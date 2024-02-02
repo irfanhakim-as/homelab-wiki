@@ -636,7 +636,7 @@ This details how to add and set up an additional network card to the ESXi server
 
 ### Description
 
-This details how to add and set up additional storage to the ESXi server.
+This details how to add and set up additional storage to the ESXi server including pass-through of physical storage devices.
 
 ### References
 
