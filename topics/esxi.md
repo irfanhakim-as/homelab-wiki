@@ -27,16 +27,20 @@ VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed b
     - [Description](#description-4)
     - [References](#references-4)
     - [Steps](#steps-3)
-  - [Creating a Virtual Machine Template](#creating-a-virtual-machine-template)
-    - [Steps](#steps-4)
-  - [Creating a Virtual Machine From a Template](#creating-a-virtual-machine-from-a-template)
-    - [Steps](#steps-5)
-  - [Editing a Virtual Machine](#editing-a-virtual-machine)
-    - [Steps](#steps-6)
+  - [Virtual Machine](#virtual-machine)
+    - [Description](#description-5)
+    - [Creating a Virtual Machine Template](#creating-a-virtual-machine-template)
+      - [Steps](#steps-4)
+    - [Creating a Virtual Machine From a Template](#creating-a-virtual-machine-from-a-template)
+      - [Steps](#steps-5)
+    - [Editing a Virtual Machine](#editing-a-virtual-machine)
+      - [Steps](#steps-6)
   - [Networking](#networking)
+    - [Description](#description-6)
     - [References](#references-5)
     - [Steps](#steps-7)
   - [Storage](#storage)
+    - [Description](#description-7)
     - [References](#references-6)
     - [Datastore](#datastore)
     - [Disk Pass-through](#disk-pass-through)
@@ -361,11 +365,17 @@ This details how to setup periodic configuration backups for ESXi.
 
 ---
 
-## Creating a Virtual Machine Template
+## Virtual Machine
+
+### Description
+
+This details matters pertaining to virtual machines on ESXi.
+
+### Creating a Virtual Machine Template
 
 This details how to create a virtual machine to be used as a template or base for other virtual machines.
 
-### Steps
+#### Steps
 
 1. Get into VMware ESXi web interface by navigating to the IP address of the ESXi server in your browser.
 
@@ -482,13 +492,11 @@ This details how to create a virtual machine to be used as a template or base fo
 
 35. Click the **Close** button.
 
----
-
-## Creating a Virtual Machine From a Template
+### Creating a Virtual Machine From a Template
 
 This details how to create a virtual machine from a template or base virtual machine.
 
-### Steps
+#### Steps
 
 1. Get into VMware ESXi web interface by navigating to the IP address of the ESXi server in your browser.
 
@@ -553,13 +561,11 @@ This details how to create a virtual machine from a template or base virtual mac
     - Updating the system's hostname.
     - Getting the system up to date since the VM template was created.
 
----
-
-## Editing a Virtual Machine
+### Editing a Virtual Machine
 
 This details how to edit an existing virtual machine.
 
-### Steps
+#### Steps
 
 1. Get into VMware ESXi web interface by navigating to the IP address of the ESXi server in your browser.
 
@@ -576,6 +582,8 @@ This details how to edit an existing virtual machine.
 ---
 
 ## Networking
+
+### Description
 
 This details how to add and set up an additional network card to the ESXi server.
 
@@ -625,6 +633,8 @@ This details how to add and set up an additional network card to the ESXi server
 ---
 
 ## Storage
+
+### Description
 
 This details how to add and set up additional storage to the ESXi server.
 
