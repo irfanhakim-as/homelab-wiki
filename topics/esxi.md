@@ -35,6 +35,9 @@ VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed b
       - [Steps](#steps-5)
     - [Editing a Virtual Machine](#editing-a-virtual-machine)
       - [Steps](#steps-6)
+    - [Virtual Disk](#virtual-disk)
+      - [Expand Disk](#expand-disk)
+      - [Add Additional Disk](#add-additional-disk)
   - [Networking](#networking)
     - [Description](#description-6)
     - [References](#references-5)
@@ -578,6 +581,25 @@ This details how to edit an existing virtual machine.
 5. In the **Edit Settings** page, make any changes to the VM's **Virtual Hardware** and **VM Options** as needed.
 
 6. Click the **Save** button to apply the changes.
+
+### Virtual Disk
+
+This details how to expand the size of an existing disk or add an additional virtual disk to a virtual machine.
+
+#### Expand Disk
+
+1. [Edit the virtual machine](#editing-a-virtual-machine) you wish to expand the disk for:
+
+    - In the **Edit Settings** page, configure the VM's **Virtual Hardware**.
+    - Locate the section for the virtual disk you wish to expand i.e. **Hard Disk 1**.
+    - In the provided size field, enter the new size for the virtual disk i.e. `20 GB`.
+    - Click the **Save** button to apply the changes.
+
+2. Expand the partition on the virtual disk. There are different ways to do this depending on the OS and the partitioning scheme used. To determine the method of doing this on Linux, refer to the [Linux](./linux.md) topic.
+
+#### Add Additional Disk
+
+TODO
 
 ---
 
