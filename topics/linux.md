@@ -18,6 +18,8 @@ This is a brief description of the topic.
     - [Configuration](#configuration)
       - [Template VM](#template-vm)
       - [Individual VM](#individual-vm)
+    - [Adding a New Disk](#adding-a-new-disk)
+    - [Expanding a Disk Partition](#expanding-a-disk-partition)
   - [Debian](#debian)
     - [Description](#description-2)
     - [References](#references-2)
@@ -26,6 +28,8 @@ This is a brief description of the topic.
     - [Configuration](#configuration-1)
       - [Template VM](#template-vm-1)
       - [Individual VM](#individual-vm-1)
+    - [Adding a New Disk](#adding-a-new-disk-1)
+    - [Expanding a Disk Partition](#expanding-a-disk-partition-1)
   - [Rocky Linux (RHEL)](#rocky-linux-rhel)
     - [Description](#description-3)
     - [References](#references-3)
@@ -34,6 +38,8 @@ This is a brief description of the topic.
     - [Configuration](#configuration-2)
       - [Template VM](#template-vm-2)
       - [Individual VM](#individual-vm-2)
+    - [Adding a New Disk](#adding-a-new-disk-2)
+    - [Expanding a Disk Partition](#expanding-a-disk-partition-2)
 
 ## References
 
@@ -199,6 +205,14 @@ This details the installation and configuration of Ubuntu as the operating syste
 3. Update the system hostname.
 
 4. Update the system.
+
+### Adding a New Disk
+
+TODO
+
+### Expanding a Disk Partition
+
+TODO
 
 ---
 
@@ -439,6 +453,14 @@ This details the installation and configuration of Debian 12 as the operating sy
 
 4. Update the system.
 
+### Adding a New Disk
+
+TODO
+
+### Expanding a Disk Partition
+
+TODO
+
 ---
 
 ## Rocky Linux (RHEL)
@@ -658,3 +680,11 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
 3. Update the system hostname.
 
 4. Update the system.
+
+### Adding a New Disk
+
+TODO
+
+### Expanding a Disk Partition
+
+TODO
