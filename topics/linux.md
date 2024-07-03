@@ -133,76 +133,72 @@ This details the installation and configuration of Ubuntu as the operating syste
 
 5. Set up the VM's firewall.
 
-    Enable the firewall
+   - Enable the firewall:
 
-    ```bash
-    sudo ufw enable
-    ```
+        ```bash
+        sudo ufw enable
+        ```
 
-    Check the firewall status
+   - Check the firewall status:
 
-    ```bash
-    sudo ufw status numbered
-    ```
+        ```bash
+        sudo ufw status numbered
+        ```
 
-    Allow new SSH port
+   - Allow new SSH port:
 
-    ```bash
-    sudo ufw allow <port>/tcp
-    ```
+        ```bash
+        sudo ufw allow <port>/tcp
+        ```
 
-    > [!TIP]  
-    > Replace `<port>` with the new port number you wish to use
+        > [!TIP]  
+        > Replace `<port>` with the new port number you wish to use.
 
 6. Update the VM's SSH configuration.
 
-    Update the SSH configuration file:
+   - Update the SSH configuration file:
 
-    ```sh
-    sudo nano /etc/ssh/sshd_config
-    ```
+        ```sh
+        sudo nano /etc/ssh/sshd_config
+        ```
 
-    Change the default SSH port:
+   - Change the default SSH port:
 
-    ```sh
-    #Port 22
-    ```
+        ```sh
+        #Port 22
+        ```
 
-    - Change the `Port` value to the new port number you have selected in step 5.
-    - Uncomment the `Port` line.
+       - Uncomment the `Port` line if it is commented.
+       - Set the `Port` value to the new port number you have selected in the previous step.
 
-    Disable root login:
+   - Disable root login:
 
-    ```sh
-    #PermitRootLogin prohibit-password
-    ```
+        ```sh
+        #PermitRootLogin prohibit-password
+        ```
 
-    - Change the `PermitRootLogin` value to `no`.
-    - Uncomment the `PermitRootLogin` line.
+       - Uncomment the `PermitRootLogin` line if it is commented.
+       - Set the `PermitRootLogin` value to `no`.
 
-    Disable password authentication:
+   - Disable password authentication:
 
-    > [!WARNING]  
-    > Make sure you have copied your SSH key to the server before doing this!
+        > [!WARNING]  
+        > Make sure you have [copied your public SSH key](ssh.md#copy-ssh-keys) to the server before doing this!
 
-    ```sh
-    #PasswordAuthentication yes
-    ```
+        ```sh
+        #PasswordAuthentication yes
+        ```
 
-    - Change the `PasswordAuthentication` value to `no`.
-    - Uncomment the `PasswordAuthentication` line.
+       - Uncomment the `PasswordAuthentication` line if it is commented.
+       - Set the `PasswordAuthentication` value to `no`.
 
-    Enable the SSH service (in case it is not yet enabled):
+   - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
 
-    ```sh
-    sudo systemctl enable --now ssh
-    ```
+   - Restart the SSH service:
 
-    Restart the SSH service:
-
-    ```sh
-    sudo systemctl restart ssh
-    ```
+        ```sh
+        sudo systemctl restart ssh
+        ```
 
 7. Reboot the VM to apply all changes:
 
@@ -394,76 +390,72 @@ This details the installation and configuration of Debian 12 as the operating sy
 
 11. Set up the VM's firewall.
 
-    Enable the firewall
+   - Enable the firewall:
 
-    ```bash
-    sudo ufw enable
-    ```
+        ```bash
+        sudo ufw enable
+        ```
 
-    Check the firewall status
+   - Check the firewall status:
 
-    ```bash
-    sudo ufw status numbered
-    ```
+        ```bash
+        sudo ufw status numbered
+        ```
 
-    Allow new SSH port
+   - Allow new SSH port:
 
-    ```bash
-    sudo ufw allow <port>/tcp
-    ```
+        ```bash
+        sudo ufw allow <port>/tcp
+        ```
 
-    > [!TIP]  
-    > Replace `<port>` with the new port number you wish to use
+        > [!TIP]  
+        > Replace `<port>` with the new port number you wish to use.
 
 12. Update the VM's SSH configuration.
 
-    Update the SSH configuration file:
+   - Update the SSH configuration file:
 
-    ```sh
-    sudo nano /etc/ssh/sshd_config
-    ```
+        ```sh
+        sudo nano /etc/ssh/sshd_config
+        ```
 
-    Change the default SSH port:
+   - Change the default SSH port:
 
-    ```sh
-    #Port 22
-    ```
+        ```sh
+        #Port 22
+        ```
 
-    - Change the `Port` value to the new port number you have selected in step 5.
-    - Uncomment the `Port` line.
+       - Uncomment the `Port` line if it is commented.
+       - Set the `Port` value to the new port number you have selected in the previous step.
 
-    Disable root login:
+   - Disable root login:
 
-    ```sh
-    #PermitRootLogin prohibit-password
-    ```
+        ```sh
+        #PermitRootLogin prohibit-password
+        ```
 
-    - Change the `PermitRootLogin` value to `no`.
-    - Uncomment the `PermitRootLogin` line.
+       - Uncomment the `PermitRootLogin` line if it is commented.
+       - Set the `PermitRootLogin` value to `no`.
 
-    Disable password authentication:
+   - Disable password authentication:
 
-    > [!WARNING]  
-    > Make sure you have copied your SSH key to the server before restarting the SSH service after doing this!
+        > [!WARNING]  
+        > Make sure you have [copied your public SSH key](ssh.md#copy-ssh-keys) to the server before doing this!
 
-    ```sh
-    #PasswordAuthentication yes
-    ```
+        ```sh
+        #PasswordAuthentication yes
+        ```
 
-    - Change the `PasswordAuthentication` value to `no`.
-    - Uncomment the `PasswordAuthentication` line.
+       - Uncomment the `PasswordAuthentication` line if it is commented.
+       - Set the `PasswordAuthentication` value to `no`.
 
-    Enable the SSH service (in case it is not yet enabled):
+   - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
 
-    ```sh
-    sudo systemctl enable --now ssh
-    ```
+   - Restart the SSH service:
 
-    Restart the SSH service:
-
-    ```sh
-    sudo systemctl restart ssh
-    ```
+        ```sh
+        sudo systemctl restart ssh
+        ```
 
 13. Reboot the VM to apply all changes:
 
@@ -606,106 +598,90 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
 
 7. Set up the VM's firewall.
 
-    Enable the firewall
+   - Enable the firewall
 
-    ```bash
-    sudo systemctl enable --now firewalld
-    ```
+        ```sh
+        sudo systemctl enable --now firewalld
+        ```
 
-    Check the firewall status
+   - Check the firewall status
 
-    ```bash
-    sudo firewall-cmd --list-all
-    ```
+        ```sh
+        sudo firewall-cmd --list-all
+        ```
 
-    Disallow the default SSH port
+   - Disallow the default SSH port
 
-    ```bash
-    sudo firewall-cmd --remove-service=ssh
-    ```
+        ```sh
+        sudo firewall-cmd --remove-service=ssh
+        ```
 
-    Allow new SSH port
+   - Allow the new SSH port
 
-    ```bash
-    sudo firewall-cmd --add-port=<port>/tcp
-    ```
+        ```sh
+        sudo firewall-cmd --add-port=<port>/tcp
+        ```
 
-    Save the firewall rules permanently
+   - Save the firewall rules permanently
 
-    ```bash
-    sudo firewall-cmd --runtime-to-permanent
-    ```
+        ```sh
+        sudo firewall-cmd --runtime-to-permanent
+        ```
 
-    Reload the firewall
+   - Reload the firewall
 
-    ```bash
-    sudo firewall-cmd --reload
-    ```
+        ```sh
+        sudo firewall-cmd --reload
+        ```
 
-    > [!TIP]  
-    > Replace `<port>` with the new port number you wish to use
+        > [!TIP]  
+        > Replace `<port>` with the new port number you wish to use.
 
-8.  Update the VM's SSH configuration.
+8. Update the VM's SSH configuration.
 
-    Update the SSH configuration file:
+   - Update the SSH configuration file:
 
-    ```sh
-    sudo nano /etc/ssh/sshd_config
-    ```
+        ```sh
+        sudo nano /etc/ssh/sshd_config
+        ```
 
-    Change the default SSH port:
+   - Change the default SSH port:
 
-    ```sh
-    #Port 22
-    ```
+        ```sh
+        #Port 22
+        ```
 
-    - Change the `Port` value to the new port number you have selected in step 5.
-    - Uncomment the `Port` line.
+       - Uncomment the `Port` line if it is commented.
+       - Set the `Port` value to the new port number you have selected in the previous step.
 
-    Disable root login:
+   - Disable root login:
 
-    ```sh
-    PermitRootLogin yes
-    ```
+        ```sh
+        #PermitRootLogin yes
+        ```
 
-    - Change the `PermitRootLogin` value to `no`.
+       - Uncomment the `PermitRootLogin` line if it is commented.
+       - Set the `PermitRootLogin` value to `no`.
 
-    Disable password authentication:
+   - Disable password authentication:
 
-    > [!WARNING]  
-    > Make sure you have copied your SSH key to the server before restarting the SSH service after doing this!
+        > [!WARNING]  
+        > Make sure you have [copied your public SSH key](ssh.md#copy-ssh-keys) to the server before doing this!
 
-    ```sh
-    PasswordAuthentication yes
-    ```
+        ```sh
+        PasswordAuthentication yes
+        ```
 
-    - Change the `PasswordAuthentication` value to `no`.
+       - Uncomment the `PasswordAuthentication` line if it is commented.
+       - Set the `PasswordAuthentication` value to `no`.
 
-    Configure SELinux to allow `sshd` to utilise the new port:
+   - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
 
-    ```sh
-    sudo semanage port -a -t ssh_port_t -p tcp <port>
-    ```
+   - Restart the SSH service:
 
-    - Replace `<port>` with the new port number you have selected in step 5.
-
-    Verify the updated SELinux policy for SSH:
-
-    ```sh
-    sudo semanage port -l | grep ssh
-    ```
-
-    Enable the SSH service (in case it is not yet enabled):
-
-    ```sh
-    sudo systemctl enable --now sshd
-    ```
-
-    Restart the SSH service:
-
-    ```sh
-    sudo systemctl restart sshd
-    ```
+        ```sh
+        sudo systemctl restart ssh
+        ```
 
 9. Reboot the VM to apply all changes:
 
