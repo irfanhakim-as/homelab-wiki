@@ -178,7 +178,7 @@ This details the installation and configuration of Ubuntu as the operating syste
         ```
 
        - Uncomment the `PermitRootLogin` line if it is commented.
-       - Set the `PermitRootLogin` value to `no`.
+       - Set the `PermitRootLogin` value to `prohibit-password` (good security) or `no` (best security).
 
    - Disable password authentication:
 
@@ -435,7 +435,7 @@ This details the installation and configuration of Debian 12 as the operating sy
         ```
 
        - Uncomment the `PermitRootLogin` line if it is commented.
-       - Set the `PermitRootLogin` value to `no`.
+       - Set the `PermitRootLogin` value to `prohibit-password` (good security) or `no` (best security).
 
    - Disable password authentication:
 
@@ -661,7 +661,7 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
         ```
 
        - Uncomment the `PermitRootLogin` line if it is commented.
-       - Set the `PermitRootLogin` value to `no`.
+       - Set the `PermitRootLogin` value to `prohibit-password` (good security) or `no` (best security).
 
    - Disable password authentication:
 
