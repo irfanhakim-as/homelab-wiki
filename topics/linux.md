@@ -44,6 +44,7 @@ Linux is both an open-source Unix-like kernel and a generic name for a family of
 ## References
 
 - [Linux](https://en.wikipedia.org/wiki/Linux)
+- [Linux distribution](https://en.wikipedia.org/wiki/Linux_distribution)
 - [List of TCP and UDP port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
 
 ---
