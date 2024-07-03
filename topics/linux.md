@@ -183,9 +183,6 @@ This details the installation and configuration of Ubuntu as the operating syste
 
    - Disable password authentication:
 
-        > [!WARNING]  
-        > Make sure you have [copied your public SSH key](ssh.md#copy-ssh-keys) to the server before doing this!
-
         ```sh
         #PasswordAuthentication yes
         ```
@@ -196,6 +193,9 @@ This details the installation and configuration of Ubuntu as the operating syste
    - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
 
    - Restart the SSH service:
+
+        > [!WARNING]  
+        > Make sure you have [copied your public SSH key(s)](ssh.md#copy-ssh-keys) to the server before doing this!
 
         ```sh
         sudo systemctl restart ssh
@@ -440,9 +440,6 @@ This details the installation and configuration of Debian 12 as the operating sy
 
    - Disable password authentication:
 
-        > [!WARNING]  
-        > Make sure you have [copied your public SSH key](ssh.md#copy-ssh-keys) to the server before doing this!
-
         ```sh
         #PasswordAuthentication yes
         ```
@@ -453,6 +450,9 @@ This details the installation and configuration of Debian 12 as the operating sy
    - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
 
    - Restart the SSH service:
+
+        > [!WARNING]  
+        > Make sure you have [copied your public SSH key(s)](ssh.md#copy-ssh-keys) to the server before doing this!
 
         ```sh
         sudo systemctl restart ssh
@@ -666,9 +666,6 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
 
    - Disable password authentication:
 
-        > [!WARNING]  
-        > Make sure you have [copied your public SSH key](ssh.md#copy-ssh-keys) to the server before doing this!
-
         ```sh
         PasswordAuthentication yes
         ```
@@ -679,6 +676,9 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
    - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
 
    - Restart the SSH service:
+
+        > [!WARNING]  
+        > Make sure you have [copied your public SSH key(s)](ssh.md#copy-ssh-keys) to the server before doing this!
 
         ```sh
         sudo systemctl restart ssh
