@@ -105,11 +105,25 @@ This details the installation and configuration of Ubuntu as the operating syste
         nano \
         net-tools \
         openssh-server \
-        open-vm-tools \
         python3 \
         python3-pip \
         wget
     ```
+
+    On a VMware ESXi host, install the following package:
+
+    ```sh
+    sudo apt install -y open-vm-tools
+    ```
+
+    On a Proxmox host, install the following package:
+
+    ```sh
+    sudo apt install -y qemu-guest-agent
+    ```
+
+    > [!TIP]  
+    > On Proxmox, you may also need to enable the `qemu-guest-agent` service yourself.
 
 4. Clean up the system:
 
@@ -351,12 +365,26 @@ This details the installation and configuration of Debian 12 as the operating sy
         nano \
         net-tools \
         openssh-server \
-        open-vm-tools \
         python3 \
         python3-pip \
         ufw \
         wget
     ```
+
+    On a VMware ESXi host, install the following package:
+
+    ```sh
+    sudo apt install -y open-vm-tools
+    ```
+
+    On a Proxmox host, install the following package:
+
+    ```sh
+    sudo apt install -y qemu-guest-agent
+    ```
+
+    > [!TIP]  
+    > On Proxmox, you may also need to enable the `qemu-guest-agent` service yourself.
 
 10. Clean up the system:
 
@@ -546,7 +574,6 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
         nano \
         net-tools \
         openssh-server \
-        open-vm-tools \
         policycoreutils-python-utils \
         python3 \
         python3-pip \
@@ -555,6 +582,21 @@ This details the installation and configuration of Rocky Linux (RHEL) as the ope
 
     > [!TIP]  
     > The `policycoreutils-python-utils` package is required for the `semanage` command, which is used to manage SELinux policy.
+
+    On a VMware ESXi host, install the following package:
+
+    ```sh
+    sudo yum install -y open-vm-tools
+    ```
+
+    On a Proxmox host, install the following package:
+
+    ```sh
+    sudo yum install -y qemu-guest-agent
+    ```
+
+    > [!TIP]  
+    > On Proxmox, you may also need to enable the `qemu-guest-agent` service yourself.
 
 6. Clean up the system:
 
