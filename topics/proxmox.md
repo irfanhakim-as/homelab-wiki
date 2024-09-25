@@ -23,6 +23,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Description](#description-3)
     - [Restore VM or Container Template From Backup](#restore-vm-or-container-template-from-backup)
     - [Create VM From Container Template](#create-vm-from-container-template)
+    - [Editing VM Parameters](#editing-vm-parameters)
 
 ## References
 
@@ -187,3 +188,19 @@ This details how to create a virtual machine or Container Template from a backup
 5. Wait for the cloning process to complete (i.e. when the lock icon on the newly created VM disappears).
 
 6. Once the VM has been created, you may start using the VM by selecting the VM entry under the Proxmox node and click the **Start** button in its corresponding view.
+
+### Editing VM Parameters
+
+This details how to edit an existing virtual machine or Container Template.
+
+1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
+
+2. Select the target virtual machine (illustrated with an icon of a display) or Container Template (illustrated with an icon of a file and display) you wish to edit.
+
+3. In the virtual machine view, go through any of the available sections such as **Hardware**, **Cloud-Init**, or **Options** and find parameters you wish to update.
+
+4. To update a VM parameter, select to highlight the particular parameter (i.e. **Memory**) and click the **Edit** button.
+
+5. In the parameter's **Edit** window, make any changes to the parameter value. Some parameters may have an **Advanced** option box you are able to check to enable.
+
+6. Click the **OK** button to save the changes.

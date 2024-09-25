@@ -65,6 +65,7 @@ This details how to edit an existing virtual machine.
 ### References
 
 - [ESXI: Editing a Virtual Machine](../topics/esxi.md#editing-a-virtual-machine)
+- [Proxmox: Editing VM Parameters](../topics/proxmox.md#editing-vm-parameters)
 
 ---
 
