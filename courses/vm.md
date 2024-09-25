@@ -14,10 +14,12 @@ In computing, a virtual machine (VM) is the virtualisation or emulation of a com
     - [References](#references-1)
   - [Creating a Virtual Machine From a Template](#creating-a-virtual-machine-from-a-template)
     - [References](#references-2)
-  - [Editing a Virtual Machine](#editing-a-virtual-machine)
+  - [Restoring From Backup](#restoring-from-backup)
     - [References](#references-3)
-  - [Adding or Expanding a Virtual Disk](#adding-or-expanding-a-virtual-disk)
+  - [Editing a Virtual Machine](#editing-a-virtual-machine)
     - [References](#references-4)
+  - [Adding or Expanding a Virtual Disk](#adding-or-expanding-a-virtual-disk)
+    - [References](#references-5)
 
 ## References
 
@@ -43,6 +45,16 @@ This details how to create a virtual machine from a template or base virtual mac
 
 - [ESXI: Creating a Virtual Machine From a Template](../topics/esxi.md#creating-a-virtual-machine-from-a-template)
 - [Proxmox: Create VM From Container Template](../topics/proxmox.md#create-vm-from-container-template)
+
+---
+
+## Restoring From Backup
+
+This details how to restore a virtual machine from a backup.
+
+### References
+
+- [Proxmox: Restore VM or Container Template From Backup](../topics/proxmox.md#restore-vm-or-container-template-from-backup)
 
 ---
 
