@@ -164,4 +164,4 @@ This details how to enable remote access to your machine and to access another m
 2. Enter the password of the remote user when prompted.
 
     > [!NOTE]  
-    > If you have copied your public SSH key to the remote server, you should not be prompted for a password.
+    > If you have [copied](#copy-ssh-keys) over your public SSH key to the remote server, you should not be prompted for a password.

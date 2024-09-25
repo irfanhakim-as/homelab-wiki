@@ -428,22 +428,7 @@ This details how to create a virtual machine to be used as a template or base fo
 
 16. Back in the VM (through the browser console), press the <kbd>Enter</kbd> key to reboot into the OS (instead of the installer media).
 
-17. On your personal machine, copy over your personal (public) SSH key to the VM:
-
-    ```sh
-    ssh-copy-id -i ~/.ssh/id_ed25519.pub <username>@<ip-address>
-    ```
-
-    Replace `~/.ssh/id_ed25519.pub` with the actual path to your personal (public) SSH key.
-
-    Replace `<username>` with the username you have set during installation.
-
-    Replace `<ip-address>` with the actual IP address of the VM.
-
-    Enter the password for the user when prompted.
-
-    > [!TIP]  
-    > You can also use the `scp` command to copy over your SSH key to the `/home/<username>/.ssh/authorized_keys` file.
+17. On your personal machine, [copy](ssh.md#copy-ssh-keys) over your public SSH key to the VM.
 
 18. Log into the VM with your provided credentials.
 
