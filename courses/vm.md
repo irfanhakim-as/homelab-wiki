@@ -74,4 +74,5 @@ This details how to add or expand the storage of an existing virtual machine.
 
 ### References
 
-- [#](../topics/linux.md#)
+- [ESXI: Add Virtual Disk](../topics/esxi.md#add-virtual-disk)
+- [ESXI: Expand Virtual Disk](../topics/esxi.md#expand-virtual-disk)
