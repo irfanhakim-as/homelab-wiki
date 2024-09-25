@@ -37,7 +37,7 @@ This details how to install and setup SSH on a Linux system.
 
 ### Installation
 
-1. Install SSH according to your Linux distribution.
+1. Install SSH according to the system's Linux distribution.
 
     Arch Linux:
 
