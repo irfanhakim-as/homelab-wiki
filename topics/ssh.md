@@ -128,7 +128,9 @@ This details how to enable remote access to your machine and to access another m
 
 ### Enable remote access
 
-1. Enable the SSH service according to your Linux distribution.
+1. Ensure SSH is [installed](#installation) on both the local and remote system.
+
+2. Enable the SSH service on the remote system according to its Linux distribution.
 
     Arch Linux:
 
@@ -148,7 +150,7 @@ This details how to enable remote access to your machine and to access another m
     sudo systemctl enable --now sshd.service
     ```
 
-2. Once the SSH service is active, said machine should now be able to be remotely accessed via another device using SSH.
+3. Once the SSH service is active, said machine should now be able to be remotely accessed via another device using SSH.
 
 ### Remotely access using SSH
 
