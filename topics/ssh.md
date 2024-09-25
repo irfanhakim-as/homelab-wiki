@@ -94,22 +94,29 @@ This details how to copy your SSH keys to a remote system.
 
 1. [Generate SSH keys](#generate-ssh-keys) on the local system if they do not already exist.
 
-2. Copy your SSH keys to the remote server using `ssh-copy-id`.
+2. Copy your SSH keys to the remote server using `ssh-copy-id`:
 
-    ```sh
-    ssh-copy-id -i <public-key-path> <remote-user>@<ip-address>
-    ```
+   - Copy the public key to the remote server:
 
-    If the remote server's SSH port is not the default (i.e. `22`), you could add the `-p` flag to specify the port number:
+        ```sh
+        ssh-copy-id -i <public-key-path> <remote-user>@<ip-address>
+        ```
 
-    ```sh
-    ssh-copy-id -i <public-key-path> -p <port-number> <remote-user>@<ip-address>
-    ```
+     - `<public-key-path>`: Replace this with the path to your public key (i.e. `~/.ssh/id_ed25519.pub`)
+     - `<remote-user>`: Replace this with the username of the remote system (i.e. `myuser`)
+     - `<ip-address>`: Replace this with the IP address of the remote system (i.e. `192.168.0.86`)
+
+   - If the remote server's SSH port is not the default (i.e. `22`), you could add the `-p` flag to specify the port number:
+
+        ```sh
+        ssh-copy-id -i <public-key-path> -p <port-number> <remote-user>@<ip-address>
+        ```
+     - `<port-number>`: Replace this with the SSH port number of the remote system (i.e. `2222`)
 
 3. **Alternatively**, you could also do so without `ssh-copy-id`:
 
     ```sh
-    cat <public-key-path> | ssh <remote-user>@<ip-address> -p <port> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+    cat <public-key-path> | ssh <remote-user>@<ip-address> -p <port-number> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
     ```
 
 4. Verify that the key has been copied successfully by [remotely accessing](#remotely-access-using-ssh) the remote server using SSH.
