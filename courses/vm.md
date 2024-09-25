@@ -42,6 +42,7 @@ This details how to create a virtual machine from a template or base virtual mac
 ### References
 
 - [ESXI: Creating a Virtual Machine From a Template](../topics/esxi.md#creating-a-virtual-machine-from-a-template)
+- [Proxmox: Create VM From Container Template](../topics/proxmox.md#create-vm-from-container-template)
 
 ---
 
