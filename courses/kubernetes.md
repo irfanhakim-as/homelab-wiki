@@ -1,12 +1,12 @@
-# Course
+# Kubernetes
 
 ## Description
 
-This is a brief description of the course.
+Kubernetes, also known as K8s, is an open source system for automating deployment, scaling, and management of containerized applications.
 
 ## Directory
 
-- [Course](#course)
+- [Kubernetes](#kubernetes)
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
@@ -16,7 +16,7 @@ This is a brief description of the course.
 
 ## References
 
-- [Reference 1](https://example.com)
+- [Kubernetes](https://kubernetes.io)
 
 ---
 
