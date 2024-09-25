@@ -148,11 +148,11 @@ This details how to enable remote access to your machine and to access another m
 1. Connect to the another machine (with SSH service enabled) using SSH.
 
     ```sh
-    ssh <remote-user>@<ip-address> -p <port>
+    ssh <remote-user>@<ip-address> -p <port-number>
     ```
 
     > [!TIP]  
-    > You could omit the `-p` flag if the remote server's SSH port is the default (i.e. `22`).
+    > You could omit the `-p` flag and value if the remote server's SSH port is the default (i.e. `22`).
 
 2. Enter the password of the remote user when prompted.
 
