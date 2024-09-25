@@ -33,7 +33,7 @@ Secure Shell (SSH) is a cryptographic network protocol for operating network ser
 
 ### Description
 
-This details how to install and setup SSH on your system.
+This details how to install and setup SSH on a Linux system.
 
 ### Installation
 
@@ -88,7 +88,7 @@ This details how to install and setup SSH on your system.
 
 ### Description
 
-This details how to copy your SSH keys to a remote server.
+This details how to copy your SSH keys to a remote system.
 
 ### Steps
 
