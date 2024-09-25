@@ -92,7 +92,9 @@ This details how to copy your SSH keys to a remote system.
 
 ### Steps
 
-1. Copy your SSH keys to the remote server using `ssh-copy-id`.
+1. [Generate SSH keys](#generate-ssh-keys) on the local system if they do not already exist.
+
+2. Copy your SSH keys to the remote server using `ssh-copy-id`.
 
     ```sh
     ssh-copy-id -i <public-key-path> <remote-user>@<ip-address>
@@ -104,13 +106,13 @@ This details how to copy your SSH keys to a remote system.
     ssh-copy-id -i <public-key-path> -p <port-number> <remote-user>@<ip-address>
     ```
 
-2. Alternatively, you could also do so without `ssh-copy-id`:
+3. **Alternatively**, you could also do so without `ssh-copy-id`:
 
     ```sh
     cat <public-key-path> | ssh <remote-user>@<ip-address> -p <port> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
     ```
 
-3. Verify that the key has been copied successfully by [remotely accessing](#remotely-access-using-ssh) the remote server using SSH.
+4. Verify that the key has been copied successfully by [remotely accessing](#remotely-access-using-ssh) the remote server using SSH.
 
     If your public key has been copied successfully, you should not be prompted for a password.
 
