@@ -418,7 +418,7 @@ This details how to create a virtual machine to be used as a template or base fo
 
 11. Click the "screen" on the VM's page to open a browser console to the VM.
 
-12. Go through the OS installation process. Refer to the [Linux](./linux.md) topic for more installation details for Linux based VMs.
+12. Go through the OS installation process. Refer to the [Linux](linux.md) topic for more installation details for Linux based VMs.
 
 13. After the installation has completed, restart the VM, and in the VM's page, click the **Edit** button.
 
