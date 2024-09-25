@@ -71,11 +71,11 @@ This details the installation and configuration of Ubuntu as the operating syste
 
 2. In the **Profile setup** section:
 
-    - Your name: Set a name suitable for your homelab.
-    - Your server's name: Set a unique name for said server, without the domain name. i.e. `ubuntu-server`.
-    - Pick a username: Set a username suitable for your homelab.
-    - Choose a password: Set a secure, minimum 12 character password.
-    - Confirm your password: Confirm the password you have set.
+    - Your name: Set a display name suitable for your homelab
+    - Your server's name: Set a unique name for said server without the domain name (i.e. `ubuntu-server`)
+    - Pick a username: Set a username suitable for your homelab
+    - Choose a password: Set a secure, minimum 12 character password
+    - Confirm your password: Confirm the password you have set
 
 3. In the **SSH Setup** section:
 
@@ -254,25 +254,25 @@ This details the installation and configuration of Debian 12 as the operating sy
 
 3. In the **Configure the network** section:
 
-    - Hostname: Set a unique name for said server, without the domain name. i.e. `debian-server`.
-    - Domain name: Leave this blank or add in your domain name i.e. `example.com`.
+    - Hostname: Set a unique name for said server, without the domain name (i.e. `debian-server`)
+    - Domain name: Leave this blank or add in your domain name (i.e. `example.com`)
 
 4. In the **Set up users and passwords** section:
 
-    - Root password: Set a secure, minimum 12 character password for the `root` user.
-    - Re-enter root password to verify: Confirm the password you have set for the `root` user.
-    - Full name for the new user: Set a name suitable for your homelab.
-    - Username for your account: Set a username suitable for your homelab.
-    - Choose a password for the new user: Set a secure, minimum 12 character password **different** from the password set for the `root` user.
-    - Re-enter password to verify: Confirm the password you have set.
+    - Root password: Set a secure, minimum 12 character password for the `root` user
+    - Re-enter root password to verify: Confirm the password you have set for the `root` user
+    - Full name for the new user: Set a display name suitable for your homelab
+    - Username for your account: Set a username suitable for your homelab
+    - Choose a password for the new user: Set a secure, minimum 12 character password **different** from the password set for the `root` user
+    - Re-enter password to verify: Confirm the password you have set
 
 5. In the **Partition disks** section:
 
-    - Partitioning method: Select the **Guided - use entire disk** option.
-    - Select disk to partition: Select the disk you wish to use for the installation.
-    - Partitioning scheme: Select the **All files in one partition (recommended for new users)** option.
-    - Overview of the new partitions: Select the **Finish partitioning and write changes to disk** option.
-    - Write the changes to disks: Select the **Yes** option.
+    - Partitioning method: Select the **Guided - use entire disk** option
+    - Select disk to partition: Select the disk you wish to use for the installation
+    - Partitioning scheme: Select the **All files in one partition (recommended for new users)** option
+    - Overview of the new partitions: Select the **Finish partitioning and write changes to disk** option
+    - Write the changes to disks: Select the **Yes** option
 
 6. When asked to scan extra installation media, select **No**.
 
