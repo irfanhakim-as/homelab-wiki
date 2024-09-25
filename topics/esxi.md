@@ -30,18 +30,14 @@ VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed b
   - [Virtual Machine](#virtual-machine)
     - [Description](#description-5)
     - [Creating a Virtual Machine Template](#creating-a-virtual-machine-template)
-      - [Steps](#steps-4)
     - [Creating a Virtual Machine From a Template](#creating-a-virtual-machine-from-a-template)
-      - [Steps](#steps-5)
     - [Editing a Virtual Machine](#editing-a-virtual-machine)
-      - [Steps](#steps-6)
-    - [Virtual Disk](#virtual-disk)
-      - [Expand Disk](#expand-disk)
-      - [Add Additional Disk](#add-additional-disk)
+    - [Add Virtual Disk](#add-virtual-disk)
+    - [Expand Virtual Disk](#expand-virtual-disk)
   - [Networking](#networking)
     - [Description](#description-6)
     - [References](#references-5)
-    - [Steps](#steps-7)
+    - [Steps](#steps-4)
   - [Storage](#storage)
     - [Description](#description-7)
     - [References](#references-6)
@@ -378,8 +374,6 @@ This details matters pertaining to virtual machines on ESXi.
 
 This details how to create a virtual machine to be used as a template or base for other virtual machines.
 
-#### Steps
-
 1. Get into VMware ESXi web interface by navigating to the IP address of the ESXi server in your browser.
 
 2. In the **Virtual Machines** page, locate and click the **Create/Register VM** button.
@@ -499,8 +493,6 @@ This details how to create a virtual machine to be used as a template or base fo
 
 This details how to create a virtual machine from a template or base virtual machine.
 
-#### Steps
-
 1. Get into VMware ESXi web interface by navigating to the IP address of the ESXi server in your browser.
 
 2. In the left panel of the VMware ESXi web interface, click the **Storage** menu item.
@@ -568,8 +560,6 @@ This details how to create a virtual machine from a template or base virtual mac
 
 This details how to edit an existing virtual machine.
 
-#### Steps
-
 1. Get into VMware ESXi web interface by navigating to the IP address of the ESXi server in your browser.
 
 2. Click the **Virtual Machines** menu item from the left panel.
@@ -582,11 +572,15 @@ This details how to edit an existing virtual machine.
 
 6. Click the **Save** button to apply the changes.
 
-### Virtual Disk
+### Add Virtual Disk
+
+This details how to add an additional virtual disk to a virtual machine.
+
+TODO
+
+### Expand Virtual Disk
 
 This details how to expand the size of an existing disk or add an additional virtual disk to a virtual machine.
-
-#### Expand Disk
 
 1. [Edit the virtual machine](#editing-a-virtual-machine) you wish to expand the disk for:
 
@@ -596,10 +590,6 @@ This details how to expand the size of an existing disk or add an additional vir
     - Click the **Save** button to apply the changes.
 
 2. Expand the partition on the virtual disk. There are different ways to do this depending on the OS and the partitioning scheme used. To determine the method of doing this on Linux, refer to the [Linux](./linux.md) topic.
-
-#### Add Additional Disk
-
-TODO
 
 ---
 
