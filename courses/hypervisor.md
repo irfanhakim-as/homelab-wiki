@@ -21,7 +21,7 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
 
 ## ESXi
 
-This details the installation and configuration of ESXi as the hypervisor of choice
+This details the installation and configuration of ESXi as the hypervisor of choice.
 
 ### References
 
