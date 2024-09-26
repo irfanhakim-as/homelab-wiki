@@ -155,7 +155,17 @@ This details the installation and configuration of Ubuntu as the operating syste
         > [!WARNING]  
         > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-9. Reboot the VM to apply all changes:
+9. Clear the VM's Bash history:
+
+    ```sh
+    history -c
+    cat /dev/null > ~/.bash_history && history -c && history -w
+    ```
+
+    > [!NOTE]  
+    > There should be no other active sessions on the VM while doing this.
+
+10. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
