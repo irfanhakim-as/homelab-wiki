@@ -132,28 +132,13 @@ This details the installation and configuration of Ubuntu as the operating syste
     sudo apt autoremove -y && sudo apt clean
     ```
 
-5. Set up the VM's firewall.
+5. Set up the VM firewall (UFW).
 
-   - Enable the firewall:
+   - [Enable](firewall.md#enablement) the firewall.
 
-        ```bash
-        sudo ufw enable
-        ```
+   - Check the [firewall status](firewall.md#status).
 
-   - Check the firewall status:
-
-        ```bash
-        sudo ufw status numbered
-        ```
-
-   - Allow new SSH port:
-
-        ```bash
-        sudo ufw allow <port>/tcp
-        ```
-
-        > [!TIP]  
-        > Replace `<port>` with the new port number you wish to use.
+   - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port with the `tcp` protocol.
 
 6. Update the VM's SSH configuration.
 
