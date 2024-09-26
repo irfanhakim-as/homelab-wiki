@@ -248,6 +248,9 @@ This details how to enable remote access to your machine and to access another m
 
 2. [Start and enable](systemd.md#enable-service) the SSH service `sshd.service`.
 
+    >[!NOTE]  
+    > Some Linux distributions may require enabling the `ssh.service` service instead.
+
 3. Once the SSH service is active, said machine should now be able to be remotely accessed via another device using SSH.
 
 ### Remotely access using SSH
