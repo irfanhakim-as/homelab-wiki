@@ -132,7 +132,11 @@ This details the installation and configuration of Ubuntu as the operating syste
     sudo apt autoremove -y && sudo apt clean
     ```
 
-5. Set up the VM firewall (UFW).
+5. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
+
+6. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
+
+7. Set up the VM firewall (UFW).
 
    - [Enable](firewall.md#enablement) the firewall.
 
@@ -140,7 +144,7 @@ This details the installation and configuration of Ubuntu as the operating syste
 
    - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port with the `tcp` protocol.
 
-6. Update the VM's [SSH configuration](ssh.md#configuration), including:
+8. Update the VM's [SSH configuration](ssh.md#configuration), including:
 
    - Change the default SSH port to what you had chosen and allowed in the system firewall.
 
@@ -149,11 +153,9 @@ This details the installation and configuration of Ubuntu as the operating syste
    - Disable password authentication via SSH.
 
         > [!WARNING]  
-        > Make sure you have [copied your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
+        > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-7. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
-
-8. Reboot the VM to apply all changes:
+9. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
