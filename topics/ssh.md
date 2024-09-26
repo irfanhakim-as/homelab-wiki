@@ -14,11 +14,17 @@ Secure Shell (SSH) is a cryptographic network protocol for operating network ser
     - [Description](#description-1)
     - [Installation](#installation)
     - [Generate SSH keys](#generate-ssh-keys)
-  - [Copy SSH keys](#copy-ssh-keys)
+  - [Configuration](#configuration)
     - [Description](#description-2)
     - [Steps](#steps)
-  - [Remote access](#remote-access)
+    - [Custom SSH Port](#custom-ssh-port)
+    - [Disable Root Login](#disable-root-login)
+    - [Disable Password Authentication](#disable-password-authentication)
+  - [Copy SSH keys](#copy-ssh-keys)
     - [Description](#description-3)
+    - [Steps](#steps-1)
+  - [Remote access](#remote-access)
+    - [Description](#description-4)
     - [References](#references-1)
     - [Enable remote access](#enable-remote-access)
     - [Remotely access using SSH](#remotely-access-using-ssh)
@@ -81,6 +87,107 @@ This details how to install and setup SSH on a Linux system.
 
     - Private key: `~/.ssh/id_ed25519`
     - Public key: `~/.ssh/id_ed25519.pub`
+
+---
+
+## Configuration
+
+### Description
+
+This details the process of updating the system's SSH configuration and includes some recommended configuration options.
+
+### Steps
+
+1. Backup the original SSH configuration file:
+
+    ```sh
+    sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+    ```
+
+2. Update the SSH configuration file:
+
+    ```sh
+    sudo nano /etc/ssh/sshd_config
+    ```
+
+3. Make any necessary changes and save the SSH configuration file.
+
+4. Once **absolutely** confident and ready to apply the changes, [restart](systemd.md#restart-service) the SSH service `sshd.service`.
+
+    > [!WARNING]  
+    > Applying changes to the SSH configuration file without being prepared for the changes to take effect is highly discouraged.
+
+### Custom SSH Port
+
+This changes the system's SSH port from its default port `22` for better security.
+
+1. In the SSH config file, search for the `Port` parameter.
+
+2. Based on the default `Port` line:
+
+    ```diff
+    #Port 22
+    +Port <port-number>
+    ```
+
+   - Comment the original `Port` line if it is not already commented to override it.
+
+   - Add a new `Port` line underneath the original with `<port-number>` being the new port number you had chosen (i.e. `2222`).
+
+   - Example changes:
+
+        ```
+        #Port 22
+        Port 2222
+        ```
+
+### Disable Root Login
+
+This disables logging in as root via SSH.
+
+1. In the SSH config file, search for the `PermitRootLogin` parameter.
+
+2. Based on the default `PermitRootLogin` line:
+
+    ```diff
+    #PermitRootLogin prohibit-password
+    +PermitRootLogin no
+    ```
+
+   - Comment the original `PermitRootLogin` line if it is not already commented to override it.
+
+   - Add a new `PermitRootLogin` line with its value set to `prohibit-password` (good security) or `no` (best security).
+
+   - Example changes:
+
+        ```
+        #PermitRootLogin prohibit-password
+        PermitRootLogin no
+        ```
+
+### Disable Password Authentication
+
+This disables authenticating users with their passwords via SSH, requiring the use of SSH keys instead.
+
+1. In the SSH config file, search for the `PasswordAuthentication` parameter.
+
+2. Based on the default `PasswordAuthentication` line:
+
+    ```diff
+    #PasswordAuthentication yes
+    +PasswordAuthentication no
+    ```
+
+   - Comment the original `PasswordAuthentication` line if it is not already commented to override it.
+
+   - Add a new `PasswordAuthentication` line with its value set to `no` to only allow user authentication using SSH keys.
+
+   - Example changes:
+
+        ```
+        #PasswordAuthentication yes
+        PasswordAuthentication no
+        ```
 
 ---
 
