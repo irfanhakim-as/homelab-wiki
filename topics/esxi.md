@@ -432,12 +432,17 @@ This details how to create a virtual machine to be used as a template or base fo
 
 18. Log into the VM with your provided credentials.
 
-19. Perform any additional configuration steps required for the VM. Steps will vary depending on the OS, so again, refer to the [Linux](./linux.md) topic for more configuration details. Recommended configuration steps include:
+19. Perform any additional configuration steps required for the VM. Generally, recommended configuration options include:
 
-    - Enabling SSH on the VM.
-    - Change the default SSH port on the VM.
-    - Disabling password authentication for SSH on the VM.
-    - Setting up a firewall on the VM while also allowing traffic to the new SSH port.
+    - Perform a system update on the VM
+    - Install the [`open-vm-tools`](https://docs.vmware.com/en/VMware-Tools/12.4.0/com.vmware.vsphere.vmwaretools.doc/GUID-8B6EA5B7-453B-48AA-92E5-DB7F061341D1.html) package on the VM to allow useful VMware VM management features
+    - [Enable SSH](ssh.md#enable-remote-access) on the VM
+    - **(Optional)** Change the default SSH port on the VM
+    - **(Optional)** Disable root login for SSH on the VM
+    - **(Optional)** Disable password authentication for SSH on the VM
+    - **(Optional)** Set up a firewall on the VM (allow traffic to the new SSH port if it's been updated)
+
+    For more detailed instructions on installing or setting up a (Linux based) virtual machine, please refer to the dedicated [Linux](linux.md) topic according to the guest OS.
 
 20. Once you are done with all of the configurations that will be inherited by future VMs, shut down the VM.
 
