@@ -17,12 +17,11 @@ Ubuntu is a Linux distribution derived from Debian and composed mostly of free a
     - [Steps](#steps)
   - [Configuration](#configuration)
     - [Description](#description-2)
-    - [References](#references-2)
     - [Base VM](#base-vm)
     - [Extended VM](#extended-vm)
   - [Software Manager](#software-manager)
     - [Description](#description-3)
-    - [References](#references-3)
+    - [References](#references-2)
     - [Install Software](#install-software)
     - [Update Software](#update-software)
     - [Remove Software](#remove-software)
@@ -84,10 +83,6 @@ This details the installation process for Ubuntu as a server on a virtual machin
 ### Description
 
 This details some recommended configuration options for Ubuntu as a server.
-
-### References
-
-- [Reference 1](https://example.com)
 
 ### Base VM
 
