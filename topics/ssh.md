@@ -16,6 +16,7 @@ Secure Shell (SSH) is a cryptographic network protocol for operating network ser
     - [Generate SSH keys](#generate-ssh-keys)
   - [Configuration](#configuration)
     - [Description](#description-2)
+    - [References](#references-1)
     - [Steps](#steps)
     - [Custom SSH Port](#custom-ssh-port)
     - [Disable Root Login](#disable-root-login)
@@ -25,7 +26,7 @@ Secure Shell (SSH) is a cryptographic network protocol for operating network ser
     - [Steps](#steps-1)
   - [Remote access](#remote-access)
     - [Description](#description-4)
-    - [References](#references-1)
+    - [References](#references-2)
     - [Enable remote access](#enable-remote-access)
     - [Remotely access using SSH](#remotely-access-using-ssh)
 
@@ -95,6 +96,10 @@ This details how to install and setup SSH on a Linux system.
 ### Description
 
 This details the process of updating the system's SSH configuration and includes some recommended configuration options.
+
+### References
+
+- [List of TCP and UDP port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
 
 ### Steps
 
