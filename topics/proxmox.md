@@ -19,8 +19,16 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Description](#description-2)
     - [References](#references-2)
     - [Package Update](#package-update)
-  - [Virtual Machine](#virtual-machine)
+  - [Adding ISO](#adding-iso)
     - [Description](#description-3)
+    - [Steps](#steps)
+  - [Virtual Machine](#virtual-machine)
+    - [Description](#description-4)
+    - [References](#references-3)
+    - [Create VM](#create-vm)
+    - [Enter the VM](#enter-the-vm)
+    - [VM Configuration](#vm-configuration)
+    - [Create Container Template](#create-container-template)
     - [Restore VM or Container Template From Backup](#restore-vm-or-container-template-from-backup)
     - [Create VM From Container Template](#create-vm-from-container-template)
     - [Editing VM Parameters](#editing-vm-parameters)
@@ -136,11 +144,186 @@ To update packages installed or required by Proxmox, do the following:
 
 ---
 
+## Adding ISO
+
+### Description
+
+This details the process of adding an ISO to Proxmox.
+
+### Steps
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the target storage you wish to add an ISO to (i.e. `local`).
+
+3. In the storage view, click the **ISO Images** menu option.
+
+4. Click the **Upload** button.
+
+5. In the **Upload** window, click the **Select File** button.
+
+6. In your system file picker, locate and select the ISO file you wish to upload, and submit by clicking the **Open** button.
+
+7. Back in the **Upload** window, click the **Upload** button.
+
+8. Wait for the upload to complete. Once done, close the **Task viewer** window.
+
+---
+
 ## Virtual Machine
 
 ### Description
 
 This details matters pertaining to virtual machines on Proxmox.
+
+### References
+
+- [Don’t run Proxmox without these settings!](https://youtu.be/VAJWUZ3sTSI)
+- [Virtual Machines Settings](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines#qm_virtual_machines_settings)
+
+### Create VM
+
+This details how to create a virtual machine from scratch.
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. Click the **Create VM** button found on the top right corner of the web interface.
+
+3. In the **Create: Virtual Machine** window, under the **General** tab, configure as such:
+
+   - Node: Expand the dropdown and select your Proxmox node (i.e. `proxmox`)
+   - VM ID: Set this to an unused index (i.e. `101`)
+   - Name: Set a suitable name for the VM (i.e. `my-vm.example.com`)
+
+    > [!TIP]  
+    > There is also an **Advanced** option you can check to enable.
+
+    Click the **Next** button.
+
+4. Under the **OS** tab, configure as such:
+
+   - Use CD/DVD disc image file (iso): Check this box to use this option
+     - Storage: Expand the dropdown and select the storage which contains the ISO you have [added](#adding-iso) to Proxmox (i.e. `local`)
+     - ISO image: Expand the dropdown and select the ISO you wish to use (i.e. `Rocky-8.6-x86_64-minimal.iso`)
+   - Guest OS:
+     - Type: Expand the dropdown and select the type of OS you wish to install (i.e. `Linux`)
+     - Version: Expand the dropdown and select the version of the OS you wish to install (i.e. `6.x - 2.6 Kernel`)
+
+    Click the **Next** button.
+
+5. Under the **System** tab, configure as such:
+
+   - Graphic card: Expand the dropdown and select the graphics driver most suited for the VM (i.e. `Default`)
+     - `Default`: Fine in most cases especially VMs you wish to use headlessly.
+     - `VirtIO-GPU`: Recommended for graphical desktops (i.e. on Windows VMs) (requires manual [installation](https://pve.proxmox.com/wiki/Windows_VirtIO_Drivers) on Windows)
+   - Machine: Expand the dropdown and select the machine type (chipset) you wish to use (i.e. `q35`)
+     - `Default (i400fx)`: Legacy, generally the most compatible.
+     - `q35`: Modern, generally compatible with most modern systems (required if you wish to enable PCIE passthrough).
+   - SCSI Controller: Expand the dropdown and select the SCSI controller you wish to use (i.e. `VirtIO SCSI single`)
+   - Qemu Agent: Check this box to enable the Qemu Agent (requires the `qemu-guest-agent` package to be installed on the VM OS)
+   - BIOS: Expand the dropdown and select the BIOS you wish to use (i.e. `OVMF (UEFI)`)
+     - `Default (SeaBIOS)`: Legacy, generally the most compatible.
+     - `OVMF (UEFI)`: Modern, generally compatible with most modern systems.
+   - Add TPM: Generally, you may leave this box unchecked except if your VM OS requires it (i.e. Windows 11)
+   - OVMF (UEFI):
+     - Add EFI Disk: Check this box to enable it
+     - EFI Storage: Expand the dropdown and select the storage where you wish to install the EFI disk on (i.e. `local-zfs`)
+     - Pre-Enroll keys: Leave this box checked by default as it may be required by few VM OS (i.e. Windows 11)
+
+    Click the **Next** button.
+
+6. Under the **Disks** tab, configure as such for each disk (i.e. **scsi0**):
+
+   - Bus/Device: Leave as default (i.e. `SCSI` and `0`)
+   - Storage: Expand the dropdown and select the storage where you wish to install the disk on (i.e. `local-zfs`)
+   - Disk size (GiB): Set the size of the disk (i.e. `10`)
+   - Cache: Expand the dropdown and select the cache mode you wish to use (i.e. `Default (No cache)`)
+   - Discard: Check this box to enable shrinking the disk image in Trim-enabled guest OSes (some guest OS may also require enabling **SSD emulation** on the drive)
+   - IO Thread: Leave this box checked to enable better distribution and utilisation of the underlying storage
+   - **(Advanced)** SSD emulation: Check this box if you would like the drive to be presented to the guest OS as an SSD
+   - **(Advanced)** Backup: Leave this box checked to include the volume in a backup job
+
+    To add more disk to the VM, simply click the **Add** button and configure it as we did before. Once done, click the **Next** button.
+
+7. Under the **CPU** tab, configure as such:
+
+   - Sockets: Set the number of CPU sockets (i.e. `1`)
+   - Cores: Set the number of CPU cores (i.e. `1`)
+   - Type: Expand the dropdown and select the CPU type you wish for the VM to use or emulate depending on your CPU and requirements (i.e. `x86-64-v3`)
+
+      > [!TIP]  
+      > Refer to the [QEMU CPU Types](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines#qm_cpu) list for the available CPU types
+
+    Click the **Next** button.
+
+8. Under the **Memory** tab, configure as such:
+
+   - Memory (MiB): Set the RAM capacity to allocate (i.e. `1024`)
+
+    Click the **Next** button.
+
+9. Under the **Network** tab, configure as such:
+
+   - No network device: Leave the box unchecked unless you specifically wish for the VM to not have a network device
+   - Bridge: Expand the dropdown and select the network bridge you wish to use (i.e. `vmbr0`)
+   - Model: Expand the dropdown and select the network model you wish to use (i.e. `VirtIO (paravirtualized)`)
+   - Firewall: Leave the box checked to enable the firewall
+
+    Click the **Next** button.
+
+10. Under the **Confirm** tab, review the VM configuration, optionally enable the **Start after created** option, and click the **Finish** button.
+
+11. [Enter the VM](#enter-the-vm) and go through the OS installation process. Refer to the [Linux](linux.md) topic for more installation details for Linux based VMs.
+
+12. Once finished installing, if the guest OS asks you to remove the installation medium before rebooting, from the virtual machine view, navigate to the **Hardware** section.
+
+13. Select the **CD/DVD Drive** containing the installation medium or ISO and click the **Edit** button.
+
+14. Select the **Do not use any media** option and click the **OK** button to remove the ISO from the virtual CD/DVD Drive.
+
+15. Go back to the **Console** and press the <kbd>Enter</kbd> key to reboot into the OS.
+
+16. [Configure](#vm-configuration) the VM as necessary.
+
+### Enter the VM
+
+This details how to enter a virtual machine on Proxmox.
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. Select the target virtual machine (illustrated with an icon of a display) you wish to enter.
+
+3. In the virtual machine view, click the **Start** button located at the top right corner if the VM is not already running.
+
+4. In the **Summary** section of the VM, there should be an **IPs** attribute containing the VM's IP address. If it does not (i.e. says **Guest Agent not running**), it's possible that the VM has not been setup or `qemu-guest-agent` is not installed.
+
+5. If you know the IP of the virtual machine, you may simply access it through [SSH]() from your personal machine for the best convenience and experience.
+
+6. **Alternatively**, if you need to access it directly through Proxmox, navigate to the **Console** section and use the VM that way.
+
+### VM Configuration
+
+This details some generic configuration recommendations for a virtual machine after it's been installed:
+
+- Perform a system update on the VM
+- Install the [`qemu-guest-agent`](https://pve.proxmox.com/wiki/Qemu-guest-agent) package on the VM to allow useful Proxmox VM management features
+- [Enable SSH](ssh.md#enable-remote-access) on the VM
+- **(Optional)** Change the default SSH port on the VM
+- **(Optional)** Disable root login for SSH on the VM
+- **(Optional)** Disable password authentication for SSH on the VM
+- **(Optional)** Set up a firewall on the VM (allow traffic to the new SSH port if it's been updated)
+
+For more detailed instructions on installing or setting up a (Linux based) virtual machine, please refer to the dedicated [Linux](linux.md) topic according to the guest OS.
+
+### Create Container Template
+
+This details how to create a Container Template out of a virtual machine.
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. Select the target virtual machine (illustrated with an icon of a display) you wish to turn to a Container Template. [Create](#create-vm) the virtual machine if you have not already.
+
+3. In the virtual machine view, expand the **More** dropdown located at the top right corner and select the **Convert to template** option.
 
 ### Restore VM or Container Template From Backup
 
