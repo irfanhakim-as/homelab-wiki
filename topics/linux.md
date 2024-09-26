@@ -140,53 +140,20 @@ This details the installation and configuration of Ubuntu as the operating syste
 
    - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port with the `tcp` protocol.
 
-6. Update the VM's SSH configuration.
+6. Update the VM's [SSH configuration](ssh.md#configuration), including:
 
-   - Update the SSH configuration file:
+   - Change the default SSH port to what you had chosen and allowed in the system firewall.
 
-        ```sh
-        sudo nano /etc/ssh/sshd_config
-        ```
+   - Disable root login via SSH.
 
-   - Change the default SSH port:
-
-        ```sh
-        #Port 22
-        ```
-
-       - Uncomment the `Port` line if it is commented.
-       - Set the `Port` value to the new port number you have selected in the previous step.
-
-   - Disable root login:
-
-        ```sh
-        #PermitRootLogin prohibit-password
-        ```
-
-       - Uncomment the `PermitRootLogin` line if it is commented.
-       - Set the `PermitRootLogin` value to `prohibit-password` (good security) or `no` (best security).
-
-   - Disable password authentication:
-
-        ```sh
-        #PasswordAuthentication yes
-        ```
-
-       - Uncomment the `PasswordAuthentication` line if it is commented.
-       - Set the `PasswordAuthentication` value to `no`.
-
-   - [Enable the SSH service](ssh.md#enable-remote-access) (in case it is not yet enabled).
-
-   - Restart the SSH service:
+   - Disable password authentication via SSH.
 
         > [!WARNING]  
-        > Make sure you have [copied your public SSH key(s)](ssh.md#copy-ssh-keys) to the server before doing this!
+        > Make sure you have [copied your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-        ```sh
-        sudo systemctl restart ssh
-        ```
+7. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
-7. Reboot the VM to apply all changes:
+8. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
