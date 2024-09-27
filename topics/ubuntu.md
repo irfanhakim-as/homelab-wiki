@@ -360,10 +360,10 @@ This details the simple process of updating system's hostname:
     sudo hostnamectl set-hostname "<hostname>.<domain>"
     ```
 
-    As an example, if the `<hostname>` is `ubuntu-server` and the `<domain>` is `example.com`:
+    As an example, if the new `<hostname>` is `ubuntu-1` and the `<domain>` is `example.com`:
 
     ```sh
-    sudo hostnamectl set-hostname "ubuntu-server.example.com"
+    sudo hostnamectl set-hostname "ubuntu-1.example.com"
     ```
 
 2. **(Optional)** Update the system's hosts file:
