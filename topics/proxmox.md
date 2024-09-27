@@ -29,7 +29,6 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Enter the VM](#enter-the-vm)
     - [VM Configuration](#vm-configuration)
     - [Create Container Template](#create-container-template)
-    - [Restore VM or Container Template From Backup](#restore-vm-or-container-template-from-backup)
     - [Create VM From Container Template](#create-vm-from-container-template)
     - [Editing VM Parameters](#editing-vm-parameters)
   - [Backups](#backups)
@@ -330,29 +329,6 @@ This details how to create a Container Template out of a virtual machine.
 2. Select the target virtual machine (illustrated with an icon of a display) you wish to turn to a Container Template. [Create](#create-vm) the virtual machine if you have not already.
 
 3. In the virtual machine view, expand the **More** dropdown located at the top right corner and select the **Convert to template** option.
-
-### Restore VM or Container Template From Backup
-
-This details how to restore a virtual machine or Container Template from a backup.
-
-1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
-
-2. Select the storage which contains the backup you wish to use (i.e. `local`).
-
-3. In said storage's menu options, click the **Backups** section.
-
-4. Select the backup you wish to restore from (create VM out of) and click the **Restore** button.
-
-5. In the **Restore: VM** window, configure the following:
-
-   - Expand the **Storage** dropdown and select the storage where you wish to install the VM on (i.e. `local-zfs`)
-   - Set the **VM** ID to an unused index (i.e. `100`)
-   - **(Optional)** Check the **Unique** box to have Proxmox autogenerate unique properties.
-   - **(Optional)** Check the **Start after restore** box to have Proxmox start the VM after it has been restored (created).
-   - **(Optional)** Use the **Override Settings** section to override any hardware configurations such as the **Name**, **Memory** capacity, number of **Cores**, or **Sockets**.
-   - Click the **Restore** button.
-
-6. In the **Restore** console, monitor the **Output** and wait for the task to finish. Once the task has finished successfully, close the console by clicking the corresponding **X** button.
 
 ### Create VM From Container Template
 
