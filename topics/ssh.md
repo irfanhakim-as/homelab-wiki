@@ -119,6 +119,9 @@ This details the process of updating the system's SSH configuration and includes
 
 4. Once **absolutely** confident and ready to apply the changes, [restart](systemd.md#restart-service) the SSH service `sshd.service`.
 
+    > [!NOTE]  
+    > The underlying SSH service may be named differently (i.e. `ssh.service`) depending on your Linux distribution.
+
     > [!WARNING]  
     > Applying changes to the SSH configuration file without being prepared for the changes to take effect is highly discouraged.
 
@@ -253,8 +256,8 @@ This details how to enable remote access to your machine and to access another m
 
 2. [Start and enable](systemd.md#enable-service) the SSH service `sshd.service`.
 
-    >[!NOTE]  
-    > Some Linux distributions may require enabling the `ssh.service` service instead.
+    > [!NOTE]  
+    > The underlying SSH service may be named differently (i.e. `ssh.service`) depending on your Linux distribution.
 
 3. Once the SSH service is active, said machine should now be able to be remotely accessed via another device using SSH.
 
