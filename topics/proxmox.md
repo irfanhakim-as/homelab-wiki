@@ -32,6 +32,12 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Restore VM or Container Template From Backup](#restore-vm-or-container-template-from-backup)
     - [Create VM From Container Template](#create-vm-from-container-template)
     - [Editing VM Parameters](#editing-vm-parameters)
+  - [Backups](#backups)
+    - [Description](#description-5)
+    - [References](#references-4)
+    - [Creating Backup](#creating-backup)
+    - [Restoring Backup](#restoring-backup)
+    - [Exporting Backup](#exporting-backup)
 
 ## References
 
@@ -387,3 +393,73 @@ This details how to edit an existing virtual machine or Container Template.
 5. In the parameter's **Edit** window, make any changes to the parameter value. Some parameters may have an **Advanced** option box you are able to check to enable.
 
 6. Click the **OK** button to save the changes.
+
+---
+
+## Backups
+
+### Description
+
+This details topics pertaining backups on Proxmox.
+
+### References
+
+- [ProxMox - Migration, Backup, and Restoration Tutorial](https://youtu.be/BkVi2vRB75Q)
+
+### Creating Backup
+
+This details the process of creating backups of a virtual machine or Container Template on Proxmox:
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the target virtual machine (illustrated with an icon of a display) or Container Template (illustrated with an icon of a file and display) you wish to create a backup of.
+
+3. In the virtual machine view, click the **Backup** menu option.
+
+4. Click the **Backup now** button.
+
+5. In the **Backup** window, configure the following:
+
+   - Storage: Expand the dropdown and select the storage where you wish to store the backup to (i.e. `local`)
+   - Mode: Expand the dropdown and select the backup mode you wish to use (i.e. `Snapshot`)
+   - Protected: Leave this box unchecked as default
+   - Compression: Expand the dropdown and select the compression algorithm you wish to use (i.e. `ZSTD`)
+   - Notification mode: Expand the dropdown and select the notification mode you wish to use (i.e. `Auto`)
+   - Send email to: Add an email address to receive the backup notification or leave it empty as default
+   - Notes: Customise the note corresponding to the backup or leave it as default (i.e. `{{guestname}}`)
+
+    Click the **Backup** button.
+
+6. In the **Task viewer** window, wait for the backup to complete. Once it has, close the window by clicking its **X** button.
+
+### Restoring Backup
+
+This details how to restore a virtual machine or Container Template from a backup.
+
+1. If you wish to create a new virtual machine or Container Template from a backup:
+
+   1. On the left-hand side of the web interface, select the target storage which contains the backup you wish to use to restore (i.e. `local`).
+   2. In the storage view, click the **Backups** menu option.
+
+2. **Alternatively**, if you wish to overwrite an existing virtual machine or Container Template from a backup:
+
+   1. On the left-hand side of the web interface, select the target storage which contains the backup you wish to use to restore (i.e. `local`).
+   2. In the storage view, click the **Backups** menu option.
+
+3. Select to highlight the backup you wish to restore from and click the **Restore** button.
+
+4. In the **Restore: VM** window, configure the following:
+
+   - Storage: Leave it as default (i.e. `From backup configuration`) or expand the dropdown and select the storage where you wish to install the VM on (i.e. `local-zfs`)
+   - VM: If you are creating a new VM, set the VM ID to an unused index (i.e. `100`)
+   - **(Optional)** Unique: Check the box to have Proxmox autogenerate unique properties
+   - **(Optional)** Start after restore: Check the box to have Proxmox start the VM after it has been restored (created)
+   - **(Optional)** Override Settings: Use this section to override any hardware configurations such as the **Name**, **Memory** capacity, number of **Cores**, or **Sockets**
+
+    Click the **Restore** button.
+
+5. In the **Task viewer** window, monitor the **Output** and wait for the task to finish. Once the task has finished successfully, close it by clicking the corresponding **X** button.
+
+### Exporting Backup
+
+TODO
