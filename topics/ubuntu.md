@@ -111,11 +111,11 @@ This details some recommended configuration options for Ubuntu as a server.
 
 6. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
 
-7. Set up the VM firewall (UFW).
+7. Set up the VM firewall (UFW):
 
    - [Enable the firewall](firewall.md#enablement).
 
-   - Check the [firewall status](firewall.md#status).
+   - Check the [firewall status](firewall.md#status) to ensure it is active and no rules have been configured.
 
    - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port using the `tcp` protocol.
 
