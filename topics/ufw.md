@@ -294,11 +294,7 @@ This details the process of deleting firewall rules with `ufw`.
 
 ### Steps
 
-1. Get a numbered list of the system's firewall rules:
-
-    ```sh
-    sudo ufw status numbered
-    ```
+1. Get a [numbered list](#firewall-status) of the system's currently active firewall rules.
 
     Sample output:
 
