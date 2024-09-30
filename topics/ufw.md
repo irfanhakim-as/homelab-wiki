@@ -45,7 +45,7 @@ Uncomplicated Firewall (UFW) is a program for managing a netfilter firewall desi
 
 ### Description
 
-This details the process of enabling, disabling, or resetting the system firewall using `ufw`.
+This details the process of enabling, disabling, or resetting the system firewall.
 
 ### References
 
@@ -84,7 +84,7 @@ This details the process of enabling, disabling, or resetting the system firewal
 
 ### Description
 
-This details the process of checking the system firewall's status and rules using `ufw`.
+This details the process of checking the system firewall's status and rules.
 
 ### References
 
@@ -150,7 +150,7 @@ This details the process of checking the system firewall's status and rules usin
 
 ### Description
 
-This details the process of adding allow rules of various types with `ufw`.
+This details the process of adding allow rules of various types.
 
 ### References
 
@@ -158,7 +158,7 @@ This details the process of adding allow rules of various types with `ufw`.
 
 ### Custom Allow Rule
 
-This details the process of adding a custom allow rule with `ufw`:
+This details the process of adding a custom allow rule using port numbers and protocols:
 
 1. To allow connections to a single specific port:
 
@@ -245,7 +245,7 @@ This details the process of adding allow rules by service name:
 
 ### Description
 
-This details the process of adding deny rules with `ufw`.
+This details the process of adding deny rules.
 
 ### References
 
@@ -286,7 +286,7 @@ This details the process of adding deny rules with `ufw`.
 
 ### Description
 
-This details the process of deleting firewall rules with `ufw`.
+This details the process of deleting firewall rules.
 
 ### References
 
