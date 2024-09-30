@@ -296,13 +296,13 @@ This details the process of updating certain networking configurations on the sy
 
 This details the process of setting a static IP address and updating the DNS server on a system.
 
-1. Backup the existing Netplan configuration file:
+1. Backup the existing network configuration file:
 
     ```sh
     sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.bak
     ```
 
-2. Update the Netplan configuration file:
+2. Update the network configuration file:
 
     ```sh
     sudo nano /etc/netplan/00-installer-config.yaml
