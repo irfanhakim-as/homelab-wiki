@@ -106,7 +106,7 @@ This details some recommended configuration options for Ubuntu as a server.
    - Proxmox: `qemu-guest-agent`
 
     > [!TIP]  
-    > On Proxmox, you may also need to enable the `qemu-guest-agent` service yourself.
+    > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
 4. [Clean up](#clean-up) the system to recover some storage space.
 
