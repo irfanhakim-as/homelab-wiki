@@ -47,6 +47,7 @@ This details the process of enabling the system firewall.
 ### References
 
 - [UFW: Enabling Firewall](ufw.md#enabling-firewall)
+- [Firewalld: Enabling Firewall](firewalld.md#enabling-firewall)
 
 ---
 
@@ -59,6 +60,7 @@ This details the process of disabling the system firewall.
 ### References
 
 - [UFW: Disabling Firewall](ufw.md#disabling-firewall)
+- [Firewalld: Disabling Firewall](firewalld.md#disabling-firewall)
 
 ---
 
@@ -71,6 +73,7 @@ This details the process of resetting the system firewall.
 ### References
 
 - [UFW: Resetting Firewall](ufw.md#resetting-firewall)
+- [Firewalld: Resetting Firewall](firewalld.md#resetting-firewall)
 
 ---
 
@@ -83,6 +86,7 @@ This details the process of checking the system firewall's status and rules.
 ### References
 
 - [UFW: Firewall Status](ufw.md#firewall-status)
+- [Firewalld: Firewall Status](firewalld.md#firewall-status)
 
 ---
 
@@ -95,6 +99,7 @@ This details the process of adding allow rules of various types.
 ### References
 
 - [UFW: Allow Rule](ufw.md#allow-rule)
+- [Firewalld: Allow Rule](firewalld.md#allow-rule)
 
 ---
 
@@ -119,3 +124,4 @@ This details the process of deleting firewall rules.
 ### References
 
 - [UFW: Delete Rule](ufw.md#delete-rule)
+- [Firewalld: Delete Rule](firewalld.md#delete-rule)
