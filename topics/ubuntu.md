@@ -105,6 +105,9 @@ This details some recommended configuration options for Ubuntu as a server.
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
 
+    > [!TIP]  
+    > On Proxmox, you may also need to enable the `qemu-guest-agent` service yourself.
+
 4. [Clean up](#clean-up) the system to recover some storage space.
 
 5. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
