@@ -145,8 +145,8 @@ This details some recommended configuration options for Debian as a server.
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
 
-    > [!TIP]  
-    > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
+        > [!TIP]  
+        > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
 5. [Clean up](#clean-up) the system to recover some storage space.
 
