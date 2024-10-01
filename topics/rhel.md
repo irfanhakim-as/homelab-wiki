@@ -221,6 +221,18 @@ This details some basic usage of the default package manager for Rocky Linux, `d
     sudo dnf install <package1> <package2> <package3>
     ```
 
+4. To install any of the predefined groups of packages, use the `groupinstall` command:
+
+    ```sh
+    sudo dnf groupinstall '<group>'
+    ```
+
+    As an example, to install the `Development Tools` group:
+
+    ```sh
+    sudo dnf groupinstall 'Development Tools'
+    ```
+
 ### Update Software
 
 1. To update a single package:
@@ -279,6 +291,12 @@ This details some basic usage of the default package manager for Rocky Linux, `d
 
     ```sh
     dnf search vim
+    ```
+
+2. To list down all available predefined groups of packages:
+
+    ```sh
+    dnf grouplist
     ```
 
 ### Clean Up
