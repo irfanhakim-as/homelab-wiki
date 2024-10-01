@@ -231,7 +231,7 @@ This details how to copy your SSH keys to a remote system.
 3. **Alternatively**, you could also do so without `ssh-copy-id`:
 
     ```sh
-    cat <public-key-path> | ssh <remote-user>@<ip-address> -p <port-number> 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+    cat <public-key-path> | ssh <remote-user>@<ip-address> -p <port-number> 'mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys'
     ```
 
 4. Verify that the key has been copied successfully by [remotely accessing](#remotely-access-using-ssh) the remote server using SSH.
