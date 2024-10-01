@@ -100,6 +100,8 @@ This details some recommended configuration options for Rocky Linux as a server.
 ### References
 
 - [How To Install EPEL Repository (Repo) on an RHEL 8](https://www.cyberciti.biz/faq/install-epel-repo-on-an-rhel-8-x)
+- [SELinux security](https://docs.rockylinux.org/guides/security/learning_selinux)
+- [Change SSH Port on CentOS or RHEL or Fedora With SELinux](https://computingforgeeks.com/change-ssh-port-centos-rhel-fedora-with-selinux)
 
 ### Base VM
 
@@ -160,7 +162,33 @@ This details some recommended configuration options for Rocky Linux as a server.
 
     - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
 
-11. Clear the VM's Bash history:
+11. SELinux is enabled by default on Rocky Linux and needs to be configured to allow access to the new SSH port.
+
+    - Add the new SSH port to the `ssh_port_t` SELinux policy:
+
+        ```sh
+        sudo semanage port -a -t ssh_port_t -p tcp <ssh-port>
+        ```
+
+        For example, if the new SSH port is `2222`:
+
+        ```sh
+        sudo semanage port -a -t ssh_port_t -p tcp 2222
+        ```
+
+    - Verify that the port is now accessible from the `ssh` service:
+
+        ```sh
+        sudo semanage port -l | grep ssh_port_t
+        ```
+
+        Sample output:
+
+        ```
+        ssh_port_t                     tcp      2222, 22
+        ```
+
+12. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -170,7 +198,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-12. Reboot the VM to apply all changes:
+13. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
