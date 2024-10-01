@@ -133,28 +133,9 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 8. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
 
-9. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
+9. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
 
-   - Changing the default SSH port to a new port (i.e. `2222`).
-
-   - Disabling root login via SSH.
-
-   - Disabling password authentication via SSH.
-
-        > [!WARNING]  
-        > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
-
-10. Set up the VM firewall (Firewalld):
-
-    - [Enable the firewall](firewall.md#enablement).
-
-    - Check the [firewall status](firewall.md#status) to ensure it is active.
-
-    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
-
-    - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
-
-11. SELinux is enabled by default on Rocky Linux and needs to be configured to allow access to the new SSH port.
+10. SELinux is enabled by default on Rocky Linux and needs to be configured to allow access to the new SSH port.
 
     - Add the new SSH port to the `ssh_port_t` SELinux policy:
 
@@ -180,7 +161,28 @@ This details some recommended configuration options for Rocky Linux as a server.
         ssh_port_t                     tcp      2222, 22
         ```
 
-12. Clear the VM's Bash history:
+11. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
+
+    - Changing the default SSH port to a new port (i.e. `2222`).
+
+    - Disabling root login via SSH.
+
+    - Disabling password authentication via SSH.
+
+        > [!WARNING]  
+        > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
+
+12. Set up the VM firewall (Firewalld):
+
+    - [Enable the firewall](firewall.md#enablement).
+
+    - Check the [firewall status](firewall.md#status) to ensure it is active.
+
+    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
+
+    - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
+
+13. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -190,7 +192,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-13. Reboot the VM to apply all changes:
+14. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
