@@ -20,17 +20,9 @@ Red Hat Enterprise Linux is a commercial open-source Linux distribution develope
     - [References](#references-2)
     - [Base VM](#base-vm)
     - [Extended VM](#extended-vm)
-  - [Software Manager](#software-manager)
+  - [Networking](#networking)
     - [Description](#description-3)
     - [References](#references-3)
-    - [Install Software](#install-software)
-    - [Update Software](#update-software)
-    - [Remove Software](#remove-software)
-    - [Search Software](#search-software)
-    - [Clean Up](#clean-up)
-  - [Networking](#networking)
-    - [Description](#description-4)
-    - [References](#references-4)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
 
@@ -105,13 +97,13 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 ### Base VM
 
-1. Perform a [full system upgrade](#update-software) on the system.
+1. Perform a [full system upgrade](package-manager.md#update-software) on the system using `dnf`.
 
-2. Enable the EPEL repository by [installing](#install-software) `https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`.
+2. Enable the EPEL repository by [installing](package-manager.md#install-software) `https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm` using `dnf`.
 
-3. [Group install](#install-software) the `'Development Tools'` group.
+3. [Group install](package-manager.md#install-software) the `'Development Tools'` group using `dnf`.
 
-4. [Install](#install-software) the following packages:
+4. [Install](package-manager.md#install-software) the following packages using `dnf`:
 
    - `curl`
    - `git`
@@ -127,7 +119,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!TIP]  
     > The `policycoreutils-python-utils` package is required for the `semanage` command, which is used to manage SELinux policy.
 
-5. [Install](#install-software) packages required by your [hypervisor](../courses/hypervisor.md):
+5. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `dnf`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
@@ -135,7 +127,7 @@ This details some recommended configuration options for Rocky Linux as a server.
         > [!TIP]  
         > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
-6. [Clean up](#clean-up) the system to recover some storage space.
+6. [Clean up](package-manager.md#clean-up) the system using `dnf` to recover some storage space.
 
 7. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
@@ -208,142 +200,11 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 These configuration options are expected to be applied on top of the changes that were made to the [base VM](#base-vm) inherited by the extended VM:
 
-1. Perform a [full system upgrade](#update-software) on the system, especially if it's been a while since the base VM was last upgraded.
+1. Perform a [full system upgrade](package-manager.md#update-software) on the system using `dnf`, especially if it's been a while since the base VM was last upgraded.
 
 2. [Set a static IP address and update the DNS server](#set-static-ip-and-update-dns) for the VM.
 
 3. [Update the system hostname](#update-hostname).
-
----
-
-## Software Manager
-
-### Description
-
-This details some basic usage of the default package manager for Rocky Linux, `dnf`.
-
-### References
-
-- [DNF: Dandified Yum](https://docs.rockylinux.org/books/admin_guide/13-softwares/#dnf-dandified-yum)
-- [DNF Command Reference](https://dnf.readthedocs.io/en/latest/command_ref.html)
-
-### Install Software
-
-1. To install a single package:
-
-    ```sh
-    sudo dnf install <package>
-    ```
-
-    As an example, to install the `vim` package:
-
-    ```sh
-    sudo dnf install vim
-    ```
-
-2. **Optionally**, use the `-y` flag to automatically answer "yes" to all prompts:
-
-    ```sh
-    sudo dnf install -y <package>
-    ```
-
-3. To install multiple packages in a single command, simply separate each package with a space:
-
-    ```sh
-    sudo dnf install <package1> <package2> <package3>
-    ```
-
-4. To install any of the predefined groups of packages, use the `groupinstall` command:
-
-    ```sh
-    sudo dnf groupinstall '<group>'
-    ```
-
-    As an example, to install the `Development Tools` group:
-
-    ```sh
-    sudo dnf groupinstall 'Development Tools'
-    ```
-
-### Update Software
-
-1. To update a single package:
-
-    ```sh
-    sudo dnf upgrade <package>
-    ```
-
-    As an example, to upgrade the `vim` package:
-
-    ```sh
-    sudo dnf upgrade vim
-    ```
-
-2. To update the entire system:
-
-    ```sh
-    sudo dnf upgrade
-    ```
-
-### Remove Software
-
-1. To uninstall a single package:
-
-    ```sh
-    sudo dnf remove <package>
-    ```
-
-    As an example, to uninstall the `vim` package:
-
-    ```sh
-    sudo dnf remove vim
-    ```
-
-2. **Optionally**, use the `-y` flag to automatically answer "yes" to all prompts:
-
-    ```sh
-    sudo dnf remove -y <package>
-    ```
-
-3. To uninstall multiple packages in a single command, simply separate each package with a space:
-
-    ```sh
-    sudo dnf remove <package1> <package2> <package3>
-    ```
-
-### Search Software
-
-1. To search for a package:
-
-    ```sh
-    dnf search <package>
-    ```
-
-    As an example, to search for the `vim` package:
-
-    ```sh
-    dnf search vim
-    ```
-
-2. To list down all available predefined groups of packages:
-
-    ```sh
-    dnf grouplist
-    ```
-
-### Clean Up
-
-1. To remove packages that were automatically installed to satisfy dependencies for other packages and are now no longer needed:
-
-    ```sh
-    sudo dnf autoremove
-    ```
-
-2. To delete cached package files and any data that have been left behind:
-
-    ```sh
-    sudo dnf clean all
-    ```
 
 ---
 

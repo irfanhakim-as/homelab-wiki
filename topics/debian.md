@@ -19,21 +19,13 @@ Debian, also known as Debian GNU/Linux, is a free and open source Linux distribu
     - [Description](#description-2)
     - [Base VM](#base-vm)
     - [Extended VM](#extended-vm)
-  - [Software Manager](#software-manager)
-    - [Description](#description-3)
-    - [References](#references-2)
-    - [Install Software](#install-software)
-    - [Update Software](#update-software)
-    - [Remove Software](#remove-software)
-    - [Search Software](#search-software)
-    - [Clean Up](#clean-up)
   - [Networking](#networking)
-    - [Description](#description-4)
+    - [Description](#description-3)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
   - [Sudo](#sudo)
-    - [Description](#description-5)
-    - [References](#references-3)
+    - [Description](#description-4)
+    - [References](#references-2)
     - [Steps](#steps-1)
 
 ## References
@@ -125,9 +117,9 @@ This details some recommended configuration options for Debian as a server.
 
 1. Setup [`sudo`](#sudo) for the system's service user as root.
 
-2. Perform a [full system upgrade](#update-software) on the system.
+2. Perform a [full system upgrade](package-manager.md#update-software) on the system using `apt`.
 
-3. [Install](#install-software) the following packages:
+3. [Install](package-manager.md#install-software) the following packages using `apt`:
 
    - `curl`
    - `git`
@@ -140,7 +132,7 @@ This details some recommended configuration options for Debian as a server.
    - `ufw`
    - `wget`
 
-4. [Install](#install-software) packages required by your [hypervisor](../courses/hypervisor.md):
+4. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
@@ -148,7 +140,7 @@ This details some recommended configuration options for Debian as a server.
         > [!TIP]  
         > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
-5. [Clean up](#clean-up) the system to recover some storage space.
+5. [Clean up](package-manager.md#clean-up) the system using `apt` to recover some storage space.
 
 6. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
@@ -193,136 +185,11 @@ This details some recommended configuration options for Debian as a server.
 
 These configuration options are expected to be applied on top of the changes that were made to the [base VM](#base-vm) inherited by the extended VM:
 
-1. Perform a [full system upgrade](#update-software) on the system, especially if it's been a while since the base VM was last upgraded.
+1. Perform a [full system upgrade](package-manager.md#update-software) on the system using `apt`, especially if it's been a while since the base VM was last upgraded.
 
 2. [Set a static IP address and update the DNS server](#set-static-ip-and-update-dns) for the VM.
 
 3. [Update the system hostname](#update-hostname).
-
----
-
-## Software Manager
-
-### Description
-
-This details some basic usage of the default package manager for Debian, `apt`.
-
-### References
-
-- [AptCLI](https://wiki.debian.org/AptCLI)
-- [Sudo apt autoremove](https://discourse.lubuntu.me/t/sudo-apt-autoremove/3699)
-
-### Install Software
-
-1. To install a single package:
-
-    ```sh
-    sudo apt install <package>
-    ```
-
-    As an example, to install the `vim` package:
-
-    ```sh
-    sudo apt install vim
-    ```
-
-2. **Optionally**, use the `-y` flag to automatically answer "yes" to all prompts:
-
-    ```sh
-    sudo apt install -y <package>
-    ```
-
-3. To install multiple packages in a single command, simply separate each package with a space:
-
-    ```sh
-    sudo apt install <package1> <package2> <package3>
-    ```
-
-### Update Software
-
-1. Update all software repositories installed on the system **before** performing any of the following operations:
-
-    ```sh
-    sudo apt update
-    ```
-
-2. To update a single package:
-
-    ```sh
-    sudo apt install --only-upgrade <package>
-    ```
-
-    As an example, to upgrade the `vim` package:
-
-    ```sh
-    sudo apt install --only-upgrade vim
-    ```
-
-3. To update all installed packages:
-
-    ```sh
-    sudo apt upgrade
-    ```
-
-4. In some cases however, a simple upgrade is not enough. To perform a full system upgrade, run the following command:
-
-    ```sh
-    sudo apt dist-upgrade
-    ```
-
-### Remove Software
-
-1. To uninstall a single package:
-
-    ```sh
-    sudo apt remove <package>
-    ```
-
-    As an example, to uninstall the `vim` package:
-
-    ```sh
-    sudo apt remove vim
-    ```
-
-2. **Optionally**, use the `-y` flag to automatically answer "yes" to all prompts:
-
-    ```sh
-    sudo apt remove -y <package>
-    ```
-
-3. To uninstall multiple packages in a single command, simply separate each package with a space:
-
-    ```sh
-    sudo apt remove <package1> <package2> <package3>
-    ```
-
-### Search Software
-
-1. To search for a package:
-
-    ```sh
-    apt search <package>
-    ```
-
-    As an example, to search for the `vim` package:
-
-    ```sh
-    apt search vim
-    ```
-
-### Clean Up
-
-1. To remove packages that were automatically installed to satisfy dependencies for other packages and are now no longer needed:
-
-    ```sh
-    sudo apt autoremove
-    ```
-
-2. To delete cached package files that have been installed:
-
-    ```sh
-    sudo apt clean
-    ```
 
 ---
 
@@ -481,9 +348,9 @@ This details the process of setting up `sudo` and adding the user to the `sudo` 
 
     Enter the root password when prompted.
 
-2. Perform a [full system upgrade](#update-software) on the system (without `sudo` since we're running as root).
+2. Perform a [full system upgrade](package-manager.md#update-software) on the system using `apt` (without `sudo` since we're running as root).
 
-3. [Install](#install-software) `sudo`.
+3. [Install](package-manager.md#install-software) `sudo` using `apt`.
 
 4. Add your service user (non-root user) to the `sudo` group:
 
