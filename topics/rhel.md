@@ -58,7 +58,7 @@ This details the installation process for Rocky Linux as a server on a virtual m
 
 2. Go through the installation wizard as per usual.
 
-3. In the **Network & Hostname** section, select the network interface you wish to use (i.e. `Ethernet (ens192)`), toggle the switch to **ON** to enable it, and click the **Done** button.
+3. In the **Network & Hostname** section, select the network interface you wish to use (i.e. `Ethernet (ens192)`), toggle the switch to `ON` to enable it, and click the **Done** button.
 
 4. In the **Time & Date** section, update the **Region** and **City**, and click **Done**.
 
