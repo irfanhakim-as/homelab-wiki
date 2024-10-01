@@ -141,7 +141,7 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 9. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
 
-   - Changing the default SSH port to what you had chosen and allowed in the system firewall.
+   - Changing the default SSH port to a new port (i.e. `2222`).
 
    - Disabling root login via SSH.
 
@@ -156,7 +156,7 @@ This details some recommended configuration options for Rocky Linux as a server.
 
     - Check the [firewall status](firewall.md#status) to ensure it is active.
 
-    - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port using the `tcp` protocol.
+    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
     - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
 
