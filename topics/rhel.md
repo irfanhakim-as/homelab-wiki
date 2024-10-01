@@ -143,7 +143,7 @@ This details some recommended configuration options for Rocky Linux as a server.
 
    - [Enable the firewall](firewall.md#enablement).
 
-   - Check the [firewall status](firewall.md#status) to ensure it is active and no rules have been configured.
+   - Check the [firewall status](firewall.md#status) to ensure it is active.
 
    - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port using the `tcp` protocol.
 
