@@ -107,7 +107,9 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 2. Enable the EPEL repository by [installing](#install-software) `https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm`.
 
-3. [Install](#install-software) the following packages:
+3. [Group install](#install-software) the `'Development Tools'` group.
+
+4. [Install](#install-software) the following packages:
 
    - `curl`
    - `git`
@@ -123,7 +125,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!TIP]  
     > The `policycoreutils-python-utils` package is required for the `semanage` command, which is used to manage SELinux policy.
 
-4. [Install](#install-software) packages required by your [hypervisor](../courses/hypervisor.md):
+5. [Install](#install-software) packages required by your [hypervisor](../courses/hypervisor.md):
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
@@ -131,13 +133,13 @@ This details some recommended configuration options for Rocky Linux as a server.
         > [!TIP]  
         > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
-5. [Clean up](#clean-up) the system to recover some storage space.
+6. [Clean up](#clean-up) the system to recover some storage space.
 
-6. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
+7. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
-7. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
+8. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
 
-8. Set up the VM firewall (Firewalld):
+9. Set up the VM firewall (Firewalld):
 
    - [Enable the firewall](firewall.md#enablement).
 
@@ -145,7 +147,7 @@ This details some recommended configuration options for Rocky Linux as a server.
 
    - Choose a new SSH port (i.e. `2222`) and [allow the connection](firewall.md#adding-allow-rule) to the chosen port using the `tcp` protocol.
 
-9. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
+10. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
 
    - Changing the default SSH port to what you had chosen and allowed in the system firewall.
 
@@ -156,7 +158,7 @@ This details some recommended configuration options for Rocky Linux as a server.
         > [!WARNING]  
         > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-10. Clear the VM's Bash history:
+11. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -166,7 +168,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-11. Reboot the VM to apply all changes:
+12. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
