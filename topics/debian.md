@@ -148,24 +148,24 @@ This details some recommended configuration options for Debian as a server.
 
 8. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
 
-9. Set up the VM firewall (UFW):
+9. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
 
-   - [Enable the firewall](firewall.md#enablement).
+   - Changing the default SSH port to a new port (i.e. `2222`).
 
-   - Check the [firewall status](firewall.md#status) to ensure it is active and no rules have been configured.
+   - Disabling root login via SSH.
 
-   - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
-
-10. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
-
-    - Changing the default SSH port to a new port (i.e. `2222`).
-
-    - Disabling root login via SSH.
-
-    - Disabling password authentication via SSH.
+   - Disabling password authentication via SSH.
 
         > [!WARNING]  
         > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
+
+10. Set up the VM firewall (UFW):
+
+    - [Enable the firewall](firewall.md#enablement).
+
+    - Check the [firewall status](firewall.md#status) to ensure it is active and no rules have been configured.
+
+    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
 11. Clear the VM's Bash history:
 
