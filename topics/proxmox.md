@@ -308,7 +308,7 @@ This details how to enter a virtual machine on Proxmox.
 
 ### VM Configuration
 
-This details some generic configuration recommendations for a virtual machine after it's been installed:
+This details some generic configuration recommendations for a virtual machine after it's been [created and installed](#create-vm):
 
 - Perform a system update on the VM
 - Install the [`qemu-guest-agent`](https://pve.proxmox.com/wiki/Qemu-guest-agent) package on the VM to allow useful Proxmox VM management features
