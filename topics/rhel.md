@@ -116,7 +116,7 @@ This details some recommended configuration options for Rocky Linux as a server.
    - `python3-pip`
    - `wget`
 
-    > [!TIP]  
+    > [!NOTE]  
     > The `policycoreutils-python-utils` package is required for the `semanage` command, which is used to manage SELinux policy.
 
 5. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `dnf`:
