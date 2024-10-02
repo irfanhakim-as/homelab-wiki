@@ -278,7 +278,7 @@ This details how to create a virtual machine from scratch.
 
 10. Under the **Confirm** tab, review the VM configuration, optionally enable the **Start after created** option, and click the **Finish** button.
 
-11. [Enter the VM](#enter-the-vm) and go through the OS installation process. Refer to the [Linux](linux.md) topic for more installation details for Linux based VMs.
+11. [Enter the VM](#enter-the-vm) and go through the OS installation process. Refer to the [Linux installation](linux.md#installation) topic for more installation details for Linux based VMs.
 
 12. Once finished installing, if the guest OS asks you to remove the installation medium before rebooting, from the virtual machine view, navigate to the **Hardware** section.
 
@@ -318,7 +318,7 @@ This details some generic configuration recommendations for a virtual machine af
 - **(Optional)** Disable password authentication for SSH on the VM
 - **(Optional)** Set up a firewall on the VM (allow traffic to the new SSH port if it's been updated)
 
-For more detailed instructions on installing or setting up a (Linux based) virtual machine, please refer to the dedicated [Linux](linux.md) topic according to the guest OS.
+For more detailed instructions on configuring a Linux based virtual machine, please refer to the [Linux configuration](linux.md#configuration) topic according to the guest OS.
 
 ### Create Container Template
 

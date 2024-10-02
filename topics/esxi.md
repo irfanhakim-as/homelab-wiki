@@ -418,7 +418,7 @@ This details how to create a virtual machine to be used as a template or base fo
 
 11. Click the "screen" on the VM's page to open a browser console to the VM.
 
-12. Go through the OS installation process. Refer to the [Linux](linux.md) topic for more installation details for Linux based VMs.
+12. Go through the OS installation process. Refer to the [Linux installation](linux.md#installation) topic for more installation details for Linux based VMs.
 
 13. After the installation has completed, restart the VM, and in the VM's page, click the **Edit** button.
 
@@ -442,7 +442,7 @@ This details how to create a virtual machine to be used as a template or base fo
     - **(Optional)** Disable password authentication for SSH on the VM
     - **(Optional)** Set up a firewall on the VM (allow traffic to the new SSH port if it's been updated)
 
-    For more detailed instructions on installing or setting up a (Linux based) virtual machine, please refer to the dedicated [Linux](linux.md) topic according to the guest OS.
+    For more detailed instructions on configuring a Linux based virtual machine, please refer to the [Linux configuration](linux.md#configuration) topic according to the guest OS.
 
 20. Once you are done with all of the configurations that will be inherited by future VMs, shut down the VM.
 
@@ -540,11 +540,13 @@ This details how to create a virtual machine from a template or base virtual mac
 
 30. Log into the VM with your provided credentials.
 
-31. Perform any additional configuration steps required for the VM. Steps will vary depending on the OS, refer to the [Linux](./linux.md) topic for more details. Recommended configuration steps include:
+31. Perform any additional configuration steps required for the VM. Generally, recommended configuration options include:
 
-    - Setting a static IP address for the VM.
-    - Updating the system's hostname.
-    - Getting the system up to date since the VM template was created.
+    - Perform a system update on the VM
+    - Set a static IP address and update the DNS server for the VM
+    - Update the system hostname
+
+    For more detailed instructions on configuring a Linux based virtual machine, please refer to the [Linux configuration](linux.md#configuration) topic according to the guest OS.
 
 ### Editing a Virtual Machine
 
@@ -579,7 +581,7 @@ This details how to expand the size of an existing disk or add an additional vir
     - In the provided size field, enter the new size for the virtual disk i.e. `20 GB`.
     - Click the **Save** button to apply the changes.
 
-2. Expand the partition on the virtual disk. There are different ways to do this depending on the OS and the partitioning scheme used. To determine the method of doing this on Linux, refer to the [Linux](./linux.md) topic.
+2. Expand the partition on the virtual disk. There are different ways to do this depending on the OS and the partitioning scheme used. To determine the method of doing this on Linux, please refer to the [Linux](linux.md) topic.
 
 ---
 
