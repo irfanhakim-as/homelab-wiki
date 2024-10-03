@@ -42,6 +42,8 @@ This details the process of installing software.
 
 - [Apt: Install Software](apt.md#install-software)
 - [DNF: Install Software](dnf.md#install-software)
+- [Pacman: Install Software](pacman.md#install-software)
+- [Yay: Install Software](yay.md#install-software)
 
 ---
 
@@ -55,6 +57,8 @@ This details the process of updating a software or the system.
 
 - [Apt: Update Software](apt.md#update-software)
 - [DNF: Update Software](dnf.md#update-software)
+- [Pacman: Update Software](pacman.md#update-software)
+- [Yay: Update Software](yay.md#update-software)
 
 ---
 
@@ -68,6 +72,8 @@ This details the process of uninstalling software.
 
 - [Apt: Remove Software](apt.md#remove-software)
 - [DNF: Remove Software](dnf.md#remove-software)
+- [Pacman: Remove Software](pacman.md#remove-software)
+- [Yay: Remove Software](yay.md#remove-software)
 
 ---
 
@@ -81,6 +87,8 @@ This details the process of searching software.
 
 - [Apt: Search Software](apt.md#search-software)
 - [DNF: Search Software](dnf.md#search-software)
+- [Pacman: Search Software](pacman.md#search-software)
+- [Yay: Search Software](yay.md#search-software)
 
 ---
 
@@ -94,3 +102,5 @@ This details the process of cleaning up the system.
 
 - [Apt: Clean Up](apt.md#clean-up)
 - [DNF: Clean Up](dnf.md#clean-up)
+- [Pacman: Clean Up](pacman.md#clean-up)
+- [Yay: Clean Up](yay.md#clean-up)
