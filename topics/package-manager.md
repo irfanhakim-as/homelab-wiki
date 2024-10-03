@@ -10,25 +10,40 @@ A package manager or package-management system is a collection of software tools
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Install Software](#install-software)
+  - [Setup](#setup)
     - [Description](#description-1)
     - [References](#references-1)
-  - [Update Software](#update-software)
+  - [Install Software](#install-software)
     - [Description](#description-2)
     - [References](#references-2)
-  - [Remove Software](#remove-software)
+  - [Update Software](#update-software)
     - [Description](#description-3)
     - [References](#references-3)
-  - [Search Software](#search-software)
+  - [Remove Software](#remove-software)
     - [Description](#description-4)
     - [References](#references-4)
-  - [Clean Up](#clean-up)
+  - [Search Software](#search-software)
     - [Description](#description-5)
     - [References](#references-5)
+  - [Clean Up](#clean-up)
+    - [Description](#description-6)
+    - [References](#references-6)
 
 ## References
 
 - [Package manager](https://en.wikipedia.org/wiki/Package_manager)
+
+---
+
+## Setup
+
+### Description
+
+This details the process of installing and setting up a package manager.
+
+### References
+
+- [Yay: Setup](yay.md#setup)
 
 ---
 
