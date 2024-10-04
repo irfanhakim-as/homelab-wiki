@@ -32,6 +32,7 @@ This details the installation process for the following Linux distributions as a
 
 ### References
 
+- [Arch Linux: Installation](arch.md#installation)
 - [Debian: Installation](debian.md#installation)
 - [RHEL: Installation](rhel.md#installation)
 - [Ubuntu: Installation](ubuntu.md#installation)
@@ -46,6 +47,7 @@ This details some recommended configuration options for the following Linux dist
 
 ### References
 
+- [Arch Linux: Configuration](arch.md#configuration)
 - [Debian: Configuration](debian.md#configuration)
 - [RHEL: Configuration](rhel.md#configuration)
 - [Ubuntu: Configuration](ubuntu.md#configuration)
