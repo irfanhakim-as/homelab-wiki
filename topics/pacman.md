@@ -10,30 +10,91 @@ The pacman package manager is one of the major distinguishing features of Arch L
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Install Software](#install-software)
+  - [Configuration](#configuration)
     - [Description](#description-1)
     - [References](#references-1)
-    - [Steps](#steps)
-  - [Update Software](#update-software)
+    - [Update Mirror List](#update-mirror-list)
+    - [Enable Parallel Downloads](#enable-parallel-downloads)
+  - [Install Software](#install-software)
     - [Description](#description-2)
     - [References](#references-2)
-    - [Steps](#steps-1)
-  - [Remove Software](#remove-software)
+    - [Steps](#steps)
+  - [Update Software](#update-software)
     - [Description](#description-3)
     - [References](#references-3)
-    - [Steps](#steps-2)
-  - [Search Software](#search-software)
+    - [Steps](#steps-1)
+  - [Remove Software](#remove-software)
     - [Description](#description-4)
     - [References](#references-4)
-    - [Steps](#steps-3)
-  - [Clean Up](#clean-up)
+    - [Steps](#steps-2)
+  - [Search Software](#search-software)
     - [Description](#description-5)
     - [References](#references-5)
+    - [Steps](#steps-3)
+  - [Clean Up](#clean-up)
+    - [Description](#description-6)
+    - [References](#references-6)
     - [Steps](#steps-4)
 
 ## References
 
 - [Pacman](https://wiki.archlinux.org/title/Pacman)
+
+---
+
+## Configuration
+
+### Description
+
+This details some configuration options for improving the package manager.
+
+### References
+
+- [REFLECTOR(1) - EXAMPLES](https://man.archlinux.org/man/reflector.1#EXAMPLES)
+- [Enabling parallel downloads](https://wiki.archlinux.org/title/Pacman#Enabling_parallel_downloads)
+
+### Update Mirror List
+
+The package manager relies on the list of mirrors to download the latest packages.
+
+1. Use `reflector` to update the system's mirror list and sort them by speed:
+
+    ```sh
+    sudo reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+    ```
+
+    > [!TIP]  
+    > Remove `sudo` if you are running as the root user.
+
+### Enable Parallel Downloads
+
+This details the steps to allow the package manager to download multiple packages in parallel instead of sequentially to speed up the download process.
+
+1. Update the Pacman configuration file:
+
+    ```sh
+    sudo nano /etc/pacman.conf
+    ```
+
+2. Make the following changes:
+
+    ```diff
+    #ParallelDownloads = 5
+    +ParallelDownloads = <number>
+    ```
+
+   - Comment the original `ParallelDownloads` line if it is not already commented to override it.
+
+   - Add a new `ParallelDownloads` line underneath the original with `<number>` being the number of parallel downloads to allow (range of values from `1` to `5`).
+
+   - Example changes:
+
+        ```conf
+        #ParallelDownloads = 5
+        ParallelDownloads = 5
+        ```
+
+3. Save the changes to the file.
 
 ---
 
