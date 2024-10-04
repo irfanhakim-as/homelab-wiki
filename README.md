@@ -1,5 +1,8 @@
 # Homelab Wiki
 
+> [!IMPORTANT]  
+> This repository is a work in progress. For a more desktop-oriented wiki on Linux, check out my [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki)
+
 ## Overview
 
 This wiki is a collection of guides and tips mostly focused on Homelabs, and is primarily used for my own reference. It is also used to document my own personal infrastructure, and is not necessarily perfected to be a general guide.
