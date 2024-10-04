@@ -1,7 +1,7 @@
 # Homelab Wiki
 
 > [!IMPORTANT]  
-> This repository is a work in progress. For a more desktop-oriented wiki on Linux, check out my [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki)
+> This repository is a work in progress. For a more desktop-oriented wiki on Linux, check out my [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki).
 
 ## Overview
 
