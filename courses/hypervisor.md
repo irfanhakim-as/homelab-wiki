@@ -31,7 +31,7 @@ This details the installation and configuration of ESXi as the hypervisor of cho
 - [Custom ISO](../topics/esxi.md#custom-iso)
 - [Installation](../topics/esxi.md#installation)
 - [Periodic Config Backups](../topics/esxi.md#periodic-config-backups)
-- [Networking](../topics/esxi.md#networking)
+- [Adding a Network Card](../topics/esxi.md#adding-a-network-card)
 - [Storage](../topics/esxi.md#storage)
 
 ---

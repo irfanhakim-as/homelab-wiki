@@ -34,7 +34,7 @@ VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed b
     - [Editing a Virtual Machine](#editing-a-virtual-machine)
     - [Add Virtual Disk](#add-virtual-disk)
     - [Expand Virtual Disk](#expand-virtual-disk)
-  - [Networking](#networking)
+  - [Adding a Network Card](#adding-a-network-card)
     - [Description](#description-6)
     - [References](#references-5)
     - [Steps](#steps-4)
@@ -585,7 +585,7 @@ This details how to expand the size of an existing disk or add an additional vir
 
 ---
 
-## Networking
+## Adding a Network Card
 
 ### Description
 
