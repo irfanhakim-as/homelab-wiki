@@ -18,14 +18,14 @@ This wiki is a collection of guides and tips mostly focused on Homelabs, and is 
 
 ## Courses
 
-This is a list of course-specific guides that compiles individual topics in this repository into a single guide catered to the course:
+This is a list of course-specific guides that compiles individual topics in this repository into individual guides catered to the course:
 
 - [Hardware](./courses/#)
 - [Hypervisor](./courses/#)
-- [Network](./courses/#)
-- [Virtual Machines](./courses/#)
+- [Virtual Machines (VM)](./courses/#)
 - [Kubernetes](./courses/#)
-- [NAS](./courses/#)
+- [Network](./courses/#)
+- [Services](./courses/#)
 
 ## Topics
 
