@@ -683,7 +683,7 @@ This details how to add and set up additional storage to the ESXi server includi
 
 4. Click the **PCI Devices** section.
 
-5. From the list of PCI devices, select the corresponding checkbox to the SATA adapter/card you have installed to the ESXi server i.e. `JMicron Technology Corp. SATA controller`.
+5. From the list of PCI devices, select the corresponding checkbox to the SATA adapter/card you have installed to the ESXi server (i.e. `JMicron Technology Corp. SATA controller`).
 
 6. Click the **Toggle passthrough** button to update the device's **Passthrough** status from `Disabled` to `Enabled`.
 
@@ -691,13 +691,13 @@ This details how to add and set up additional storage to the ESXi server includi
 
 8. After the ESXi server has rebooted, navigate back to the same **PCI Devices** section, and verify that the SATA adapter/card's **Passthrough** status is `Active`.
 
-9. To use the SATA adapter/card on a VM, [create](#creating-a-virtual-machine-from-a-template) a new VM or [edit](#editing-a-virtual-machine) an existing VM, and configure the VM's **Virtual Hardware**:
+9. To pass-through the physical storage device to a VM, [configure](#editing-a-virtual-machine) the VM's **Virtual Hardware**:
 
     - In the **Virtual Hardware** tab, click the **Add other device** button.
     - Click the **PCI Device** option.
     - In the newly added **New PCI Device** section, expand the dropdown, and select the SATA adapter/card we had enabled for passthrough.
 
-    > [!WARNING]  
-    > You **MAY** also need to update the **SCSI Controller 0** selection to `LSI Logic SAS`. **ONLY** do this if it turns out that this is actually required.
+        > [!WARNING]  
+        > You **MAY** also need to update the **SCSI Controller 0** selection to `LSI Logic SAS`. **ONLY** do this if it turns out that this is actually required.
 
     - Click the **Save** button.
