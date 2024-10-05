@@ -41,7 +41,7 @@ VMware ESXi (formerly ESX) is an enterprise-class, type-1 hypervisor developed b
   - [Storage](#storage)
     - [Description](#description-7)
     - [References](#references-6)
-    - [Datastore](#datastore)
+    - [Adding a Datastore](#adding-a-datastore)
     - [Disk Pass-through](#disk-pass-through)
 
 ## References
@@ -647,7 +647,7 @@ This details how to add and set up additional storage to the ESXi server includi
 - [Create a new Datastore in ESXi 6.7 (virtual environment)](https://youtu.be/-0e3jSjO1Ss)
 - [ESXi - How to Enable Passthrough mode (VMDirectPath) in #VMware #vSphere #ESXi 6.7](https://youtu.be/zzp9WBCFaK0)
 
-### Datastore
+### Adding a Datastore
 
 1. Connect the physical storage device to the ESXi server by way of the onboard SATA ports or PCIe M.2 slot.
 
