@@ -33,12 +33,20 @@ Check out the [topics](./topics/) directory for individual guides and tips.
 
 ## TODO
 
-- topics/esxi.md: installation text guide
-- topics/truenas.md -> courses/nas.md
-- topics/esxi.md: add nic card, datastore -> courses/hypervisor.md
-- topics/wireguard.md -> courses/network.md
-- courses/kubernetes.md (ingress) -> courses/network.md
-- topics/cloudflare.md -> courses/network.md
-- topics/esxi.md: add/expand virtual disk -> courses/vm.md
-- topics/linux.md: add/expand virtual disk -> topics/esxi.md
-- topics/linux.md: debian - check installation using lvm
+1. [Hardware](courses/hardware.md): Hardware setup as the base of the homelab
+2. [Hypervisor](courses/hypervisor.md): The primary core of the homelab used for provisioning VMs
+   1. [Proxmox](topics/proxmox.md)
+   2. [ESXi](topics/esxi.md)
+3. [VM](courses/vm.md): The base of all services and infrastructure hosted in the homelab
+   1. Creation and management per [hypervisor](courses/hypervisor.md)
+   2. Guest OS: [Linux](topics/linux.md)
+4. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
+   1. [RKE2](topics/rke2.md)
+5. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
+   1. Home router
+   2. Domain: Google, FreeDNS
+   3. DNS: Cloudflare (incl. CloudFlare DDNS), FreeDNS
+   4. VPN: WireGuard
+6. Services: Selection of VM or container based services that can be hosted in the homelab
+   1. NAS (VM): TrueNAS
+   2. Databases (Container): MariaDB, PostgreSQL
