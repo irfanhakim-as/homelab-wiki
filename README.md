@@ -50,8 +50,8 @@ Check out the [topics](./topics/) directory for individual guides and tips.
 5. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
    1. Home router:
       1. Port forwarding
-   2. Domain:
-      1. Google
+   2. [Domain](topics/domain.md):
+      1. [Squarespace](topics/squarespace.md) (Google)
       2. FreeDNS
    3. DNS:
       1. Cloudflare (Cloudflare DDNS, Cloudflare Tunnel)
