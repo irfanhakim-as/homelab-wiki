@@ -39,14 +39,28 @@ Check out the [topics](./topics/) directory for individual guides and tips.
    2. [ESXi](topics/esxi.md)
 3. [VM](courses/vm.md): The base of all services and infrastructure hosted in the homelab
    1. Creation and management per [hypervisor](courses/hypervisor.md)
-   2. Guest OS: [Linux](topics/linux.md)
+   2. Guest OS:
+      1. [Linux](topics/linux.md):
+         1. [Arch Linux](topics/arch.md)
+         2. [Debian](topics/debian.md)
+         3. [Ubuntu](topics/ubuntu.md)
+         4. [RHEL](topics/rhel.md)
 4. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
    1. [RKE2](topics/rke2.md)
 5. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
-   1. Home router
-   2. Domain: Google, FreeDNS
-   3. DNS: Cloudflare (incl. CloudFlare DDNS), FreeDNS
-   4. VPN: WireGuard
+   1. Home router:
+      1. Port forwarding
+   2. Domain:
+      1. Google
+      2. FreeDNS
+   3. DNS:
+      1. Cloudflare (Cloudflare DDNS, Cloudflare Tunnel)
+      2. FreeDNS
+   4. VPN:
+      1. WireGuard
 6. Services: Selection of VM or container based services that can be hosted in the homelab
-   1. NAS (VM): TrueNAS
-   2. Databases (Container): MariaDB, PostgreSQL
+   1. NAS (VM):
+      1. TrueNAS
+   2. Databases (Container):
+      1. MariaDB
+      2. PostgreSQL
