@@ -25,7 +25,7 @@ Porkbun is an amazingly awesome ICANN accredited domain name registrar based out
 
 ### Description
 
-This details how to purchase a domain name on Squarespace (formerly Google Domains).
+This details how to purchase a domain name on Porkbun.
 
 ### References
 
