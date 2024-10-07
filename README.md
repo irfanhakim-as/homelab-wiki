@@ -52,7 +52,9 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       1. Port forwarding
    2. [Domain](topics/domain.md):
       1. [Squarespace](topics/squarespace.md) (Google)
-      2. FreeDNS
+      2. Cloudflare
+      3. Porkbun
+      4. FreeDNS
    3. DNS:
       1. Cloudflare (Cloudflare DDNS, Cloudflare Tunnel)
       2. FreeDNS
