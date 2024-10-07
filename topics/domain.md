@@ -10,7 +10,7 @@ In the Internet, a domain name is a string that identifies a realm of administra
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Buying a Domain](#buying-a-domain)
+  - [Acquiring a Domain](#acquiring-a-domain)
     - [Description](#description-1)
     - [References](#references-1)
 
@@ -20,11 +20,11 @@ In the Internet, a domain name is a string that identifies a realm of administra
 
 ---
 
-## Buying a Domain
+## Acquiring a Domain
 
 ### Description
 
-This details how to purchase a domain name from a domain name registrar.
+This details how to acquire a domain name from a domain name registrar.
 
 ### References
 
