@@ -16,6 +16,8 @@ In the Internet, a domain name is a string that identifies a realm of administra
   - [Update Authoritative Nameserver](#update-authoritative-nameserver)
     - [Description](#description-2)
     - [References](#references-2)
+  - [Cloudflare as Nameserver](#cloudflare-as-nameserver)
+    - [Description](#description-3)
 
 ## References
 
@@ -47,3 +49,14 @@ This details how to update the authoritative nameserver for a domain.
 
 - [Porkbun: Update Authoritative Nameserver](porkbun.md#update-authoritative-nameserver)
 - [Squarespace: Update Authoritative Nameserver](squarespace.md#update-authoritative-nameserver)
+
+---
+
+## [Cloudflare as Nameserver](cloudflare.md#cloudflare-as-nameserver)
+
+> [!IMPORTANT]  
+> This section is not required if your domain was [purchased](#acquiring-a-domain) on Cloudflare.
+
+### Description
+
+This details how to set Cloudflare as the authoritative DNS nameserver for a domain.
