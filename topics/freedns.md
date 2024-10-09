@@ -61,7 +61,7 @@ This details how to register a subdomain on FreeDNS.
 
 4. In the **Add a new subdomain** form, configure as such:
 
-   - Type: `A`
+   - Type: Expand the dropdown and select the DNS type (i.e. `A`)
    - Subdomain: Add the name of the subdomain you wish to register (i.e. `mysubdomain`)
    - Domain: Leave this as the domain you had picked earlier (i.e. `example.com`)
    - Destination: Set this to the Public IP address of your home network (i.e. `237.84.2.178`)
