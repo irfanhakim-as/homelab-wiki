@@ -14,6 +14,10 @@ Squarespace, Inc. is an American website building and hosting company based in N
     - [Description](#description-1)
     - [References](#references-1)
     - [Steps](#steps)
+  - [Update Authoritative Nameserver](#update-authoritative-nameserver)
+    - [Description](#description-2)
+    - [References](#references-2)
+    - [Steps](#steps-1)
 
 ## References
 
@@ -47,3 +51,29 @@ This details how to purchase a domain name on Squarespace (formerly Google Domai
 6. In the **Registration** page, fill in all the required fields and click the **Save and Continue** button.
 
 7. In the **Review order** page, review all of the billing details and order summary. Click the **Confirm Payment** button to complete the order.
+
+---
+
+## Update Authoritative Nameserver
+
+### Description
+
+This details how to update the authoritative nameserver for a domain.
+
+### References
+
+- [Nameservers and DNSSEC for Squarespace-managed domains](https://support.squarespace.com/hc/en-us/articles/4404183898125-Nameservers-and-DNSSEC-for-Squarespace-managed-domains)
+
+### Steps
+
+1. Visit the [domains dashboard](https://account.squarespace.com/domains) page on a web browser. Log into your Squarespace account if you have not already.
+
+2. From the **Domains** list, select the domain you wish to update.
+
+3. On the left-hand side of the selected domain view, expand the **DNS** group and navigate to the **Domain Nameservers** section.
+
+4. Click the **Use Custom Nameservers** button if the domain was using the default Squarespace nameservers, otherwise, click the **Update Nameservers** button.
+
+5. In the **Update nameservers** form, click the **Add Nameserver** button to add any additional nameserver field and fill in all of the fields with the intended nameservers.
+
+6. Click the **Save** button to save the changes.

@@ -14,6 +14,10 @@ Porkbun is an amazingly awesome ICANN accredited domain name registrar based out
     - [Description](#description-1)
     - [References](#references-1)
     - [Steps](#steps)
+  - [Update Authoritative Nameserver](#update-authoritative-nameserver)
+    - [Description](#description-2)
+    - [References](#references-2)
+    - [Steps](#steps-1)
 
 ## References
 
@@ -44,3 +48,27 @@ This details how to purchase a domain name on Porkbun.
 5. In the **Billing Information** page, choose your payment method and continue.
 
 6. Complete your purchase.
+
+---
+
+## Update Authoritative Nameserver
+
+### Description
+
+This details how to update the authoritative nameserver for a domain.
+
+### References
+
+- [How to Change Nameservers](https://kb.porkbun.com/article/22-how-to-change-nameservers)
+
+### Steps
+
+1. Visit the [Domain Management](https://porkbun.com/account/domainsSpeedy) page on a web browser. Log into your Porkbun account if you have not already.
+
+2. From the list of available domains in your account, expand the corresponding **Details** section of the domain you wish to update.
+
+3. Click the corresponding **Edit** button next to the **Nameservers** section.
+
+4. In the **Edit Authoritative Nameservers** form, add any intended nameservers to the text area, each on a new line.
+
+5. Click the **Submit** button to save the changes.
