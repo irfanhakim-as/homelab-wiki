@@ -34,6 +34,7 @@ This details how to acquire a domain name from a domain name registrar.
 ### References
 
 - [Cloudflare: Buying a Domain](cloudflare.md#buying-a-domain)
+- [FreeDNS: Acquiring a Domain](freedns.md#acquiring-a-domain)
 - [Porkbun: Buying a Domain](porkbun.md#buying-a-domain)
 - [Squarespace: Buying a Domain](squarespace.md#buying-a-domain)
 
