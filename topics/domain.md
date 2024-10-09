@@ -75,4 +75,5 @@ This details how to register a subdomain on a DNS server.
 
 ### References
 
+- [Cloudflare: Register a Subdomain](cloudflare.md#register-a-subdomain)
 - [FreeDNS: Register a Subdomain](freedns.md#register-a-subdomain)

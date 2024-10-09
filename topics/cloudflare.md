@@ -18,6 +18,10 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Description](#description-2)
     - [References](#references-2)
     - [Steps](#steps-1)
+  - [Register a Subdomain](#register-a-subdomain)
+    - [Description](#description-3)
+    - [References](#references-3)
+    - [Steps](#steps-2)
 
 ## References
 
@@ -91,3 +95,33 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
     - You can refresh the page after some time to see if your domain has officially used Cloudflare as its nameservers by seeing a message such as **Great news! Cloudflare is now protecting your site**.
     - You may also receive an email from Cloudflare stating, for example, **Your domain is now active on a Cloudflare Free plan**.
+
+---
+
+## Register a Subdomain
+
+### Description
+
+This details how to register a subdomain on Cloudflare.
+
+### References
+
+- [Create DNS records](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/#create-dns-records)
+
+### Steps
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, expand the **DNS** group and select the **Records** menu item.
+
+3. In the **DNS Records** page, click the **Add record** button.
+
+4. In the provided form, configure as such:
+
+   - Type: Expand the dropdown and select the DNS type (i.e. `A`)
+   - Name: Add the name of the subdomain you wish to register (i.e. `mysubdomain`)
+   - IPv4 address: Set this to the Public IP address of your home network (i.e. `237.84.2.178`)
+   - Proxy status: Toggle to decide whether the hostname traffic should be proxied through Cloudflare
+   - TTL: Expand the dropdown and set the duration for record updates to reach end users (i.e. `Auto`)
+
+    Click the **Save** button.
