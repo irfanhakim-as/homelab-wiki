@@ -112,11 +112,15 @@ This details how to register a subdomain on Cloudflare.
 
 1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
 
-2. On the left hand side of the dashboard, expand the **DNS** group and select the **Records** menu item.
+2. On the left hand side of the dashboard, select the **Websites** menu item.
 
-3. In the **DNS Records** page, click the **Add record** button.
+3. In the **Home** page, select the domain you wish to register a subdomain to (i.e. `example.com`).
 
-4. In the provided form, configure as such:
+4. On the left hand side of the dashboard, expand the **DNS** group and select the **Records** menu item.
+
+5. In the **DNS Records** page, click the **Add record** button.
+
+6. In the provided form, configure as such:
 
    - Type: Expand the dropdown and select the DNS type (i.e. `A`)
    - Name: Add the name of the subdomain you wish to register (i.e. `mysubdomain`)
