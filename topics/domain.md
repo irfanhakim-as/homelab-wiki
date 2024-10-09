@@ -18,6 +18,9 @@ In the Internet, a domain name is a string that identifies a realm of administra
     - [References](#references-2)
   - [Cloudflare as Nameserver](#cloudflare-as-nameserver)
     - [Description](#description-3)
+  - [Register a Subdomain](#register-a-subdomain)
+    - [Description](#description-4)
+    - [References](#references-3)
 
 ## References
 
@@ -61,3 +64,15 @@ This details how to update the authoritative nameserver for a domain.
 ### Description
 
 This details how to set Cloudflare as the authoritative DNS nameserver for a domain.
+
+---
+
+## Register a Subdomain
+
+### Description
+
+This details how to register a subdomain on a DNS server.
+
+### References
+
+- [FreeDNS: Register a Subdomain](freedns.md#register-a-subdomain)
