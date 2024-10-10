@@ -22,6 +22,12 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Description](#description-3)
     - [References](#references-3)
     - [Steps](#steps-2)
+  - [Dynamic DNS](#dynamic-dns)
+    - [Description](#description-4)
+    - [References](#references-4)
+    - [Get Zone ID](#get-zone-id)
+    - [Create API Token](#create-api-token)
+    - [Cloudflare DDNS on Helm](#cloudflare-ddns-on-helm)
 
 ## References
 
@@ -129,3 +135,134 @@ This details how to register a subdomain on Cloudflare.
    - TTL: Expand the dropdown and set the duration for record updates to reach end users (i.e. `Auto`)
 
     Click the **Save** button.
+
+---
+
+## Dynamic DNS
+
+### Description
+
+This details how to keep DNS records up-to-date dynamically on Cloudflare.
+
+### References
+
+- [Dynamically update DNS records](https://developers.cloudflare.com/dns/manage-dns-records/how-to/managing-dynamic-ip-addresses)
+- [Cloudflare DDNS](https://github.com/timothymiller/cloudflare-ddns)
+
+### Get Zone ID
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, select the **Websites** menu item.
+
+3. In the **Home** page, select a domain you wish to configure for dynamic DNS (i.e. `example.com`).
+
+4. On the bottom right corner of the dashboard, within the **API** section, copy and make a note of the value of the **Zone ID** (i.e. `SEgYD5N77TVkBa2P1m01eryDC4IuajmS`).
+
+### Create API Token
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, select the **Websites** menu item.
+
+3. In the **Home** page, select a domain you wish to configure for dynamic DNS (i.e. `example.com`).
+
+4. On the bottom right corner of the dashboard, within the **API** section, click the **Get your API token** link.
+
+5. From within the same section, click the **Get your API token** link.
+
+6. In the **User API Tokens** page, click the **Create Token** button.
+
+7. In the **Create API Token** page, click the **Get started** button corresponding to the **Create Custom Token** option.
+
+8. In the **Create Custom Token** form, configure the following:
+
+   - Token name: Set a descriptive and concise name for the token (i.e. `LE DNS Validation (example.com)`)
+   - Permissions:
+     - `Zone`: `Zone`: `Read`
+     - `Zone`: `DNS`: `Edit`
+   - Zone Resources:
+     - `Include`: `Specific zone`: The domain this token should allow access to (i.e. `example.com`)
+     - **Alternatively**, make the token applicable to all of your zones (domains) by configuring it as such instead:
+       - `Include`: `All zones`
+   - TTL: Update the `Start Date` and `End Date` as to define how long the token will stay active (leave empty for indefinite)
+
+    Click the **Continue to summary** button.
+
+9. In the **API token summary** page, review the summary of the new API token and click the **Create Token** button to create the token.
+
+10. Once the API token has been created, copy the token value and keep it somewhere safe. For security reasons, the value of this API token will no longer be shown again on Cloudflare.
+
+### Cloudflare DDNS on Helm
+
+1. Add the [`mika`](https://github.com/irfanhakim-as/charts) Helm chart repository to your system if you have not already.
+
+2. Get the latest updates from available Helm chart repositories:
+
+    ```sh
+    helm repo update
+    ```
+
+3. Download the template values file of the `mika/cloudflareddns` chart to the home directory (i.e. `~/values.yaml`):
+
+    ```sh
+    helm get values mika/cloudflareddns > ~/values.yaml
+    ```
+
+4. Update the template values file with any required changes, including:
+
+   - `cloudflareddns.token`: Set the value to the dedicated Cloudflare [API Token](#create-api-token) previously created
+   - `cloudflareddns.zoneID`: Set the value to the [Zone ID](#get-zone-id) of the domain we wish the deployment to manage
+
+5. To register subdomain(s) to the particular zone, update the `cloudflareddns.subdomains` value in the template values file appropriately.
+
+   - For example:
+
+      ```diff
+      - subdomains: []
+      + subdomains:
+      +   # The subdomain of the domain to be updated.
+      +   - hostname: "mysubdomain"
+      +   # Specifies whether the subdomain should be proxied.
+      +     proxied: "false"
+      ```
+
+      This change adds or updates the `mysubdomain` DNS record in the zone specified in the `cloudflareddns.zoneID` value (i.e. `mysubdomain.example.com`).
+
+   - To register more subdomains, simply add more of them to the `cloudflareddns.subdomains` array as such:
+
+      ```yaml
+      subdomains:
+        - hostname: ""
+          proxied: "true"
+        - hostname: "mysubdomain"
+          proxied: "false"
+      ```
+
+      > [!TIP]  
+      > Setting an empty `hostname` value adds or updates a DNS record equalling to the apex or root domain of the specified zone (i.e. `example.com`).
+
+6. Deploy the `mika/cloudflareddns` chart:
+
+    ```sh
+    helm -n <namespace> upgrade --install <release-name> mika/cloudflareddns -f ~/values.yaml
+    ```
+
+   - Replace `<namespace>` with the namespace where the `mika/cloudflareddns` chart should be deployed (i.e. `cloudflare`)
+   - Replace `<release-name>` with a unique, descriptive name for the `mika/cloudflareddns` release (i.e. `example-com`)
+
+7. Verify the deployment is running:
+
+    ```sh
+    kubectl -n <namespace> logs deployments/<release-name>-cloudflareddns
+    ```
+
+   - Make the same value replacements as before.
+
+    Sample output indicating the deployment is running and working successfully:
+
+    ```
+    🕰️ Updating IPv4 (A) records every 300 seconds
+    📡 Updating record {'type': 'A', 'name': 'example.com', 'content': '237.84.2.178', 'proxied': True, 'ttl': 300}
+    📡 Updating record {'type': 'A', 'name': 'mysubdomain.example.com', 'content': '237.84.2.178', 'proxied': False, 'ttl': 300}
+    ```

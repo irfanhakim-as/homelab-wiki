@@ -21,6 +21,9 @@ In the Internet, a domain name is a string that identifies a realm of administra
   - [Register a Subdomain](#register-a-subdomain)
     - [Description](#description-4)
     - [References](#references-3)
+  - [Dynamic DNS](#dynamic-dns)
+    - [Description](#description-5)
+    - [References](#references-4)
 
 ## References
 
@@ -77,3 +80,15 @@ This details how to register a subdomain on a DNS server.
 
 - [Cloudflare: Register a Subdomain](cloudflare.md#register-a-subdomain)
 - [FreeDNS: Register a Subdomain](freedns.md#register-a-subdomain)
+
+---
+
+## Dynamic DNS
+
+### Description
+
+This details how to keep DNS records up-to-date dynamically on a DNS server.
+
+### References
+
+- [Cloudflare: Dynamic DNS](cloudflare.md#dynamic-dns)
