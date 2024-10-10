@@ -92,3 +92,4 @@ This details how to keep DNS records up-to-date dynamically on a DNS server.
 ### References
 
 - [Cloudflare: Dynamic DNS](cloudflare.md#dynamic-dns)
+- [FreeDNS: Dynamic DNS](freedns.md#dynamic-dns)
