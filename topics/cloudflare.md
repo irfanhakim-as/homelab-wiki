@@ -130,7 +130,7 @@ This details how to register a subdomain on Cloudflare.
 
    - Type: Expand the dropdown and select the DNS type (i.e. `A`)
    - Name: Add the name of the subdomain you wish to register (i.e. `mysubdomain`)
-   - IPv4 address: Set this to the Public IP address of your home network (i.e. `237.84.2.178`)
+   - IPv4 address: Set this to the public IP address of your home network (i.e. `237.84.2.178`)
    - Proxy status: Toggle to decide whether the hostname traffic should be proxied through Cloudflare
    - TTL: Expand the dropdown and set the duration for record updates to reach end users (i.e. `Auto`)
 
