@@ -332,7 +332,7 @@ This details how to create a Container Template out of a virtual machine.
 
 ### Create VM From Container Template
 
-This details how to create a virtual machine or Container Template from a backup.
+This details how to create a virtual machine from a [Container Template](#create-container-template).
 
 1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
 
