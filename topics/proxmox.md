@@ -326,7 +326,7 @@ This details how to create a Container Template out of a virtual machine.
 
 1. Launch the Proxmox Virtual Environment web interface on a web browser.
 
-2. Select the target virtual machine (illustrated with an icon of a display) you wish to turn to a Container Template. [Create](#create-vm) the virtual machine if you have not already.
+2. Select the target virtual machine (illustrated with an icon of a display) you wish to turn to a Container Template. [Create the virtual machine](#create-vm) if you have not already.
 
 3. In the virtual machine view, expand the **More** dropdown located at the top right corner and select the **Convert to template** option.
 
