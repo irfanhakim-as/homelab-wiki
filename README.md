@@ -58,8 +58,8 @@ Check out the [topics](./topics/) directory for individual guides and tips.
    3. DNS:
       1. Cloudflare (Cloudflare DDNS, Cloudflare Tunnel)
       2. FreeDNS
-   4. VPN:
-      1. WireGuard
+   4. [VPN](topics/vpn.md):
+      1. [WireGuard](topics/wireguard.md)
 6. Services: Selection of VM or container based services that can be hosted in the homelab
    1. NAS (VM):
       1. TrueNAS
