@@ -1,36 +1,43 @@
-# Course
+# Network
 
 ## Description
 
-This is a brief description of the course.
+A computer network is a set of computers sharing resources located on or provided by network nodes. Computers use common communication protocols over digital interconnections to communicate with each other.
 
 ## Directory
 
-- [Course](#course)
+- [Network](#network)
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Topic 1](#topic-1)
-  - [Topic 2](#topic-2)
+  - [Domain](#domain)
     - [References](#references-1)
+  - [VPN](#vpn)
+    - [References](#references-2)
 
 ## References
 
-- [Reference 1](https://example.com)
+- [Computer network](https://en.wikipedia.org/wiki/Computer_network)
 
 ---
 
-## [Topic 1](../topics/topic1.md)
+## Domain
 
-This is the content of the topic.
-
----
-
-## Topic 2
-
-This is the content of the topic.
+This section details all topics pertaining DNS in order to enable getting our services published online.
 
 ### References
 
-- [Subtopic 1](../topics/topic2.md#subtopic-1)
-- [Subtopic 2](../topics/topic2.md#subtopic-2)
+- [Acquiring a Domain](../topics/domain.md#acquiring-a-domain)
+- [Cloudflare as Nameserver](../topics/domain.md#cloudflare-as-nameserver)
+- [Register a Subdomain](../topics/domain.md#register-a-subdomain)
+- [Dynamic DNS](../topics/domain.md#dynamic-dns)
+
+---
+
+## VPN
+
+This section details all topics pertaining VPN in order to allow us access to our local services securely from outside the home network.
+
+### References
+
+- [Setup](../topics/vpn.md#setup)
