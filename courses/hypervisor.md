@@ -70,12 +70,18 @@ This details some configuration options for the hypervisor.
 
 ### Adding Additional Storage
 
+This topic details how to add an additional storage device to the hypervisor.
+
 - [ESXi: Adding a Datastore](../topics/esxi.md#adding-a-datastore)
 
 ### Adding a Network Card
 
+This topic details how to add an additional network device to the hypervisor.
+
 - [ESXi: Adding a Network Card](../topics/esxi.md#adding-a-network-card)
 
 ### Disk Pass-through
+
+This topic details how to enable disk pass-through on the hypervisor.
 
 - [ESXi: Disk Pass-through](../topics/esxi.md#disk-pass-through)
