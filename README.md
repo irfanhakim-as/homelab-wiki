@@ -66,3 +66,5 @@ Check out the [topics](./topics/) directory for individual guides and tips.
    2. Databases (Container):
       1. MariaDB
       2. PostgreSQL
+   3. DNS:
+      1. Pi-hole
