@@ -62,7 +62,7 @@ This details how to update the authoritative nameserver for a domain.
 ## [Cloudflare as Nameserver](cloudflare.md#cloudflare-as-nameserver)
 
 > [!IMPORTANT]  
-> This section is not required if your domain was [purchased](#acquiring-a-domain) on Cloudflare.
+> This section is not required if your domain was [purchased](#acquiring-a-domain) on Cloudflare or if you have no intention to use Cloudflare as your nameserver.
 
 ### Description
 
