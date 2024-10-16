@@ -211,7 +211,7 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
     helm get values mika/cloudflareddns > ~/values.yaml
     ```
 
-4. Update the template values file with any required changes, including:
+4. Update the template values file with the required values, including:
 
    - `cloudflareddns.token`: Set the value to the dedicated Cloudflare [API Token](#create-api-token) previously created
    - `cloudflareddns.zoneID`: Set the value to the [Zone ID](#get-zone-id) of the domain we wish the deployment to manage
