@@ -1,12 +1,12 @@
-# Domain
+# Domain Name System (DNS)
 
 ## Description
 
-In the Internet, a domain name is a string that identifies a realm of administrative autonomy, authority or control. Domain names are often used to identify services provided through the Internet, such as websites, email services and more.
+The Domain Name System (DNS) is a hierarchical and distributed name service that provides a naming system for computers, services, and other resources on the Internet or other Internet Protocol (IP) networks.
 
 ## Directory
 
-- [Domain](#domain)
+- [Domain Name System (DNS)](#domain-name-system-dns)
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
@@ -27,7 +27,7 @@ In the Internet, a domain name is a string that identifies a realm of administra
 
 ## References
 
-- [Domain name](https://en.wikipedia.org/wiki/Domain_name)
+- [Domain Name System](https://en.wikipedia.org/wiki/Domain_Name_System)
 
 ---
 
