@@ -92,7 +92,7 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
 6. In the **Review your DNS records** page, we are informed that we will need to set Cloudflare as the nameserver for our domain. Scroll down to the bottom of the page and click **Continue**.
 
-7. Copy the nameserver endpoints supplied by Cloudflare and [update the nameserver of our domain](domain.md#update-authoritative-nameserver) according to our domain provider (i.e. Porkbun, Squarespace, etc.).
+7. Copy the nameserver endpoints supplied by Cloudflare and [update the nameserver of our domain](dns.md#update-authoritative-nameserver) according to our domain provider (i.e. Porkbun, Squarespace, etc.).
 
 8. Once we have configured our domain to use Cloudflare as the nameserver, head back to where we were on Cloudflare and click the **Done, check nameservers** button located at the very bottom of the page.
 

@@ -27,10 +27,10 @@ This section details all topics pertaining DNS in order to enable getting our se
 
 ### References
 
-- [Acquiring a Domain](../topics/domain.md#acquiring-a-domain)
-- [Cloudflare as Nameserver](../topics/domain.md#cloudflare-as-nameserver)
-- [Register a Subdomain](../topics/domain.md#register-a-subdomain)
-- [Dynamic DNS](../topics/domain.md#dynamic-dns)
+- [Acquiring a Domain](../topics/dns.md#acquiring-a-domain)
+- [Cloudflare as Nameserver](../topics/dns.md#cloudflare-as-nameserver)
+- [Register a Subdomain](../topics/dns.md#register-a-subdomain)
+- [Dynamic DNS](../topics/dns.md#dynamic-dns)
 
 ---
 
