@@ -21,7 +21,7 @@ The site FreeDNS began in 2001 because founder Joshua Anderson wanted to have fu
   - [Dynamic DNS](#dynamic-dns)
     - [Description](#description-3)
     - [References](#references-3)
-    - [Steps](#steps-2)
+    - [Ddclient](#ddclient)
 
 ## References
 
@@ -87,7 +87,7 @@ This details how to keep DNS records up-to-date dynamically on FreeDNS.
 - [Dynamic DNS clients](https://freedns.afraid.org/scripts/freedns.clients.php)
 - [Multiple Domains with ddclient (Namecheap)](https://www.labsrc.com/multiple-domains-with-ddclient-namecheap)
 
-### Steps
+### Ddclient
 
 1. [Provision a VM](../courses/vm.md#creating-a-virtual-machine-from-a-template) that will host the `ddclient` software.
 
