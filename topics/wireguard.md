@@ -44,10 +44,10 @@ This details the process of setting up a WireGuard server.
 
 3. While the domain has been set up to point towards your home network, ensure that your home network is able to carry forward and route the traffic to your VPN server. This can be achieved through [port forwarding](#):
 
-   - Service Name: Set any suitable name that describes the rule (i.e. `vpn`)
+   - Service Name: Set any suitable name that best describes the service or rule (i.e. `vpn`)
    - Device IP Address: Enter the private IP address of the WireGuard server (i.e. `192.168.0.106`)
-   - External Port: Enter the port number you wish to allocate for the WireGuard server (i.e. `51820`)
-   - Internal Port: Enter the same port number you have allocated for the WireGuard server (i.e. `51820`)
+   - External Port: Enter the default port number for WireGuard (`51820`) or set a custom port number (i.e. `51821`)
+   - Internal Port: Enter the same port number you had set for the external port (i.e. `51820`)
    - Protocol: `UDP`
    - Enabled: Toggle or check this box to enable it
 
