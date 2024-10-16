@@ -48,8 +48,8 @@ Check out the [topics](./topics/) directory for individual guides and tips.
 4. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
    1. [RKE2](topics/rke2.md)
 5. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
-   1. Home router:
-      1. Port forwarding
+   1. [Router](topics/router.md):
+      1. [Port forwarding](topics/router.md#port-forwarding)
    2. [DNS](topics/dns.md):
       1. [Squarespace](topics/squarespace.md) (Google)
       2. [Cloudflare](topics/cloudflare.md): Cloudflare DDNS, Cloudflare Tunnel
