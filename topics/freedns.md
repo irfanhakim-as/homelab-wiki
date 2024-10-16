@@ -112,7 +112,7 @@ This details how to keep DNS records up-to-date dynamically on FreeDNS.
 
     In this example, `enp6s18` is the name of the active network interface.
 
-4. Update the ddclient configuration file:
+4. Update the ddclient dynamic DNS configuration file:
 
     ```sh
     sudo nano /etc/ddclient.conf
@@ -185,7 +185,7 @@ This details how to keep DNS records up-to-date dynamically on FreeDNS.
       mysubdomain.example.com, mysubdomain2.example.com, mysubdomain3.example.com
       ```
 
-5. Update another ddclient configuration file:
+5. Update the ddclient service configuration file:
 
     ```sh
     sudo nano /etc/default/ddclient
