@@ -112,7 +112,44 @@ This details how to keep DNS records up-to-date dynamically on FreeDNS.
 
     In this example, `enp6s18` is the name of the active network interface.
 
-4. Update the ddclient dynamic DNS configuration file:
+4. Update the ddclient service configuration file:
+
+    ```sh
+    sudo nano /etc/default/ddclient
+    ````
+
+   - Update the configuration file to be as such:
+
+      ```sh
+      # Configuration for ddclient scripts
+      # generated from debconf on Thu Oct 10 12:03:05 UTC 2024
+      #
+      # /etc/default/ddclient
+
+      # Set to "true" if ddclient should be run every time DHCP client ('dhclient'
+      # from package isc-dhcp-client) updates the systems IP address.
+      run_dhclient="false"
+
+      # Set to "true" if ddclient should be run every time a new ppp connection is
+      # established. This might be useful, if you are using dial-on-demand.
+      run_ipup="false"
+
+      # Set to "true" if ddclient should run in daemon mode
+      # If this is changed to true, run_ipup and run_dhclient must be set to false.
+      run_daemon="true"
+
+      # Set the time interval between the updates of the dynamic DNS name in seconds.
+      # This option only takes effect if the ddclient runs in daemon mode.
+      daemon_interval="300"
+      ```
+
+   - Whereby the following values are set as follows:
+
+     - run_dhclient: `"false"`
+     - run_ipup: `"false"`
+     - run_daemon: `"true"`
+
+5. Update the ddclient dynamic DNS configuration file:
 
     ```sh
     sudo nano /etc/ddclient.conf
@@ -184,42 +221,5 @@ This details how to keep DNS records up-to-date dynamically on FreeDNS.
       ```conf
       mysubdomain.example.com, mysubdomain2.example.com, mysubdomain3.example.com
       ```
-
-5. Update the ddclient service configuration file:
-
-    ```sh
-    sudo nano /etc/default/ddclient
-    ````
-
-   - Update the configuration file to be as such:
-
-      ```sh
-      # Configuration for ddclient scripts
-      # generated from debconf on Thu Oct 10 12:03:05 UTC 2024
-      #
-      # /etc/default/ddclient
-
-      # Set to "true" if ddclient should be run every time DHCP client ('dhclient'
-      # from package isc-dhcp-client) updates the systems IP address.
-      run_dhclient="false"
-
-      # Set to "true" if ddclient should be run every time a new ppp connection is
-      # established. This might be useful, if you are using dial-on-demand.
-      run_ipup="false"
-
-      # Set to "true" if ddclient should run in daemon mode
-      # If this is changed to true, run_ipup and run_dhclient must be set to false.
-      run_daemon="true"
-
-      # Set the time interval between the updates of the dynamic DNS name in seconds.
-      # This option only takes effect if the ddclient runs in daemon mode.
-      daemon_interval="300"
-      ```
-
-   - Whereby the following values are set as follows:
-
-     - run_dhclient: `"false"`
-     - run_ipup: `"false"`
-     - run_daemon: `"true"`
 
 6. Finally, [enable](systemd.md#enable-service) and [restart](systemd.md#restart-service) the `ddclient.service` service.
