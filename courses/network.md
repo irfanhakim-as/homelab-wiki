@@ -10,14 +10,26 @@ A computer network is a set of computers sharing resources located on or provide
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [DNS](#dns)
+  - [Router](#router)
     - [References](#references-1)
-  - [VPN](#vpn)
+  - [DNS](#dns)
     - [References](#references-2)
+  - [VPN](#vpn)
+    - [References](#references-3)
 
 ## References
 
 - [Computer network](https://en.wikipedia.org/wiki/Computer_network)
+
+---
+
+## Router
+
+This section details all topics pertaining to router configuration to ensure proper network management.
+
+### References
+
+- [Port Forwarding](../topics/router.md#port-forwarding)
 
 ---
 
