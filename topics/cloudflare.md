@@ -21,7 +21,8 @@ Cloudflare, Inc. is an American company that provides content delivery network s
   - [Register a Subdomain](#register-a-subdomain)
     - [Description](#description-3)
     - [References](#references-3)
-    - [Steps](#steps-2)
+    - [Manual](#manual)
+    - [Cloudflare DDNS](#cloudflare-ddns)
   - [Dynamic DNS](#dynamic-dns)
     - [Description](#description-4)
     - [References](#references-4)
@@ -138,6 +139,67 @@ This method of registering a subdomain relies on you to manually update the DNS 
 
     Click the **Save** button.
 
+### Cloudflare DDNS
+
+This ensures all of the subdomains that were registered to your domain using this method will have its public IP endpoint automatically updated:
+
+1. Deploy [Cloudflare DDNS on Helm](#cloudflare-ddns-helm) for each zone (domain) if you have not already.
+
+2. To register subdomain(s) to the particular zone, update the release's `cloudflareddns.subdomains` value in its release values file (i.e. `~/values.yaml`).
+
+   - For example:
+
+      ```diff
+      - subdomains: []
+      + subdomains:
+      +   - hostname: "mysubdomain"
+      +     proxied: "false"
+      ```
+
+      This sample change adds or updates the `mysubdomain` DNS record in the zone specified in the `cloudflareddns.zoneID` value (i.e. `mysubdomain.example.com`).
+
+   - To register more subdomains, simply add more of them to the `cloudflareddns.subdomains` array as such:
+
+      ```yaml
+      subdomains:
+        - hostname: ""
+          proxied: "true"
+        - hostname: "mysubdomain"
+          proxied: "false"
+      ```
+
+      > [!TIP]  
+      > Setting an empty `hostname` value adds or updates a DNS record equalling to the apex or root domain of the specified zone (i.e. `example.com`).
+
+3. Deploy the update to the existing `mika/cloudflareddns` release:
+
+    ```sh
+    helm -n <namespace> upgrade --install <release-name> mika/cloudflareddns -f ~/values.yaml
+    ```
+
+   - Replace `<namespace>` with the namespace where the `mika/cloudflareddns` release was deployed (i.e. `cloudflare`)
+   - Replace `<release-name>` with the name of the `mika/cloudflareddns` release (i.e. `example-com`)
+
+4. You may need to kill the release's pod manually for the changes to take effect:
+
+    ```sh
+    kubectl -n <namespace> delete pods -l app.kubernetes.io/instance=<release-name>
+    ```
+
+5. Verify the deployment is running:
+
+    ```sh
+    kubectl -n <namespace> logs deployments/<release-name>-cloudflareddns
+    ```
+
+    Sample output indicating the deployment is running and updating DNS records successfully:
+
+    ```
+    🕰️ Updating IPv4 (A) records every 300 seconds
+    📡 Updating record {'type': 'A', 'name': 'example.com', 'content': '237.84.2.178', 'proxied': True, 'ttl': 300}
+    📡 Updating record {'type': 'A', 'name': 'mysubdomain.example.com', 'content': '237.84.2.178', 'proxied': False, 'ttl': 300}
+    ```
+
 ---
 
 ## Dynamic DNS
@@ -216,35 +278,7 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
    - `cloudflareddns.token`: Set the value to the dedicated Cloudflare [API Token](#create-api-token) previously created
    - `cloudflareddns.zoneID`: Set the value to the [Zone ID](#get-zone-id) of the domain we wish the deployment to manage
 
-5. To register subdomain(s) to the particular zone, update the `cloudflareddns.subdomains` value in the template values file appropriately.
-
-   - For example:
-
-      ```diff
-      - subdomains: []
-      + subdomains:
-      +   # The subdomain of the domain to be updated.
-      +   - hostname: "mysubdomain"
-      +   # Specifies whether the subdomain should be proxied.
-      +     proxied: "false"
-      ```
-
-      This change adds or updates the `mysubdomain` DNS record in the zone specified in the `cloudflareddns.zoneID` value (i.e. `mysubdomain.example.com`).
-
-   - To register more subdomains, simply add more of them to the `cloudflareddns.subdomains` array as such:
-
-      ```yaml
-      subdomains:
-        - hostname: ""
-          proxied: "true"
-        - hostname: "mysubdomain"
-          proxied: "false"
-      ```
-
-      > [!TIP]  
-      > Setting an empty `hostname` value adds or updates a DNS record equalling to the apex or root domain of the specified zone (i.e. `example.com`).
-
-6. Deploy the `mika/cloudflareddns` chart:
+5. Deploy the `mika/cloudflareddns` chart:
 
     ```sh
     helm -n <namespace> upgrade --install <release-name> mika/cloudflareddns -f ~/values.yaml
@@ -253,18 +287,16 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
    - Replace `<namespace>` with the namespace where the `mika/cloudflareddns` chart should be deployed (i.e. `cloudflare`)
    - Replace `<release-name>` with a unique, descriptive name for the `mika/cloudflareddns` release (i.e. `example-com`)
 
-7. Verify the deployment is running:
+6. Verify the deployment is running:
 
     ```sh
     kubectl -n <namespace> logs deployments/<release-name>-cloudflareddns
     ```
 
-   - Make the same value replacements as before.
-
     Sample output indicating the deployment is running and working successfully:
 
     ```
     🕰️ Updating IPv4 (A) records every 300 seconds
-    📡 Updating record {'type': 'A', 'name': 'example.com', 'content': '237.84.2.178', 'proxied': True, 'ttl': 300}
-    📡 Updating record {'type': 'A', 'name': 'mysubdomain.example.com', 'content': '237.84.2.178', 'proxied': False, 'ttl': 300}
     ```
+
+7. To register and update subdomain(s) (i.e. with the latest public IP endpoint) on the release's specified zone, [update the release's list of subdomains](#cloudflare-ddns).
