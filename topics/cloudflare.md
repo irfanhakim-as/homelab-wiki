@@ -197,7 +197,7 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
 
 ### Cloudflare DDNS (Helm)
 
-1. Add the [`mika`](https://github.com/irfanhakim-as/charts) Helm chart repository to your system if you have not already.
+1. Add the [mika](https://github.com/irfanhakim-as/charts) Helm chart repository to your system if you have not already.
 
 2. Get the latest updates from available Helm chart repositories:
 
