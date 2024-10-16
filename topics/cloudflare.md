@@ -27,7 +27,7 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [References](#references-4)
     - [Get Zone ID](#get-zone-id)
     - [Create API Token](#create-api-token)
-    - [Cloudflare DDNS on Helm](#cloudflare-ddns-on-helm)
+    - [Cloudflare DDNS (Helm)](#cloudflare-ddns-helm)
 
 ## References
 
@@ -195,7 +195,7 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
 
 10. Once the API token has been created, copy the token value and keep it somewhere safe. For security reasons, the value of this API token will no longer be shown again on Cloudflare.
 
-### Cloudflare DDNS on Helm
+### Cloudflare DDNS (Helm)
 
 1. Add the [`mika`](https://github.com/irfanhakim-as/charts) Helm chart repository to your system if you have not already.
 
