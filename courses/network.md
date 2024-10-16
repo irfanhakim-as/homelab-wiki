@@ -10,7 +10,7 @@ A computer network is a set of computers sharing resources located on or provide
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Domain](#domain)
+  - [DNS](#dns)
     - [References](#references-1)
   - [VPN](#vpn)
     - [References](#references-2)
@@ -21,7 +21,7 @@ A computer network is a set of computers sharing resources located on or provide
 
 ---
 
-## Domain
+## DNS
 
 This section details all topics pertaining DNS in order to enable getting our services published online.
 
