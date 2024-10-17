@@ -374,12 +374,6 @@ This part of the guide details the process of setting up the Pi-hole server as a
 
    - [Restart](systemd.md#restart-service) the `unbound.service` service.
 
-9.  Reboot the Pi-hole server:
-
-    ```sh
-    sudo reboot now
-    ```
-
 ### Cloudflared
 
 > [!IMPORTANT]  
