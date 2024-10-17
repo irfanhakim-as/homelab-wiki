@@ -189,7 +189,7 @@ This part of the guide details the process of setting up the Pi-hole server as a
 4. Test to make sure the local recursive server is working:
 
     ```sh
-    dig pi-hole.net @127.0.0.1 -p 5335
+    dig @127.0.0.1 -p 5335 pi-hole.net
     ```
 
     Sample successful output:
