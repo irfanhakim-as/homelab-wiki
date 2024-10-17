@@ -328,7 +328,7 @@ This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-h
     Type=simple
     User=cloudflared
     EnvironmentFile=/etc/default/cloudflared
-    ExecStart=/usr/local/bin/cloudflared proxy-dns ${CLOUDFLARED_OPTS}
+    ExecStart=/usr/local/bin/cloudflared proxy-dns $CLOUDFLARED_OPTS
     Restart=on-failure
     RestartSec=10
     KillMode=process
