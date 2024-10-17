@@ -339,7 +339,43 @@ This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-h
 
 10. [Start and enable](systemd.md#enable-service) the `cloudflared.service` service.
 
-11. Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
+11. Verify that DNS-Over-HTTPS is working on the Pi-hole server:
+
+    ```sh
+    dig @127.0.0.1 -p 5053 google.com
+    ```
+
+    Sample successful output:
+
+    ```
+    ; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> @127.0.0.1 -p 5053 google.com
+    ; (1 server found)
+    ;; global options: +cmd
+    ;; Got answer:
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 56103
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+    ;; OPT PSEUDOSECTION:
+    ; EDNS: version: 0, flags:; udp: 1232
+    ; COOKIE: opjt6abhpa2tlwne (echoed)
+    ;; QUESTION SECTION:
+    ;google.com.                    IN      A
+
+    ;; ANSWER SECTION:
+    google.com.             300     IN      A       74.125.130.138
+    google.com.             300     IN      A       74.125.130.101
+    google.com.             300     IN      A       74.125.130.113
+    google.com.             300     IN      A       74.125.130.100
+    google.com.             300     IN      A       74.125.130.139
+    google.com.             300     IN      A       74.125.130.102
+
+    ;; Query time: 44 msec
+    ;; SERVER: 127.0.0.1#5053(127.0.0.1) (UDP)
+    ;; WHEN: Fri Oct 18 01:20:11 +08 2024
+    ;; MSG SIZE  rcvd: 207
+    ```
+
+12. Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
 
 ### Usage
 
