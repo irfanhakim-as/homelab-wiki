@@ -232,7 +232,13 @@ This part of the guide details the process of setting up the Pi-hole server as a
      - Check the **Custom 1 (IPv4)** box and enter the following IP address: `127.0.0.1#5335`
    - Click the **Save** button.
 
-7. For good measure, reboot the Pi-hole server:
+7. This might not be needed depending on your server but for good measure, disable `resolveconf.conf` entry for `unbound`:
+
+   - [Check the status](systemd.md#service-status) of the `unbound-resolvconf.service` service.
+   - [Stop and disable](systemd.md#disable-service) the `unbound-resolvconf.service` service.
+   - [Restart](systemd.md#restart-service) the `unbound.service` service.
+
+8. Reboot the Pi-hole server:
 
     ```sh
     sudo reboot now
