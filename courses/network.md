@@ -43,6 +43,7 @@ This section details all topics pertaining DNS in order to enable getting our se
 - [Cloudflare as Nameserver](../topics/dns.md#cloudflare-as-nameserver)
 - [Register a Subdomain](../topics/dns.md#register-a-subdomain)
 - [Dynamic DNS](../topics/dns.md#dynamic-dns)
+- [Local DNS](../topics/dns.md#local-dns)
 
 ---
 
