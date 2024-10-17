@@ -241,7 +241,140 @@ This part of the guide details the process of setting up the Pi-hole server as a
    - [Stop and disable](systemd.md#disable-service) the `unbound-resolvconf.service` service.
    - [Restart](systemd.md#restart-service) the `unbound.service` service.
 
-8. Reboot the Pi-hole server:
+8. **(Optional)** Set up DNS-Over-TLS (DoT) with `unbound`:
+
+   - Verify that you have a certificate installed on the Pi-hole server:
+
+      ```sh
+      ls -la /etc/ssl/certs/ca-certificates.crt
+      ```
+
+   - Update the `unbound` configuration file:
+
+      ```sh
+      sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
+      ```
+
+      Make the following additions to the end of the file and save the changes:
+
+      ```diff
+            # Ensure privacy of local IP ranges
+            private-address: 192.168.0.0/16
+            private-address: 169.254.0.0/16
+            private-address: 172.16.0.0/12
+            private-address: 10.0.0.0/8
+            private-address: fd00::/8
+            private-address: fe80::/10
+      +
+      +     # Define trusted certificates
+      +     tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+      +
+      + forward-zone:
+      +     name: "."
+      +     forward-tls-upstream: yes
+      +     # Cloudflare DNS servers as an example
+      +     forward-addr: 1.1.1.1@853
+      +     forward-addr: 1.0.0.1@853
+      +     # You can add other DNS servers supporting DNS over TLS, like Google DNS or Quad9:
+      +     # Google:
+      +     # forward-addr: 8.8.8.8@853
+      +     # forward-addr: 8.8.4.4@853
+      +     # Quad9:
+      +     # forward-addr: 9.9.9.9@853
+      +     # forward-addr: 149.112.112.112@853
+      ```
+
+        Sample of the updated `unbound` configuration file:
+
+        ```yaml
+        server:
+            # If no logfile is specified, syslog is used
+            # logfile: "/var/log/unbound/unbound.log"
+            verbosity: 0
+
+            interface: 127.0.0.1
+            port: 5335
+            do-ip4: yes
+            do-udp: yes
+            do-tcp: yes
+
+            # May be set to yes if you have IPv6 connectivity
+            do-ip6: no
+
+            # You want to leave this to no unless you have *native* IPv6. With 6to4 and
+            # Terredo tunnels your web browser should favor IPv4 for the same reasons
+            prefer-ip6: no
+
+            # Use this only when you downloaded the list of primary root servers!
+            # If you use the default dns-root-data package, unbound will find it automatically
+            #root-hints: "/var/lib/unbound/root.hints"
+
+            # Trust glue only if it is within the server's authority
+            harden-glue: yes
+
+            # Require DNSSEC data for trust-anchored zones, if such data is absent, the zone becomes BOGUS
+            harden-dnssec-stripped: yes
+
+            # Don't use Capitalization randomization as it known to cause DNSSEC issues sometimes
+            # see https://discourse.pi-hole.net/t/unbound-stubby-or-dnscrypt-proxy/9378 for further details
+            use-caps-for-id: no
+
+            # Reduce EDNS reassembly buffer size.
+            # IP fragmentation is unreliable on the Internet today, and can cause
+            # transmission failures when large DNS messages are sent via UDP. Even
+            # when fragmentation does work, it may not be secure; it is theoretically
+            # possible to spoof parts of a fragmented DNS message, without easy
+            # detection at the receiving end. Recently, there was an excellent study
+            # >>> Defragmenting DNS - Determining the optimal maximum UDP response size for DNS <<<
+            # by Axel Koolhaas, and Tjeerd Slokker (https://indico.dns-oarc.net/event/36/contributions/776/)
+            # in collaboration with NLnet Labs explored DNS using real world data from the
+            # the RIPE Atlas probes and the researchers suggested different values for
+            # IPv4 and IPv6 and in different scenarios. They advise that servers should
+            # be configured to limit DNS messages sent over UDP to a size that will not
+            # trigger fragmentation on typical network links. DNS servers can switch
+            # from UDP to TCP when a DNS response is too big to fit in this limited
+            # buffer size. This value has also been suggested in DNS Flag Day 2020.
+            edns-buffer-size: 1232
+
+            # Perform prefetching of close to expired message cache entries
+            # This only applies to domains that have been frequently queried
+            prefetch: yes
+
+            # One thread should be sufficient, can be increased on beefy machines. In reality for most users running on small networks or on a single machine, it should be unnecessary to seek performance enhancement by increasing num-threads above 1.
+            num-threads: 1
+
+            # Ensure kernel buffer is large enough to not lose messages in traffic spikes
+            so-rcvbuf: 1m
+
+            # Ensure privacy of local IP ranges
+            private-address: 192.168.0.0/16
+            private-address: 169.254.0.0/16
+            private-address: 172.16.0.0/12
+            private-address: 10.0.0.0/8
+            private-address: fd00::/8
+            private-address: fe80::/10
+
+            # Define trusted certificates
+            tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+
+        forward-zone:
+            name: "."
+            forward-tls-upstream: yes
+            # Cloudflare DNS servers as an example
+            forward-addr: 1.1.1.1@853
+            forward-addr: 1.0.0.1@853
+            # You can add other DNS servers supporting DNS over TLS, like Google DNS or Quad9:
+            # Google:
+            # forward-addr: 8.8.8.8@853
+            # forward-addr: 8.8.4.4@853
+            # Quad9:
+            # forward-addr: 9.9.9.9@853
+            # forward-addr: 149.112.112.112@853
+        ```
+
+   - [Restart](systemd.md#restart-service) the `unbound.service` service.
+
+9.  Reboot the Pi-hole server:
 
     ```sh
     sudo reboot now
