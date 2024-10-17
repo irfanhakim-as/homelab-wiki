@@ -38,6 +38,8 @@ This is a brief description of the subtopic.
 - [Installation](https://docs.pi-hole.net/main/basic-install)
 - [Unbound](https://docs.pi-hole.net/guides/dns/unbound)
 - [cloudflared (DoH)](https://docs.pi-hole.net/guides/dns/cloudflared)
+- [Pi-hole + Unbound + DNS Over TLS (Ubiquiti/UniFi/DoT/DoH)](https://youtu.be/8ENLZmzm5vc)
+- [Cloudflared, Unbound, or Both?](https://discourse.pi-hole.net/t/cloudflared-unbound-or-both/59245)
 
 ### Installation
 
