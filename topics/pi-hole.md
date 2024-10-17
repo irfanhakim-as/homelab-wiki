@@ -14,8 +14,8 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
     - [Description](#description-1)
     - [References](#references-1)
     - [Installation](#installation)
-    - [Recursive DNS Server](#recursive-dns-server)
-    - [DNS-Over-HTTPS](#dns-over-https)
+    - [Unbound](#unbound)
+    - [Cloudflared](#cloudflared)
     - [Usage](#usage)
 
 ## References
@@ -99,7 +99,10 @@ This is a brief description of the subtopic.
 
 6. Using a web browser, log into the Pi-hole web interface with the specified address and password.
 
-### Recursive DNS Server
+### Unbound
+
+> [!IMPORTANT]  
+> This part of the setup is optional. If you choose to proceed with this setup, please skip the [Cloudflared](#cloudflared) section.
 
 This part of the guide details the process of setting up the Pi-hole server as a recursive DNS serve solution:
 
@@ -244,7 +247,10 @@ This part of the guide details the process of setting up the Pi-hole server as a
     sudo reboot now
     ```
 
-### DNS-Over-HTTPS
+### Cloudflared
+
+> [!IMPORTANT]  
+> This part of the setup is optional. If you choose to proceed with this setup, please skip the [Unbound](#unbound) section.
 
 This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-hole server which prevents requests from being looked or tampered:
 
