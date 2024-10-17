@@ -53,8 +53,9 @@ Check out the [topics](./topics/) directory for individual guides and tips.
    2. [DNS](topics/dns.md):
       1. [Squarespace](topics/squarespace.md) (Google)
       2. [Cloudflare](topics/cloudflare.md): Cloudflare DDNS, Cloudflare Tunnel
-      3. [Porkbun](topics/porkbun.md)
-      4. [FreeDNS](topics/freedns.md)
+      3. [Pi-hole](topics/pi-hole.md)
+      4. [Porkbun](topics/porkbun.md)
+      5. [FreeDNS](topics/freedns.md)
    3. [VPN](topics/vpn.md):
       1. [WireGuard](topics/wireguard.md)
 6. Services: Selection of VM or container based services that can be hosted in the homelab
@@ -64,4 +65,4 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       1. MariaDB
       2. PostgreSQL
    3. DNS:
-      1. Pi-hole
+      1. [Pi-hole](topics/pi-hole.md)
