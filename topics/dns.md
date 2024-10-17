@@ -24,6 +24,9 @@ The Domain Name System (DNS) is a hierarchical and distributed name service that
   - [Dynamic DNS](#dynamic-dns)
     - [Description](#description-5)
     - [References](#references-4)
+  - [Local DNS](#local-dns)
+    - [Description](#description-6)
+    - [References](#references-5)
 
 ## References
 
@@ -93,3 +96,15 @@ This details how to keep DNS records up-to-date dynamically on a DNS server.
 
 - [Cloudflare: Dynamic DNS](cloudflare.md#dynamic-dns)
 - [FreeDNS: Dynamic DNS](freedns.md#dynamic-dns)
+
+---
+
+## Local DNS
+
+### Description
+
+This details the process of setting up a local DNS server for use with your local servers or devices.
+
+### References
+
+- [Pi-hole: Setup](pi-hole.md#setup)
