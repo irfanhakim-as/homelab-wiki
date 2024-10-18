@@ -17,6 +17,9 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
     - [Unbound](#unbound)
     - [Cloudflared](#cloudflared)
     - [Usage](#usage)
+  - [Upstream DNS Server](#upstream-dns-server)
+    - [Description](#description-2)
+    - [Steps](#steps)
 
 ## References
 
