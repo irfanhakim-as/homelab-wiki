@@ -252,7 +252,7 @@ This part of the guide details the process of enabling DNS-Over-TLS on the Pi-ho
 2. Verify that you have a certificate installed on the Pi-hole server:
 
     ```sh
-    ls -la /etc/ssl/certs/ca-certificates.crt
+    ls -l /etc/ssl/certs/ca-certificates.crt
     ```
 
 3. Update the `unbound` configuration file:
