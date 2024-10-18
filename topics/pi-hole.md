@@ -104,10 +104,10 @@ This is a brief description of the subtopic.
 
 6. Using a web browser, log into the Pi-hole web interface with the specified address and password.
 
-### Unbound
+### Recursive DNS Server
 
 > [!IMPORTANT]  
-> This part of the setup is optional. If you choose to proceed with this setup, please skip the [Cloudflared](#cloudflared) section.
+> This part of the setup is optional. If you choose to proceed with this setup, please skip the conflicting [DNS-Over-HTTPS](#dns-over-https-doh) section.
 
 This part of the guide details the process of setting up the Pi-hole server as a recursive DNS server solution:
 
@@ -370,10 +370,10 @@ This part of the guide details the process of setting up the Pi-hole server as a
 
    - [Restart](systemd.md#restart-service) the `unbound.service` service.
 
-### Cloudflared
+### DNS-Over-HTTPS (DoH)
 
 > [!IMPORTANT]  
-> This part of the setup is optional. If you choose to proceed with this setup, please skip the [Unbound](#unbound) section.
+> This part of the setup is optional. If you choose to proceed with this setup, please skip the conflicting [DNS-Over-TLS](#dns-over-tls-dot) section.
 
 This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-hole server which prevents requests from being looked or tampered:
 
