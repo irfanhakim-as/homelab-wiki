@@ -34,7 +34,7 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
 
 ### Description
 
-This is a brief description of the subtopic.
+This details the process of setting up Pi-hole as the local DNS server for use with your local servers or devices.
 
 ### References
 
