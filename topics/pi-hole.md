@@ -228,22 +228,13 @@ This part of the guide details the process of setting up the Pi-hole server as a
 
     This ensures that `dnsmasq` uses a maximum DNS packet size of 1232 bytes to avoid issues with DNS packet fragmentation and can improve DNS query reliability.
 
-6. Configure the Pi-hole server to use itself as the Upstream DNS Server:
-
-   - From the Pi-hole web interface, click the **Settings** menu item.
-   - In the Settings view, navigate to the **DNS** tab.
-   - In the **Upstream DNS Servers** section:
-     - Uncheck any checked boxes of Upstream DNS Provider(s) you may have selected during installation (i.e. `Cloudflare`)
-     - Check the **Custom 1 (IPv4)** box and enter the following IP address: `127.0.0.1#5335`
-   - Click the **Save** button.
-
-7. This might not be needed depending on your server but for good measure, disable `resolveconf.conf` entry for `unbound`:
+6. This might not be needed depending on your server but for good measure, disable `resolveconf.conf` entry for `unbound`:
 
    - [Check the status](systemd.md#service-status) of the `unbound-resolvconf.service` service.
    - [Stop and disable](systemd.md#disable-service) the `unbound-resolvconf.service` service.
    - [Restart](systemd.md#restart-service) the `unbound.service` service.
 
-8. **(Optional)** Set up DNS-Over-TLS (DoT) with `unbound`:
+7. [Configure the Upstream DNS Provider](#upstream-dns-server) for the Pi-hole server by checking the **Custom 1 (IPv4)** box and entering the following IP address: `127.0.0.1#5335`.
 
    - Verify that you have a certificate installed on the Pi-hole server:
 
