@@ -255,7 +255,7 @@ This part of the guide details the process of enabling DNS-Over-TLS on the Pi-ho
     ls -l /etc/ssl/certs/ca-certificates.crt
     ```
 
-3. Update the `unbound` configuration file:
+3. Update the `unbound` configuration file to enable DoT:
 
     ```sh
     sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
