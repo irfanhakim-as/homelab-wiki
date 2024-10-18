@@ -521,3 +521,27 @@ This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-h
 ### Usage
 
 1. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
+
+---
+
+## Upstream DNS Server
+
+### Description
+
+This details how to set the upstream DNS provider for the Pi-hole server.
+
+### Steps
+
+1. From the Pi-hole web interface, click the **Settings** menu item.
+
+2. In the Settings view, navigate to the **DNS** tab.
+
+3. In the **Upstream DNS Servers** section, configure the following:
+
+   - Uncheck all checked boxes of Upstream DNS Provider(s) you wish to not use (i.e. `Cloudflare`)
+
+   - To use any of the listed public DNS providers: simply check their corresponding boxes
+
+   - To use custom DNS servers: Check the custom box(es) you require (i.e. `Custom 1 (IPv4)`) and enter the IP address of the desired DNS server for each box you have checked
+
+   - Click the **Save** button
