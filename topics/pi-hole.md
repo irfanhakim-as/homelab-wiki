@@ -516,7 +516,7 @@ This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-h
     ;; MSG SIZE  rcvd: 207
     ```
 
-12. Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
+12. **(Optional)** Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
 
 ### Usage
 
