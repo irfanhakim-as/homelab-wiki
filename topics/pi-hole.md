@@ -109,7 +109,7 @@ This is a brief description of the subtopic.
 > [!IMPORTANT]  
 > This part of the setup is optional. If you choose to proceed with this setup, please skip the [Cloudflared](#cloudflared) section.
 
-This part of the guide details the process of setting up the Pi-hole server as a recursive DNS serve solution:
+This part of the guide details the process of setting up the Pi-hole server as a recursive DNS server solution:
 
 1. [Install](package-manager.md#install-software) the `unbound` package using your package manager (i.e. `apt`).
 
