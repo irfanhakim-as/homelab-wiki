@@ -516,7 +516,9 @@ This part of the guide details the process of setting DNS-Over-HTTPS on the Pi-h
     ;; MSG SIZE  rcvd: 207
     ```
 
-12. **(Optional)** Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
+12. [Configure the Upstream DNS Provider](#upstream-dns-server) for the Pi-hole server by checking the **Custom 1 (IPv4)** box and entering the following IP address: `127.0.0.1#5053`.
+
+13. **(Optional)** Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
 
 ### Usage
 
