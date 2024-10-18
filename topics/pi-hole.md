@@ -239,19 +239,28 @@ This part of the guide details the process of setting up the Pi-hole server as a
 
 7. [Configure the Upstream DNS Provider](#upstream-dns-server) for the Pi-hole server by checking the **Custom 1 (IPv4)** box and entering the following IP address: `127.0.0.1#5335`.
 
-   - Verify that you have a certificate installed on the Pi-hole server:
+### DNS-Over-TLS (DoT)
 
-      ```sh
-      ls -la /etc/ssl/certs/ca-certificates.crt
-      ```
+> [!IMPORTANT]  
+> This part of the setup is optional. If you choose to proceed with this setup, please skip the conflicting [DNS-Over-HTTPS](#dns-over-https-doh) section.
 
-   - Update the `unbound` configuration file:
+This part of the guide details the process of enabling DNS-Over-TLS on the Pi-hole server which prevents requests from being looked or tampered:
 
-      ```sh
-      sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
-      ```
+1. As this DoT solution relies on [Unbound](#recursive-dns-server), ensure you have set it up before proceeding.
 
-      Make the following additions to the end of the file and save the changes:
+2. Verify that you have a certificate installed on the Pi-hole server:
+
+    ```sh
+    ls -la /etc/ssl/certs/ca-certificates.crt
+    ```
+
+3. Update the `unbound` configuration file:
+
+    ```sh
+    sudo nano /etc/unbound/unbound.conf.d/pi-hole.conf
+    ```
+
+   - Make the following additions to the end of the file and save the changes:
 
       ```diff
             # Ensure privacy of local IP ranges
