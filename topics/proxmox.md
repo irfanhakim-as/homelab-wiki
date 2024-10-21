@@ -419,8 +419,8 @@ This details how to restore a virtual machine or Container Template from a backu
 
 2. **Alternatively**, if you wish to overwrite an existing virtual machine or Container Template from a backup:
 
-   1. On the left-hand side of the web interface, select the target storage which contains the backup you wish to use to restore (i.e. `local`).
-   2. In the storage view, click the **Backups** menu option.
+   1. On the left-hand side of the web interface, select the target virtual machine you wish to overwrite from a backup.
+   2. In the storage view, click the **Backup** menu option.
 
 3. Select to highlight the backup you wish to restore from and click the **Restore** button.
 
