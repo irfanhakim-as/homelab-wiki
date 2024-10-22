@@ -438,4 +438,19 @@ This details how to restore a virtual machine or Container Template from a backu
 
 ### Exporting Backup
 
-TODO
+This details how to export a backup of a virtual machine or Container Template:
+
+1. On the left-hand side of the web interface, select the target storage which contains the backup you wish to export (i.e. `local`).
+
+2. In the storage view, click the **Backups** menu option.
+
+3. From the list of available backups, take note the **Name** of the backup you wish to export.
+
+4. From your client system, export the backup to the downloads folder:
+
+    ```sh
+    scp root@<proxmox-host>:/var/lib/vz/dump/<backup-name>* ~/Downloads
+    ```
+
+   - Replace `<proxmox-host>` with the IP address or hostname of the Proxmox server (i.e. `192.168.0.106`)
+   - Replace `<backup-name>` with the name of the backup you wish to export (i.e. `vzdump-qemu-100-2024_09_24-11_15_57.vma.zst`)
