@@ -55,7 +55,7 @@ This details how to restore a virtual machine from a backup.
 
 ### References
 
-- [Proxmox: Restore VM or Container Template From Backup](../topics/proxmox.md#restoring-backup)
+- [Proxmox: Restoring Backup](../topics/proxmox.md#restoring-backup)
 
 ---
 
