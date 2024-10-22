@@ -16,10 +16,12 @@ In computing, a virtual machine (VM) is the virtualisation or emulation of a com
     - [References](#references-2)
   - [Restoring From Backup](#restoring-from-backup)
     - [References](#references-3)
-  - [Editing a Virtual Machine](#editing-a-virtual-machine)
+  - [Exporting Backup](#exporting-backup)
     - [References](#references-4)
-  - [Adding or Expanding a Virtual Disk](#adding-or-expanding-a-virtual-disk)
+  - [Editing a Virtual Machine](#editing-a-virtual-machine)
     - [References](#references-5)
+  - [Adding or Expanding a Virtual Disk](#adding-or-expanding-a-virtual-disk)
+    - [References](#references-6)
 
 ## References
 
@@ -56,6 +58,16 @@ This details how to restore a virtual machine from a backup.
 ### References
 
 - [Proxmox: Restoring Backup](../topics/proxmox.md#restoring-backup)
+
+---
+
+## Exporting Backup
+
+This details how to export a backup of a virtual machine or template.
+
+### References
+
+- [Proxmox: Exporting Backup](../topics/proxmox.md#exporting-backup)
 
 ---
 
