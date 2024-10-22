@@ -410,7 +410,7 @@ This details the process of creating backups of a virtual machine or Container T
 
 ### Restoring Backup
 
-This details how to restore a virtual machine or Container Template from a backup.
+This details how to restore a virtual machine or Container Template from a backup:
 
 1. If you wish to create a new virtual machine or Container Template from a backup:
 
