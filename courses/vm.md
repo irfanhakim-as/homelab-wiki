@@ -53,7 +53,7 @@ This details how to create a virtual machine from a template or base virtual mac
 
 ## Restoring From Backup
 
-This details how to restore a virtual machine from a backup.
+This details how to restore an existing virtual machine or create a new one from a backup.
 
 ### References
 
