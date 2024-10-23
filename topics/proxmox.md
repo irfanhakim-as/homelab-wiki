@@ -37,6 +37,10 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Creating Backup](#creating-backup)
     - [Restoring Backup](#restoring-backup)
     - [Exporting Backup](#exporting-backup)
+  - [Migrating to Proxmox](#migrating-to-proxmox)
+    - [Description](#description-6)
+    - [References](#references-5)
+    - [ESXi](#esxi)
 
 ## References
 
@@ -454,3 +458,95 @@ This details how to export a backup of a virtual machine or Container Template:
 
    - Replace `<proxmox-host>` with the IP address or hostname of the Proxmox server (i.e. `192.168.0.106`)
    - Replace `<backup-name>` with the name of the backup you wish to export (i.e. `vzdump-qemu-100-2024_09_24-11_15_57.vma.zst`)
+
+---
+
+## Migrating to Proxmox
+
+### Description
+
+This details the process of migrating a virtual machine from an existing hypervisor to Proxmox.
+
+### References
+
+- [New Proxmox Import Wizard for Migrating VMware ESXi VMs](https://youtu.be/H1t6hxCoiZw)
+
+### ESXi
+
+This process details how to migrate a virtual machine from an ESXi hypervisor to Proxmox:
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the **Datacenter** menu item.
+
+3. In the Datacenter view, click the **Storage** menu option.
+
+4. In the Storage section, click the **Add** button to expand the dropdown and select the **ESXi** option.
+
+5. In the **Add: ESXi** form, configure the following:
+
+   - ID: Add a unique, descriptive ID for the ESXi storage (i.e. `esxi`)
+   - Server: Add the IP address of the ESXi node (i.e. `192.168.0.106`)
+   - Username: Add the administrator username of the ESXi node (i.e. `root`)
+   - Password: Add the administrator password of the ESXi node
+   - Skip Certificate Verification: Check the box to avoid issues with the possibly self-signed certificate
+
+    Click the **Add** button.
+
+6. On the left-hand side of the web interface, select the added ESXi storage (i.e. `esxi`).
+
+7. In the list of **Virtual Guests**, select to highlight the virtual machine you wish to import denoted by their `vmx` file (i.e. `my-server.vmx`), and click the **Import** button.
+
+    > [!WARNING]  
+    > Please ensure that the VM you are importing is not in a running state (on the ESXi server)!
+
+8. In the **Import Guest** form, configure the following:
+
+   - **General**:
+
+     - VM ID: Set this to an unused index (i.e. `101`)
+     - Name: Set a suitable name for the VM (i.e. `my-vm.example.com`)
+     - CPU Type: Expand the dropdown and select the CPU type you wish for the VM to use or emulate depending on your CPU and requirements (i.e. `x86-64-v3`)
+     - OS Type: Expand the dropdown and select the type of OS the VM runs (i.e. `Linux`)
+
+   - **Advanced**:
+
+     - SCSI Controller: Expand the dropdown and select the SCSI controller you wish to use (i.e. `VirtIO SCSI single`)
+     - Network Interface Model: Expand the dropdown and select the network model you wish to use (i.e. `VirtIO (paravirtualized)`)
+
+   - Configure the rest of the settings as you see fit or leave them as default. Click the **Import** button once done.
+
+9. In the **Task viewer** window, wait for the import to complete. Once it has, close the window by clicking its **X** button.
+
+10. Once the VM has been imported, you will find the VM listed on the left-hand side of the web interface, under the group denoted by the name of your Proxmox server (i.e. `proxmox`). Select the VM.
+
+11. [Edit the VM](#editing-vm-parameters)'s **Boot Order** found in the **Options** menu and ensure the boot storage device (i.e. `scsi0`) is enabled and first in order.
+
+12. [Enter the VM](#enter-the-vm) to do some [configuration](linux.md#configuration). Most important configuration items being:
+
+    - In some cases, you may need to configure the existing network configuration which still expects its old network interface (from ESXi) to be available:
+
+      - Run the following command to determine its new network interface:
+
+        ```sh
+        ip link
+        ```
+
+      - In this sample output, the right network interface is `enp6s18`:
+
+        ```
+        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+            link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+        2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+            link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
+        ```
+
+        Replace any possible mention of the old network interface (i.e. `ens192`) in the VM's network configuration with the new one.
+
+    - [Install](package-manager.md#install-software) packages required by Proxmox using the system package manager (i.e. `apt`):
+
+      - `qemu-guest-agent`
+
+    - Additionally, you may also [uninstall](package-manager.md#remove-software) packages that are no longer required using the system package manager (i.e. `apt`):
+
+      - `open-vm-tools`
