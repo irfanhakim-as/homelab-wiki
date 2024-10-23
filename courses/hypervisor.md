@@ -21,6 +21,8 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
     - [Adding Additional Storage](#adding-additional-storage)
     - [Adding a Network Card](#adding-a-network-card)
     - [Disk Pass-through](#disk-pass-through)
+  - [Migration](#migration)
+    - [References](#references-3)
 
 ## References
 
@@ -85,3 +87,13 @@ This topic details how to add an additional network device to the hypervisor.
 This topic details how to enable disk pass-through on the hypervisor.
 
 - [ESXi: Disk Pass-through](../topics/esxi.md#disk-pass-through)
+
+---
+
+## Migration
+
+This details the process of migrating a virtual machine from an existing hypervisor to another.
+
+### References
+
+- [Proxmox: Migrating to Proxmox](../topics/proxmox.md#migrating-to-proxmox)
