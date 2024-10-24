@@ -87,6 +87,7 @@ This topic details how to add an additional network device to the hypervisor.
 This details the process of passing through PCIe devices to a virtual machine on the hypervisor.
 
 - [ESXi: Disk Pass-through](../topics/esxi.md#disk-pass-through)
+- [Proxmox: PCIe Passthrough](../topics/proxmox.md#pcie-passthrough)
 
 ---
 
