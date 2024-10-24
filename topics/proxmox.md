@@ -42,6 +42,11 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Description](#description-6)
     - [References](#references-5)
     - [ESXi](#esxi)
+  - [PCIe Passthrough](#pcie-passthrough)
+    - [Description](#description-7)
+    - [References](#references-6)
+    - [Enablement](#enablement)
+    - [Adding to VM](#adding-to-vm)
 
 ## References
 
@@ -567,3 +572,180 @@ This process details how to migrate a virtual machine from an ESXi hypervisor to
     - Additionally, you may also [uninstall](package-manager.md#remove-software) packages that are no longer required using the system package manager (i.e. `apt`):
 
       - `open-vm-tools`
+
+---
+
+## PCIe Passthrough
+
+### Description
+
+This details the process of passing through PCIe devices to a virtual machine in Proxmox.
+
+### References
+
+- [Proxmox 8.0 - PCIe Passthrough Tutorial](https://youtu.be/_hOBAGKLQkI)
+- [Written guide](https://drive.google.com/file/d/1rPTKi_b7EFqKTMylH64b3Dg9W0N_XIhO/view)
+- [PCI(e) Passthrough](https://pve.proxmox.com/wiki/PCI(e)_Passthrough)
+- [Determine which Bootloader is Used](https://pve.proxmox.com/wiki/Host_Bootloader#sysboot_determine_bootloader_used)
+
+### Enablement
+
+This process details how to enable PCIe passthrough in Proxmox:
+
+1. On the Proxmox node, determine the bootloader used:
+
+    ```sh
+    efibootmgr -v
+    ```
+
+   - If the output shows something like the following:
+
+      ```
+      BootCurrent: 0002
+      ```
+
+      ```
+      Boot0002* Linux Boot Manager    HD(2,GPT,aqxk1iaf-t8fe-2hoz-iz2i-ycetxczlsftm,0x800,0x200000)/File(\EFI\SYSTEMD\SYSTEMD-BOOTX64.EFI)
+      ```
+
+      It means that the bootloader is Systemd-boot. Otherwise, assume it is GRUB.
+
+2. Update the kernel command line according to the bootloader used. To do so:
+
+   - Systemd-boot:
+
+      ```sh
+      nano /etc/kernel/cmdline
+      ```
+
+     - Append the required argument(s) to the end of the first line. For example:
+
+        ```diff
+        - root=ZFS=rpool/ROOT/pve-1 boot=zfs
+        + root=ZFS=rpool/ROOT/pve-1 boot=zfs sample_arg=sample_value
+        ```
+
+     - Save and apply the changes after updating the kernel command line:
+
+        ```sh
+        proxmox-boot-tool refresh
+        ```
+
+   - GRUB:
+
+      ```sh
+      nano /etc/default/grub
+      ```
+
+     - Append the required argument(s) to the end of the value of the `GRUB_CMDLINE_LINUX_DEFAULT` variable. For example:
+
+        ```diff
+        - GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+        + GRUB_CMDLINE_LINUX_DEFAULT="quiet sample_arg=sample_value"
+        ```
+
+     - Save and apply the changes after updating the kernel command line:
+
+        ```sh
+        update-grub
+        ```
+
+3. Enable IOMMU according to your CPU by adding the following value to the kernel command line:
+
+   - Intel:
+
+      ```sh
+      intel_iommu=on
+      ```
+
+   - AMD:
+
+      ```sh
+      amd_iommu=on
+      ```
+
+4. Enable IOMMU Passthrough mode for increased performance for supported hardware:
+
+    Add the following option to the kernel command line:
+
+    ```sh
+    iommu=pt
+    ```
+
+5. Load the following kernel modules to enable support for hardware passthrough:
+
+    ```sh
+    nano /etc/modules
+    ```
+
+   - Add the following kernel modules to the file:
+
+      ```diff
+        # /etc/modules: kernel modules to load at boot time.
+        #
+        # This file contains the names of kernel modules that should be loaded
+        # at boot time, one per line. Lines beginning with "#" are ignored.
+        # Parameters can be specified after the module name.
+      + vfio
+      + vfio_iommu_type1
+      + vfio_pci
+      + # vfio_virqfd # not needed if on kernel 6.2 or newer
+      ```
+
+      Save the changes made to the updated file:
+
+      ```sh
+      # /etc/modules: kernel modules to load at boot time.
+      #
+      # This file contains the names of kernel modules that should be loaded
+      # at boot time, one per line. Lines beginning with "#" are ignored.
+      # Parameters can be specified after the module name.
+      vfio
+      vfio_iommu_type1
+      vfio_pci
+      # vfio_virqfd # not needed if on kernel 6.2 or newer
+      ```
+
+   - Refresh the `initramfs` after adding the new kernel modules:
+
+      ```sh
+      update-initramfs -u -k all
+      ```
+
+   - Verify that the modules we have added are loaded:
+
+      ```sh
+      lsmod | grep vfio
+      ```
+
+6. Reboot the Proxmox node for all changes to take effect. After rebooting, verify that all the required features have been enabled:
+
+    ```sh
+    dmesg | grep -e DMAR -e IOMMU -e AMD-Vi
+    ```
+
+### Adding to VM
+
+This details how to configure a virtual machine to pass through a PCIe device:
+
+1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
+
+   - **System**:
+     - Machine: Expand the dropdown and select the machine type (chipset) that matches your Proxmox node (i.e. `q35`)
+     - BIOS: Expand the dropdown and select the right BIOS type according to your selected **Machine** (i.e. `OVMF (UEFI)`)
+   - **Memory**:
+     - Ballooning Device: Uncheck the box to disable it as required by hardware passthrough which is memory address based
+
+2. Once the virtual machine has been created or updated, [add a PCI Device](#adding-a-device) to the virtual machine with the following configurations:
+
+   - Mapped Device: If you are passing through a device that has shareable resources like certain video cards and network cards, check this box to enable it
+   - Raw Device: If you are passing through a device as a whole, check this box to enable it
+   - Device: Expand the dropdown and select the PCI device you wish to add
+
+3. [Enter the virtual machine](#enter-the-vm) and verify that the device has been passed through:
+
+    ```sh
+    lspci
+    ```
+
+    From the output, locate the PCI device you have added.
