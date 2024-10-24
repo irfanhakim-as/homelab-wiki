@@ -31,6 +31,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create Container Template](#create-container-template)
     - [Create VM From Container Template](#create-vm-from-container-template)
     - [Editing VM Parameters](#editing-vm-parameters)
+    - [Adding a Device](#adding-a-device)
   - [Backups](#backups)
     - [Description](#description-5)
     - [References](#references-4)
@@ -373,6 +374,22 @@ This details how to edit an existing virtual machine or Container Template.
 5. In the parameter's **Edit** window, make any changes to the parameter value. Some parameters may have an **Advanced** option box you are able to check to enable.
 
 6. Click the **OK** button to save the changes.
+
+### Adding a Device
+
+This details how to add a device to an existing virtual machine:
+
+1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
+
+2. Select the target virtual machine (illustrated with an icon of a display) you wish to add a device to.
+
+3. In the virtual machine view, navigate to the **Hardware** section.
+
+4. Click the **Add** button to expand the list of device categories you wish to add to the virtual machine such as **Hard Disk**, **CD/DVD Drive**, and **Network Device**.
+
+5. Select the type of device you wish to add (i.e. `PCI Device`).
+
+6. In the prompted form, configure the device accordingly, and click the **Add** button.
 
 ---
 
