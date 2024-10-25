@@ -41,6 +41,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
   - [Migrating to Proxmox](#migrating-to-proxmox)
     - [Description](#description-6)
     - [References](#references-5)
+    - [Manual](#manual)
     - [ESXi](#esxi)
     - [Post-Migration](#post-migration)
   - [PCIe Passthrough](#pcie-passthrough)
@@ -493,6 +494,76 @@ This details the process of migrating a virtual machine from an existing hypervi
 ### References
 
 - [New Proxmox Import Wizard for Migrating VMware ESXi VMs](https://youtu.be/H1t6hxCoiZw)
+- [Migrate to Proxmox VE](https://pve.proxmox.com/wiki/Migrate_to_Proxmox_VE)
+
+### Manual
+
+This details how to migrate a virtual machine manually to Proxmox:
+
+1. Export the source virtual machine's `*.vmdk` and `*-flat.vmdk` files to your client machine.
+
+2. Send the files to a location accessible to the destination Proxmox node (i.e. `~`):
+
+    ```sh
+    scp *.vmdk root@<proxmox-host>:~
+    ```
+
+    Replace `<proxmox-host>` with the IP address or hostname of the Proxmox server (i.e. `192.168.0.106`)
+
+3. On the Proxmox node, [create a new VM](#create-vm) with the specifications as close to the source virtual machine as possible and its default disk **REMOVED**. Take note of the virtual machine's VM ID (i.e. `100`).
+
+4. On the Proxmox server shell, import the `*.vmdk` file to the new target virtual machine:
+
+   - Navigate to where the `*.vmdk` and `*-flat.vmdk` files are located (i.e. `~`):
+
+      ```sh
+      cd ~
+      ```
+
+   - Import the `*.vmdk` file to the target virtual machine:
+
+      ```sh
+      qm disk import <vmid> <vmdk-file> <storage>
+      ```
+
+     - Replace `<vmid>` with the ID of the target virtual machine (i.e. `100`)
+     - Replace `<vmdk-file>` with the name of the target `*.vmdk` file (i.e. `my-server.vmdk`)
+     - Replace `<storage>` with the name of the target storage (i.e. `local-zfs`)
+
+   - If the target storage expects or stores disk images in a certain format, specify the format by adding the `--format` option to the same command:
+
+      ```sh
+      qm disk import <vmid> <vmdk-file> <storage> --format <format>
+      ```
+
+     - Replace `<format>` with the disk format the target storage expects (i.e. `raw`)
+
+   - The full sample command should look something like this:
+
+      ```sh
+      qm disk import 100 my-server.vmdk local-zfs --format raw
+      ```
+
+   - If the import was successful, it should return an output similar to the following:
+
+      ```sh
+      Successfully imported disk as 'unused0:local-zfs:vm-100-disk-0'
+      ```
+
+5. Once the import is done, [update](#editing-vm-parameters) the imported disk (i.e. `Unused Disk 0`) in the **Hardware** section of the target machine:
+
+   - Make any configuration to the **Add: Unused Disk** form if necessary.
+   - Click the **Add** button to attach the disk to the target machine.
+
+6. [Update](#editing-vm-parameters) the **Boot Order** in the **Options** section of the target machine and ensure the imported storage device (i.e. `scsi0`) is enabled and first in order.
+
+7. Carry out the [Post-Migration](#post-migration) process to ensure the VM is properly configured.
+
+8. Once the imported VM is up and running, you may delete the imported `*.vmdk` and `*-flat.vmdk` files from the Proxmox node:
+
+    ```sh
+    rm -f ~/*.vmdk
+    ```
 
 ### ESXi
 
