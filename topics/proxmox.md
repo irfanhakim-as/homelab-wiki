@@ -614,7 +614,10 @@ This process details how to migrate a virtual machine from an ESXi hypervisor to
 
 10. Once the VM has been imported, you will find the VM listed on the left-hand side of the web interface, under the group denoted by the name of your Proxmox server (i.e. `proxmox`). Select the VM.
 
-11. [Edit the VM](#editing-vm-parameters)'s **Boot Order** found in the **Options** menu and ensure the boot storage device (i.e. `scsi0`) is enabled and first in order.
+11. [Edit the VM](#editing-vm-parameters)'s following configurations found in the **Options** menu:
+
+    - Boot Order: Ensure the boot storage device (i.e. `scsi0`) is enabled and first in order
+    - QEMU Guest Agent: Check the box to enable the QEMU Guest Agent
 
 12. Carry out the [Post-Migration](#post-migration) process to ensure the VM is properly configured.
 
