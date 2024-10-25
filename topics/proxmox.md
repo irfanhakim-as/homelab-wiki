@@ -42,6 +42,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Description](#description-6)
     - [References](#references-5)
     - [ESXi](#esxi)
+    - [Post-Migration](#post-migration)
   - [PCIe Passthrough](#pcie-passthrough)
     - [Description](#description-7)
     - [References](#references-6)
@@ -544,34 +545,40 @@ This process details how to migrate a virtual machine from an ESXi hypervisor to
 
 11. [Edit the VM](#editing-vm-parameters)'s **Boot Order** found in the **Options** menu and ensure the boot storage device (i.e. `scsi0`) is enabled and first in order.
 
-12. [Enter the VM](#enter-the-vm) to do some [configuration](linux.md#configuration). Most important configuration items being:
+12. Carry out the [Post-Migration](#post-migration) process to ensure the VM is properly configured.
 
-    - In some cases, you may need to configure the existing network configuration which still expects its old network interface (from ESXi) to be available:
+### Post-Migration
 
-      - Run the following command to determine its new network interface:
+This process details some configuration options to a virtual machine that has just been imported to Proxmox:
 
-        ```sh
-        ip link
-        ```
+1. [Enter the VM](#enter-the-vm) to do some [configuration](linux.md#configuration).
 
-      - In this sample output, the right network interface is `enp6s18`:
+2. In some cases, you may need to configure the existing network configuration which still expects its old network interface (from ESXi) to be available:
 
-        ```
-        1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
-            link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-        2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
-            link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
-        ```
+   - Run the following command to determine its new network interface:
 
-        Replace any possible mention of the old network interface (i.e. `ens192`) in the VM's network configuration with the new one.
+      ```sh
+      ip link
+      ```
 
-    - [Install](package-manager.md#install-software) packages required by Proxmox using the system package manager (i.e. `apt`):
+   - In this sample output, the right network interface is `enp6s18`:
 
-      - `qemu-guest-agent`
+      ```
+      1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+          link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+      2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+          link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
+      ```
 
-    - Additionally, you may also [uninstall](package-manager.md#remove-software) packages that are no longer required using the system package manager (i.e. `apt`):
+      Replace any possible mention of the old network interface (i.e. `ens192`) in the VM's network configuration with the new one.
 
-      - `open-vm-tools`
+3. [Install](package-manager.md#install-software) packages required by Proxmox using the system package manager (i.e. `apt`):
+
+   - `qemu-guest-agent`
+
+4. Additionally, you may also [uninstall](package-manager.md#remove-software) packages that are no longer required using the system package manager (i.e. `apt`):
+
+   - `open-vm-tools`
 
 ---
 
