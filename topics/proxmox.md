@@ -622,7 +622,7 @@ This process details how to migrate a virtual machine from an ESXi hypervisor to
 
 This process details some configuration options to a virtual machine that has just been imported to Proxmox:
 
-1. [Enter the VM](#enter-the-vm) to do some [configuration](linux.md#configuration).
+1. [Enter the VM](#enter-the-vm) to do some [configuration](linux.md#configuration) according to the target guest OS.
 
 2. In some cases, you may need to configure the existing network configuration which still expects its old network interface (from ESXi) to be available:
 
