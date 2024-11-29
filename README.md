@@ -47,6 +47,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
          4. [RHEL](topics/rhel.md)
 4. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
    1. [RKE2](topics/rke2.md)
+   2. Rancher
 5. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
    1. [Router](topics/router.md):
       1. [Port forwarding](topics/router.md#port-forwarding)
