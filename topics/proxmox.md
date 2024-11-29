@@ -550,7 +550,13 @@ This details how to migrate a virtual machine manually to Proxmox:
       Successfully imported disk as 'unused0:local-zfs:vm-100-disk-0'
       ```
 
-5. Once the import is done, [update](#editing-vm-parameters) the imported disk (i.e. `Unused Disk 0`) in the **Hardware** section of the target machine:
+   - If the source virtual machine has multiple disks, repeat the import process for each disk's `*.vmdk` file. For example:
+
+      ```sh
+      qm disk import 100 my-server_1.vmdk local-zfs --format raw
+      ```
+
+5. Once the import is done, [update](#editing-vm-parameters) each imported disk (i.e. `Unused Disk 0`) in the **Hardware** section of the target machine:
 
    - Make any configuration to the **Add: Unused Disk** form if necessary.
    - Click the **Add** button to attach the disk to the target machine.
