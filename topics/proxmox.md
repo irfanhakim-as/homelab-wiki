@@ -527,7 +527,7 @@ This details how to migrate a virtual machine manually to Proxmox:
       ```
 
      - Replace `<vmid>` with the ID of the target virtual machine (i.e. `100`)
-     - Replace `<vmdk-file>` with the name of the target `*.vmdk` file (i.e. `my-server.vmdk`)
+     - Replace `<vmdk-file>` with the name of the target `*.vmdk` (**NOT** `*-flat.vmdk`) file (i.e. `my-server.vmdk`)
      - Replace `<storage>` with the name of the target storage (i.e. `local-zfs`)
 
    - If the target storage expects or stores disk images in a certain format, specify the format by adding the `--format` option to the same command:
