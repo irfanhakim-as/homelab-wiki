@@ -561,7 +561,7 @@ This details how to migrate a virtual machine manually to Proxmox:
    - Make any configuration to the **Add: Unused Disk** form if necessary.
    - Click the **Add** button to attach the disk to the target machine.
 
-6. [Update](#editing-vm-parameters) the **Boot Order** in the **Options** section of the target machine and ensure the imported storage device (i.e. `scsi0`) is enabled and first in order.
+6. [Update](#editing-vm-parameters) the **Boot Order** in the **Options** section of the target machine and ensure the boot or primary storage device (i.e. `scsi0`) is enabled and first in order.
 
 7. Carry out the [Post-Migration](#post-migration) process to ensure the VM is properly configured.
 
