@@ -510,7 +510,7 @@ This details how to migrate a virtual machine manually to Proxmox:
 
     Replace `<proxmox-host>` with the IP address or hostname of the Proxmox server (i.e. `192.168.0.106`)
 
-3. On the Proxmox node, [create a new VM](#create-vm) with the specifications as close to the source virtual machine as possible and its default disk **REMOVED**. Take note of the virtual machine's VM ID (i.e. `100`).
+3. On the Proxmox node, [create a new VM](#create-vm) with the specifications as close to the source virtual machine as possible, not using any media, and have its default disk **REMOVED**. Take note of the virtual machine's VM ID (i.e. `100`).
 
 4. On the Proxmox server shell, import the `*.vmdk` file to the new target virtual machine:
 
