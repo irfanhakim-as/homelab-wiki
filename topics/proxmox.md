@@ -811,9 +811,9 @@ This process details how to enable PCIe passthrough in Proxmox:
 
 6. Reboot the Proxmox node for all changes to take effect. After rebooting, verify that all the required features have been enabled:
 
-    ```sh
-    dmesg | grep -e DMAR -e IOMMU -e AMD-Vi
-    ```
+      ```sh
+      dmesg | grep -e DMAR -e IOMMU -e AMD-Vi
+      ```
 
 ### Adding to VM
 
