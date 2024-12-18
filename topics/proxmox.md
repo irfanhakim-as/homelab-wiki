@@ -809,10 +809,33 @@ This process details how to enable PCIe passthrough in Proxmox:
       lsmod | grep vfio
       ```
 
+      Sample output:
+
+      ```sh
+      vfio_pci               16384  0
+      vfio_pci_core          86016  1 vfio_pci
+      irqbypass              12288  2 vfio_pci_core,kvm
+      vfio_iommu_type1       49152  0
+      vfio                   65536  3 vfio_pci_core,vfio_iommu_type1,vfio_pci
+      iommufd                94208  1 vfio
+      ```
+
 6. Reboot the Proxmox node for all changes to take effect. After rebooting, verify that all the required features have been enabled:
 
       ```sh
       dmesg | grep -e DMAR -e IOMMU -e AMD-Vi
+      ```
+
+      Sample output:
+
+      ```sh
+      [    0.000000] AMD-Vi: Unknown option - 'on'
+      [    0.000000] AMD-Vi: Using global IVHD EFR:0xf77ef22294ada, EFR2:0x0
+      [    0.325658] pci 0000:00:00.2: AMD-Vi: IOMMU performance counters supported
+      [    0.327225] AMD-Vi: Extended features (0xf77ef22294ada, 0x0): PPR NX GT IA GA PC GA_vAPIC
+      [    0.327244] AMD-Vi: Interrupt remapping enabled
+      [    0.327388] AMD-Vi: Virtual APIC enabled
+      [    0.327499] perf/amd_iommu: Detected AMD IOMMU #0 (2 banks, 4 counters/bank).
       ```
 
 ### Adding to VM
