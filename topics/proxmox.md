@@ -72,6 +72,9 @@ This details the process of setting up Proxmox including installation and config
 
 2. In the Proxmox Virtual Environment welcome page, select the **Install Proxmox VE (Graphical)** option.
 
+    > [!TIP]  
+    > If this process gets stuck at `loading drivers`, restart and opt for the same boot entry but with the [`nomodeset` kernel parameter enabled](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#nomodeset_kernel_param).
+
 3. When prompted with the End User License Agreement (EULA) page, click the **I agree** button.
 
 4. Expand the **Target Harddisk** dropdown and select the intended drive to install Proxmox to (i.e. `/dev/nvme0n1`).
