@@ -65,6 +65,7 @@ This details the process of setting up Proxmox including installation and config
 ### References
 
 - [Let's Install Proxmox 8.0!](https://youtu.be/sZcOlW-DwrU)
+- [ZFS on Linux](https://pve.proxmox.com/wiki/ZFS_on_Linux)
 
 ### Installation
 
