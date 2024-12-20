@@ -98,7 +98,7 @@ This details the process of setting up Proxmox including installation and config
 
     Click the **Next** button
 
-8. In the **Summary** page, review your installation options, check the **Automatically reboot after successful installation** box, and click the **Install** button.
+8. In the **Summary** page, review your installation options **carefully**, check the **Automatically reboot after successful installation** box, and click the **Install** button.
 
 9. Wait for the installation to complete. Once it has, the Proxmox Virtual Environment web interface will be accessible on a browser at the server's IP address and port 8006 (i.e. `https://192.168.0.106:8006`).
 
