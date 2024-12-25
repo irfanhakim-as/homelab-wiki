@@ -239,7 +239,7 @@ This details the process of setting a static IP address and updating the DNS ser
     enp6s18
     ```
 
-    Alternatively, you may also use the following command:
+    **Alternatively**, you may also use the following command:
 
     ```sh
     ip link
