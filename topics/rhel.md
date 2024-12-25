@@ -230,6 +230,18 @@ This details the process of setting a static IP address and updating the DNS ser
 1. Determine the name of the active network interface on the system:
 
     ```sh
+    route | grep '^default' | grep -o '[^ ]*$'
+    ```
+
+    Sample output:
+
+    ```
+    enp6s18
+    ```
+
+    Alternatively, you may also use the following command:
+
+    ```sh
     ip link
     ```
 
