@@ -211,13 +211,42 @@ This details the process of setting a static IP address and updating the DNS ser
     sudo cp /etc/network/interfaces /etc/network/interfaces.bak
     ```
 
-2. Update the network configuration file:
+2. Determine the name of the active network interface on the system:
+
+    ```sh
+    route | grep '^default' | grep -o '[^ ]*$'
+    ```
+
+    Sample output:
+
+    ```
+    enp6s18
+    ```
+
+    Alternatively, you may also use the following command:
+
+    ```sh
+    ip link
+    ```
+
+    Sample output:
+
+    ```
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+        link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
+    ```
+
+    In this example, `enp6s18` is the name of the active network interface.
+
+3. Update the network configuration file:
 
     ```sh
     sudo nano /etc/network/interfaces
     ```
 
-3. Update the configuration as such:
+4. Update the configuration as such:
 
     Original configuration which uses DHCP to dynamically assign an IP address:
 
@@ -273,7 +302,7 @@ This details the process of setting a static IP address and updating the DNS ser
     dns-nameservers 1.1.1.1 8.8.8.8
     ```
 
-4. Save all changes made to the file and apply the new configuration by [restarting](systemd.md#restart-service) the `networking.service` service.
+5. Save all changes made to the file and apply the new configuration by [restarting](systemd.md#restart-service) the `networking.service` service.
 
 ### Update Hostname
 

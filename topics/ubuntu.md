@@ -196,13 +196,42 @@ This details the process of setting a static IP address and updating the DNS ser
     sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.bak
     ```
 
-4. Update or create the network configuration file:
+4. Determine the name of the active network interface on the system:
+
+    ```sh
+    route | grep '^default' | grep -o '[^ ]*$'
+    ```
+
+    Sample output:
+
+    ```
+    enp6s18
+    ```
+
+    Alternatively, you may also use the following command:
+
+    ```sh
+    ip link
+    ```
+
+    Sample output:
+
+    ```
+    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+        link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
+    ```
+
+    In this example, `enp6s18` is the name of the active network interface.
+
+5. Update or create the network configuration file:
 
     ```sh
     sudo nano /etc/netplan/00-installer-config.yaml
     ```
 
-5. Update the configuration as such:
+6. Update the configuration as such:
 
     Original configuration which uses DHCP to dynamically assign an IP address:
 
@@ -241,7 +270,7 @@ This details the process of setting a static IP address and updating the DNS ser
       version: 2
     ```
 
-6. Save all changes made to the file and apply the new configuration:
+7. Save all changes made to the file and apply the new configuration:
 
     ```sh
     sudo netplan apply
