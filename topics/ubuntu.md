@@ -165,19 +165,39 @@ This details the process of updating certain networking configurations on the sy
 
 This details the process of setting a static IP address and updating the DNS server on a system.
 
-1. Backup the existing network configuration file:
+1. Ensure the system's network configuration is not provisioned by `cloud-init`:
+
+    ```sh
+    ls -l /etc/netplan/*-cloud-init.yaml
+    ```
+
+    If the output is not empty, then the system is provisioned by `cloud-init` and needs to be disabled.
+
+2. To disable `cloud-init`:
+
+    ```sh
+    sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+    ```
+
+    Add and save the following configuration to the file:
+
+    ```
+    network: {config: disabled}
+    ```
+
+3. Backup the existing network configuration file, if available:
 
     ```sh
     sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.bak
     ```
 
-2. Update the network configuration file:
+4. Update or create the network configuration file:
 
     ```sh
     sudo nano /etc/netplan/00-installer-config.yaml
     ```
 
-3. Update the configuration as such:
+5. Update the configuration as such:
 
     Original configuration which uses DHCP to dynamically assign an IP address:
 
@@ -216,7 +236,7 @@ This details the process of setting a static IP address and updating the DNS ser
       version: 2
     ```
 
-4. Save all changes made to the file and apply the new configuration:
+6. Save all changes made to the file and apply the new configuration:
 
     ```sh
     sudo netplan apply
