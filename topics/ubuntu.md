@@ -178,7 +178,7 @@ This details the process of setting a static IP address and updating the DNS ser
 
     If the output is not empty, then the system is provisioned by `cloud-init` and needs to be disabled.
 
-2. To disable `cloud-init`:
+2. To disable `cloud-init` from managing the system's network configuration:
 
     ```sh
     sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
