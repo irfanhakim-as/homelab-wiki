@@ -21,6 +21,7 @@ Ubuntu is a Linux distribution derived from Debian and composed mostly of free a
     - [Extended VM](#extended-vm)
   - [Networking](#networking)
     - [Description](#description-3)
+    - [References](#references-2)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
 
@@ -160,6 +161,10 @@ These configuration options are expected to be applied on top of the changes tha
 ### Description
 
 This details the process of updating certain networking configurations on the system.
+
+### References
+
+- [How to Configure Static IP Address on Ubuntu 20.04](https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04)
 
 ### Set Static IP and Update DNS
 
