@@ -49,6 +49,10 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [References](#references-6)
     - [Enablement](#enablement)
     - [Adding to VM](#adding-to-vm)
+  - [Updating Configuration](#updating-configuration)
+    - [Description](#description-8)
+    - [References](#references-7)
+    - [Datacenter Configuration](#datacenter-configuration)
 
 ## References
 
@@ -863,3 +867,39 @@ This details how to configure a virtual machine to pass through a PCIe device:
     ```
 
     From the output, locate the PCI device you have added.
+
+---
+
+## Updating Configuration
+
+### Description
+
+This details the process of updating the configuration of a Proxmox node.
+
+### References
+
+- [Datacenter Configuration](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_options)
+
+### Datacenter Configuration
+
+1. Create a backup of the datacenter configuration file:
+
+   ```sh
+   cp /etc/pve/datacenter.cfg /etc/pve/datacenter.cfg.bak
+   ```
+
+2. Update the datacenter configuration file:
+
+   ```sh
+   nano /etc/pve/datacenter.cfg
+   ```
+
+   For example, to update the default GUI language, add the following property:
+
+   ```diff
+   + language: en
+   ```
+
+   Please refer to the [official documentation](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_options) for the full list of available options.
+
+3. Save the changes made to the file and reboot the Proxmox node.
