@@ -128,7 +128,89 @@ This details some recommended configuration options for Ubuntu as a server.
 
    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
-10. Clear the VM's Bash history:
+10. For systems running `cloud-init` (i.e. on a Raspberry Pi), password prompts may not be required when using `sudo` by default.
+
+    - To fix this, check the content of the `/etc/sudoers` file:
+
+      ```sh
+      sudo cat /etc/sudoers
+      ```
+
+    - Identify whether the following line is found in the file and not commented:
+
+      ```
+      %sudo   ALL=(ALL:ALL) ALL
+      ```
+
+      If it is not found, add the line to the end of the file accordingly. Likewise, uncomment the line if it is commented.
+
+    - Now, check for a configuration file in the `/etc/sudoers.d/` directory that is responsible for the current behaviour:
+
+      ```sh
+      sudo ls -l /etc/sudoers.d/
+      ```
+
+      Sample output:
+
+      ```
+      total 8
+      -r--r----- 1 root root 149 Apr 21  2022 90-cloud-init-users
+      -r--r----- 1 root root 958 Feb  3  2020 README
+      ```
+
+      In this example, the configuration file is `90-cloud-init-users`.
+
+    - Update the configuration file (i.e. `90-cloud-init-users`) to change this behaviour:
+
+      ```sh
+      sudo nano /etc/sudoers.d/90-cloud-init-users
+      ```
+
+      Sample configuration:
+
+      ```
+      # Created by cloud-init v. 22.2-0ubuntu1~20.04.3 on Thu, 21 Apr 2022 12:54:58 +0000
+
+      # User rules for <user>
+      <user> ALL=(ALL) NOPASSWD:ALL
+      ```
+
+      Comment the line with the `NOPASSWD:ALL` option to prevent it from allowing the `<user>` user from using `sudo` without a password:
+
+      ```diff
+        # Created by cloud-init v. 22.2-0ubuntu1~20.04.3 on Thu, 21 Apr 2022 12:54:58 +0000
+        
+        # User rules for <user>
+      - <user> ALL=(ALL) NOPASSWD:ALL
+      + #<user> ALL=(ALL) NOPASSWD:ALL
+      ```
+
+      **Alternatively**, if you think it is safe, you may also delete the configuration file entirely:
+
+      ```sh
+      sudo rm -f /etc/sudoers.d/90-cloud-init-users
+      ```
+
+    - Finally, disable `cloud-init` completely to prevent this from being overwritten:
+
+      ```sh
+      sudo touch /etc/cloud/cloud-init.disabled
+      ```
+
+      **Alternatively**, disable `cloud-init` from managing any `sudo` configuration for the user:
+
+      ```sh
+      sudo nano /var/lib/cloud/instance/user-data.txt
+      ```
+
+      Look for the `NOPASSWD:ALL` option and comment or remove it:
+
+      ```diff
+      - sudo: ALL=(ALL) NOPASSWD:ALL
+      + #sudo: ALL=(ALL) NOPASSWD:ALL
+      ```
+
+11. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -138,7 +220,7 @@ This details some recommended configuration options for Ubuntu as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-11. Reboot the VM to apply all changes:
+12. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
