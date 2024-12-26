@@ -23,6 +23,8 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
     - [PCIe Passthrough](#pcie-passthrough)
   - [Migration](#migration)
     - [References](#references-3)
+  - [Clustering](#clustering)
+    - [References](#references-4)
 
 ## References
 
@@ -98,3 +100,13 @@ This details the process of migrating a virtual machine from an existing hypervi
 ### References
 
 - [Proxmox: Migrating to Proxmox](../topics/proxmox.md#migrating-to-proxmox)
+
+---
+
+## Clustering
+
+This details the process of clustering multiple hypervisor nodes together.
+
+### References
+
+- [Proxmox: Clustering](../topics/proxmox.md#clustering)
