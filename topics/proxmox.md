@@ -53,6 +53,13 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Description](#description-8)
     - [References](#references-7)
     - [Datacenter Configuration](#datacenter-configuration)
+  - [Clustering](#clustering)
+    - [Description](#description-9)
+    - [References](#references-8)
+    - [Creating Cluster](#creating-cluster)
+    - [Joining Node](#joining-node)
+    - [Recommended Configuration](#recommended-configuration)
+    - [Adding QDevice](#adding-qdevice)
 
 ## References
 
@@ -903,3 +910,113 @@ This details the process of updating the configuration of a Proxmox node.
    Please refer to the [official documentation](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_options) for the full list of available options.
 
 3. Save the changes made to the file and reboot the Proxmox node.
+
+---
+
+## Clustering
+
+### Description
+
+This details the process of clustering multiple Proxmox nodes together, including a QDevice.
+
+### References
+
+- [ProxMox High Availability Cluster!](https://youtu.be/08b9DDJ_yf4)
+- [SMALL Proxmox Cluster Tips | Quorum and QDevices, Oh My! (+ Installing a QDevice on a RasPi)](https://youtu.be/TXFYTQKYlno)
+- [QDevice-Net Setup](https://pve.proxmox.com/wiki/Cluster_Manager#_qdevice_net_setup)
+- [Default firewall rules](https://pve.proxmox.com/wiki/Firewall#pve_firewall_default_rules)
+- [Can a QDevice be outside the local network](https://www.reddit.com/r/Proxmox/comments/1aolhng/can_a_qdevice_be_outside_the_local_network)
+
+### Creating Cluster
+
+TODO
+
+### Joining Node
+
+TODO
+
+### Recommended Configuration
+
+This details some recommended configurations for the Proxmox cluster depending on your setup.
+
+1. If the cluster is using the same NIC for your VMs and the cluster link, [update the datacenter configuration]() with the following property and value:
+
+   ```
+   bwlimit: migration=768000
+   ```
+
+### Adding QDevice
+
+1. Prepare an external device (i.e. Raspberry Pi) that will serve as the QDevice. The following are some recommendations and considerations for the QDevice:
+
+   - Any Linux distribution will do, but [Debian 12](debian.md) or [Ubuntu 20.04 LTS](ubuntu.md) is recommended. [Install](linux.md#installation) and [configure](linux.md#configuration) the device accordingly.
+   - The QDevice requires a static IPv4 address. This should already be the case if you have configured the QDevice correctly.
+   - [Enable SSH](ssh.md#enable-remote-access) on the QDevice.
+   - [Update the SSH configuration](ssh.md#configuration) and ensure the following things are in order:
+
+     - `Port`: The SSH port has to be set to its default, `22`.
+     - `PermitRootLogin`: Allow root login by setting it to `yes`.
+     - `PasswordAuthentication`: Enable password authentication by setting it to `yes`.
+
+   - [Enable the Firewall](firewall.md#enablement) on the QDevice.
+   - [Add and apply the following allow rules](firewall.md#adding-allow-rule) on the QDevice:
+
+     - `22/tcp` (SSH)
+     - `5403/tcp` (Corosync)
+
+2. On the QDevice itself, [install](package-manager.md#install-software) the `corosync-qnetd` package using the system's package manager (i.e. `apt`).
+
+3. On each Proxmox node on the cluster you wish to add the QDevice to, [install](package-manager.md#install-software) the `corosync-qdevice` package using the system's package manager (i.e. `apt`).
+
+4. Ensure all Proxmox nodes on the cluster are up and running. On only one of the Proxmox nodes, add the QDevice to the cluster by running the following command:
+
+   ```sh
+   pvecm qdevice setup <qdevice-ip>
+   ```
+
+   Replace `<qdevice-ip>` with the static IPv4 address of the QDevice (i.e. `192.168.0.108`).
+
+5. If the command was successful, check the status of the cluster by running the following on the same Proxmox node:
+
+   ```sh
+   pvecm status
+   ```
+
+   Sample output:
+
+   ```
+   Cluster information
+   -------------------
+   Name:             my-proxmox-cluster
+   Config Version:   7
+   Transport:        knet
+   Secure auth:      on
+
+   Quorum information
+   ------------------
+   Date:             Wed Dec 25 16:13:02 2024
+   Quorum provider:  corosync_votequorum
+   Nodes:            2
+   Node ID:          0x00000001
+   Ring ID:          1.1b
+   Quorate:          Yes
+
+   Votequorum information
+   ----------------------
+   Expected votes:   3
+   Highest expected: 3
+   Total votes:      3
+   Quorum:           2
+   Flags:            Quorate Qdevice
+
+   Membership information
+   ----------------------
+      Nodeid      Votes    Qdevice Name
+   0x00000001          1    A,V,NMW 192.168.0.106 (local)
+   0x00000002          1    A,V,NMW 192.168.0.107
+   0x00000000          1            Qdevice
+   ```
+
+   Ensure that the `Qdevice` is part of the cluster's `Membership information` section and that it has exactly `1` vote.
+
+6. If all is done correctly, as long as not more than one node (including the QDevice) is down, the cluster should remain quorate.
