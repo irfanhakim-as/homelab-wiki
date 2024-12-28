@@ -46,6 +46,7 @@ This details how to acquire a domain name from a domain name registrar.
 - [FreeDNS: Acquiring a Domain](freedns.md#acquiring-a-domain)
 - [Porkbun: Buying a Domain](porkbun.md#buying-a-domain)
 - [Squarespace: Buying a Domain](squarespace.md#buying-a-domain)
+- [Name.com: Buying a Domain](name.com.md#buying-a-domain)
 
 ---
 
@@ -59,6 +60,7 @@ This details how to update the authoritative nameserver for a domain.
 
 - [Porkbun: Update Authoritative Nameserver](porkbun.md#update-authoritative-nameserver)
 - [Squarespace: Update Authoritative Nameserver](squarespace.md#update-authoritative-nameserver)
+- [Name.com: Update Authoritative Nameserver](name.com.md#update-authoritative-nameserver)
 
 ---
 
