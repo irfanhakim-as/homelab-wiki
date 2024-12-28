@@ -17,7 +17,7 @@ Cloudflare, Inc. is an American company that provides content delivery network s
   - [Cloudflare as Nameserver](#cloudflare-as-nameserver)
     - [Description](#description-2)
     - [References](#references-2)
-    - [Steps](#steps-1)
+    - [Setup](#setup)
   - [Register a Subdomain](#register-a-subdomain)
     - [Description](#description-3)
     - [References](#references-3)
@@ -78,7 +78,7 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 - [Add your domain to Cloudflare](https://developers.cloudflare.com/learning-paths/get-started/add-domain-to-cf)
 - [EXPOSE your home network to the INTERNET!! (it's safe)](https://youtu.be/ey4u7OUAF3c)
 
-### Steps
+### Setup
 
 1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
 
