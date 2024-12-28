@@ -82,23 +82,23 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
 1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
 
-2. On the left hand side of the dashboard, select the **Websites** menu item.
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
 
-3. Click the **Add a Domain** button.
+3. On the **Account Home** page, click the **Add a domain** button.
 
-4. Enter your apex domain in the **Enter an existing domain** field and select the **Manually enter DNS records** option. Click **Continue**.
+4. Enter your apex domain in the **Enter an existing domain** field and click **Continue**.
 
 5. When provided with several subscription plans to choose from, scroll down to the bottom of the page and select the **Free** plan and click **Continue**.
 
-6. In the **Review your DNS records** page, we are informed that we will need to set Cloudflare as the nameserver for our domain. Scroll down to the bottom of the page and click **Continue**.
+6. In the **Review your DNS records** page, we are informed that we will need to set Cloudflare as the nameserver for our domain. Scroll down to the bottom of the page and click the **Continue to activation** button.
 
-7. Copy the nameserver endpoints supplied by Cloudflare and [update the nameserver of our domain](dns.md#update-authoritative-nameserver) according to our domain provider (i.e. Porkbun, Squarespace, etc.).
+7. Copy the nameserver endpoints supplied by Cloudflare and [update the nameservers of our domain](dns.md#update-authoritative-nameserver) according to our domain provider (i.e. Porkbun, Squarespace, etc.).
 
-8. Once we have configured our domain to use Cloudflare as the nameserver, head back to where we were on Cloudflare and click the **Done, check nameservers** button located at the very bottom of the page.
+8. Once we have configured our domain to use Cloudflare as the nameserver, head back to where we were on Cloudflare and click the **Check nameservers now** button located at the very bottom of the page.
 
-9. In the **Quick Start Guide** page, click the **Finish later** link under the **Get started** button.
+9. Click the **Continue** button.
 
-10. In the **Zone Overview** page for your domain, scroll down and click the **Check nameservers** button.
+10. In the **Overview** page for your domain, you can monitor the progress by scrolling down and clicking the **Check nameservers now** button to check once per hour.
 
     - You can refresh the page after some time to see if your domain has officially used Cloudflare as its nameservers by seeing a message such as **Great news! Cloudflare is now protecting your site**.
     - You may also receive an email from Cloudflare stating, for example, **Your domain is now active on a Cloudflare Free plan**.
@@ -121,9 +121,9 @@ This method of registering a subdomain relies on you to manually update the DNS 
 
 1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
 
-2. On the left hand side of the dashboard, select the **Websites** menu item.
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
 
-3. In the **Home** page, select the domain you wish to register a subdomain to (i.e. `example.com`).
+3. On the **Account Home** page, select the link on the name of the domain you wish to register a subdomain to (i.e. `example.com`).
 
 4. On the left hand side of the dashboard, expand the **DNS** group and select the **Records** menu item.
 
@@ -217,29 +217,27 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
 
 1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
 
-2. On the left hand side of the dashboard, select the **Websites** menu item.
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
 
-3. In the **Home** page, select a domain you wish to configure for dynamic DNS (i.e. `example.com`).
+3. On the **Account Home** page, select a domain you wish to configure for dynamic DNS (i.e. `example.com`).
 
-4. On the bottom right corner of the dashboard, within the **API** section, copy and make a note of the value of the **Zone ID** (i.e. `SEgYD5N77TVkBa2P1m01eryDC4IuajmS`).
+4. On the bottom right corner of the dashboard, within the **API** section, copy and make note of the value of the **Zone ID** (i.e. `SEgYD5N77TVkBa2P1m01eryDC4IuajmS`).
 
 ### Create API Token
 
 1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
 
-2. On the left hand side of the dashboard, select the **Websites** menu item.
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
 
-3. In the **Home** page, select a domain you wish to configure for dynamic DNS (i.e. `example.com`).
+3. On the **Account Home** page, select a domain you wish to configure for dynamic DNS (i.e. `example.com`).
 
 4. On the bottom right corner of the dashboard, within the **API** section, click the **Get your API token** link.
 
-5. From within the same section, click the **Get your API token** link.
+5. In the **User API Tokens** page, click the **Create Token** button.
 
-6. In the **User API Tokens** page, click the **Create Token** button.
+6. In the **Create API Token** page, click the **Get started** button corresponding to the **Create Custom Token** option.
 
-7. In the **Create API Token** page, click the **Get started** button corresponding to the **Create Custom Token** option.
-
-8. In the **Create Custom Token** form, configure the following:
+7. In the **Create Custom Token** form, configure the following:
 
    - Token name: Set a descriptive and concise name for the token (i.e. `LE DNS Validation (example.com)`)
    - Permissions:
@@ -253,9 +251,9 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
 
     Click the **Continue to summary** button.
 
-9. In the **API token summary** page, review the summary of the new API token and click the **Create Token** button to create the token.
+8. In the **API token summary** page, review the summary of the new API token and click the **Create Token** button to create the token.
 
-10. Once the API token has been created, copy the token value and keep it somewhere safe. For security reasons, the value of this API token will no longer be shown again on Cloudflare.
+9. Once the API token has been created, copy the token value and keep it somewhere safe. For security reasons, the value of this API token will no longer be shown again on Cloudflare.
 
 ### Cloudflare DDNS (Helm)
 
