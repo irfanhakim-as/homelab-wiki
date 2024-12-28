@@ -18,6 +18,7 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Description](#description-2)
     - [References](#references-2)
     - [Setup](#setup)
+    - [Configuration](#configuration)
   - [Register a Subdomain](#register-a-subdomain)
     - [Description](#description-3)
     - [References](#references-3)
@@ -102,6 +103,22 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
     - You can refresh the page after some time to see if your domain has officially used Cloudflare as its nameservers by seeing a message such as **Great news! Cloudflare is now protecting your site**.
     - You may also receive an email from Cloudflare stating, for example, **Your domain is now active on a Cloudflare Free plan**.
+
+### Configuration
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
+
+3. On the **Account Home** page, select the link on the name of the domain you wish to configure (i.e. `example.com`).
+
+4. On the left hand side of the dashboard, expand the **SSL/TLS** group and select the **Overview** menu item.
+
+5. Under the **SSL/TLS encryption** section, click the **Configure** button.
+
+6. In the **Configure encryption mode** page, under **Custom SSL/TLS**, click the **Select** button.
+
+7. Check the `Full (Strict)` option and click the **Save** button.
 
 ---
 
