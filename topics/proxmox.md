@@ -939,7 +939,7 @@ TODO
 
 This details some recommended configurations for the Proxmox cluster depending on your setup.
 
-1. If the cluster is using the same NIC for your VMs and the cluster link, [update the datacenter configuration]() with the following property and value:
+1. If the cluster is using the same NIC for your VMs and the cluster link, [update the datacenter configuration](#datacenter-configuration) with the following property and value:
 
    ```
    bwlimit: migration=768000
