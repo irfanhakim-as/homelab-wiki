@@ -59,6 +59,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Creating Cluster](#creating-cluster)
     - [Joining Node](#joining-node)
     - [Recommended Configuration](#recommended-configuration)
+    - [High Availability (HA)](#high-availability-ha)
     - [Adding QDevice](#adding-qdevice)
 
 ## References
@@ -944,6 +945,65 @@ This details some recommended configurations for the Proxmox cluster depending o
    ```
    bwlimit: migration=768000
    ```
+
+### High Availability (HA)
+
+This details the steps to create a HA group on a Proxmox cluster:
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the **Datacenter** menu item.
+
+3. In the Datacenter view, expand the **HA** group and select the **Groups** menu option.
+
+4. Click the **Create** button to create a new HA group.
+
+5. In the **Create: HA Group** form, configure the following:
+
+   - ID: Add a unique, descriptive ID for the HA group (i.e. `proxmox-HA`)
+   - Restricted: Leave unchecked to prevent resources from being restricted to nodes defined by the group
+   - Nofailback: Leave unchecked to allow services to migrate to a node with a higher priority
+   - Comment: Add a descriptive comment or leave empty as default
+   - Nodes: From the list of nodes, check the corresponding boxes of each node you wish to add to the HA group
+
+    Click the **Create** button.
+
+This details how to make a VM HA:
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the target virtual machine (illustrated with an icon of a display) you wish to make HA.
+
+3. In the virtual machine view, expand the **More** dropdown on the top right side and click the **Manage HA** option.
+
+4. In the **Add: Resource: Container/Virtual Machine** form, configure the following:
+
+   - Group: Expand the dropdown and select the HA group you wish to add the virtual machine to (i.e. `proxmox-HA`)
+   - Request State: Expand the dropdown and select the `started` option
+   - Comment: Add a descriptive comment or leave empty as default
+
+    Click the **Add** button.
+
+In order for VM HA to work, either a shared storage or a storage replication is required. To setup storage replication:
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the target virtual machine (illustrated with an icon of a display) you wish to be replicated.
+
+3. In the virtual machine view, select the **Replication** menu option.
+
+4. Click the **Add** button to setup replication for the VM.
+
+5. In the **Create: Replication Job** form, configure the following:
+
+   - Target: Expand the dropdown and select the node(s) you wish to replicate the VM storage to (i.e. `proxmox-2`)
+   - Schedule: Expand the dropdown and select the desired schedule or leave it as default (i.e. `*/15 - Every 15 minutes`)
+   - Comment: Add a descriptive comment or leave empty as default
+   - Enabled: Check this box to enable replication for the VM
+
+    Click the **Create** button.
+
+6. Either wait for the replication to be scheduled, or select the replication job and click the **Schedule now** button.
 
 ### Adding QDevice
 
