@@ -61,6 +61,14 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Recommended Configuration](#recommended-configuration)
     - [High Availability (HA)](#high-availability-ha)
     - [Adding QDevice](#adding-qdevice)
+  - [Monitoring](#monitoring)
+    - [Description](#description-10)
+    - [References](#references-9)
+    - [Install NetData Agent](#install-netdata-agent)
+    - [Configuring NetData](#configuring-netdata)
+    - [NetData Parent](#netdata-parent)
+    - [NetData Child](#netdata-child)
+    - [Streaming Data](#streaming-data)
 
 ## References
 
@@ -1080,3 +1088,266 @@ In order for VM HA to work, either a shared storage or a storage replication is 
    Ensure that the `Qdevice` is part of the cluster's `Membership information` section and that it has exactly `1` vote.
 
 6. If all is done correctly, as long as not more than one node (including the QDevice) is down, the cluster should remain quorate.
+
+---
+
+## Monitoring
+
+### Description
+
+This details the setup process of a monitoring system on Proxmox using NetData.
+
+### References
+
+- [Install Netdata with kickstart.sh](https://learn.netdata.cloud/docs/netdata-agent/installation/linux)
+- [Boost Proxmox with NetData: Real-Time Monitoring](https://youtu.be/auvVz1D8RGk)
+- [Deployment Examples: Parent – Child](https://learn.netdata.cloud/docs/deployment-guides/deployment-examples#parent--child)
+- [Configuration steps for deploying Netdata with Observability Centralization Points](https://learn.netdata.cloud/docs/deployment-guides/deployment-with-centralization-points#configuration-steps-for-deploying-netdata-with-observability-centralization-points)
+- [Edit a configuration file using edit-config](https://learn.netdata.cloud/docs/netdata-agent/configuration#edit-a-configuration-file-using-edit-config)
+- [Binding Netdata to multiple ports](https://learn.netdata.cloud/docs/netdata-agent/configuration/securing-agents/web-server-reference#binding-netdata-to-multiple-ports)
+- [Service Control](https://learn.netdata.cloud/docs/netdata-agent/maintenance/service-control)
+- [How do I install uuidgen](https://stackoverflow.com/questions/17710958/how-do-i-install-uuidgen)
+- [Daemon Configuration Reference](https://learn.netdata.cloud/docs/netdata-agent/configuration/daemon)
+
+### Install NetData Agent
+
+This details the steps to install NetData Agent on a particular system:
+
+1. On said system, run the following command to install NetData Agent:
+
+   ```sh
+   curl https://get.netdata.cloud/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh --stable-channel --disable-telemetry
+   ```
+
+### Configuring NetData
+
+This details the steps to edit a NetData configuration file on a system with NetData Agent installed:
+
+1. On said system, run the following to get to your NetData config directory:
+
+   ```sh
+   cd /etc/netdata 2>/dev/null || cd /opt/netdata/etc/netdata
+   ```
+
+2. Configure the file you wish to update:
+
+   ```sh
+   sudo ./edit-config <config-file>
+   ```
+
+   Replace `<config-file>` with the name of the NetData configuration file you wish to update (i.e. `netdata.conf`). For example:
+
+   ```sh
+   sudo ./edit-config netdata.conf
+   ```
+
+3. Make your changes to the file with the editor and save it.
+
+4. To apply your changes, [restart](systemd.md#restart-service) the `netdata.service` service.
+
+### NetData Parent
+
+1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one to be designated as the Parent node with the following considerations:
+
+   - **Disks**:
+     - Disk size (GiB): `25` (Recommended)
+   - **Memory**:
+     - Memory (MiB): `3584` (Recommended)
+
+   As for the OS, we recommend [installing](linux.md#installation) (and [configuring](linux.md#configuration)) [Debian](debian.md).
+
+2. Configure the firewall to [allow connections](firewall.md#adding-allow-rule) to the following port(s):
+
+   - NetData: `19999/tcp`
+
+3. [Install NetData Agent](#install-netdata-agent) on the Parent node.
+
+4. Add the following [configurations](#configuring-netdata) to the `netdata.conf` config file:
+
+   ```ini
+   [db]
+      mode = dbengine
+      dbengine tier backfill = new
+      storage tiers = 3
+      dbengine page cache size = 1.4GiB
+      # storage tier 0
+      update every = 1
+      dbengine tier 0 retention size = 12GiB
+      # storage tier 1
+      dbengine tier 1 update every iterations = 60
+      dbengine tier 1 retention size = 4GiB
+      # storage tier 2
+      dbengine tier 2 update every iterations = 60
+      dbengine tier 2 retention size = 2GiB
+   [ml]
+      # Enabled by default
+      # enabled = yes
+   [health]
+      # Enabled by default
+      # enabled = yes
+   [web]
+      # Enabled by default
+      # bind to = *
+   ```
+
+   - This configuration is tailored for multiple [tiers of metrics storage](https://learn.netdata.cloud/docs/netdata-agent/database#tiers), for 10 Children nodes:
+
+     - Tier 0: 1s granularity for 1 week
+     - Tier 1: 1m granularity for 1 month
+     - Tier 2: 1h granularity for 1 year
+
+   - **Optionally**, you could lower resource usage by lowering the data granularity by making these changes:
+
+      ```diff
+         # storage tier 0
+      -  update every = 1
+      +  update every = 30 # update every 30s
+         # storage tier 1
+      -  dbengine tier 1 update every iterations = 60
+      +  dbengine tier 1 update every iterations = 10 # update every 10 tier 0 iterations of 30s = 5m
+         # storage tier 2
+      -  dbengine tier 2 update every iterations = 60
+      +  dbengine tier 2 update every iterations = 12 # update every 12 tier 1 iterations of 5m = 1h
+      ```
+
+      This configuration sets the data granularity of tiers; 0, 1, and 2 to `30s`, `5m`, and `1h` respectively.
+
+   - You may also lower the amount of storage space to consume if you are monitoring a lesser number of Children node(s):
+
+      ```diff
+         # storage tier 0
+      -  dbengine tier 0 retention size = 12GiB
+      +  dbengine tier 0 retention size = 2.5GiB
+         # storage tier 1
+      -  dbengine tier 1 retention size = 4GiB
+      +  dbengine tier 1 retention size = 1GiB
+         # storage tier 2
+      -  dbengine tier 2 retention size = 2GiB
+      +  dbengine tier 2 retention size = 0.5GiB
+      ```
+
+      Use this configuration for a cluster of only 2 Children nodes.
+
+   - Additionally, you may also reduce the amount of memory to consume by reducing the page cache size:
+
+      ```diff
+      -  dbengine page cache size = 1.4GiB
+      +  dbengine page cache size = 0.3GiB
+      ```
+
+      This amount should be sufficient for a cluster of only 2 Children nodes.
+
+   - Make your own adjustments accordingly based on the number of Children node(s) you have and the data granularity you require.
+
+### NetData Child
+
+1. First and foremost, ensure that the node has a unique [hostname](linux.md#update-hostname) configured for itself before proceeding with the NetData Agent installation.
+
+2. [Install NetData Agent](#install-netdata-agent) on the node.
+
+3. Add the following [configurations](#configuring-netdata) to the `netdata.conf` config file:
+
+   ```ini
+   [db]
+      # https://github.com/netdata/netdata/blob/master/src/database/README.md
+      # none = no retention, ram = some retention in ram
+      mode = ram
+      # The retention in seconds.
+      # This provides some tolerance to the time the child has to find a parent 
+      # to transfer the data. For IoT, this can be lowered to 120.
+      retention = 1200
+      # The granularity of metrics, in seconds.
+      # You may increase this to lower CPU resources.
+      update every = 1
+   [ml]
+      # Disable Machine Learning
+      enabled = no
+   [health]
+      # Disable Health Checks (Alerting)
+      enabled = no
+   [web]
+      # Disable the Web Server
+      mode = none
+   [plugins]
+      # Uncomment the following line to disable all external plugins on extreme IoT cases by default.
+      # enable running new plugins = no
+   ```
+
+   **Optionally**, if you have lowered the (tier 0) data granularity on the Parent node, you may reflect the same changes on the Child node (i.e. `30`):
+
+   ```diff
+   -  update every = 1
+   +  update every = 30
+   ```
+
+      This configuration sets the data granularity of tier 0 to `30s` like you may have configured on the Parent node.
+
+### Streaming Data
+
+This details the steps to stream data from a Child node to the Parent node:
+
+1. After setting up both the [Parent node](#netdata-parent) and [Child node(s)](#netdata-child), on **each** Child node, generate a unique API key:
+
+   ```sh
+   uuidgen
+   ```
+
+   Sample output:
+
+   ```
+   759eff6f-cfc2-45cb-b477-edb130abb413
+   ```
+
+   If the command is not installed, [install](package-manager.md#install-software) the `uuid-runtime` package using the system's package manager (i.e. `apt`) accordingly.
+
+2. On **each** Child node, add the following [configurations](#configuring-netdata) to the end of the `stream.conf` config file:
+
+   ```ini
+   [stream]
+      # Stream metrics to another Netdata
+      enabled = yes
+      # The IP and PORT of the parent
+      destination = <parent-node>:19999
+      # The shared API key, generated by uuidgen
+      api key = <api-key>
+   ```
+
+   Replace `<parent-node>` with the static IP address of the Parent node (i.e. `192.168.0.106`) and `<api-key>` with the API key you generated (i.e. `759eff6f-cfc2-45cb-b477-edb130abb413`) accordingly. For example:
+
+   ```diff
+      # The IP and PORT of the parent
+   -  destination = <parent-node>:19999
+   +  destination = 192.168.0.106:19999
+      # The shared API key, generated by uuidgen
+   -  api key = <api-key>
+   +  api key = 759eff6f-cfc2-45cb-b477-edb130abb413
+   ```
+
+3. On the Parent node, add the following [configurations](#configuring-netdata) to the end of the `stream.conf` config file for **each** Child node:
+
+   ```ini
+   [<child-api-key>]
+     # Accept metrics streaming from other Agents with the specified API key
+     enabled = yes
+   ```
+
+   Replace `<child-api-key>` with the API key of the Child node (i.e. `759eff6f-cfc2-45cb-b477-edb130abb413`) accordingly. For example:
+
+   ```diff
+   - [<child-api-key>]
+   + [759eff6f-cfc2-45cb-b477-edb130abb413]
+       # Accept metrics streaming from other Agents with the specified API key
+       enabled = yes
+   ```
+
+   As instructed, do this for each Child node that you have in your cluster. For example, if you have another Child node with an API key of its own (i.e. `09319cf6-2283-48d1-b113-a6589348d216`), your configuration should look like this:
+
+   ```ini
+   [759eff6f-cfc2-45cb-b477-edb130abb413]
+     # Accept metrics streaming from other Agents with the specified API key
+     enabled = yes
+
+   [09319cf6-2283-48d1-b113-a6589348d216]
+     # Accept metrics streaming from other Agents with the specified API key
+     enabled = yes
+   ```
