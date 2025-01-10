@@ -69,6 +69,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Netdata Parent](#netdata-parent)
     - [Netdata Child](#netdata-child)
     - [Streaming Data](#streaming-data)
+    - [Netdata Email Alerts](#netdata-email-alerts)
 
 ## References
 
@@ -1108,6 +1109,8 @@ This details the setup process of a monitoring system on Proxmox using Netdata.
 - [Service Control](https://learn.netdata.cloud/docs/netdata-agent/maintenance/service-control)
 - [How do I install uuidgen](https://stackoverflow.com/questions/17710958/how-do-i-install-uuidgen)
 - [Daemon Configuration Reference](https://learn.netdata.cloud/docs/netdata-agent/configuration/daemon)
+- [Email](https://learn.netdata.cloud/docs/alerts-&-notifications/notifications/agent-dispatched-notifications/email)
+- [SSMTP](https://wiki.archlinux.org/title/SSMTP)
 
 ### Install Netdata Agent
 
@@ -1350,4 +1353,78 @@ This details the steps to stream data from a Child node to the Parent node:
    [09319cf6-2283-48d1-b113-a6589348d216]
      # Accept metrics streaming from other Agents with the specified API key
      enabled = yes
+   ```
+
+### Netdata Email Alerts
+
+This details the steps to set up email alerts on the Parent node:
+
+1. On the Parent node, [install](package-manager.md#install-software) the `ssmtp` package using the system's package manager (i.e. `apt`).
+
+2. Backup the existing SSMTP configuration file:
+
+   ```sh
+   sudo cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.bak
+   ```
+
+3. Update the network configuration file:
+
+   ```sh
+   sudo nano /etc/ssmtp/ssmtp.conf
+   ```
+
+   Add the following configuration to the end of the file:
+
+   ```sh
+   root=<email-address>
+
+   mailhub=smtp.gmail.com:465
+
+   rewriteDomain=gmail.com
+
+   TLS_CA_FILE=/etc/ssl/certs/ca-certificates.crt
+   UseTLS=Yes
+   UseSTARTTLS=No
+
+   AuthUser=<email-address>
+   AuthPass=<email-password>
+   AuthMethod=LOGIN
+   ```
+
+   Replace `<email-address>` and `<email-password>` with your own email address and [app password](https://support.google.com/mail/answer/185833). You may also need to configure the other settings according to your own email provider.
+
+4. Test top see whether the your SSMTP configuration works by sending a test email:
+
+   ```sh
+   echo -e "Subject: Test Email\n\nThis is a test email" | sudo sendmail <receiver-email>
+   ```
+
+   Replace `<receiver-email>` with the email address you wish to send the test email to.
+
+5. If the test email was sent successfully, add the following [configurations](#configuring-netdata) to the end of the `health_alarm_notify.conf` config file:
+
+   ```sh
+   EMAIL_SENDER="<sender-email>"
+   SEND_EMAIL="YES"
+   DEFAULT_RECIPIENT_EMAIL="<receiver-email>"
+   ```
+
+   Replace `<sender-email>` with your email address (i.e. `netdata@example.com`) and `<receiver-email>` with the email address you wish to send the email alerts to (i.e. `admin@example.com`) accordingly. For example:
+
+   ```sh
+   EMAIL_SENDER="netdata@example.com"
+   SEND_EMAIL="YES"
+   DEFAULT_RECIPIENT_EMAIL="admin@example.com"
+   ```
+
+   You may also add multiple recipient emails by separating them with spaces:
+
+   ```sh
+   DEFAULT_RECIPIENT_EMAIL="admin@example.com user@example.com"
+   ```
+
+6. Verify that the Netdata email alerts are working by sending test alerts as user `netdata`:
+
+   ```sh
+   sudo -u netdata /usr/libexec/netdata/plugins.d/alarm-notify.sh test
    ```
