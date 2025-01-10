@@ -25,6 +25,8 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
     - [References](#references-3)
   - [Clustering](#clustering)
     - [References](#references-4)
+  - [Monitoring](#monitoring)
+    - [References](#references-5)
 
 ## References
 
@@ -110,3 +112,13 @@ This details the process of clustering multiple hypervisor nodes together.
 ### References
 
 - [Proxmox: Clustering](../topics/proxmox.md#clustering)
+
+---
+
+## Monitoring
+
+This details the setup process of a monitoring system on the hypervisor.
+
+### References
+
+- [Proxmox](../topics/proxmox.md#monitoring)
