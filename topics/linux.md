@@ -20,6 +20,9 @@ Linux is both an open-source Unix-like kernel and a generic name for a family of
     - [Description](#description-3)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
+  - [Storage](#storage)
+    - [Description](#description-4)
+    - [Resize Storage](#resize-storage)
 
 ## References
 
@@ -81,3 +84,17 @@ This details the simple process of updating the system's hostname:
 - [Debian](debian.md#update-hostname)
 - [RHEL](rhel.md#update-hostname)
 - [Ubuntu](ubuntu.md#update-hostname)
+
+---
+
+## Storage
+
+### Description
+
+This details the process of updating certain storage related configurations for the following Linux distributions.
+
+### Resize Storage
+
+After the _physical_ storage of the system itself has been expanded, the following steps should be performed for the new storage capacity to be reflected on the system:
+
+- [Debian](debian.md#resize-storage)
