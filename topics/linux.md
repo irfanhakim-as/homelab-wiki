@@ -16,6 +16,10 @@ Linux is both an open-source Unix-like kernel and a generic name for a family of
   - [Configuration](#configuration)
     - [Description](#description-2)
     - [References](#references-2)
+  - [Networking](#networking)
+    - [Description](#description-3)
+    - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
+    - [Update Hostname](#update-hostname)
 
 ## References
 
@@ -51,3 +55,29 @@ This details some recommended configuration options for the following Linux dist
 - [Debian: Configuration](debian.md#configuration)
 - [RHEL: Configuration](rhel.md#configuration)
 - [Ubuntu: Configuration](ubuntu.md#configuration)
+
+---
+
+## Networking
+
+### Description
+
+This details the process of updating certain networking configurations for the following Linux distributions.
+
+### Set Static IP and Update DNS
+
+This details the process of setting a static IP address and updating the DNS server on a system:
+
+- [Arch Linux](arch.md#set-static-ip-and-update-dns)
+- [Debian](debian.md#set-static-ip-and-update-dns)
+- [RHEL](rhel.md#set-static-ip-and-update-dns)
+- [Ubuntu](ubuntu.md#set-static-ip-and-update-dns)
+
+### Update Hostname
+
+This details the simple process of updating the system's hostname:
+
+- [Arch Linux](arch.md#update-hostname)
+- [Debian](debian.md#update-hostname)
+- [RHEL](rhel.md#update-hostname)
+- [Ubuntu](ubuntu.md#update-hostname)
