@@ -64,10 +64,10 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
   - [Monitoring](#monitoring)
     - [Description](#description-10)
     - [References](#references-9)
-    - [Install NetData Agent](#install-netdata-agent)
-    - [Configuring NetData](#configuring-netdata)
-    - [NetData Parent](#netdata-parent)
-    - [NetData Child](#netdata-child)
+    - [Install Netdata Agent](#install-netdata-agent)
+    - [Configuring Netdata](#configuring-netdata)
+    - [Netdata Parent](#netdata-parent)
+    - [Netdata Child](#netdata-child)
     - [Streaming Data](#streaming-data)
 
 ## References
@@ -1095,7 +1095,7 @@ In order for VM HA to work, either a shared storage or a storage replication is 
 
 ### Description
 
-This details the setup process of a monitoring system on Proxmox using NetData.
+This details the setup process of a monitoring system on Proxmox using Netdata.
 
 ### References
 
@@ -1109,21 +1109,21 @@ This details the setup process of a monitoring system on Proxmox using NetData.
 - [How do I install uuidgen](https://stackoverflow.com/questions/17710958/how-do-i-install-uuidgen)
 - [Daemon Configuration Reference](https://learn.netdata.cloud/docs/netdata-agent/configuration/daemon)
 
-### Install NetData Agent
+### Install Netdata Agent
 
-This details the steps to install NetData Agent on a particular system:
+This details the steps to install Netdata Agent on a particular system:
 
-1. On said system, run the following command to install NetData Agent:
+1. On said system, run the following command to install Netdata Agent:
 
    ```sh
    curl https://get.netdata.cloud/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh --stable-channel --disable-telemetry
    ```
 
-### Configuring NetData
+### Configuring Netdata
 
-This details the steps to edit a NetData configuration file on a system with NetData Agent installed:
+This details the steps to edit a Netdata configuration file on a system with Netdata Agent installed:
 
-1. On said system, run the following to get to your NetData config directory:
+1. On said system, run the following to get to your Netdata config directory:
 
    ```sh
    cd /etc/netdata 2>/dev/null || cd /opt/netdata/etc/netdata
@@ -1135,7 +1135,7 @@ This details the steps to edit a NetData configuration file on a system with Net
    sudo ./edit-config <config-file>
    ```
 
-   Replace `<config-file>` with the name of the NetData configuration file you wish to update (i.e. `netdata.conf`). For example:
+   Replace `<config-file>` with the name of the Netdata configuration file you wish to update (i.e. `netdata.conf`). For example:
 
    ```sh
    sudo ./edit-config netdata.conf
@@ -1145,7 +1145,7 @@ This details the steps to edit a NetData configuration file on a system with Net
 
 4. To apply your changes, [restart](systemd.md#restart-service) the `netdata.service` service.
 
-### NetData Parent
+### Netdata Parent
 
 1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one to be designated as the Parent node with the following considerations:
 
@@ -1158,9 +1158,9 @@ This details the steps to edit a NetData configuration file on a system with Net
 
 2. Configure the firewall to [allow connections](firewall.md#adding-allow-rule) to the following port(s):
 
-   - NetData: `19999/tcp`
+   - Netdata: `19999/tcp`
 
-3. [Install NetData Agent](#install-netdata-agent) on the Parent node.
+3. [Install Netdata Agent](#install-netdata-agent) on the Parent node.
 
 4. Add the following [configurations](#configuring-netdata) to the `netdata.conf` config file:
 
@@ -1239,11 +1239,11 @@ This details the steps to edit a NetData configuration file on a system with Net
 
    - Make your own adjustments accordingly based on the number of Children node(s) you have and the data granularity you require.
 
-### NetData Child
+### Netdata Child
 
-1. First and foremost, ensure that the node has a unique [hostname](linux.md#update-hostname) configured for itself before proceeding with the NetData Agent installation.
+1. First and foremost, ensure that the node has a unique [hostname](linux.md#update-hostname) configured for itself before proceeding with the Netdata Agent installation.
 
-2. [Install NetData Agent](#install-netdata-agent) on the node.
+2. [Install Netdata Agent](#install-netdata-agent) on the node.
 
 3. Add the following [configurations](#configuring-netdata) to the `netdata.conf` config file:
 
