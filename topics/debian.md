@@ -23,9 +23,13 @@ Debian, also known as Debian GNU/Linux, is a free and open source Linux distribu
     - [Description](#description-3)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
-  - [Sudo](#sudo)
+  - [Storage](#storage)
     - [Description](#description-4)
     - [References](#references-2)
+    - [Resize Storage](#resize-storage)
+  - [Sudo](#sudo)
+    - [Description](#description-5)
+    - [References](#references-3)
     - [Steps](#steps-1)
 
 ## References
@@ -355,6 +359,264 @@ This details the simple process of updating system's hostname:
 
     ```sh
     sudo reboot now
+    ```
+
+---
+
+## Storage
+
+### Description
+
+This details the process of updating certain storage related configurations on the system.
+
+### References
+
+- [How to List All Block Devices in Linux | lsblk Command](https://www.geeksforgeeks.org/lsblk-command-in-linux-with-examples)
+
+### Resize Storage
+
+After the _physical_ storage of the system itself has been expanded, the following steps should be performed for the new storage capacity to be reflected on the system:
+
+1. List the block devices on the system to determine the partition and logical volume we wish to resize:
+
+    ```sh
+    lsblk
+    ```
+
+    Sample output:
+
+    ```
+        NAME                          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+        sda                             8:0    0   25G  0 disk
+        ├─sda1                          8:1    0  512M  0 part /boot/efi
+        ├─sda2                          8:2    0  488M  0 part /boot
+        └─sda3                          8:3    0    9G  0 part
+          ├─debian--server--vg-root   254:0    0  8.1G  0 lvm  /
+          └─debian--server--vg-swap_1 254:1    0  980M  0 lvm  [SWAP]
+        sr0                            11:0    1 1024M  0 rom
+    ```
+
+    Take note of the following details that we will need for the later steps:
+
+      - The logical volume we wish to resize (i.e. `debian--server--vg-root`)
+      - The partition containing the logical volume we wish to resize (i.e. `sda3` or `/dev/sda3`)
+      - The block device containing the partition we wish to resize (i.e. `sda` or `/dev/sda`)
+
+2. Resize the partition using `fdisk`:
+
+   - Start `fdisk` for the disk which contains the partition we wish to resize (i.e. `/dev/sda`):
+
+        ```sh
+        sudo fdisk /dev/sda
+        ```
+
+   - In the interactive `fdisk` session, enter the following to print the partition table:
+
+        ```sh
+        p
+        ```
+
+        Sample output:
+
+        ```
+            Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+            Disk model: QEMU HARDDISK
+            Units: sectors of 1 * 512 = 512 bytes
+            Sector size (logical/physical): 512 bytes / 512 bytes
+            I/O size (minimum/optimal): 512 bytes / 512 bytes
+            Disklabel type: gpt
+            Disk identifier: 123E4567-E89B-12D3-A456-426614174000
+
+            Device       Start      End  Sectors  Size Type
+            /dev/sda1     2048  1050623  1048576  512M EFI System
+            /dev/sda2  1050624  2050047   999424  488M Linux filesystem
+            /dev/sda3  2050048 20969471 18919424    9G Linux LVM
+        ```
+
+        Take note of the following details that we will need for the later steps:
+
+        - The number of the partition we wish to resize (i.e. `3` for `/dev/sda3`)
+        - The type of the partition we wish to resize (i.e. `Linux LVM`)
+
+   - Enter the following to delete the partition we wish to resize:
+
+        ```sh
+        d
+        ```
+
+        When prompted for the partition number, enter the number of the partition we wish to resize (i.e. `3`):
+
+        ```sh
+        3
+        ```
+
+        Sample output:
+
+        ```
+            Partition 3 has been deleted.
+        ```
+
+   - Enter the following to create a new partition:
+
+        ```sh
+        n
+        ```
+
+        When prompted for the partition number, enter the number of the partition we had deleted and wish to recreate (i.e. `3`):
+
+        ```sh
+        3
+        ```
+
+        When prompted for the start of the `First sector`, press <kbd>Enter</kbd> to leave as default.
+
+        When prompted for the end of the `Last sector`, press <kbd>Enter</kbd> to leave as default to use the full available space.
+
+        If asked if we wish to remove the `LVM2_member` signature, refuse it by entering:
+
+        ```sh
+        N
+        ```
+
+   - Enter the following to configure the partition type:
+
+        ```sh
+        t
+        ```
+
+        When prompted for the partition number, enter the number of the partition we had just created (i.e. `3`):
+
+        ```sh
+        3
+        ```
+
+        When asked for the partition type, we are supposed to enter the **alias** for our partition type (i.e. `Linux LVM`). To find the alias for our partition type, run the following command:
+
+        ```sh
+        L
+        ```
+
+        Sample output:
+
+        ```
+            43 Linux LVM                      E6D6D379-F507-44C2-A23C-238F2A3DF928
+        ```
+
+        In this example, the alias for our `Linux LVM` partition is `43`. Enter the alias accordingly:
+
+        ```sh
+        43
+        ```
+
+   - Print the partition table to verify our new partition:
+
+        ```sh
+        p
+        ```
+
+        Sample output:
+
+        ```
+            Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+            Disk model: QEMU HARDDISK
+            Units: sectors of 1 * 512 = 512 bytes
+            Sector size (logical/physical): 512 bytes / 512 bytes
+            I/O size (minimum/optimal): 512 bytes / 512 bytes
+            Disklabel type: gpt
+            Disk identifier: 123E4567-E89B-12D3-A456-426614174000
+
+            Device       Start      End  Sectors  Size Type
+            /dev/sda1     2048  1050623  1048576  512M EFI System
+            /dev/sda2  1050624  2050047   999424  488M Linux filesystem
+            /dev/sda3  2050048 52426751 50376704   24G Linux LVM
+        ```
+
+        Ensure that the new partition has been created with the correct `Size` and `Type`.
+
+   - Enter the following to write our changes to the disk:
+
+        ```sh
+        w
+        ```
+
+        Sample output:
+
+        ```
+            The partition table has been altered.
+            Syncing disks.
+        ```
+
+3. Reboot the system if necessary to apply the partition changes:
+
+    ```sh
+    sudo reboot now
+    ```
+
+4. Resize the physical volume of our newly resized partition (i.e. `/dev/sda3`):
+
+    ```sh
+    sudo pvresize /dev/sda3
+    ```
+
+    Sample output:
+
+    ```
+        Physical volume "/dev/sda3" changed
+        1 physical volume(s) resized or updated / 0 physical volume(s) not resized
+    ```
+
+5. Resize the logical volume (i.e. `debian--server--vg-root`) and its partition (i.e. `/dev/sda3`):
+
+    ```sh
+    sudo lvresize /dev/mapper/debian--server--vg-root /dev/sda3
+    ```
+
+    Sample output:
+
+    ```
+        Size of logical volume debian-server-vg/root changed from 8.06 GiB (2064 extents) to 23.06 GiB (5904 extents).
+        Logical volume debian-server-vg/root successfully resized.
+    ```
+
+    **Alternatively**, you could also use this command to simply extend the size of the logical volume (i.e. `debian--server--vg-root`):
+
+    ```sh
+    sudo lvextend -l +100%FREE /dev/mapper/debian--server--vg-root
+    ```
+
+6. Resize the filesystem of the logical volume (i.e. `debian--server--vg-root`):
+
+    ```sh
+    sudo resize2fs /dev/mapper/debian--server--vg-root
+    ```
+
+    Sample output:
+
+    ```
+        resize2fs 1.47.0 (5-Feb-2023)
+        Filesystem at /dev/mapper/debian--server--vg-root is mounted on /; on-line resizing required
+        old_desc_blocks = 2, new_desc_blocks = 3
+        The filesystem on /dev/mapper/debian--server--vg-root is now 6045696 (4k) blocks long.
+    ```
+
+7. Verify the new size of the logical volume (i.e. `debian--server--vg-root`) by checking the filesystem size:
+
+    ```sh
+    df -h
+    ```
+
+    Sample output:
+
+    ```
+        Filesystem                           Size  Used Avail Use% Mounted on
+        udev                                 1.7G     0  1.7G   0% /dev
+        tmpfs                                338M  696K  337M   1% /run
+        /dev/mapper/debian--server--vg-root   23G  2.1G   20G  10% /
+        tmpfs                                1.7G     0  1.7G   0% /dev/shm
+        tmpfs                                5.0M     0  5.0M   0% /run/lock
+        /dev/sda2                            456M   93M  339M  22% /boot
+        /dev/sda1                            511M  5.9M  506M   2% /boot/efi
+        tmpfs                                338M     0  338M   0% /run/user/1000
     ```
 
 ---
