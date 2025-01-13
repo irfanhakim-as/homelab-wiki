@@ -1393,7 +1393,7 @@ This details the steps to set up email alerts on the Parent node:
 
    Replace `<email-address>` and `<email-password>` with your own email address and [app password](https://support.google.com/mail/answer/185833). You may also need to configure the other settings according to your own email provider.
 
-4. Test top see whether the your SSMTP configuration works by sending a test email:
+4. Test to see whether the SSMTP configuration works by sending a test email:
 
    ```sh
    echo -e "Subject: Test Email\n\nThis is a test email" | sudo sendmail <receiver-email>
