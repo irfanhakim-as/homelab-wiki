@@ -1399,7 +1399,7 @@ This details the steps to set up email alerts on the Parent node:
    echo -e "Subject: Test Email\n\nThis is a test email" | sudo sendmail <receiver-email>
    ```
 
-   Replace `<receiver-email>` with the email address you wish to send the test email to.
+   Replace `<receiver-email>` with the email address you wish to send the test email to (i.e. `admin@example.com`).
 
 5. If the test email was sent successfully, add the following [configurations](#configuring-netdata) to the end of the `health_alarm_notify.conf` config file:
 
