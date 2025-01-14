@@ -1391,7 +1391,7 @@ This details the steps to set up email alerts on the Parent node:
    AuthMethod=LOGIN
    ```
 
-   Replace `<email-address>` and `<email-password>` with your own email address and [app password](https://support.google.com/mail/answer/185833). You may also need to configure the other settings according to your own email provider.
+   Replace `<email-address>` and `<email-password>` with your own email address (i.e. `netdata@example.com`) and [app password](https://support.google.com/mail/answer/185833) respectively. You may need to configure these a little differently according to your own email provider.
 
 4. Test to see whether the SSMTP configuration works by sending a test email:
 
