@@ -464,7 +464,7 @@ This part of the guide details the process of enabling DNS-Over-HTTPS on the Pi-
 
     Add and save the following content to the service file:
 
-    ```sh
+    ```ini
     [Unit]
     Description=cloudflared DNS over HTTPS proxy
     After=syslog.target network-online.target
