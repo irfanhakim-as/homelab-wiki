@@ -60,16 +60,16 @@ This details the process of setting up Pi-hole as the local DNS server for use w
     As a result, your [firewall status](firewall.md#status) should contain the following rules:
 
     ```
-    53                         ALLOW       Anywhere
-    4711/tcp                   ALLOW       Anywhere
-    80/tcp                     ALLOW       Anywhere
-    67                         ALLOW       Anywhere
-    546:547/udp                ALLOW       Anywhere
-    53 (v6)                    ALLOW       Anywhere (v6)
-    4711/tcp (v6)              ALLOW       Anywhere (v6)
-    80/tcp (v6)                ALLOW       Anywhere (v6)
-    67 (v6)                    ALLOW       Anywhere (v6)
-    546:547/udp (v6)           ALLOW       Anywhere (v6)
+        53                         ALLOW       Anywhere
+        4711/tcp                   ALLOW       Anywhere
+        80/tcp                     ALLOW       Anywhere
+        67                         ALLOW       Anywhere
+        546:547/udp                ALLOW       Anywhere
+        53 (v6)                    ALLOW       Anywhere (v6)
+        4711/tcp (v6)              ALLOW       Anywhere (v6)
+        80/tcp (v6)                ALLOW       Anywhere (v6)
+        67 (v6)                    ALLOW       Anywhere (v6)
+        546:547/udp (v6)           ALLOW       Anywhere (v6)
     ```
 
 3. Run the installer:
@@ -204,24 +204,24 @@ This part of the guide details the process of setting up the Pi-hole server as a
     Sample successful output:
 
     ```
-    ; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> pi-hole.net @127.0.0.1 -p 5335
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20505
-    ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+        ; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> pi-hole.net @127.0.0.1 -p 5335
+        ;; global options: +cmd
+        ;; Got answer:
+        ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 20505
+        ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags:; udp: 1232
-    ;; QUESTION SECTION:
-    ;pi-hole.net.                   IN      A
+        ;; OPT PSEUDOSECTION:
+        ; EDNS: version: 0, flags:; udp: 1232
+        ;; QUESTION SECTION:
+        ;pi-hole.net.                   IN      A
 
-    ;; ANSWER SECTION:
-    pi-hole.net.            300     IN      A       3.18.136.52
+        ;; ANSWER SECTION:
+        pi-hole.net.            300     IN      A       3.18.136.52
 
-    ;; Query time: 472 msec
-    ;; SERVER: 127.0.0.1#5335(127.0.0.1) (UDP)
-    ;; WHEN: Thu Oct 17 11:21:52 +08 2024
-    ;; MSG SIZE  rcvd: 56
+        ;; Query time: 472 msec
+        ;; SERVER: 127.0.0.1#5335(127.0.0.1) (UDP)
+        ;; WHEN: Thu Oct 17 11:21:52 +08 2024
+        ;; MSG SIZE  rcvd: 56
     ```
 
 5. Create a configuration file to set the maximum size for DNS packets when using EDNS:
@@ -428,7 +428,7 @@ This part of the guide details the process of enabling DNS-Over-HTTPS on the Pi-
     Sample output showing that it has been installed successfully:
 
     ```
-    cloudflared version 2024.10.0 (built 2024-10-10-0949 UTC)
+        cloudflared version 2024.10.0 (built 2024-10-10-0949 UTC)
     ```
 
 6. Create a service user for running `cloudflared` on startup:
@@ -493,31 +493,31 @@ This part of the guide details the process of enabling DNS-Over-HTTPS on the Pi-
     Sample successful output:
 
     ```
-    ; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> @127.0.0.1 -p 5053 google.com
-    ; (1 server found)
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 56103
-    ;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+        ; <<>> DiG 9.18.28-1~deb12u2-Debian <<>> @127.0.0.1 -p 5053 google.com
+        ; (1 server found)
+        ;; global options: +cmd
+        ;; Got answer:
+        ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 56103
+        ;; flags: qr rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags:; udp: 1232
-    ; COOKIE: opjt6abhpa2tlwne (echoed)
-    ;; QUESTION SECTION:
-    ;google.com.                    IN      A
+        ;; OPT PSEUDOSECTION:
+        ; EDNS: version: 0, flags:; udp: 1232
+        ; COOKIE: opjt6abhpa2tlwne (echoed)
+        ;; QUESTION SECTION:
+        ;google.com.                    IN      A
 
-    ;; ANSWER SECTION:
-    google.com.             300     IN      A       74.125.130.138
-    google.com.             300     IN      A       74.125.130.101
-    google.com.             300     IN      A       74.125.130.113
-    google.com.             300     IN      A       74.125.130.100
-    google.com.             300     IN      A       74.125.130.139
-    google.com.             300     IN      A       74.125.130.102
+        ;; ANSWER SECTION:
+        google.com.             300     IN      A       74.125.130.138
+        google.com.             300     IN      A       74.125.130.101
+        google.com.             300     IN      A       74.125.130.113
+        google.com.             300     IN      A       74.125.130.100
+        google.com.             300     IN      A       74.125.130.139
+        google.com.             300     IN      A       74.125.130.102
 
-    ;; Query time: 44 msec
-    ;; SERVER: 127.0.0.1#5053(127.0.0.1) (UDP)
-    ;; WHEN: Fri Oct 18 01:20:11 +08 2024
-    ;; MSG SIZE  rcvd: 207
+        ;; Query time: 44 msec
+        ;; SERVER: 127.0.0.1#5053(127.0.0.1) (UDP)
+        ;; WHEN: Fri Oct 18 01:20:11 +08 2024
+        ;; MSG SIZE  rcvd: 207
     ```
 
 12. [Configure the Upstream DNS Provider](#upstream-dns-server) for the Pi-hole server by checking the **Custom 1 (IPv4)** box and entering the following IP address: `127.0.0.1#5053`.
