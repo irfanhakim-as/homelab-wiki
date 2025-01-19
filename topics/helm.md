@@ -109,6 +109,8 @@ This details how to add a Helm chart repository to your system:
 
     Replace `<repo-user>` and `<repo-password>` with the right user credentials which has access to the Helm chart repository.
 
+3. [Update the chart repository](#update-chart-repository) to ensure it is up-to-date.
+
 ### Update Chart Repository
 
 This details how to update a Helm chart repository on your system:
