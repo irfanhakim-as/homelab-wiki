@@ -203,19 +203,9 @@ This details how to show available Helm charts from a Helm chart repository:
 
 This details how to install a Helm chart or upgrade an existing Helm release:
 
-1. If you are installing a Helm chart for the first time, get the [Helm chart values](#helm-chart-values) (latest or of a specific version) as a `values.yaml` file.
+1. [Prepare the values file](#update-helm-values) (i.e. `values.yaml`) for the Helm chart or release you wish to install or upgrade.
 
-    **Alternatively**, if you are upgrading an existing Helm release, get its [Helm release values](#helm-release-values) as a `values.yaml` file.
-
-2. Update the `values.yaml` file as required:
-
-    ```sh
-    nano values.yaml
-    ```
-
-    Make any necessary changes with the appropriate values of your deployment and save the file.
-
-3. Use the following command to install or upgrade a Helm chart:
+2. Use the following command to install or upgrade a Helm chart:
 
     ```sh
     helm upgrade --install --wait --kube-context <cluster> --namespace <namespace> <release> <chart-repo>/<chart> --values values.yaml
@@ -227,13 +217,13 @@ This details how to install a Helm chart or upgrade an existing Helm release:
     helm upgrade --install --wait --kube-context my-cluster --namespace default hello-world-app examples/hello-world --values values.yaml
     ```
 
-4. **(Optional)** If you wish to deploy the Helm chart to a specific namespace you have not created, simply include the following flag to the same command:
+3. **(Optional)** If you wish to deploy the Helm chart to a specific namespace you have not created, simply include the following flag to the same command:
 
     ```sh
     --create-namespace
     ```
 
-5. **(Optional)** If you wish to deploy the Helm chart of a specific version, simply include the following flag to the same command:
+4. **(Optional)** If you wish to deploy the Helm chart of a specific version, simply include the following flag to the same command:
 
     ```sh
     --version <chart-version>
@@ -303,3 +293,21 @@ This details how to get the values of a Helm release:
     ```sh
     helm --kube-context <cluster> --namespace <namespace> get values <release> > values.yaml
     ```
+
+### Update Helm Values
+
+This details how to update a Helm values file before installing or upgrading a release:
+
+1. If you are installing a Helm chart for the first time, [get the Helm chart values](#get-helm-chart-values) (latest or of a specific version) as a `values.yaml` file.
+
+    **Alternatively**, if you are upgrading an existing Helm release, [get its Helm release values](#get-helm-release-values) as a `values.yaml` file.
+
+2. Update the Helm `values.yaml` file with the intended configurations for your deployment:
+
+    ```sh
+    nano values.yaml
+    ```
+
+    Refer to the official documentations when possible and pay extra attention to the descriptions and sample values provided.
+
+3. Save changes made to the values file. [Install or upgrade](#install-or-upgrade-a-helm-chart) the intended Helm chart or release using the file to apply it.
