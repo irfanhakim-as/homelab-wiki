@@ -25,11 +25,12 @@ Helm helps you manage Kubernetes applications — Helm Charts help you define, i
     - [References](#references-3)
     - [Get Helm Charts](#get-helm-charts)
     - [Install or Upgrade a Helm Chart](#install-or-upgrade-a-helm-chart)
-  - [Get Helm Values](#get-helm-values)
+  - [Helm Values](#helm-values)
     - [Description](#description-4)
     - [References](#references-4)
-    - [Helm Chart Values](#helm-chart-values)
-    - [Helm Release Values](#helm-release-values)
+    - [Get Helm Chart Values](#get-helm-chart-values)
+    - [Get Helm Release Values](#get-helm-release-values)
+    - [Update Helm Values](#update-helm-values)
 
 ## References
 
@@ -240,7 +241,7 @@ This details how to install a Helm chart or upgrade an existing Helm release:
 
 ---
 
-## Get Helm Values
+## Helm Values
 
 ### Description
 
@@ -251,7 +252,7 @@ This details how to get Helm values from a Helm chart or deployment (release).
 - [Helm Show Values](https://helm.sh/docs/helm/helm_show_values)
 - [Helm Get Values](https://helm.sh/docs/helm/helm_get_values)
 
-### Helm Chart Values
+### Get Helm Chart Values
 
 This details how to get the default Helm values from a Helm chart:
 
@@ -279,7 +280,7 @@ This details how to get the default Helm values from a Helm chart:
     helm show values <chart-repo>/<chart> > values.yaml
     ```
 
-### Helm Release Values
+### Get Helm Release Values
 
 This details how to get the values of a Helm release:
 

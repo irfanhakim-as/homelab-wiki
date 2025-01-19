@@ -40,4 +40,4 @@ This details the installation and usage of Helm to deploy and manage Kubernetes 
 - [Installation](../topics/helm.md#installation)
 - [Helm Chart Repository](../topics/helm.md#helm-chart-repository)
 - [Helm Charts](../topics/helm.md#helm-charts)
-- [Get Helm Values](../topics/helm.md#get-helm-values)
+- [Helm Values](../topics/helm.md#helm-values)
