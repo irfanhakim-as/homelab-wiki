@@ -25,6 +25,7 @@ Helm helps you manage Kubernetes applications — Helm Charts help you define, i
     - [References](#references-3)
     - [Get Helm Charts](#get-helm-charts)
     - [Install or Upgrade a Helm Chart](#install-or-upgrade-a-helm-chart)
+    - [Uninstall a Helm Release](#uninstall-a-helm-release)
   - [Helm Values](#helm-values)
     - [Description](#description-4)
     - [References](#references-4)
@@ -230,6 +231,33 @@ This details how to install a Helm chart or upgrade an existing Helm release:
     ```
 
     Replace `<chart-version>` with the version number (i.e. `0.1.0`) of the Helm chart to deploy.
+
+### Uninstall a Helm Release
+
+> [!CAUTION]  
+> Uninstalling a Helm release will irreversibly delete all the resources associated with it, including any persistent data.
+
+This details how to remove or uninstall a Helm release you have deployed:
+
+1. Uninstall the Helm release from the cluster by using the following command:
+
+    ```sh
+    helm uninstall --wait --kube-context <cluster> --namespace <namespace> <release>
+    ```
+
+    Replace the `<cluster>`, `<namespace>`, and `<release>` placeholders with the same values you had used to [deploy](#install-or-upgrade-a-helm-chart) it. For example:
+
+    ```sh
+    helm uninstall --wait --kube-context my-cluster --namespace default hello-world-app
+    ```
+
+2. Verify that the Helm release has been removed by listing all Helm releases on the namespace:
+
+    ```sh
+    helm ls --kube-context <cluster> --namespace <namespace> | grep "<release>"
+    ```
+
+    If this command returns nothing, the Helm release has been removed successfully.
 
 ---
 
