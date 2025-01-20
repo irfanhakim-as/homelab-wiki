@@ -28,4 +28,4 @@ This details how to set up port forwarding to route external traffic to a local 
 
 ### References
 
-- [TP-Link: Port Forwarding](tp-link.md#port-forwarding)
+- [TP-Link](tp-link.md#port-forwarding)
