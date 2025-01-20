@@ -65,7 +65,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
    1. NAS (VM):
       1. TrueNAS
    2. [Database](topics/database.md) (Container):
-      1. MariaDB
+      1. [MariaDB](topics/mariadb.md)
       2. PostgreSQL
       3. [MySQL](topics/mysql.md)
    3. DNS:

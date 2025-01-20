@@ -35,6 +35,7 @@ This details how to deploy a database server to a Kubernetes cluster.
 ### References
 
 - [MySQL](mysql.md#deploying-mysql-server)
+- [MariaDB](mariadb.md#deploying-mariadb-server)
 
 ---
 
@@ -47,6 +48,7 @@ This details how to deploy a user-database pair on a database server.
 ### References
 
 - [MySQL](mysql.md#deploying-mysql-database)
+- [MariaDB](mariadb.md#deploying-mariadb-database)
 
 ---
 
@@ -59,3 +61,4 @@ This details how to delete a user-database pair on a database server.
 ### References
 
 - [MySQL](mysql.md#deleting-mysql-database)
+- [MariaDB](mariadb.md#deleting-mariadb-database)
