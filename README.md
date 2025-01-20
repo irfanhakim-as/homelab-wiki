@@ -64,7 +64,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
 6. Services: Selection of VM or container based services that can be hosted in the homelab
    1. NAS (VM):
       1. TrueNAS
-   2. Databases (Container):
+   2. [Database](topics/database.md) (Container):
       1. MariaDB
       2. PostgreSQL
       3. [MySQL](topics/mysql.md)
