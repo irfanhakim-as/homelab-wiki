@@ -162,7 +162,7 @@ This details how to deploy a user-database pair on a MySQL server:
         client: "mysql"
       ```
 
-   - `mariadb.host`: Set the value to the fully qualified domain name (FQDN) of the primary MariaDB server
+   - `mariadb.host`: Set the value to the fully qualified domain name (FQDN) of the primary MySQL server
 
       ```yaml
       mariadb:
