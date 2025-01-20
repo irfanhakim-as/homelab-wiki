@@ -59,6 +59,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       4. [Porkbun](topics/porkbun.md)
       5. [FreeDNS](topics/freedns.md)
       6. [Name.com](topics/name.com.md)
+      7. [Pi-hole](topics/pi-hole.md)
    3. [VPN](topics/vpn.md):
       1. [WireGuard](topics/wireguard.md)
 6. Services: Selection of VM or container based services that can be hosted in the homelab
@@ -68,7 +69,5 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       1. [MariaDB](topics/mariadb.md)
       2. [PostgreSQL](topics/postgresql.md)
       3. [MySQL](topics/mysql.md)
-   3. DNS:
-      1. [Pi-hole](topics/pi-hole.md)
-   4. Home:
+   3. Home:
       1. Home Assistant
