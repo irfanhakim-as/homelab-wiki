@@ -103,6 +103,8 @@ This details how to deploy a MySQL server to a Kubernetes cluster.
       mysql-server-1-secondary-headless    ClusterIP   None            <none>        3306/TCP         15s
     ```
 
+7. **(Optional)** Keep the Helm release values file (i.e. `values.yaml`) for future use (i.e. for updates).
+
 ---
 
 ## MySQL Database
@@ -208,3 +210,5 @@ This details how to deploy a user-database pair on a MySQL server.
    - Name: `mydatabase`
    - User: `myuser`
    - Password: `myuserpassword`
+
+7. **(Optional)** Keep the Helm release values file (i.e. `values.yaml`) for future use (i.e. for updates).
