@@ -195,6 +195,27 @@ This details how to deploy a user-database pair on a MySQL server.
             custom_command: ""
       ```
 
+      You can deploy multiple database-user pairs by adding more entries to the list. For example:
+
+      ```yaml
+      mariadb:
+        databases:
+          - name: "mydatabase"
+            user: "myuser"
+            password: "myuserpassword"
+            create: true
+            drop: false
+            custom: false
+            custom_command: ""
+          - name: "mydatabase2"
+            user: "myuser2"
+            password: "myuser2password"
+            create: true
+            drop: false
+            custom: false
+            custom_command: ""
+      ```
+
 5. [Deploy the Helm release](helm.md#install-or-upgrade-a-helm-chart) using the values file you had prepared with the following recommended options:
 
    - Namespace: `agents` (include the flag that creates the namespace if it does not exist)
