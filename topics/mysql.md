@@ -200,7 +200,7 @@ This details how to deploy a user-database pair on a MySQL server.
    - Repository: `mika`
    - Chart: `mariadb-agent`
 
-6. After the database-user pair has been created, you can supply the database values to the service you wish to deploy that require them. For example:
+6. After the database-user pair has been created, you can supply the database values to any service that require them. For example:
 
    - Type: `mysql`
    - Host: `mysql-server-1-primary.databases.svc.cluster.local`
