@@ -13,9 +13,11 @@ A computer network is a set of computers sharing resources located on or provide
   - [Router](#router)
     - [References](#references-1)
   - [DNS](#dns)
-    - [References](#references-2)
+    - [Setting Up a Domain](#setting-up-a-domain)
+    - [Registering Subdomains](#registering-subdomains)
+    - [Local DNS](#local-dns)
   - [VPN](#vpn)
-    - [References](#references-3)
+    - [References](#references-2)
 
 ## References
 
@@ -35,14 +37,26 @@ This section details all topics pertaining to router configuration to ensure pro
 
 ## DNS
 
-This section details all topics pertaining DNS in order to enable getting our services published online.
+This section details all topics pertaining DNS in order to enable getting our services published online and for general home use.
 
-### References
+### Setting Up a Domain
+
+This details how to acquire and set up a(n apex) domain name for your homelab:
 
 - [Acquiring a Domain](../topics/dns.md#acquiring-a-domain)
 - [Cloudflare as Nameserver](../topics/dns.md#cloudflare-as-nameserver)
+
+### Registering Subdomains
+
+This details how to register and manage subdomains for your services:
+
 - [Register a Subdomain](../topics/dns.md#register-a-subdomain)
 - [Dynamic DNS](../topics/dns.md#dynamic-dns)
+
+### Local DNS
+
+This details the process of setting up a local DNS server for use with your local servers or devices:
+
 - [Local DNS](../topics/dns.md#local-dns)
 
 ---
