@@ -18,6 +18,7 @@ MySQL is an open-source relational database management system (RDBMS). Its name 
     - [Description](#description-2)
     - [References](#references-2)
     - [Deploying MySQL Database](#deploying-mysql-database)
+    - [Deleting MySQL Database](#deleting-mysql-database)
 
 ## References
 
@@ -114,13 +115,15 @@ This details how to deploy a MySQL server to a Kubernetes cluster.
 
 ### Description
 
-This details how to deploy a user-database pair on a MySQL server.
+This details how to deploy or delete a user-database pair on a MySQL server.
 
 ### References
 
 - [MariaDB-Agent](https://github.com/irfanhakim-as/charts/tree/master/mika/mariadb-agent)
 
 ### Deploying MySQL Database
+
+This details how to deploy a user-database pair on a MySQL server:
 
 1. Ensure Helm is [installed](helm.md#installation) on your system.
 
@@ -233,3 +236,32 @@ This details how to deploy a user-database pair on a MySQL server.
    - Password: `myuserpassword`
 
 7. **(Optional)** Keep the Helm release values file (i.e. `values.yaml`) for future use (i.e. for updates).
+
+### Deleting MySQL Database
+
+This details how to delete a user-database pair on a MySQL server:
+
+1. Assuming you have [deployed a user-database pair](#deploying-mysql-database) to your MySQL server, you can delete them by [updating](helm.md#update-helm-values) the same Helm values file (i.e. `values.yaml`) you had used to deploy them:
+
+   - `mariadb.databases`: Set the database-user pair(s) you wish to delete to `drop` instead of `create`
+
+      ```yaml
+      mariadb:
+        databases:
+          - name: "mydatabase"
+            user: "myuser"
+            password: "myuserpassword"
+            create: false
+            drop: true
+            custom: false
+            custom_command: ""
+      ```
+
+2. [Deploy the Helm release](helm.md#install-or-upgrade-a-helm-chart) using the values file you have updated with the same values you had used to deploy them. For example:
+
+   - Namespace: `agents`
+   - Release: The name of the database (i.e. `mydatabase`)
+   - Repository: `mika`
+   - Chart: `mariadb-agent`
+
+3. **(Optional)** Keep the Helm release values file (i.e. `values.yaml`) for future use or delete it if you no longer need it.
