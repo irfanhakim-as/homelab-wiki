@@ -70,7 +70,7 @@ This details how to deploy a MySQL server to a Kubernetes cluster.
 
    - **(Optional)** `primary.service.type`: Set the value to `NodePort` if you need access to the service from outside the cluster
 
-   - **(Optional)** `primary.service.nodePorts.mysql`: Set the value to a specific node port number (i.e. `30000`)
+   - **(Optional)** `primary.service.nodePorts.mysql`: Set the value to a specific node port number (i.e. `30000`) or leave it as random
 
    - **(Optional)** `secondary.replicaCount`: Set the value to `0` to disable the secondary replica
 
