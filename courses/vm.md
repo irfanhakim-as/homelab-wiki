@@ -35,7 +35,7 @@ This details how to create a virtual machine to be used as a template or base fo
 
 ### References
 
-- [ESXI: Creating a Virtual Machine Template](../topics/esxi.md#creating-a-virtual-machine-template)
+- [ESXi: Creating a Virtual Machine Template](../topics/esxi.md#creating-a-virtual-machine-template)
 - [Proxmox: Create Container Template](../topics/proxmox.md#create-container-template)
 
 ---
@@ -46,7 +46,7 @@ This details how to create a virtual machine from a template or base virtual mac
 
 ### References
 
-- [ESXI: Creating a Virtual Machine From a Template](../topics/esxi.md#creating-a-virtual-machine-from-a-template)
+- [ESXi: Creating a Virtual Machine From a Template](../topics/esxi.md#creating-a-virtual-machine-from-a-template)
 - [Proxmox: Create VM From Container Template](../topics/proxmox.md#create-vm-from-container-template)
 
 ---
@@ -77,7 +77,7 @@ This details how to edit an existing virtual machine.
 
 ### References
 
-- [ESXI: Editing a Virtual Machine](../topics/esxi.md#editing-a-virtual-machine)
+- [ESXi: Editing a Virtual Machine](../topics/esxi.md#editing-a-virtual-machine)
 - [Proxmox: Editing VM Parameters](../topics/proxmox.md#editing-vm-parameters)
 
 ---
@@ -88,5 +88,5 @@ This details how to add or expand the storage of an existing virtual machine.
 
 ### References
 
-- [ESXI: Add Virtual Disk](../topics/esxi.md#add-virtual-disk)
-- [ESXI: Expand Virtual Disk](../topics/esxi.md#expand-virtual-disk)
+- [ESXi: Add Virtual Disk](../topics/esxi.md#add-virtual-disk)
+- [ESXi: Expand Virtual Disk](../topics/esxi.md#expand-virtual-disk)
