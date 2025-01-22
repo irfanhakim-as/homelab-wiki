@@ -160,61 +160,61 @@ This method of registering a subdomain relies on you to manually update the DNS 
 
 This ensures all of the subdomains that were registered to your domain using this method will have its public IP endpoint automatically updated:
 
-1. Deploy [Cloudflare DDNS on Helm](#cloudflare-ddns-helm) for each zone (domain) if you have not already.
+1. Deploy [Cloudflare DDNS](#cloudflare-ddns-helm) using Helm for each zone (domain) if you have not already.
 
-2. To register subdomain(s) to the particular zone, update the release's `cloudflareddns.subdomains` value in its release values file (i.e. `~/values.yaml`).
+2. [Update the values file](helm.md#update-helm-values) (i.e. `values.yaml`) of the existing Helm release (i.e. `example-com`) you have deployed:
 
-   - For example:
+   - To register subdomain(s) to the particular zone, update the `cloudflareddns.subdomains` configuration as such:
 
       ```diff
-      - subdomains: []
-      + subdomains:
-      +   - hostname: "mysubdomain"
-      +     proxied: "false"
+        cloudflareddns:
+      -   subdomains: []
+      +   subdomains:
+      +     - hostname: "mysubdomain"
+      +       proxied: "false"
       ```
 
       This sample change adds or updates the `mysubdomain` DNS record in the zone specified in the `cloudflareddns.zoneID` value (i.e. `mysubdomain.example.com`).
 
-   - To register more subdomains, simply add more of them to the `cloudflareddns.subdomains` array as such:
+   - To register more subdomains, simply add them to the `cloudflareddns.subdomains` list as such:
 
       ```yaml
-      subdomains:
-        - hostname: ""
-          proxied: "true"
-        - hostname: "mysubdomain"
-          proxied: "false"
+      cloudflareddns:
+        subdomains:
+          - hostname: "mysubdomain"
+            proxied: "false"
+          - hostname: ""
+            proxied: "false"
       ```
 
       > [!TIP]  
-      > Setting an empty `hostname` value adds or updates a DNS record equalling to the apex or root domain of the specified zone (i.e. `example.com`).
+      > Setting an empty `hostname` value adds or updates a DNS record equalling to the apex or root domain of the specified zone (i.e. `example.com` as opposed to something like `mysubdomain.example.com`).
 
-3. Deploy the update to the existing `mika/cloudflareddns` release:
+3. [Redeploy the Helm release](helm.md#install-or-upgrade-a-helm-chart) to apply the updated values file with the following specifications:
 
-    ```sh
-    helm -n <namespace> upgrade --install <release-name> mika/cloudflareddns -f ~/values.yaml
-    ```
+   - Namespace: The namespace where the existing `mika/cloudflareddns` Helm release was deployed (i.e. `cloudflare`)
+   - Release: The name of the existing `mika/cloudflareddns` Helm release (i.e. `example-com`)
+   - Repository: `mika`
+   - Chart: `cloudflareddns`
 
-   - Replace `<namespace>` with the namespace where the `mika/cloudflareddns` release was deployed (i.e. `cloudflare`)
-   - Replace `<release-name>` with the name of the `mika/cloudflareddns` release (i.e. `example-com`)
-
-4. You may need to kill the release's pod manually for the changes to take effect:
+4. You may need to kill the existing release's pod manually for the changes to take effect:
 
     ```sh
-    kubectl -n <namespace> delete pods -l app.kubernetes.io/instance=<release-name>
+    kubectl --context <cluster> --namespace <namespace> delete pods -l app.kubernetes.io/instance=<release>
     ```
 
 5. Verify the deployment is running:
 
     ```sh
-    kubectl -n <namespace> logs deployments/<release-name>-cloudflareddns
+    kubectl --context <cluster> --namespace <namespace> logs deployments/<release>-cloudflareddns
     ```
 
     Sample output indicating the deployment is running and updating DNS records successfully:
 
     ```
-    🕰️ Updating IPv4 (A) records every 300 seconds
-    📡 Updating record {'type': 'A', 'name': 'example.com', 'content': '237.84.2.178', 'proxied': True, 'ttl': 300}
-    📡 Updating record {'type': 'A', 'name': 'mysubdomain.example.com', 'content': '237.84.2.178', 'proxied': False, 'ttl': 300}
+      🕰️ Updating IPv4 (A) records every 300 seconds
+      📡 Updating record {'type': 'A', 'name': 'mysubdomain.example.com', 'content': '203.0.113.0', 'proxied': False, 'ttl': 300}
+      📡 Updating record {'type': 'A', 'name': 'example.com', 'content': '203.0.113.0', 'proxied': False, 'ttl': 300}
     ```
 
 ---
@@ -274,44 +274,68 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
 
 ### Cloudflare DDNS (Helm)
 
-1. Add the [mika](https://github.com/irfanhakim-as/charts) Helm chart repository to your system if you have not already.
+> [!NOTE]  
+> This guide only deploys the Cloudflare DDNS tool without specifying any DNS records for it to update. To register and update subdomain(s) on the release's specified zone (domain), [update its list of subdomains](#cloudflare-ddns).
 
-2. Get the latest updates from available Helm chart repositories:
+1. Ensure Helm is [installed](helm.md#installation) on your system.
 
-    ```sh
-    helm repo update
-    ```
+2. Add the Mika [Helm chart repository](helm.md#adding-chart-repository) to your system:
 
-3. Download the template values file of the `mika/cloudflareddns` chart to the home directory (i.e. `~/values.yaml`):
+   - Repository name: `mika`
+   - Repository source: `https://irfanhakim-as.github.io/charts`
 
-    ```sh
-    helm get values mika/cloudflareddns > ~/values.yaml
-    ```
+3. Get the [Helm values file](helm.md#get-helm-chart-values) as a `values.yaml` file for the following chart:
 
-4. Update the template values file with the required values, including:
+   - Repository: `mika`
+   - Chart: `cloudflareddns`
+
+4. [Prepare the values file](helm.md#update-helm-values) with the following configuration considerations:
 
    - `cloudflareddns.token`: Set the value to the dedicated Cloudflare [API Token](#create-api-token) previously created
+
+      ```yaml
+      cloudflareddns:
+        token: "<cloudflare-api-token>"
+      ```
+
+      For example, if the generated API token is `Na9E7VEY58COhA03l1ytm1r70u7jBsf8bNqh5AlZ`:
+
+      ```yaml
+      cloudflareddns:
+        token: "Na9E7VEY58COhA03l1ytm1r70u7jBsf8bNqh5AlZ"
+      ```
+
    - `cloudflareddns.zoneID`: Set the value to the [Zone ID](#get-zone-id) of the domain we wish the deployment to manage
 
-5. Deploy the `mika/cloudflareddns` chart:
+      ```yaml
+      cloudflareddns:
+        zoneID: "<cloudflare-zone-id>"
+      ```
 
-    ```sh
-    helm -n <namespace> upgrade --install <release-name> mika/cloudflareddns -f ~/values.yaml
-    ```
+      For example, if the domain's Zone ID is `71fovu74p100z856k795umzl32h3240p`:
 
-   - Replace `<namespace>` with the namespace where the `mika/cloudflareddns` chart should be deployed (i.e. `cloudflare`)
-   - Replace `<release-name>` with a unique, descriptive name for the `mika/cloudflareddns` release (i.e. `example-com`)
+      ```yaml
+      cloudflareddns:
+        zoneID: "71fovu74p100z856k795umzl32h3240p"
+      ```
+
+5. [Deploy the Helm release](helm.md#install-or-upgrade-a-helm-chart) using the values file you had prepared with the following recommended options:
+
+   - Namespace: `cloudflare` (include the flag that creates the namespace if it does not exist)
+   - Release: The name of the domain with periods replaced with hyphens (i.e. `example-com`)
+   - Repository: `mika`
+   - Chart: `cloudflareddns`
 
 6. Verify the deployment is running:
 
     ```sh
-    kubectl -n <namespace> logs deployments/<release-name>-cloudflareddns
+    kubectl --context <cluster> --namespace <namespace> logs deployments/<release>-cloudflareddns
     ```
 
-    Sample output indicating the deployment is running and working successfully:
+    Sample output indicating the deployment is running:
 
     ```
-    🕰️ Updating IPv4 (A) records every 300 seconds
+      🕰️ Updating IPv4 (A) records every 300 seconds
     ```
 
-7. To register and update subdomain(s) (i.e. with the latest public IP endpoint) on the release's specified zone, [update the release's list of subdomains](#cloudflare-ddns).
+7. **(Optional)** Keep the Helm release values file (i.e. `values.yaml`) for future use (i.e. for updates).
