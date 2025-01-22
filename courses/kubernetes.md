@@ -11,9 +11,9 @@ Kubernetes, also known as K8s, is an open source system for automating deploymen
   - [Directory](#directory)
   - [References](#references)
   - [Kubernetes Cluster](#kubernetes-cluster)
-    - [References](#references-1)
+    - [Creating a Kubernetes Cluster](#creating-a-kubernetes-cluster)
   - [Helm](#helm)
-    - [References](#references-2)
+    - [References](#references-1)
 
 ## References
 
@@ -25,9 +25,9 @@ Kubernetes, also known as K8s, is an open source system for automating deploymen
 
 This details the process of creating and setting up a Kubernetes cluster.
 
-### References
+### Creating a Kubernetes Cluster
 
-- [RKE2: Creating a Kubernetes Cluster](../topics/rke2.md#creating-a-kubernetes-cluster)
+- [RKE2](../topics/rke2.md#creating-a-kubernetes-cluster)
 
 ---
 
