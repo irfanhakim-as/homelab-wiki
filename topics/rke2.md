@@ -36,9 +36,9 @@ This details the process of creating and setting up a Kubernetes cluster based o
 
 1. [Provision](../courses/vm.md#creating-a-virtual-machine-from-a-template) the required number of nodes as the Master node, Worker node, and **optionally**, the Login node.
 
-    Refer to [Orked](https://github.com/irfanhakim-as/orked)'s [prerequisites](https://github.com/irfanhakim-as/orked#hardware) and [hardware requirements](https://github.com/irfanhakim-as/orked#hardware-requirements) for the exact details.
+    Please refer to Orked's [prerequisites](https://github.com/irfanhakim-as/orked/blob/master/README.md#prerequisites) and [hardware requirements](https://github.com/irfanhakim-as/orked/blob/master/README.md#hardware-requirements) for the exact details.
 
     > [!TIP]  
     > It is highly recommended that you [create a VM template](../courses/vm.md#creating-a-virtual-machine-template) out of each of these categories of nodes for ease of reproducibility and scaling in the future.
 
-2. Follow the detailed steps laid out in the Orked [installation guide](https://github.com/irfanhakim-as/orked#installation) to setup a RKE2-based Kubernetes cluster from the ground up using a collection of scripts.
+2. Follow the detailed steps laid out in the Orked [installation guide](https://github.com/irfanhakim-as/orked/blob/master/README.md#installation) to setup a RKE2-based Kubernetes cluster from the ground up using a collection of scripts.
