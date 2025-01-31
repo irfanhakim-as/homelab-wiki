@@ -30,6 +30,10 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Get Zone ID](#get-zone-id)
     - [Create API Token](#create-api-token)
     - [Cloudflare DDNS (Helm)](#cloudflare-ddns-helm)
+  - [Disable Email Address Obfuscation](#disable-email-address-obfuscation)
+    - [Description](#description-5)
+    - [References](#references-5)
+    - [Steps](#steps-1)
 
 ## References
 
@@ -339,3 +343,69 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
     ```
 
 7. **(Optional)** Keep the Helm release values file (i.e. `values.yaml`) for future use (i.e. for updates).
+
+---
+
+## Disable Email Address Obfuscation
+
+### Description
+
+This details how to disable the Cloudflare Email Address Obfuscation security feature.
+
+### References
+
+- [Email Address Obfuscation](https://developers.cloudflare.com/waf/tools/scrape-shield/email-address-obfuscation)
+- [Say Goodbye to CloudFlare Email obfuscation](https://www.corewebvitals.io/pagespeed/say-goodbye-to-cloudflare-email-obfuscation)
+
+### Steps
+
+Forced email address obfuscation might not be what you want in some cases, this details how to disable it on a zone or hostname basis:
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
+
+3. On the **Account Home** page, select the link on the name of the domain you wish to configure (i.e. `example.com`).
+
+4. On the left hand side of the dashboard, select the **Scrape Shield** menu item.
+
+5. In the **Scrape Shield** page, toggle the **Email Address Obfuscation** switch to disable the feature for the entire domain (i.e. `example.com`).
+
+6. **Alternatively**, leave the **Email Address Obfuscation** switch enabled and click the corresponding **Create a Configuration Rule** link if you wish to only disable the feature for a specific hostname (i.e. `mysubdomain.example.com`).
+
+7. In the **Configuration Rules** page, click the **Create rule** button.
+
+8. In the **Create new Configuration Rule** form, configure the following:
+
+   - Rule name: Add a descriptive name that identifies the rule (i.e. `Disable Email Address Obfuscation for mysubdomain.example.com`)
+
+   - If incoming requests match: Select the `Custom filter expression` checkbox option
+
+   - Custom filter expression:
+
+     - Set the following values:
+
+       - Field: Expand the dropdown and select the `Hostname` option
+       - Operator: Expand the dropdown and select the `equals` option
+       - Value: Set the hostname you wish to disable email address obfuscation for (i.e. `mysubdomain.example.com`)
+
+     - (Optional)** If you wish to narrow the scope down further to a specific path on the hostname, click the corresponding **And** button and configure the following:
+
+       - Field: Expand the dropdown and select the `Path` option
+       - Operator: Expand the dropdown and select the `starts with` option
+       - Value: Set the path you wish to disable email address obfuscation for (i.e. `/blog`)
+
+     - The **Expression Preview** should look similar to the following, if you have done all of the above:
+
+        ```
+          (http.host eq "mysubdomain.example.com" and starts_with(http.request.uri.path, "/blog"))
+        ```
+
+     - Then the settings are:
+
+       - Locate the **Email Obfuscation** section and click the corresponding **Add** button.
+       - Ensure the switch has been toggled off to disable the feature.
+
+     - Click the **Deploy** button to apply the rule configuration.
+
+9. Back in the **Configuration Rules** page, ensure that the rule you have just created has been enabled.
