@@ -869,9 +869,12 @@ This details how to configure a virtual machine to pass through a PCIe device:
 1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
 
    - **System**:
+
      - Machine: Expand the dropdown and select the machine type (chipset) that matches your Proxmox node host (i.e. `q35`)
      - BIOS: Expand the dropdown and select the right BIOS type according to your selected **Machine** (i.e. `OVMF (UEFI)`)
+
    - **Memory**:
+
      - Ballooning Device: Uncheck the box to disable it as required by hardware passthrough which is memory address based
 
 2. Once the virtual machine has been created or updated, [add a PCI Device](#adding-a-device) to the virtual machine with the following configurations:
