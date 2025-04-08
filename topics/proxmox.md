@@ -866,7 +866,41 @@ This process details how to enable PCIe passthrough in Proxmox:
 
 This details how to configure a virtual machine to pass through a PCIe device:
 
-1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
+1. First and foremost, identify the PCI device that you wish to pass through, and verify that it is "safe" to do so:
+
+   - Run the following command on the Proxmox node to list all PCI devices together with their IOMMU groups:
+
+      ```sh
+      for d in /sys/kernel/iommu_groups/*/devices/*; do n=${d#*/iommu_groups/*}; n=${n%%/*}; printf 'IOMMU group %s ' "${n}"; lspci -nns "${d##*/}"; done
+      ```
+
+      For example, the PCI device we wish to pass through is the following SATA controller:
+
+      ```
+         IOMMU group 2 07:00.0 SATA controller [0106]: JMicron Technology Corp. JMB58x AHCI SATA controller [197b:0585]
+      ```
+
+   - Based on our example, the PCI device we wish to share belongs to IOMMU group `2`.
+
+     - Check to see if the PCI device shares the same IOMMU group with any other (critical) devices:
+
+         ```sh
+         for d in /sys/kernel/iommu_groups/*/devices/*; do n=${d#*/iommu_groups/*}; n=${n%%/*}; [[ ${n} -eq <group> ]] && printf 'IOMMU group %s ' "${n}" && lspci -nns "${d##*/}"; done
+         ```
+
+         Replace `<group>` with the IOMMU group of the PCI device we wish to share (i.e. `2`).
+
+     - Sample output:
+
+         ```
+            IOMMU group 2 00:03.0 Host bridge [0600]: Advanced Micro Devices, Inc. [AMD] Family 17h (Models 00h-1fh) PCIe Dummy Host Bridge [1022:1452]
+            IOMMU group 2 00:03.1 PCI bridge [0604]: Advanced Micro Devices, Inc. [AMD] Family 17h (Models 00h-0fh) PCIe GPP Bridge [1022:1453]
+            IOMMU group 2 07:00.0 SATA controller [0106]: JMicron Technology Corp. JMB58x AHCI SATA controller [197b:0585]
+         ```
+
+   - Once we have managed to establish that the PCI device is safe to pass through (along with other devices in the same IOMMU group), proceed with the rest of the guide.
+
+2. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
 
    - **System**:
 
@@ -877,13 +911,13 @@ This details how to configure a virtual machine to pass through a PCIe device:
 
      - Ballooning Device: Uncheck the box to disable it as required by hardware passthrough which is memory address based
 
-2. Once the virtual machine has been created or updated, [add a PCI Device](#adding-a-device) to the virtual machine with the following configurations:
+3. Once the virtual machine has been created or updated, [add a PCI Device](#adding-a-device) to the virtual machine with the following configurations:
 
    - Mapped Device: If you are passing through a device that has shareable resources like certain video cards and network cards, check this box to enable it
    - Raw Device: If you are passing through a device as a whole, check this box to enable it
    - Device: Expand the dropdown and select the PCI device you wish to add
 
-3. [Enter the virtual machine](#enter-the-vm) and verify that the device has been passed through:
+4. [Enter the virtual machine](#enter-the-vm) and verify that the device has been passed through:
 
     ```sh
     lspci
