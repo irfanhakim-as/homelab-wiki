@@ -861,6 +861,9 @@ This process details how to enable PCIe passthrough in Proxmox:
 
 ### Adding to VM
 
+> [!NOTE]  
+> This part of the guide assumes that you have [enabled PCIE passthrough](#enablement) on your Proxmox node.
+
 This details how to configure a virtual machine to pass through a PCIe device:
 
 1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
