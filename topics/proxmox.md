@@ -28,8 +28,8 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create VM](#create-vm)
     - [Enter the VM](#enter-the-vm)
     - [VM Configuration](#vm-configuration)
-    - [Create Container Template](#create-container-template)
-    - [Create VM From Container Template](#create-vm-from-container-template)
+    - [Create VM Template](#create-vm-template)
+    - [Create VM From VM Template](#create-vm-from-vm-template)
     - [Editing VM Parameters](#editing-vm-parameters)
     - [Adding a Device](#adding-a-device)
   - [Backups](#backups)
@@ -357,25 +357,25 @@ This details some generic configuration recommendations for a virtual machine af
 
 For more detailed instructions on configuring a Linux based virtual machine, please refer to the [Linux configuration](linux.md#configuration) topic according to the guest OS.
 
-### Create Container Template
+### Create VM Template
 
-This details how to create a Container Template out of a virtual machine.
+This details how to create a VM Template out of a virtual machine.
 
 1. Launch the Proxmox Virtual Environment web interface on a web browser.
 
-2. Select the target virtual machine (illustrated with an icon of a display) you wish to turn to a Container Template. [Create the virtual machine](#create-vm) if you have not already.
+2. Select the target virtual machine (illustrated with an icon of a display) you wish to turn to a VM Template. [Create the virtual machine](#create-vm) if you have not already.
 
 3. In the virtual machine view, expand the **More** dropdown located at the top right corner and select the **Convert to template** option.
 
-### Create VM From Container Template
+### Create VM From VM Template
 
-This details how to create a virtual machine from a [Container Template](#create-container-template).
+This details how to create a virtual machine from a [VM Template](#create-vm-template).
 
 1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
 
-2. Select the target Container Template (illustrated with an icon of a file and display) you wish to use as a base for your new virtual machine.
+2. Select the target VM Template (illustrated with an icon of a file and display) you wish to use as a base for your new virtual machine.
 
-3. In the Container Template view, expand the **More** dropdown located at the top right corner and select the **Clone** option.
+3. In the VM Template view, expand the **More** dropdown located at the top right corner and select the **Clone** option.
 
 4. In the **Clone VM Template** window, configure the following options:
 
@@ -393,11 +393,11 @@ This details how to create a virtual machine from a [Container Template](#create
 
 ### Editing VM Parameters
 
-This details how to edit an existing virtual machine or Container Template.
+This details how to edit an existing virtual machine or VM Template.
 
 1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
 
-2. Select the target virtual machine (illustrated with an icon of a display) or Container Template (illustrated with an icon of a file and display) you wish to edit.
+2. Select the target virtual machine (illustrated with an icon of a display) or VM Template (illustrated with an icon of a file and display) you wish to edit.
 
 3. In the virtual machine view, go through any of the available sections such as **Hardware**, **Cloud-Init**, or **Options** and find parameters you wish to update.
 
@@ -437,11 +437,11 @@ This details topics pertaining backups on Proxmox.
 
 ### Creating Backup
 
-This details the process of creating backups of a virtual machine or Container Template on Proxmox:
+This details the process of creating backups of a virtual machine or VM Template on Proxmox:
 
 1. Launch the Proxmox Virtual Environment web interface on a web browser.
 
-2. On the left-hand side of the web interface, select the target virtual machine (illustrated with an icon of a display) or Container Template (illustrated with an icon of a file and display) you wish to create a backup of.
+2. On the left-hand side of the web interface, select the target virtual machine (illustrated with an icon of a display) or VM Template (illustrated with an icon of a file and display) you wish to create a backup of.
 
 3. In the virtual machine view, click the **Backup** menu option.
 
@@ -463,14 +463,14 @@ This details the process of creating backups of a virtual machine or Container T
 
 ### Restoring Backup
 
-This details how to restore a virtual machine or Container Template from a backup:
+This details how to restore a virtual machine or VM Template from a backup:
 
-1. If you wish to create a new virtual machine or Container Template from a backup:
+1. If you wish to create a new virtual machine or VM Template from a backup:
 
    1. On the left-hand side of the web interface, select the target storage which contains the backup you wish to use to restore (i.e. `local`).
    2. In the storage view, click the **Backups** menu option.
 
-2. **Alternatively**, if you wish to overwrite an existing virtual machine or Container Template from a backup:
+2. **Alternatively**, if you wish to overwrite an existing virtual machine or VM Template from a backup:
 
    1. On the left-hand side of the web interface, select the target virtual machine you wish to overwrite from a backup.
    2. In the storage view, click the **Backup** menu option.
@@ -491,7 +491,7 @@ This details how to restore a virtual machine or Container Template from a backu
 
 ### Exporting Backup
 
-This details how to export a backup of a virtual machine or Container Template:
+This details how to export a backup of a virtual machine or VM Template:
 
 1. On the left-hand side of the web interface, select the target storage which contains the backup you wish to export (i.e. `local`).
 
@@ -900,7 +900,7 @@ This details how to configure a virtual machine to pass through a PCIe device:
 
    - Once we have managed to establish that the PCI device is safe to pass through (along with other devices in the same IOMMU group), proceed with the rest of the guide.
 
-2. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
+2. [Create a virtual machine](#create-vm-from-vm-template) or [update](#editing-vm-parameters) an existing one with the following considerations:
 
    - **System**:
 
@@ -1190,7 +1190,7 @@ This details the steps to edit a Netdata configuration file on a system with Net
 
 ### Netdata Parent
 
-1. [Create a virtual machine](#create-vm-from-container-template) or [update](#editing-vm-parameters) an existing one to be designated as the Parent node with the following considerations:
+1. [Create a virtual machine](#create-vm-from-vm-template) or [update](#editing-vm-parameters) an existing one to be designated as the Parent node with the following considerations:
 
    - **Disks**:
      - Disk size (GiB): `25` (Recommended)
