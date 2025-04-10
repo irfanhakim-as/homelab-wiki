@@ -100,6 +100,7 @@ This details the process of updating the system's SSH configuration and includes
 ### References
 
 - [List of TCP and UDP port numbers](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers)
+- [SSH doesn't work as expected in LXC](https://forum.proxmox.com/threads/ssh-doesnt-work-as-expected-in-lxc.54691)
 
 ### Steps
 
@@ -121,6 +122,12 @@ This details the process of updating the system's SSH configuration and includes
 
     > [!WARNING]  
     > Applying changes to the SSH configuration file without being prepared for the changes to take effect is highly discouraged.
+
+5. If any of these changes do not persist across reboot (i.e. on certain LXC Containers), you may need to run the following additional steps:
+
+   - [Disable](systemd.md#disable-service) the SSH socket (i.e. `sshd.socket` or `ssh.socket`)
+
+   - [Enable](systemd.md#enable-service) the SSH service (i.e. `sshd.service` or `ssh.service`)
 
 ### Custom SSH Port
 
