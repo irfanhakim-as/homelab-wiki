@@ -117,10 +117,7 @@ This details the process of updating the system's SSH configuration and includes
 
 3. Make any necessary changes and save the SSH configuration file.
 
-4. Once **absolutely** confident and ready to apply the changes, [restart](systemd.md#restart-service) the SSH service `sshd.service`.
-
-    > [!NOTE]  
-    > The underlying SSH service may be named differently (i.e. `ssh.service`) depending on your Linux distribution.
+4. Once **absolutely** confident and ready to apply the changes, [restart](systemd.md#restart-service) the SSH service (i.e. `sshd.service` or `ssh.service`).
 
     > [!WARNING]  
     > Applying changes to the SSH configuration file without being prepared for the changes to take effect is highly discouraged.
