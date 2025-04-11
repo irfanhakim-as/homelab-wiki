@@ -200,6 +200,9 @@ These configuration options are expected to be applied on top of the changes tha
 
 ## Networking
 
+> [!NOTE]  
+> Proxmox [LXC Containers](proxmox.md#linux-containers-lxc) have their own, much easier way of managing these settings graphically. If you choose to configure them manually, [make sure they persist](proxmox.md#persist-configurations-in-lxc).
+
 ### Description
 
 This details the process of updating certain networking configurations on the system.
