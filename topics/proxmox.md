@@ -540,7 +540,7 @@ This details how to create an LXC Container.
 
 ### Create LXC Container Template
 
-This details how to create a Container Template out of an LXC.
+This details how to create a Container Template out of an LXC Container.
 
 1. Launch the Proxmox Virtual Environment web interface on a web browser.
 
