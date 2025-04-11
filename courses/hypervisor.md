@@ -72,7 +72,7 @@ This details the process of backing up our hypervisor.
 
 ## Configuration
 
-This details some configuration options for the hypervisor.
+This details some additional configuration options and use cases for the hypervisor.
 
 ### Adding Additional Storage
 
