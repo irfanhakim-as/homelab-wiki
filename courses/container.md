@@ -14,6 +14,8 @@ In software engineering, containerisation is operating-system–level virtualisa
     - [References](#references-1)
   - [Create LXC Container from Container Template](#create-lxc-container-from-container-template)
     - [References](#references-2)
+  - [Docker](#docker)
+    - [References](#references-3)
 
 ## References
 
@@ -38,3 +40,13 @@ This details how to create an LXC Container from a Container Template.
 ### References
 
 - [Proxmox: Create LXC Container from Container Template](../topics/proxmox.md#create-lxc-container-from-container-template)
+
+---
+
+## Docker
+
+This details the installation and configuration process of Docker on a Linux system.
+
+### References
+
+- [Setup](../topics/docker.md#setup)
