@@ -443,6 +443,7 @@ This details matters pertaining to LXC on Proxmox.
 - [Linux Container](https://pve.proxmox.com/wiki/Linux_Container)
 - [Proxmox Container Toolkit](https://pve.proxmox.com/pve-docs/chapter-pct.html)
 - [Guest Operating System Configuration](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_guest_operating_system_configuration)
+- [Proxmox LXC - How To Guide - Better Than A VM?](https://youtu.be/xKhWRMj5Nrc)
 
 ### Create LXC Container
 
