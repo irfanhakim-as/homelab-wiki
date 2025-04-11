@@ -593,7 +593,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       render:x:104:
    ```
 
-2. On the Proxmox node host, update the Group ID (GID) mapping to allow the root user to map these groups to a new GID later:
+2. On the Proxmox node host, update the Group ID (GID) mapping to grant the root user the permission to map these groups inside the LXC Container later:
 
    - Update the `/etc/subgid` file:
 
@@ -601,7 +601,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       sudo nano /etc/subgid
       ```
 
-   - Grant the following GIDs to be mapped inside the LXC Container by adding the following lines to the file:
+   - Allow the following groups to be mapped inside the LXC Container by adding the following lines to the file:
 
       ```diff
         root:100000:65536
@@ -621,7 +621,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
 3. Identify the video device (i.e. GPU or iGPU) on the Proxmox node host that you wish to passthrough and share to the LXC Container(s):
 
-   - Run the following command to list the available video devices:
+   - Run the following command to list all available video device(s) on the Proxmox node host:
 
       ```sh
       ls -l /dev/dri/by-path
@@ -636,13 +636,13 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       From this sample, take note of the numbered `renderD` value (i.e. `128`).
 
-   - If you have multiple video devices (i.e. `renderD128` and `renderD129`), take note of each `renderD` device's corresponding "target" (i.e. `pci-0000:07:00.0-render`):
+   - If you have multiple video devices (i.e. `renderD128` and `renderD129`), take note of each `renderD` device's corresponding "target":
 
       ```
          pci-0000:07:00.0-render -> ../renderD128
       ```
 
-      In this case, `pci-0000:07:00.0-render`, and cross-check with the list of available PCI devices on the system using only the `TODO` portion of the value (i.e. `07:00.0`):
+      Based on the "target" in this sample (i.e. `pci-0000:07:00.0-render`), cross-check with the list of available PCI devices on the system using only the `XX:XX.X` portion of the value (i.e. `07:00.0`):
 
       ```sh
       lspci | grep '07:00.0'
@@ -656,7 +656,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       Once you have found the right video device that you wish to share, again, take note of its corresponding numbered `renderD` value (i.e. `128`).
 
-4. Based on the `renderD` value of the video device, get its Major and Minor Device Numbers:
+4. Based on the `renderD` value of the video device, get its Major and Minor device numbers:
 
    - Replace `<renderd-number>` with the `renderD` value of the video device:
 
@@ -746,10 +746,10 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       - Replace `<video-gid>` with the GID value for the `video` group (i.e. `44`).
       - This maps the LXC Container's GIDs; `0:(video-gid - 1)` to the Proxmox node host's GIDs; `100000:(100000 + (video-gid - 1))`.
-      - For example, if the `video` GID is `44`, then the LXC Container's GIDs will be `0:43` to the Proxmox node host's GIDs `100000:100043`.
-      - This mapping is done purposefully to make way for the `video` group (i.e. `44`) to be mapped accordingly later.
+      - According to the sample value, this maps the LXC Container's GIDs; `0:43` to the Proxmox node host's GIDs; `100000:100043`.
+      - This mapping is done purposefully to make way for the `video` group (i.e. `44`) to be mapped accordingly next.
 
-   - Add each of the following lines to the end of the file:
+   - Add the following line to the end of the file:
 
       ```diff
         lxc.idmap: g 0 100000 44
@@ -760,7 +760,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       - According to the sample value, this directly maps the LXC Container's GID, `44` to the Proxmox node host's GID, `44`.
       - This mapping grants the LXC Container access to the Proxmox node host's `video` group, for GPU device sharing.
 
-   - Add each of the following lines to the end of the file:
+   - Add the following line to the end of the file:
 
       ```diff
         lxc.idmap: g 44 44 1
@@ -769,11 +769,11 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       - Replace `(<video-gid> + 1)` with the sum of the GID value for the `video` group (i.e. `44`) and `1` (i.e. `45`).
       - Replace `(100000 + (<video-gid> + 1))` with the sum of `100000`, the GID value for the `video` group (i.e. `44`), and `1` (i.e. `100045`).
-      - Replace `(<lxc-render-gid> - (<render-gid> + 1))` with the difference between the intended LXC Container `render` GID (i.e. `107`) and the sum of the GID value for the `video` group (i.e. `44`) and `1` (i.e. `106`).
+      - Replace `(<lxc-render-gid> - (<render-gid> + 1))` with the difference between the intended LXC Container `render` GID (i.e. `107`) and the sum of the GID value for the `video` group (i.e. `44`) and `1` (i.e. `62`).
       - According to the sample value, this maps the LXC Container's GIDs; `45:106` to the Proxmox node host's GIDs; `100045:100106`.
-      - This mapping resumes the previous unprivileged group mapping for the LXC Container, while making way for the `render` group (i.e. `104`) on the Proxmox node host to be mapped to the intended LXC Container `render` GID (i.e. `107`) on the LXC Container.
+      - This mapping resumes the previous unprivileged group mapping for the LXC Container, while making way for the intended `render` GID on the LXC Container (i.e. `107`) to be mapped to the `render` group (i.e. `104`) on the Proxmox node host.
 
-   - Add each of the following lines to the end of the file:
+   - Add the following line to the end of the file:
 
       ```diff
         lxc.idmap: g 45 100045 62
@@ -782,12 +782,12 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       Replace the following value with your own accordingly:
 
-      - Replace `<lxc-render-gid>` with the intended LXC Container `render` GID (i.e. `107`).
+      - Replace `<lxc-render-gid>` with the intended GID value for the `render` group on the LXC Container (i.e. `107`).
       - Replace `<render-gid>` with the GID value for the `render` group (i.e. `104`).
       - According to the sample value, this maps the LXC Container's GID, `107` to the Proxmox node host's GID, `104`.
       - This mapping grants the LXC Container access to the Proxmox node host's `render` group, for GPU rendering.
 
-   - Add each of the following lines to the end of the file:
+   - Add the following line to the end of the file:
 
       ```diff
         lxc.idmap: g 107 104 1
