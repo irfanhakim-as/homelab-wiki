@@ -32,38 +32,45 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create VM From VM Template](#create-vm-from-vm-template)
     - [Editing VM Parameters](#editing-vm-parameters)
     - [Adding a Device](#adding-a-device)
-  - [Backups](#backups)
+  - [Linux Containers (LXC)](#linux-containers-lxc)
     - [Description](#description-5)
     - [References](#references-4)
+    - [Create LXC Container](#create-lxc-container)
+    - [Create LXC Container Template](#create-lxc-container-template)
+    - [Create LXC Container from Container Template](#create-lxc-container-from-container-template)
+    - [Persist Configurations in LXC](#persist-configurations-in-lxc)
+  - [Backups](#backups)
+    - [Description](#description-6)
+    - [References](#references-5)
     - [Creating Backup](#creating-backup)
     - [Restoring Backup](#restoring-backup)
     - [Exporting Backup](#exporting-backup)
   - [Migrating to Proxmox](#migrating-to-proxmox)
-    - [Description](#description-6)
-    - [References](#references-5)
+    - [Description](#description-7)
+    - [References](#references-6)
     - [Manual](#manual)
     - [ESXi](#esxi)
     - [Post-Migration](#post-migration)
   - [PCIe Passthrough](#pcie-passthrough)
-    - [Description](#description-7)
-    - [References](#references-6)
+    - [Description](#description-8)
+    - [References](#references-7)
     - [Enablement](#enablement)
     - [Adding to VM](#adding-to-vm)
   - [Updating Configuration](#updating-configuration)
-    - [Description](#description-8)
-    - [References](#references-7)
-    - [Datacenter Configuration](#datacenter-configuration)
-  - [Clustering](#clustering)
     - [Description](#description-9)
     - [References](#references-8)
+    - [Datacenter Configuration](#datacenter-configuration)
+  - [Clustering](#clustering)
+    - [Description](#description-10)
+    - [References](#references-9)
     - [Creating Cluster](#creating-cluster)
     - [Joining Node](#joining-node)
     - [Recommended Configuration](#recommended-configuration)
     - [High Availability (HA)](#high-availability-ha)
     - [Adding QDevice](#adding-qdevice)
   - [Monitoring](#monitoring)
-    - [Description](#description-10)
-    - [References](#references-9)
+    - [Description](#description-11)
+    - [References](#references-10)
     - [Install Netdata Agent](#install-netdata-agent)
     - [Configuring Netdata](#configuring-netdata)
     - [Netdata Parent](#netdata-parent)
@@ -422,6 +429,178 @@ This details how to add a device to an existing virtual machine:
 5. Select the type of device you wish to add (i.e. `PCI Device`).
 
 6. In the prompted form, configure the device accordingly, and click the **Add** button.
+
+---
+
+## Linux Containers (LXC)
+
+### Description
+
+This details matters pertaining to LXC on Proxmox.
+
+### References
+
+- [Linux Container](https://pve.proxmox.com/wiki/Linux_Container)
+- [Proxmox Container Toolkit](https://pve.proxmox.com/pve-docs/chapter-pct.html)
+- [Guest Operating System Configuration](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#_guest_operating_system_configuration)
+
+### Create LXC Container
+
+This details how to create an LXC Container.
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. If no Container Image (Template) has been added to the Proxmox node, do the following steps:
+
+   - On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
+
+   - Select the target storage which is of type `Directory` (i.e. `local`).
+
+   - In the target storage view, click the **CT Templates** menu option.
+
+   - In the **CT Templates** view, click the **Templates** button.
+
+   - In the list of available **Templates**, select the template you wish to download and use as the base of the new LXC Container Template (i.e. `debian-12-standard`).
+
+   - Click the **Download** button.
+
+   - In the **Task viewer** dialog, wait for the process to complete. Once it has, close it by clicking its corresponding **X** (**Close dialog**) button.
+
+3. Click the **Create CT** button found on the top right corner of the web interface.
+
+4. In the **Create: LXC Container** form, configure as such:
+
+   - Select the **Advanced** checkbox at the bottom of the form to show additional options.
+
+   - **General**:
+
+     - Node: Expand the dropdown and select your Proxmox node (i.e. `proxmox`)
+     - CT ID: Set this to an unused index (i.e. `101`)
+     - Hostname: Set a suitable, unique hostname for the Container (i.e. `my-container.example.com`)
+     - Password: Set a secure password for the Container user
+     - Confirm password: Confirm the password you have set for the Container user
+     - SSH public key(s): Copy over your public SSH key(s), each separated by a new line
+     - Unprivileged container: Leaving this option checked and enabled is recommended as it keeps the Proxmox environment more secure in case of compromises
+     - Nesting: Leaving this option checked and enabled in an unprivileged environment exposes procfs and sysfs contents of the host to the guest
+
+      Click the **Next** button.
+
+   - **Template**:
+
+     - Storage: Expand the dropdown and select the storage which contains the Container Image you have added to the Proxmox node (i.e. `local`)
+     - Template: Expand the dropdown and select the Container Template you wish to use (i.e. `debian-12-standard.tar.zst`)
+
+      Click the **Next** button.
+
+   - **Disks**:
+
+     - Storage: Expand the dropdown and select the storage where you wish to install the disk on (i.e. `local-zfs`)
+     - Disk size (GiB): Set the size of the disk (i.e. `8`)
+
+      To add more disk to the Container, simply click the **Add** button and configure it as needed. Once done, click the **Next** button.
+
+   - **CPU**:
+
+     - Cores: Set the number of CPU cores as required by the container (i.e. `1`)
+     - CPU limit: Set how much CPU time the container is allowed to use across all cores (i.e. `1`)
+     - CPU units: Set the relative weight or priority for CPU access for the container (i.e. `100`)
+
+      Click the **Next** button.
+
+   - **Memory**:
+
+     - Memory (MiB): Set the RAM capacity to allocate (i.e. `512`)
+     - Swap (MiB): Set additional swap memory from the host swap space to allocate (i.e. `512`)
+
+      Click the **Next** button.
+
+   - **Network**:
+
+     - Name: Set an appropriate name for the network or leave it as default (i.e. `eth0`)
+     - Bridge: Expand the dropdown and select the network bridge you wish to use (i.e. `vmbr0`)
+     - Firewall: Leave the corresponding checkbox checked to enable the firewall
+     - IPv4: Select the `DHCP` option, or optionally, the `Static` option instead
+     - IPv4/CIDR: Set a unique, static IPv4 address for the Container if you have chosen the `Static` option (i.e. `192.168.0.106/24`)
+     - Gateway (IPv4): Set the local gateway of your network if you have chosen the `Static` option (i.e. `192.168.0.1`)
+
+      Click the **Next** button.
+
+   - **DNS**:
+
+     - DNS domain: Leave empty to use the default host settings
+     - DNS servers: Leave empty to use the default host settings
+
+      Click the **Next** button.
+
+   - Under the **Confirm** tab, review the Container configuration, optionally enable the **Start after created** option, and click the **Finish** button.
+
+5.  In the **Task viewer** dialog, wait for the process to complete. Once it has, close it by clicking its corresponding **X** (**Close dialog**) button.
+
+6. **TODO**: Once the Container has been created, [enter the Container](#enter-the-vm) or [remote into it using SSH](ssh.md#remotely-access-using-ssh) and [configure the Container](#vm-configuration) as necessary.
+
+### Create LXC Container Template
+
+This details how to create a Container Template out of an LXC.
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. Select the target Container (illustrated with an icon of a cube) you wish to turn to a Container Template. [Create the LXC Container](#create-lxc-container) if you have not already.
+
+3. In the Container view, expand the **More** dropdown located at the top right corner and select the **Convert to template** option.
+
+### Create LXC Container from Container Template
+
+This details how to create an LXC Container from a Container Template.
+
+1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
+
+2. Select the target Container Template (illustrated with an icon of a file and cube) you wish to use as a base for your new LXC Container.
+
+3. In the Container Template view, expand the **More** dropdown located at the top right corner and select the **Clone** option.
+
+4. In the **Clone CT Template** form, configure the following options:
+
+   - Target node: Set this to your Proxmox node (i.e. `proxmox`)
+   - CT ID: Set this to an unused index (i.e. `101`)
+   - Hostname: Set a suitable, unique hostname for the Container (i.e. `my-container.example.com`)
+   - Mode: Expand the dropdown and select the `Full Clone` option
+   - Target Storage: Expand the dropdown and select the storage where you wish to install the Container on (Defaults to `Same as source`)
+
+   Click the **Clone** button.
+
+5. Wait for the cloning process to complete (i.e. when the lock icon on the newly created Container disappears).
+
+6. **TODO**: Once the Container has been created, [enter the Container](#enter-the-vm) or [remote into it using SSH](ssh.md#remotely-access-using-ssh) and [configure the Container](#vm-configuration) as necessary.
+
+### Persist Configurations in LXC
+
+Some configurations for LXC Containers are managed by Proxmox itself which will override your own changes across reboots. This details how to persist a configuration file for the Container:
+
+1. In the LXC Container, make your changes to a configuration file accordingly:
+
+   ```sh
+   sudo nano /path/to/<configuration-file>
+   ```
+
+   For example, if the `/path/to/<configuration-file>` is `/etc/network/interfaces`:
+
+   ```sh
+   sudo nano /etc/network/interfaces
+   ```
+
+2. After you have completed your configuration changes, make the configuration file persist by creating a `.pve-ignore` file for it:
+
+   ```sh
+   sudo touch /path/to/.pve-ignore.<configuration-file>
+   ```
+
+   For example, if the `/path/to/<configuration-file>` is `/etc/network/interfaces`:
+
+   ```sh
+   sudo touch /etc/network/.pve-ignore.interfaces
+   ```
+
+   Doing so will tell Proxmox not to manage or interfere with the configuration file that corresponds to the `.pve-ignore` file.
 
 ---
 
