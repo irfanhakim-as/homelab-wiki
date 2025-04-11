@@ -92,6 +92,7 @@ This details the process of passing through hardware devices to a virtual machin
 
 - [ESXi: Disk Pass-through](../topics/esxi.md#disk-pass-through)
 - [Proxmox: PCIe Passthrough](../topics/proxmox.md#pcie-passthrough)
+- [Proxmox: GPU Passthrough to LXC Container](../topics/proxmox.md#gpu-passthrough-to-lxc-container)
 
 ---
 
