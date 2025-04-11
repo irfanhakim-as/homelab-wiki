@@ -800,6 +800,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       - Replace `(100000 + (<lxc-render-gid> + 1))` with the sum of `100000`, the intended LXC Container `render` GID (i.e. `107`), and `1` (i.e. `100108`).
       - Replace `(65536 - (<lxc-render-gid> + 1))` with the difference between `65536` and the sum of the intended LXC Container `render` GID (i.e. `107`) and `1` (i.e. `65428`).
       - According to the sample value, this maps the LXC Container's GIDs; `108:65535` to the Proxmox node host's GIDs; `100108:165535`.
+      - This mapping completes the rest of the unprivileged group mapping for the LXC Container to the Proxmox node host.
 
    - Sample resulting file:
 
