@@ -349,7 +349,7 @@ This details some generic configuration recommendations for a virtual machine af
 
 - Perform a system update on the VM
 - Install the [`qemu-guest-agent`](https://pve.proxmox.com/wiki/Qemu-guest-agent) package on the VM to allow useful Proxmox VM management features
-- [Enable SSH](ssh.md#enable-remote-access) on the VM
+- Enable SSH on the VM
 - **(Optional)** Change the default SSH port on the VM
 - **(Optional)** Disable root login for SSH on the VM
 - **(Optional)** Disable password authentication for SSH on the VM
