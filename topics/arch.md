@@ -129,7 +129,7 @@ This details some recommended configuration options for Arch Linux as a server.
    - `vim`
    - `wget`
 
-4. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `pacman`:
+4. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `pacman`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`

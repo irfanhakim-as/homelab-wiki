@@ -136,7 +136,7 @@ This details some recommended configuration options for Debian as a server.
    - `ufw`
    - `wget`
 
-4. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
+4. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`

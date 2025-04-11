@@ -119,7 +119,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > The `policycoreutils-python-utils` package is required for the `semanage` command, which is used to manage SELinux policy.
 
-5. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `dnf`:
+5. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `dnf`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`

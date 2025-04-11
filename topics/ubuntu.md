@@ -93,7 +93,7 @@ This details some recommended configuration options for Ubuntu as a server.
    - `python3-pip`
    - `wget`
 
-3. [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
+3. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
