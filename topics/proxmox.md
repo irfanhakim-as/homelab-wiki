@@ -389,7 +389,7 @@ This details how to create a virtual machine from a [VM Template](#create-vm-tem
 
 5. Wait for the cloning process to complete (i.e. when the lock icon on the newly created VM disappears).
 
-6. Once the VM has been created, you may start using the VM by selecting the VM entry under the Proxmox node and click the **Start** button in its corresponding view.
+6. Once the VM has been created, [enter the VM](#enter-the-vm) or [remote into it using SSH](ssh.md#remotely-access-using-ssh) and [configure the VM](#vm-configuration) as necessary.
 
 ### Editing VM Parameters
 
