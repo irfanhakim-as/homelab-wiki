@@ -383,7 +383,7 @@ This details how to create a virtual machine from a [VM Template](#create-vm-tem
    - VM ID: Set this to an unused index (i.e. `101`)
    - Name: Set a suitable name for the VM (i.e. `my-vm.example.com`)
    - Mode: Expand the dropdown and select the `Full Clone` option
-   - **(Target Storage)**: Expand the dropdown and select the storage where you wish to install the VM on (Defaults to `Same as source`)
+   - Target Storage: Expand the dropdown and select the storage where you wish to install the VM on (Defaults to `Same as source`)
 
    Click the **Clone** button.
 
