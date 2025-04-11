@@ -20,7 +20,7 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
   - [Configuration](#configuration)
     - [Adding Additional Storage](#adding-additional-storage)
     - [Adding a Network Card](#adding-a-network-card)
-    - [PCIe Passthrough](#pcie-passthrough)
+    - [Hardware Passthrough](#hardware-passthrough)
   - [Migration](#migration)
     - [References](#references-3)
   - [Clustering](#clustering)
@@ -86,9 +86,9 @@ This topic details how to add an additional network device to the hypervisor.
 
 - [ESXi: Adding a Network Card](../topics/esxi.md#adding-a-network-card)
 
-### PCIe Passthrough
+### Hardware Passthrough
 
-This details the process of passing through PCIe devices to a virtual machine on the hypervisor.
+This details the process of passing through hardware devices to a virtual machine or LXC container on the hypervisor.
 
 - [ESXi: Disk Pass-through](../topics/esxi.md#disk-pass-through)
 - [Proxmox: PCIe Passthrough](../topics/proxmox.md#pcie-passthrough)
