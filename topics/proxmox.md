@@ -39,6 +39,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create LXC Container Template](#create-lxc-container-template)
     - [Create LXC Container from Container Template](#create-lxc-container-from-container-template)
     - [GPU Passthrough to LXC Container](#gpu-passthrough-to-lxc-container)
+    - [Mount SMB share on LXC Container](#mount-smb-share-on-lxc-container)
     - [Persist Configurations in LXC](#persist-configurations-in-lxc)
   - [Backups](#backups)
     - [Description](#description-6)
@@ -449,6 +450,8 @@ This details matters pertaining to LXC on Proxmox.
 - [LXC On Proxmox](https://jellyfin.org/docs/general/administration/hardware-acceleration/intel/#lxc-on-proxmox)
 - [Split A GPU Between Multiple Computers - Proxmox LXC (Unprivileged)](https://youtu.be/0ZDr5h52OOE)
 - [Split A GPU Between Multiple Computers (Written Steps)](https://github.com/JamesTurland/JimsGarage/tree/main/LXC/Jellyfin)
+- [NAS Shares On LXC - Unprivileged - Jellyfin Example](https://youtu.be/DMPetY4mX-c)
+- [NAS Shares On LXC - Unprivileged (Written Steps)](https://github.com/JamesTurland/JimsGarage/tree/main/LXC/NAS)
 
 
 ### Create LXC Container
@@ -834,6 +837,68 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
    ```sh
    usermod -aG render,video root
    ```
+
+### Mount SMB share on LXC Container
+
+This details the steps to mount an SMB share on an unprivileged LXC Container:
+
+1. On the LXC Container, create a group that will grant the permission to mount the SMB share:
+
+    ```sh
+    sudo groupadd -g 10000 <group-name>
+    ```
+
+    Replace `<group-name>` with a suitable name accordingly (i.e. `lxc_shares`).
+
+2. If you have any user(s) other than `root` that needs access to the share inside the LXC Container, add them to the group:
+
+    ```sh
+    sudo usermod -aG <group-name> <user>
+    ```
+
+    Replace `<group-name>` with the name of the group you have created, and `<user>` with the name of each user you wish to allow access to the share.
+
+3. On the Proxmox node host, mount the SMB share as you would normally do, including:
+
+   - Creating a directory for the share to be mounted to (i.e. `/mnt/smb`).
+   - Adding a mount for the share to the `/etc/fstab` file.
+   - Mounting the share on the Proxmox node host.
+
+    You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide to do this for more details.
+
+4. On the Proxmox node host, update the LXC Container's configuration file:
+
+   - Replace `<ct-id>` with the LXC Container's actual CT ID value:
+
+      ```sh
+      sudo nano /etc/pve/lxc/<ct-id>.conf
+      ```
+
+      For example, assuming that the LXC Container's CT ID is `101`:
+
+      ```sh
+      sudo nano /etc/pve/lxc/101.conf
+      ```
+
+   - Add the following line to the end of the file:
+
+      ```diff
+        arch: amd64
+        cores: 2
+        features: nesting=1
+        hostname: my-container.example.com
+        memory: 2048
+        net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:06:18:78,ip=dhcp,type=veth
+        ostype: debian
+        rootfs: local-lvm:vm-101-disk-0,size=8G
+        swap: 512
+        unprivileged: 1
+      + mp0: <host-mount-path>,mp=<container-mount-path>,ro=1
+      ```
+
+      - Replace `<host-mount-path>` with the path to the directory where you have mounted the share on the Proxmox node host (i.e. `/mnt/smb/`).
+      - Replace `<container-mount-path>` with the path to where the share should be mounted inside the LXC Container (i.e. `/mnt/data`).
+      - **(Optional)** Include the `ro=1` flag to make the share read-only inside the LXC Container.
 
 ### Persist Configurations in LXC
 
