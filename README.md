@@ -46,11 +46,15 @@ Check out the [topics](./topics/) directory for individual guides and tips.
          2. [Debian](topics/debian.md)
          3. [Ubuntu](topics/ubuntu.md)
          4. [RHEL](topics/rhel.md)
-4. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
+4. [Container](courses/container.md): The alternative way of hosting services
+    1. [LXC](topics/proxmox.md#linux-containers-lxc)
+    2. [Docker](topics/docker.md)
+    3. Podman
+5. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
    1. [RKE2](topics/rke2.md)
    2. Rancher
    3. [Helm](topics/helm.md)
-5. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
+6. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
    1. [Router](topics/router.md):
       1. [Port forwarding](topics/router.md#port-forwarding)
    2. [DNS](topics/dns.md):
@@ -63,7 +67,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       7. [Pi-hole](topics/pi-hole.md)
    3. [VPN](topics/vpn.md):
       1. [WireGuard](topics/wireguard.md)
-6. Services: Selection of VM or container based services that can be hosted in the homelab
+7. Services: Selection of VM or container based services that can be hosted in the homelab
    1. NAS (VM):
       1. TrueNAS
    2. [Database](topics/database.md) (Container):
