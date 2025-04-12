@@ -40,6 +40,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create LXC Container from Container Template](#create-lxc-container-from-container-template)
     - [GPU Passthrough to LXC Container](#gpu-passthrough-to-lxc-container)
     - [Mount SMB share on LXC Container](#mount-smb-share-on-lxc-container)
+    - [Update LXC Container Configuration](#update-lxc-container-configuration)
     - [Persist Configurations in LXC](#persist-configurations-in-lxc)
   - [Backups](#backups)
     - [Description](#description-6)
@@ -689,19 +690,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
 5. Referring to the LXC Container which you wish to passthrough and share a device to, take note of the LXC Container's `CT ID` value (i.e. `101`) - create an (unprivileged) LXC Container [from scratch](#create-lxc-container) or [from a Container Template](#create-lxc-container-from-container-template) if you have not already.
 
-6. On the Proxmox node host, update the LXC Container's configuration file:
-
-   - Replace `<ct-id>` with the LXC Container's actual CT ID value:
-
-      ```sh
-      sudo nano /etc/pve/lxc/<ct-id>.conf
-      ```
-
-      For example, assuming that the LXC Container's CT ID is `101`:
-
-      ```sh
-      sudo nano /etc/pve/lxc/101.conf
-      ```
+6. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
    - Add each of the following lines to the end of the file:
 
@@ -866,19 +855,7 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
 
     You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide to do this for more details.
 
-4. On the Proxmox node host, update the LXC Container's configuration file:
-
-   - Replace `<ct-id>` with the LXC Container's actual CT ID value:
-
-      ```sh
-      sudo nano /etc/pve/lxc/<ct-id>.conf
-      ```
-
-      For example, assuming that the LXC Container's CT ID is `101`:
-
-      ```sh
-      sudo nano /etc/pve/lxc/101.conf
-      ```
+4. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
    - Add the following line to the end of the file:
 
@@ -915,6 +892,30 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
         unprivileged: 1
         mp0: /mnt/smb/,mp=/mnt/data,ro=1
       ```
+
+### Update LXC Container Configuration
+
+This details how to update the configuration of an LXC Container:
+
+1. Ensure that the LXC Container has been shut down.
+
+2. On the Proxmox node host, update the LXC Container's configuration file:
+
+   - Replace `<ct-id>` with the LXC Container's actual CT ID value:
+
+        ```sh
+        sudo nano /etc/pve/lxc/<ct-id>.conf
+        ```
+
+        For example, assuming that the LXC Container's CT ID is `101`:
+
+        ```sh
+        sudo nano /etc/pve/lxc/101.conf
+        ```
+
+   - Make your changes to the configuration file accordingly.
+
+3. Save the changes made to the file and start the LXC Container.
 
 ### Persist Configurations in LXC
 
