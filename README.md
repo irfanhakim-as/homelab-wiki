@@ -20,12 +20,12 @@ This wiki is a collection of guides and tips mostly focused on Homelabs, and is 
 
 This is a list of course-specific guides that compiles individual topics in this repository into individual guides catered to the course:
 
-- [Hardware](./courses/#)
-- [Hypervisor](./courses/#)
-- [Virtual Machines (VM)](./courses/#)
+- [Hardware](./courses/hardware.md)
+- [Hypervisor](./courses/hypervisor.md)
+- [Virtual Machines (VM)](./courses/vm.md)
 - [Containers](./courses/container.md)
-- [Kubernetes](./courses/#)
-- [Network](./courses/#)
+- [Kubernetes](./courses/kubernetes.md)
+- [Network](./courses/network.md)
 - [Services](./courses/#)
 
 ## Topics
