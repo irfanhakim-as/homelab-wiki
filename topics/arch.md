@@ -127,6 +127,7 @@ This details some recommended configuration options for Arch Linux as a server.
    - `pciutils`
    - `python`
    - `python-pip`
+   - `rsync`
    - `vim`
    - `wget`
 

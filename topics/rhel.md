@@ -115,6 +115,7 @@ This details some recommended configuration options for Rocky Linux as a server.
    - `policycoreutils-python-utils`
    - `python3`
    - `python3-pip`
+   - `rsync`
    - `wget`
 
     > [!NOTE]  

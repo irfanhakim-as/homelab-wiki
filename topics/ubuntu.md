@@ -92,6 +92,7 @@ This details some recommended configuration options for Ubuntu as a server.
    - `pciutils`
    - `python3`
    - `python3-pip`
+   - `rsync`
    - `wget`
 
 3. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:

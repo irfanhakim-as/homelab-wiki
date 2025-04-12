@@ -134,6 +134,7 @@ This details some recommended configuration options for Debian as a server.
    - `pciutils`
    - `python3`
    - `python3-pip`
+   - `rsync`
    - `ufw`
    - `wget`
 
