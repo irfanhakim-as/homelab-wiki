@@ -856,7 +856,7 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
     sudo usermod -aG <group-name> <user>
     ```
 
-    Replace `<group-name>` with the name of the group you have created, and `<user>` with the name of each user you wish to allow access to the share.
+    Replace `<group-name>` with the name of the group you have created (i.e. `lxc_shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
 
 3. On the Proxmox node host, mount the SMB share as you would normally do, including:
 
