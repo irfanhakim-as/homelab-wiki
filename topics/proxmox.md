@@ -447,6 +447,9 @@ This details matters pertaining to LXC on Proxmox.
 - [Proxmox LXC - How To Guide - Better Than A VM?](https://youtu.be/xKhWRMj5Nrc)
 - [Major and Minor Numbers](https://www.oreilly.com/library/view/linux-device-drivers/0596000081/ch03s02.html)
 - [LXC On Proxmox](https://jellyfin.org/docs/general/administration/hardware-acceleration/intel/#lxc-on-proxmox)
+- [Split A GPU Between Multiple Computers - Proxmox LXC (Unprivileged)](https://youtu.be/0ZDr5h52OOE)
+- [Split A GPU Between Multiple Computers (Written Steps)](https://github.com/JamesTurland/JimsGarage/tree/main/LXC/Jellyfin)
+
 
 ### Create LXC Container
 
