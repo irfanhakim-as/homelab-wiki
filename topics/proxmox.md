@@ -900,6 +900,22 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
       - Replace `<container-mount-path>` with the path to where the share should be mounted inside the LXC Container (i.e. `/mnt/data`).
       - **(Optional)** Include the `ro=1` flag to make the share read-only inside the LXC Container.
 
+   - Sample resulting configuration file:
+
+      ```
+        arch: amd64
+        cores: 2
+        features: nesting=1
+        hostname: my-container.example.com
+        memory: 2048
+        net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:06:18:78,ip=dhcp,type=veth
+        ostype: debian
+        rootfs: local-lvm:vm-101-disk-0,size=8G
+        swap: 512
+        unprivileged: 1
+        mp0: /mnt/smb/,mp=/mnt/data,ro=1
+      ```
+
 ### Persist Configurations in LXC
 
 Some configurations for LXC Containers are managed by Proxmox itself which will override your own changes across reboots. This details how to persist a configuration file for the Container:
