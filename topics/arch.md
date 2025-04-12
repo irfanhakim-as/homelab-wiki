@@ -124,6 +124,7 @@ This details some recommended configuration options for Arch Linux as a server.
    - `nano`
    - `net-tools`
    - `openssh`
+   - `pciutils`
    - `python`
    - `python-pip`
    - `vim`

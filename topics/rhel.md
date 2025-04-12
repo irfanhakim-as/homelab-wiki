@@ -111,6 +111,7 @@ This details some recommended configuration options for Rocky Linux as a server.
    - `nano`
    - `net-tools`
    - `openssh-server`
+   - `pciutils`
    - `policycoreutils-python-utils`
    - `python3`
    - `python3-pip`

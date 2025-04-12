@@ -89,6 +89,7 @@ This details some recommended configuration options for Ubuntu as a server.
    - `nano`
    - `net-tools`
    - `openssh-server`
+   - `pciutils`
    - `python3`
    - `python3-pip`
    - `wget`
