@@ -919,7 +919,7 @@ This details how to update the configuration of an LXC Container:
 
 ### Persist Configurations in LXC
 
-Some configurations for LXC Containers are managed by Proxmox itself which will override your own changes across reboots. This details how to persist a configuration file for the Container:
+Some configurations inside LXC Containers are managed by Proxmox itself which will override your own changes across reboots. This details how to persist a configuration file inside the Container:
 
 1. In the LXC Container, make your changes to a configuration file accordingly:
 
