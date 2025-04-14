@@ -619,24 +619,7 @@ This details how to add a device to an existing LXC Container:
 
 This details how to passthrough and share a video device (i.e. GPU or iGPU) from a Proxmox node to one or more LXC Container(s):
 
-1. On the Proxmox node host, find the Group ID (GID) of groups; `render` and `video`:
-
-   - Run the following command to find the `render` and `video` groups on the Proxmox node host:
-
-      ```sh
-      grep -E '^(render|video):' /etc/group
-      ```
-
-      Sample output:
-
-      ```
-         video:x:44:
-         render:x:104:
-      ```
-
-   - From the sample output, take note of the numbered GID value of the `render` (i.e. `104`) and `video` (i.e. `44`) groups.
-
-2. On the Proxmox node host, identify the video device (i.e. GPU or iGPU) that you wish to passthrough and share to the LXC Container(s):
+1. On the Proxmox node host, identify the video device (i.e. GPU or iGPU) that you wish to passthrough and share to the LXC Container(s):
 
    - Run the following command to list all available video device(s) on the Proxmox node host:
 
@@ -673,7 +656,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       Once you have found the right video device that you wish to share, again, take note of its corresponding numbered `renderD` value (i.e. `128`).
 
-3. On the Proxmox node host, get the video device's Major and Minor device numbers:
+2. On the Proxmox node host, get the video device's Major and Minor device numbers:
 
    - Replace `<renderd-number>` with the `renderD` value of the video device you wish to share:
 
@@ -697,6 +680,23 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       - Major device number (i.e. `226`)
       - Minor device number (i.e. `128`)
+
+3. On the Proxmox node host, find the Group ID (GID) of groups; `render` and `video`:
+
+   - Run the following command to find the `render` and `video` groups on the Proxmox node host:
+
+      ```sh
+      grep -E '^(render|video):' /etc/group
+      ```
+
+      Sample output:
+
+      ```
+         video:x:44:
+         render:x:104:
+      ```
+
+   - From the sample output, take note of the numbered GID value of the `render` (i.e. `104`) and `video` (i.e. `44`) groups.
 
 4. On the Proxmox node host, update the GID mapping to grant the root user the permission to map these groups inside the LXC Container later:
 
