@@ -626,7 +626,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       root:104:1
       ```
 
-3. Identify the video device (i.e. GPU or iGPU) on the Proxmox node host that you wish to passthrough and share to the LXC Container(s):
+3. On the Proxmox node host, identify the video device (i.e. GPU or iGPU) that you wish to passthrough and share to the LXC Container(s):
 
    - Run the following command to list all available video device(s) on the Proxmox node host:
 
@@ -663,9 +663,9 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       Once you have found the right video device that you wish to share, again, take note of its corresponding numbered `renderD` value (i.e. `128`).
 
-4. Based on the `renderD` value of the video device, get its Major and Minor device numbers:
+4. On the Proxmox node host, get the video device's Major and Minor device numbers:
 
-   - Replace `<renderd-number>` with the `renderD` value of the video device:
+   - Replace `<renderd-number>` with the `renderD` value of the video device you wish to share:
 
       ```sh
       ls -l /dev/dri/renderD<renderd-number>
