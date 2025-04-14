@@ -669,9 +669,54 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
 
    - Take note of the following values of the video device:
 
-     - Numbered `renderD` value (i.e. `128`)
+     - Numbered `renderD` value of the video device (i.e. `128`)
+     - **(Easy)** Numbered `card` value of the video device (i.e. `0`)
 
-2. **(Advanced)** On the Proxmox node host, get the video device's Major and Minor device numbers:
+2. **(Easy)** On the LXC Container, find out the User ID (UID) of the user that needs access to the video device:
+
+   - Replace `username` with the username of the user that needs access to the video device:
+
+      ```sh
+      id -u <username>
+      ```
+
+      For example, if the user's username is `root`:
+
+      ```sh
+      id -u root
+      ```
+
+      Sample output:
+
+      ```
+         0
+      ```
+
+   - Take note of the following values:
+
+     - Numbered user UID on the LXC Container (i.e. `0`)
+
+3. **(Easy)** Find the Group ID (GID) of groups; `render` and `video` on the LXC Container:
+
+   - On the LXC Container, run the following command to find the `render` and `video` groups:
+
+      ```sh
+      grep -E '^(render|video):' /etc/group
+      ```
+
+      Sample output:
+
+      ```
+         video:x:44:
+         render:x:104:
+      ```
+
+   - Take note of the following values:
+
+     - Numbered `render` group GID on the LXC Container (i.e. `104`)
+     - Numbered `video` group GID on the LXC Container (i.e. `44`)
+
+4. **(Advanced)** On the Proxmox node host, get the video device's Major and Minor device numbers:
 
    - Replace `<renderd-number>` with the `renderD` value of the video device you wish to share:
 
@@ -696,7 +741,7 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
      - Major device number (i.e. `226`)
      - Minor device number (i.e. `128`)
 
-3. **(Advanced)** Find the Group ID (GID) of groups; `render` and `video` on the Proxmox node host:
+5. **(Advanced)** Find the Group ID (GID) of groups; `render` and `video` on the Proxmox node host:
 
    - Run the following command to find the `render` and `video` groups on the Proxmox node host:
 
