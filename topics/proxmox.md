@@ -31,7 +31,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create VM Template](#create-vm-template)
     - [Create VM From VM Template](#create-vm-from-vm-template)
     - [Editing VM Parameters](#editing-vm-parameters)
-    - [Adding a Device](#adding-a-device)
+    - [Adding a Device to a VM](#adding-a-device-to-a-vm)
   - [Linux Containers (LXC)](#linux-containers-lxc)
     - [Description](#description-5)
     - [References](#references-4)
@@ -417,7 +417,7 @@ This details how to edit an existing virtual machine or VM Template.
 
 6. Click the **OK** button to save the changes.
 
-### Adding a Device
+### Adding a Device to a VM
 
 This details how to add a device to an existing virtual machine:
 
@@ -1433,7 +1433,7 @@ This details how to configure a virtual machine to pass through a PCIe device:
 
      - Ballooning Device: Uncheck the box to disable it as required by hardware passthrough which is memory address based
 
-3. Once the virtual machine has been created or updated, [add a PCI Device](#adding-a-device) to the virtual machine with the following configurations:
+3. Once the virtual machine has been created or updated, [add a PCI Device to the virtual machine](#adding-a-device-to-a-vm) with the following configurations:
 
    - Mapped Device: If you are passing through a device that has shareable resources like certain video cards and network cards, check this box to enable it
    - Raw Device: If you are passing through a device as a whole, check this box to enable it
