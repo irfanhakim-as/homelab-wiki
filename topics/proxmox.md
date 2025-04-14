@@ -688,9 +688,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       - Major device number (i.e. `226`)
       - Minor device number (i.e. `128`)
 
-5. Referring to the LXC Container which you wish to passthrough and share a device to, take note of the LXC Container's `CT ID` value (i.e. `101`) - create an (unprivileged) LXC Container [from scratch](#create-lxc-container) or [from a Container Template](#create-lxc-container-from-container-template) if you have not already.
-
-6. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
+5. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
    - Add each of the following lines to the end of the file:
 
@@ -821,7 +819,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       lxc.idmap: g 108 100108 65428
       ```
 
-7. On the Proxmox node host, add the `root` user to the `render` and `video` groups:
+6. On the Proxmox node host, add the `root` user to the `render` and `video` groups:
 
    ```sh
    usermod -aG render,video root
