@@ -455,6 +455,7 @@ This details matters pertaining to LXC on Proxmox.
 - [Split A GPU Between Multiple Computers (Written Steps)](https://github.com/JamesTurland/JimsGarage/tree/main/LXC/Jellyfin)
 - [NAS Shares On LXC - Unprivileged - Jellyfin Example](https://youtu.be/DMPetY4mX-c)
 - [NAS Shares On LXC - Unprivileged (Written Steps)](https://github.com/JamesTurland/JimsGarage/tree/main/LXC/NAS)
+- [New LXC Add Option - Device Passthrough](https://github.com/tteck/Proxmox/discussions/2850)
 
 
 ### Create LXC Container
