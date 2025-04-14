@@ -583,22 +583,58 @@ This details how to create an LXC Container from a Container Template.
 
 6. **TODO**: Once the Container has been created, [enter the Container](#enter-the-vm) or [remote into it using SSH](ssh.md#remotely-access-using-ssh) and [configure the Container](#vm-configuration) as necessary.
 
+### Editing LXC Container Parameters
+
+This details how to edit an existing LXC Container or Container Template.
+
+1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
+
+2. Select the target LXC Container (illustrated with an icon of a cube) or Container Template (illustrated with an icon of a file and cube) you wish to edit.
+
+3. In the Container view, go through any of the available sections such as **Resources**, **Network**, **DNS**, or **Options** and find parameters you wish to update.
+
+4. To update a Container parameter, select to highlight the particular parameter (i.e. **Memory**) and click the **Edit** button.
+
+5. In the parameter's **Edit** form, make any changes to the parameter value. Some parameters may have an **Advanced** checkbox you could enable to show additional, hidden options.
+
+6. Click the **OK** button to save the changes.
+
+### Adding a Device to an LXC Container
+
+This details how to add a device to an existing LXC Container:
+
+1. On the left-hand side of the web interface, under **Datacenter**, expand the section belonging to your Proxmox node (i.e. `proxmox`).
+
+2. Select the target LXC Container (illustrated with an icon of a cube) you wish to add a device to.
+
+3. In the Container view, navigate to the section related to the device you wish to add (i.e. **Resources** or **Network**).
+
+4. Click the **Add** button.
+
+5. If provided with a selection of device types, select the type of device you wish to add (i.e. `Mount Point`).
+
+6. In the prompted form, configure the device accordingly, and click the **Add** or **Create** button.
+
 ### GPU Passthrough to LXC Container
 
 This details how to passthrough and share a video device (i.e. GPU or iGPU) from a Proxmox node to one or more LXC Container(s):
 
 1. On the Proxmox node host, find the Group ID (GID) of groups; `render` and `video`:
 
-   ```sh
-   grep -E '^(render|video):' /etc/group
-   ```
+   - Run the following command to find the `render` and `video` groups on the Proxmox node host:
 
-   Sample output:
+      ```sh
+      grep -E '^(render|video):' /etc/group
+      ```
 
-   ```
-      video:x:44:
-      render:x:104:
-   ```
+      Sample output:
+
+      ```
+         video:x:44:
+         render:x:104:
+      ```
+
+   - From the sample output, take note of the numbered GID value of the `render` (i.e. `104`) and `video` (i.e. `44`) groups.
 
 2. On the Proxmox node host, identify the video device (i.e. GPU or iGPU) that you wish to passthrough and share to the LXC Container(s):
 
