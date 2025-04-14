@@ -82,6 +82,11 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Netdata Child](#netdata-child)
     - [Streaming Data](#streaming-data)
     - [Netdata Email Alerts](#netdata-email-alerts)
+  - [Storage](#storage)
+    - [Description](#description-12)
+    - [References](#references-11)
+    - [Adding Storage](#adding-storage)
+    - [Adding SMB/CIFS Storage](#adding-smbcifs-storage)
 
 ## References
 
@@ -2117,3 +2122,54 @@ This details the steps to set up email alerts on the Parent node:
    ```sh
    sudo -u netdata /usr/libexec/netdata/plugins.d/alarm-notify.sh test
    ```
+
+---
+
+## Storage
+
+### Description
+
+This details topics pertaining storage including adding a storage pool to the Proxmox cluster.
+
+### References
+
+- [Proxmox VE Storage](https://pve.proxmox.com/pve-docs/chapter-pvesm.html)
+
+### Adding Storage
+
+This details the process of adding a storage pool to the Proxmox cluster:
+
+1. Launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the **Datacenter** menu item.
+
+3. In the Datacenter view, select the **Storage** menu option.
+
+4. Click the **Add** button to expand it and select the type of storage you wish to add (i.e. `Directory`).
+
+5. In the **Add** form, enable the **Advanced** checkbox to show additional, hidden options if necessary, and configure the storage accordingly.
+
+6. Click the form's corresponding **Add** button to add or create the storage pool.
+
+### Adding SMB/CIFS Storage
+
+This details how to add an SMB/CIFS share as storage to the Proxmox cluster:
+
+1. [Add the `SMB/CIFS` storage](#adding-storage) to the Proxmox cluster, configuring it as follows:
+
+   - ID: Add an appropriate, unique name as the identifier for the storage (i.e. `smb`)
+   - Server: Add the static IP address of the SMB/CIFS server (i.e. `192.168.0.106`)
+   - Username: Add the username of the SMB/CIFS share user (i.e. `smbuser`)
+   - Password: Add the password of the SMB/CIFS share user (i.e. `smbuserpassword`)
+   - Share: After filling in the earlier fields, expand the dropdown and select the SMB/CIFS share location (i.e. `smbshare`)
+   - Nodes: Expand the dropdown and select the nodes which will have access to the storage, or leave it as default (i.e. `All`)
+   - Enable: Check the corresponding checkbox to enable the storage
+   - Content: Expand the dropdown and select each option that applies to the kind of files that will be stored on the storage (i.e. `Snippets`)
+
+2. After adding the SMB/CIFS storage, the share should be available on all Proxmox node(s) you have selected, at the following mount point:
+
+   ```
+   /mnt/pve/<storage-id>
+   ```
+
+   Replace `<storage-id>` with the ID of the SMB/CIFS storage (i.e. `smb`).
