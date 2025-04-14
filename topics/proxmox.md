@@ -1009,21 +1009,23 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
         mp0: /mnt/smb/,mp=/mnt/data,ro=1
       ```
 
-3. On the LXC Container, create a group that will grant the permission to mount the SMB share:
+3. **(Optional)** Perform the following additional configuration if the previous steps were not sufficient in granting access to the share, for your user in the LXC Container:
 
-    ```sh
-    sudo groupadd -g 10000 <group-name>
-    ```
+   - On the LXC Container, create a group that will grant the permission to mount the SMB share:
 
-    Replace `<group-name>` with a suitable name accordingly (i.e. `lxc_shares`).
+      ```sh
+      sudo groupadd -g 10000 <group-name>
+      ```
 
-4. If you have any user(s) other than `root` that needs access to the share inside the LXC Container, add them to the group:
+      Replace `<group-name>` with a suitable name accordingly (i.e. `lxc-shares`).
 
-    ```sh
-    sudo usermod -aG <group-name> <user>
-    ```
+   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, add them to the group:
 
-    Replace `<group-name>` with the name of the group you have created (i.e. `lxc_shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
+      ```sh
+      sudo usermod -aG <group-name> <user>
+      ```
+
+      Replace `<group-name>` with the name of the group you have created (i.e. `lxc-shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
 
 ### Update LXC Container Configuration
 
