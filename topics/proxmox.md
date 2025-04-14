@@ -761,6 +761,33 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
      - Numbered `render` group GID on the Proxmox node host (i.e. `104`)
      - Numbered `video` group GID on the Proxmox node host (i.e. `44`)
 
+**(Easy)** This details how to perform the GPU passthrough graphically:
+
+> [!IMPORTANT]  
+> This method is only supported on Proxmox PVE Manager version 8.2+
+
+1. Please ensure that you have the following values before proceeding with the rest of the steps:
+
+   - `<card-number>`: Numbered `card` value of the video device (i.e. `0`)
+   - `<renderd-number>`: Numbered `renderD` value of the video device (i.e. `128`)
+   - `<lxc-uid>`: Numbered user UID on the LXC Container (i.e. `0`)
+   - `<lxc-video-gid>`: Numbered `video` group GID on the LXC Container (i.e. `44`)
+   - `<lxc-render-gid>`: Numbered `render` group GID on the LXC Container (i.e. `104`)
+
+2. [Add a `Device Passthrough` device](#adding-a-device-to-an-lxc-container) to the LXC Container with the following configuration:
+
+   - Device Path: `/dev/dri/card<card-number>` (i.e. `/dev/dri/card0`)
+   - UID in CT: `<lxc-uid>` (i.e. `0`)
+   - GID in CT: `<lxc-video-gid>` (i.e. `44`)
+
+3. [Add another `Device Passthrough` device](#adding-a-device-to-an-lxc-container) to the LXC Container with the following configuration:
+
+   - Device Path: `/dev/dri/renderD<renderd-number>` (i.e. `/dev/dri/renderD128`)
+   - UID in CT: `<lxc-uid>` (i.e. `0`)
+   - GID in CT: `<lxc-render-gid>` (i.e. `104`)
+
+4. Reboot the LXC Container if it was running, to apply the changes.
+
 **(Advanced)** This details how to perform the GPU passthrough manually:
 
 1. On the Proxmox node host, update the GID mapping to grant the root user the permission to map these groups inside the LXC Container later:
