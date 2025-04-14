@@ -35,7 +35,7 @@ This details how to create a Container Template out of an LXC Container.
 
 ## Create LXC Container from Container Template
 
-This details how to create an LXC Container from a Container Template.
+This details topics pertaining to Linux Containers (LXC) on Proxmox.
 
 ### References
 

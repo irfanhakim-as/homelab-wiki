@@ -446,7 +446,7 @@ This details how to add a device to an existing virtual machine:
 
 ### Description
 
-This details matters pertaining to LXC on Proxmox.
+This details topics pertaining to Linux Containers (LXC) on Proxmox.
 
 ### References
 
