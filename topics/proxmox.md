@@ -615,7 +615,9 @@ This details how to add a device to an existing LXC Container:
 
 5. If provided with a selection of device types, select the type of device you wish to add (i.e. `Mount Point`).
 
-6. In the prompted form, configure the device accordingly, and click the **Add** or **Create** button.
+6. In the prompted form, enable the **Advanced** checkbox to show additional, hidden options if necessary, and configure the device accordingly.
+
+7. Click the **Add** or **Create** button.
 
 ### GPU Passthrough to LXC Container
 
