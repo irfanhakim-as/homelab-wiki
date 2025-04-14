@@ -587,7 +587,7 @@ This details how to create an LXC Container from a Container Template.
 
 This details how to passthrough and share a video device (i.e. GPU or iGPU) from a Proxmox node to one or more LXC Container(s):
 
-1. On the Proxmox node host, find the group numbers of groups; `render` and `video`:
+1. On the Proxmox node host, find the Group ID (GID) of groups; `render` and `video`:
 
    ```sh
    grep -E '^(render|video):' /etc/group
@@ -662,7 +662,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       - Major device number (i.e. `226`)
       - Minor device number (i.e. `128`)
 
-4. On the Proxmox node host, update the Group ID (GID) mapping to grant the root user the permission to map these groups inside the LXC Container later:
+4. On the Proxmox node host, update the GID mapping to grant the root user the permission to map these groups inside the LXC Container later:
 
    - Update the `/etc/subgid` file:
 
