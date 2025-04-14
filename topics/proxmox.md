@@ -696,7 +696,7 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
      - Major device number (i.e. `226`)
      - Minor device number (i.e. `128`)
 
-3. **(Advanced)** On the Proxmox node host, find the Group ID (GID) of groups; `render` and `video`:
+3. **(Advanced)** Find the Group ID (GID) of groups; `render` and `video` on the Proxmox node host:
 
    - Run the following command to find the `render` and `video` groups on the Proxmox node host:
 
@@ -711,10 +711,10 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
          render:x:104:
       ```
 
-   - Take note of the following values on the Proxmox node host:
+   - Take note of the following values:
 
-     - Numbered `render` group GID (i.e. `104`)
-     - Numbered `video` group GID (i.e. `44`)
+     - Numbered `render` group GID on the Proxmox node host (i.e. `104`)
+     - Numbered `video` group GID on the Proxmox node host (i.e. `44`)
 
 **(Advanced)** This details how to perform the GPU passthrough manually:
 
