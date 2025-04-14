@@ -634,15 +634,13 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
          lrwxrwxrwx 1 root root 13 Feb  7 23:18 pci-0000:07:00.0-render -> ../renderD128
       ```
 
-      From this sample, take note of the numbered `renderD` value (i.e. `128`).
-
    - If you have multiple video devices (i.e. `renderD128` and `renderD129`), take note of each `renderD` device's corresponding "target":
 
       ```
          pci-0000:07:00.0-render -> ../renderD128
       ```
 
-      Based on the "target" in this sample (i.e. `pci-0000:07:00.0-render`), cross-check with the list of available PCI devices on the system using only the `XX:XX.X` portion of the value (i.e. `07:00.0`):
+      Based on the "target" of the device (i.e. `pci-0000:07:00.0-render`), cross-check with the list of available PCI devices on the system using only the `XX:XX.X` portion of the value (i.e. `07:00.0`):
 
       ```sh
       lspci | grep '07:00.0'
@@ -654,7 +652,20 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
          07:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Cezanne [Radeon Vega Series / Radeon Vega Mobile Series] (rev c9)
       ```
 
-      Once you have found the right video device that you wish to share, again, take note of its corresponding numbered `renderD` value (i.e. `128`).
+   - Once you have identified the right video device that you wish to share, use the `XX:XX.X` value of the target device (i.e. `07:00.0`) to get its corresponding values specifically:
+
+      ```sh
+      ls -l /dev/dri/by-path | grep '07:00.0'
+      ```
+
+      Sample output:
+
+      ```
+         lrwxrwxrwx 1 root root  8 Feb  7 23:18 pci-0000:07:00.0-card -> ../card0
+         lrwxrwxrwx 1 root root 13 Feb  7 23:18 pci-0000:07:00.0-render -> ../renderD128
+      ```
+
+   - Take note of video device's corresponding numbered `renderD` value (i.e. `128`).
 
 2. On the Proxmox node host, get the video device's Major and Minor device numbers:
 
