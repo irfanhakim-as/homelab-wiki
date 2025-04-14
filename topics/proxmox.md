@@ -977,13 +977,15 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
 
     Replace `<group-name>` with the name of the group you have created (i.e. `lxc_shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
 
-3. On the Proxmox node host, mount the SMB share as you would normally do, including:
+3. [Add the SMB/CIFS share as storage](#adding-smbcifs-storage) to the Proxmox cluster - this allows for the share to be mounted on all Proxmox node(s) easily.
+
+   **Alternatively**, on the Proxmox node host, mount the SMB share as you would normally do, including:
 
    - Creating a directory for the share to be mounted to (i.e. `/mnt/smb`).
    - Adding a mount for the share to the `/etc/fstab` file.
    - Mounting the share on the Proxmox node host.
 
-    You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide to do this for more details.
+   You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide to do this for more details.
 
 4. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
