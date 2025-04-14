@@ -38,6 +38,8 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Create LXC Container](#create-lxc-container)
     - [Create LXC Container Template](#create-lxc-container-template)
     - [Create LXC Container from Container Template](#create-lxc-container-from-container-template)
+    - [Editing LXC Container Parameters](#editing-lxc-container-parameters)
+    - [Adding a Device to an LXC Container](#adding-a-device-to-an-lxc-container)
     - [GPU Passthrough to LXC Container](#gpu-passthrough-to-lxc-container)
     - [Mount SMB share on LXC Container](#mount-smb-share-on-lxc-container)
     - [Update LXC Container Configuration](#update-lxc-container-configuration)
