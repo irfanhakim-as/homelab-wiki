@@ -716,7 +716,27 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
      - Numbered `render` group GID on the LXC Container (i.e. `104`)
      - Numbered `video` group GID on the LXC Container (i.e. `44`)
 
-4. **(Advanced)** On the Proxmox node host, get the video device's Major and Minor device numbers:
+4. **(Advanced)** Find the GID of groups; `render` and `video` on the Proxmox node host:
+
+   - On the Proxmox node host, run the following command to find the `render` and `video` groups:
+
+      ```sh
+      grep -E '^(render|video):' /etc/group
+      ```
+
+      Sample output:
+
+      ```
+         video:x:44:
+         render:x:104:
+      ```
+
+   - Take note of the following values:
+
+     - Numbered `render` group GID on the Proxmox node host (i.e. `104`)
+     - Numbered `video` group GID on the Proxmox node host (i.e. `44`)
+
+5. **(Advanced)** On the Proxmox node host, get the video device's Major and Minor device numbers:
 
    - Replace `<renderd-number>` with the `renderD` value of the video device you wish to share:
 
@@ -740,26 +760,6 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
 
      - Major device number (i.e. `226`)
      - Minor device number (i.e. `128`)
-
-5. **(Advanced)** Find the Group ID (GID) of groups; `render` and `video` on the Proxmox node host:
-
-   - Run the following command to find the `render` and `video` groups on the Proxmox node host:
-
-      ```sh
-      grep -E '^(render|video):' /etc/group
-      ```
-
-      Sample output:
-
-      ```
-         video:x:44:
-         render:x:104:
-      ```
-
-   - Take note of the following values:
-
-     - Numbered `render` group GID on the Proxmox node host (i.e. `104`)
-     - Numbered `video` group GID on the Proxmox node host (i.e. `44`)
 
 **(Easy)** This details how to perform the GPU passthrough graphically:
 
