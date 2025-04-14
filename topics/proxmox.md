@@ -806,7 +806,7 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
       + root:<render-gid>:1
       ```
 
-      Replace `<video-gid>` and `<render-gid>` with the GID values for the `video` (i.e. `44`) and `render` (i.e. `104`) groups, respectively.
+      Replace `<video-gid>` and `<render-gid>` with the GID values for the `video` (i.e. `44`) and `render` (i.e. `104`) groups on the Proxmox node host, respectively.
 
    - Sample resulting file:
 
@@ -865,7 +865,7 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
       + lxc.idmap: g 0 100000 <video-gid>
       ```
 
-      - Replace `<video-gid>` with the GID value for the `video` group (i.e. `44`).
+      - Replace `<video-gid>` with the GID value for the `video` group on the Proxmox node host (i.e. `44`).
       - This maps the LXC Container's GIDs; `0:(video-gid - 1)` to the Proxmox node host's GIDs; `100000:(100000 + (video-gid - 1))`.
       - According to the sample value, this maps the LXC Container's GIDs; `0:43` to the Proxmox node host's GIDs; `100000:100043`.
       - This mapping is done purposefully to make way for the `video` group (i.e. `44`) to be mapped accordingly next.
@@ -877,7 +877,7 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
       + lxc.idmap: g <video-gid> <video-gid> 1
       ```
 
-      - Replace `<video-gid>` with the GID value for the `video` group (i.e. `44`).
+      - Replace `<video-gid>` with the GID value for the `video` group on the Proxmox node host (i.e. `44`).
       - According to the sample value, this directly maps the LXC Container's GID, `44` to the Proxmox node host's GID, `44`.
       - This mapping grants the LXC Container access to the Proxmox node host's `video` group, for GPU device sharing.
 
@@ -888,11 +888,11 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
       + lxc.idmap: g (<video-gid> + 1) (100000 + (<video-gid> + 1)) (<lxc-render-gid> - (<render-gid> + 1))
       ```
 
-      - Replace `(<video-gid> + 1)` with the sum of the GID value for the `video` group (i.e. `44`) and `1` (i.e. `45`).
-      - Replace `(100000 + (<video-gid> + 1))` with the sum of `100000`, the GID value for the `video` group (i.e. `44`), and `1` (i.e. `100045`).
-      - Replace `(<lxc-render-gid> - (<render-gid> + 1))` with the difference between the intended LXC Container `render` GID (i.e. `107`) and the sum of the GID value for the `video` group (i.e. `44`) and `1` (i.e. `62`).
+      - Replace `(<video-gid> + 1)` with the sum of the GID value for the `video` group on the Proxmox node host (i.e. `44`) and `1` (i.e. `45`).
+      - Replace `(100000 + (<video-gid> + 1))` with the sum of `100000`, the GID value for the `video` group on the Proxmox node host (i.e. `44`), and `1` (i.e. `100045`).
+      - Replace `(<lxc-render-gid> - (<render-gid> + 1))` with the difference between the intended `render` group GID on the LXC Container (i.e. `107`) and the sum of the GID value for the `video` group on the Proxmox node host (i.e. `44`) and `1` (i.e. `62`).
       - According to the sample value, this maps the LXC Container's GIDs; `45:106` to the Proxmox node host's GIDs; `100045:100106`.
-      - This mapping resumes the previous unprivileged group mapping for the LXC Container, while making way for the intended `render` GID on the LXC Container (i.e. `107`) to be mapped to the `render` group (i.e. `104`) on the Proxmox node host.
+      - This mapping resumes the previous unprivileged group mapping for the LXC Container, while making way for the intended `render` group GID on the LXC Container (i.e. `107`) to be mapped to the `render` group (i.e. `104`) on the Proxmox node host.
 
    - Add the following line to the end of the file:
 
@@ -902,7 +902,7 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
       ```
 
       - Replace `<lxc-render-gid>` with the intended GID value for the `render` group on the LXC Container (i.e. `107`).
-      - Replace `<render-gid>` with the GID value for the `render` group (i.e. `104`).
+      - Replace `<render-gid>` with the GID value for the `render` group on the Proxmox node host (i.e. `104`).
       - According to the sample value, this maps the LXC Container's GID, `107` to the Proxmox node host's GID, `104`.
       - This mapping grants the LXC Container access to the Proxmox node host's `render` group, for GPU rendering.
 
@@ -913,9 +913,9 @@ This details two methods, **Easy** and **Advanced**, on how to passthrough and s
       + lxc.idmap: g (<lxc-render-gid> + 1) (100000 + (<lxc-render-gid> + 1)) (65536 - (<lxc-render-gid> + 1))
       ```
 
-      - Replace `(<lxc-render-gid> + 1)` with the sum of the intended LXC Container `render` GID (i.e. `107`) and `1` (i.e. `108`).
-      - Replace `(100000 + (<lxc-render-gid> + 1))` with the sum of `100000`, the intended LXC Container `render` GID (i.e. `107`), and `1` (i.e. `100108`).
-      - Replace `(65536 - (<lxc-render-gid> + 1))` with the difference between `65536` and the sum of the intended LXC Container `render` GID (i.e. `107`) and `1` (i.e. `65428`).
+      - Replace `(<lxc-render-gid> + 1)` with the sum of the intended `render` group GID on the LXC Container (i.e. `107`) and `1` (i.e. `108`).
+      - Replace `(100000 + (<lxc-render-gid> + 1))` with the sum of `100000`, the intended `render` group GID on the LXC Container (i.e. `107`), and `1` (i.e. `100108`).
+      - Replace `(65536 - (<lxc-render-gid> + 1))` with the difference between `65536` and the sum of the intended `render` group GID on the LXC Container (i.e. `107`) and `1` (i.e. `65428`).
       - According to the sample value, this maps the LXC Container's GIDs; `108:65535` to the Proxmox node host's GIDs; `100108:165535`.
       - This mapping completes the rest of the unprivileged group mapping for the LXC Container to the Proxmox node host.
 
