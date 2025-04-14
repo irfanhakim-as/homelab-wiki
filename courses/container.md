@@ -10,12 +10,10 @@ In software engineering, containerisation is operating-system–level virtualisa
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Create LXC Container Template](#create-lxc-container-template)
+  - [Linux Containers (LXC)](#linux-containers-lxc)
     - [References](#references-1)
-  - [Create LXC Container from Container Template](#create-lxc-container-from-container-template)
-    - [References](#references-2)
   - [Docker](#docker)
-    - [References](#references-3)
+    - [References](#references-2)
 
 ## References
 
@@ -23,23 +21,16 @@ In software engineering, containerisation is operating-system–level virtualisa
 
 ---
 
-## Create LXC Container Template
-
-This details how to create a Container Template out of an LXC Container.
-
-### References
-
-- [Proxmox: Create LXC Container Template](../topics/proxmox.md#create-lxc-container-template)
-
----
-
-## Create LXC Container from Container Template
+## Linux Containers (LXC)
 
 This details topics pertaining to Linux Containers (LXC) on Proxmox.
 
 ### References
 
-- [Proxmox: Create LXC Container from Container Template](../topics/proxmox.md#create-lxc-container-from-container-template)
+- [Create LXC Container Template](../topics/proxmox.md#create-lxc-container-template)
+- [Create LXC Container from Container Template](../topics/proxmox.md#create-lxc-container-from-container-template)
+- [GPU Passthrough to LXC Container](../topics/proxmox.md#gpu-passthrough-to-lxc-container)
+- [Mount SMB share on LXC Container](../topics/proxmox.md#mount-smb-share-on-lxc-container)
 
 ---
 
