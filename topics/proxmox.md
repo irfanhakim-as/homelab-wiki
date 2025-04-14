@@ -600,33 +600,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       render:x:104:
    ```
 
-2. On the Proxmox node host, update the Group ID (GID) mapping to grant the root user the permission to map these groups inside the LXC Container later:
-
-   - Update the `/etc/subgid` file:
-
-      ```sh
-      sudo nano /etc/subgid
-      ```
-
-   - Allow the following groups to be mapped inside the LXC Container by adding the following lines to the file:
-
-      ```diff
-        root:100000:65536
-      + root:<video-gid>:1
-      + root:<render-gid>:1
-      ```
-
-      Replace `<video-gid>` and `<render-gid>` with the GID values for the `video` (i.e. `44`) and `render` (i.e. `104`) groups, respectively.
-
-   - Sample resulting file:
-
-      ```
-      root:100000:65536
-      root:44:1
-      root:104:1
-      ```
-
-3. On the Proxmox node host, identify the video device (i.e. GPU or iGPU) that you wish to passthrough and share to the LXC Container(s):
+2. On the Proxmox node host, identify the video device (i.e. GPU or iGPU) that you wish to passthrough and share to the LXC Container(s):
 
    - Run the following command to list all available video device(s) on the Proxmox node host:
 
@@ -663,7 +637,7 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       Once you have found the right video device that you wish to share, again, take note of its corresponding numbered `renderD` value (i.e. `128`).
 
-4. On the Proxmox node host, get the video device's Major and Minor device numbers:
+3. On the Proxmox node host, get the video device's Major and Minor device numbers:
 
    - Replace `<renderd-number>` with the `renderD` value of the video device you wish to share:
 
@@ -687,6 +661,32 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
 
       - Major device number (i.e. `226`)
       - Minor device number (i.e. `128`)
+
+4. On the Proxmox node host, update the Group ID (GID) mapping to grant the root user the permission to map these groups inside the LXC Container later:
+
+   - Update the `/etc/subgid` file:
+
+      ```sh
+      sudo nano /etc/subgid
+      ```
+
+   - Allow the following groups to be mapped inside the LXC Container by adding the following lines to the file:
+
+      ```diff
+        root:100000:65536
+      + root:<video-gid>:1
+      + root:<render-gid>:1
+      ```
+
+      Replace `<video-gid>` and `<render-gid>` with the GID values for the `video` (i.e. `44`) and `render` (i.e. `104`) groups, respectively.
+
+   - Sample resulting file:
+
+      ```
+      root:100000:65536
+      root:44:1
+      root:104:1
+      ```
 
 5. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
