@@ -667,7 +667,9 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
          lrwxrwxrwx 1 root root 13 Feb  7 23:18 pci-0000:07:00.0-render -> ../renderD128
       ```
 
-   - Take note of video device's corresponding numbered `renderD` value (i.e. `128`).
+   - Take note of the following values of the video device:
+
+     - Numbered `renderD` value (i.e. `128`)
 
 2. On the Proxmox node host, get the video device's Major and Minor device numbers:
 
@@ -683,16 +685,16 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
       ls -l /dev/dri/renderD128
       ```
 
-   - Sample output:
+      Sample output:
 
       ```
          crw-rw---- 1 root render 226, 128 Feb  7 23:18 /dev/dri/renderD128
       ```
 
-      Take note of the following values of the video device:
+   - Take note of the following values of the video device:
 
-      - Major device number (i.e. `226`)
-      - Minor device number (i.e. `128`)
+     - Major device number (i.e. `226`)
+     - Minor device number (i.e. `128`)
 
 3. On the Proxmox node host, find the Group ID (GID) of groups; `render` and `video`:
 
@@ -709,7 +711,10 @@ This details how to passthrough and share a video device (i.e. GPU or iGPU) from
          render:x:104:
       ```
 
-   - From the sample output, take note of the numbered GID value of the `render` (i.e. `104`) and `video` (i.e. `44`) groups.
+   - Take note of the following values on the Proxmox node host:
+
+     - Numbered `render` group GID (i.e. `104`)
+     - Numbered `video` group GID (i.e. `44`)
 
 4. On the Proxmox node host, update the GID mapping to grant the root user the permission to map these groups inside the LXC Container later:
 
