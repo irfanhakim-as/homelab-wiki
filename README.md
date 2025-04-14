@@ -47,7 +47,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
          3. [Ubuntu](topics/ubuntu.md)
          4. [RHEL](topics/rhel.md)
 4. [Container](courses/container.md): The alternative way of hosting services
-    1. [LXC](topics/proxmox.md#linux-containers-lxc)
+    1. [LXC](courses/container.md#linux-containers-lxc)
     2. [Docker](topics/docker.md)
     3. Podman
 5. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
