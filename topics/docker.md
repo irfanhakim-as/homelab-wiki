@@ -33,6 +33,7 @@ This details the installation and configuration process of Docker on a Linux sys
 
 - [Install Docker Engine](https://docs.docker.com/engine/install)
 - [Manage Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
+- [ArchWiki](https://wiki.archlinux.org/title/Docker)
 
 ### Installation
 
@@ -88,11 +89,19 @@ This details how to install Docker on a Linux system.
 
 4. [Install](package-manager.md#install-software) the latest version of Docker packages using your package manager (i.e. `apt`):
 
-   - `docker-ce`
-   - `docker-ce-cli`
-   - `containerd.io`
-   - `docker-buildx-plugin`
-   - `docker-compose-plugin`
+    **Arch Linux**:
+
+    - `docker`
+    - `docker-buildx`
+    - `docker-compose`
+
+    **Debian/Ubuntu/RHEL**:
+
+    - `docker-ce`
+    - `docker-ce-cli`
+    - `containerd.io`
+    - `docker-buildx-plugin`
+    - `docker-compose-plugin`
 
 5. [Start and enable](systemd.md#enable-service) the following Docker services:
 
