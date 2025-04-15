@@ -63,9 +63,6 @@ The package manager relies on the list of mirrors to download the latest package
     sudo reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
     ```
 
-    > [!TIP]  
-    > Remove `sudo` if you are running as the root user.
-
 ### Enable Parallel Downloads
 
 This details the steps to allow the package manager to download multiple packages in parallel instead of sequentially to speed up the download process.
