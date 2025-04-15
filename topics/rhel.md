@@ -137,7 +137,7 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 9. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
 
-10. SELinux is enabled by default on Rocky Linux and needs to be configured to allow access to the new SSH port.
+10. If SELinux is enabled on the system, configure it to allow access to the new SSH port:
 
     - Add the new SSH port to the `ssh_port_t` SELinux policy:
 
