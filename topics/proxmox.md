@@ -1027,6 +1027,8 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
       You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide for more details on how to do this.
 
+   - **(Optional)** In either of these methods, if you have trouble with allowing read access for a user in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker Container), you may need to update the `dir_mode` and `file_mode` mount options to `0775` accordingly.
+
 2. Grant access to the SMB/CIFS share for your user in the LXC Container:
 
    - On the LXC Container, create a group that will grant the permission to mount the SMB share:
