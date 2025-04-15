@@ -227,7 +227,7 @@ This details the process of deleting firewall rules.
     icmp-block-inversion: no
     interfaces: enp6s18
     sources:
-    services: cockpit dhcpv6-client
+    services: cockpit dhcpv6-client ssh
     ports: 2222/tcp
     protocols:
     forward: no
