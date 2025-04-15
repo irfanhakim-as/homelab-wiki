@@ -461,6 +461,7 @@ This details topics pertaining to Linux Containers (LXC) on Proxmox.
 - [NAS Shares On LXC - Unprivileged - Jellyfin Example](https://youtu.be/DMPetY4mX-c)
 - [NAS Shares On LXC - Unprivileged (Written Steps)](https://github.com/JamesTurland/JimsGarage/tree/main/LXC/NAS)
 - [New LXC Add Option - Device Passthrough](https://github.com/tteck/Proxmox/discussions/2850)
+- [Tutorial: Unprivileged LXCs - Mount CIFS shares](https://forum.proxmox.com/threads/tutorial-unprivileged-lxcs-mount-cifs-shares.101795)
 
 
 ### Create LXC Container
