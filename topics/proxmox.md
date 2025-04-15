@@ -1066,6 +1066,7 @@ Choose for yourself one of the aforementioned methods and follow the instruction
       - Replace `<host-mount-path>` with the path to the directory where you have mounted the share on the Proxmox node host (i.e. `/mnt/smb/`).
       - Replace `<container-mount-path>` with the path to where the share should be mounted inside the LXC Container (i.e. `/mnt/data`).
       - **(Optional)** Include the `ro=1` flag to make the share read-only inside the LXC Container.
+      - **(Optional)** Adding the `shared=1` flag may be needed to allow migrating the LXC Container between Proxmox nodes.
 
    - Sample resulting configuration file:
 
