@@ -971,7 +971,25 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
 
    You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide to do this for more details.
 
-2. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
+2. **(Optional)** Perform the following additional configuration if the previous steps were not sufficient in granting access to the share, for your user in the LXC Container:
+
+   - On the LXC Container, create a group that will grant the permission to mount the SMB share:
+
+      ```sh
+      sudo groupadd -g 10000 <group-name>
+      ```
+
+      Replace `<group-name>` with a suitable name accordingly (i.e. `lxc-shares`).
+
+   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, add them to the group:
+
+      ```sh
+      sudo usermod -aG <group-name> <user>
+      ```
+
+      Replace `<group-name>` with the name of the group you have created (i.e. `lxc-shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
+
+3. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
    - Add the following line to the end of the file:
 
@@ -1008,24 +1026,6 @@ This details the steps to mount an SMB share on an unprivileged LXC Container:
         unprivileged: 1
         mp0: /mnt/smb/,mp=/mnt/data,ro=1
       ```
-
-3. **(Optional)** Perform the following additional configuration if the previous steps were not sufficient in granting access to the share, for your user in the LXC Container:
-
-   - On the LXC Container, create a group that will grant the permission to mount the SMB share:
-
-      ```sh
-      sudo groupadd -g 10000 <group-name>
-      ```
-
-      Replace `<group-name>` with a suitable name accordingly (i.e. `lxc-shares`).
-
-   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, add them to the group:
-
-      ```sh
-      sudo usermod -aG <group-name> <user>
-      ```
-
-      Replace `<group-name>` with the name of the group you have created (i.e. `lxc-shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
 
 ### Update LXC Container Configuration
 
