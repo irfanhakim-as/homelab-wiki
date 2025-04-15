@@ -57,7 +57,9 @@ This details some configuration options for improving the package manager.
 
 The package manager relies on the list of mirrors to download the latest packages.
 
-1. Use `reflector` to update the system's mirror list and sort them by speed:
+1. [Install](#install-software) the `reflector` package if it is not already installed on the system.
+
+2. Update the system's mirror list and sort them by speed:
 
     ```sh
     sudo reflector --latest 50 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
