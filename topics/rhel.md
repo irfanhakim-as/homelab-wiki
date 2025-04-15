@@ -176,6 +176,8 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 12. Set up the VM firewall (Firewalld):
 
+    - [Install](package-manager.md#install-software) the `firewalld` package using `dnf`.
+
     - [Enable the firewall](firewall.md#enablement).
 
     - Check the [firewall status](firewall.md#status) to ensure it is active.
