@@ -181,7 +181,7 @@ This details some recommended configuration options for Ubuntu as a server.
 
       ```diff
         # Created by cloud-init v. 22.2-0ubuntu1~20.04.3 on Thu, 21 Apr 2022 12:54:58 +0000
-        
+
         # User rules for <user>
       - <user> ALL=(ALL) NOPASSWD:ALL
       + #<user> ALL=(ALL) NOPASSWD:ALL
