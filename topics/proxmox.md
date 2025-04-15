@@ -959,19 +959,74 @@ This details two methods, **Easy** **(Recommended)** and **Advanced**, on how to
 
 ### Mount SMB share on LXC Container
 
-This details the steps to mount an SMB share on an unprivileged LXC Container:
+This details two methods, **Cluster** **(Recommended)** and **Node**, to mount an SMB share on an unprivileged LXC Container:
 
-1. [Add the SMB/CIFS share as storage](#adding-smbcifs-storage) to the Proxmox cluster - this allows for the share to be mounted on all Proxmox node(s) easily.
+- **Cluster**: This method mounts the SMB/CIFS share as a Proxmox storage on the entire Proxmox cluster.
+- **Node**: This method mounts the SMB/CIFS share individually on a single Proxmox node host.
 
-   **Alternatively**, on the Proxmox node host, mount the SMB share as you would normally do, including:
+Choose for yourself one of the aforementioned methods and follow the instructions below accordingly.
 
-   - Creating a directory for the share to be mounted to (i.e. `/mnt/smb`).
-   - Adding a mount for the share to the `/etc/fstab` file.
-   - Mounting the share on the Proxmox node host.
+1. Add the SMB/CIFS share as storage to the Proxmox cluster or node host individually:
 
-   You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide to do this for more details.
+   - **(Cluster)** [Add the SMB/CIFS share as storage](#adding-smbcifs-storage) to the Proxmox cluster with the following considerations:
 
-2. **(Optional)** Perform the following additional configuration if the previous steps were not sufficient in granting access to the share, for your user in the LXC Container:
+     - When adding the SMB/CIFS share as storage to the Proxmox cluster, uncheck the **Enable** option to disable and prevent it from being mounted.
+
+     - On any one of your Proxmox node host(s), edit the Proxmox storage configuration file:
+
+         ```sh
+         nano /etc/pve/storage.cfg
+         ```
+
+         Locate the configuration section of your SMB/CIFS storage, for example:
+
+         ```
+         cifs: smb
+                  path /mnt/pve/smb
+                  server 192.168.0.106
+                  share smbshare
+                  content snippets
+                  prune-backups keep-all=1
+                  username smbuser
+         ```
+
+     - Add the following mount options to the end of the SMB/CIFS share section:
+
+         ```diff
+                  username smbuser
+         +        options uid=100000,gid=110000,dir_mode=0770,file_mode=0770
+         ```
+
+         Sample resulting file:
+
+         ```
+         cifs: smb
+                  path /mnt/pve/smb
+                  server 192.168.0.106
+                  share smbshare
+                  content snippets
+                  prune-backups keep-all=1
+                  username smbuser
+                  options uid=100000,gid=110000,dir_mode=0770,file_mode=0770
+         ```
+
+     - Navigate back to the [SMB/CIFS storage you have added](#adding-smbcifs-storage) and edit it by selecting the storage and clicking the **Edit** button.
+
+     - Enable the storage to be mounted on all Proxmox node host(s) by checking the **Enable** option.
+
+   - **(Node)** For each Proxmox node host (as necessary), mount the SMB share as you would normally do, including:
+
+     - Creating a directory for the share to be mounted to (i.e. `/mnt/smb`).
+
+     - Adding a mount for the share to the `/etc/fstab` file, including the following options:
+
+       - `uid=100000,gid=110000,dir_mode=0770,file_mode=0770`: Limit read-write access to the share for the UID/GID
+
+     - Mounting the share on the Proxmox node host.
+
+      You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide for more details on how to do this.
+
+2. Grant access to the SMB/CIFS share for your user in the LXC Container:
 
    - On the LXC Container, create a group that will grant the permission to mount the SMB share:
 
