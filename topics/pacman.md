@@ -13,6 +13,7 @@ The pacman package manager is one of the major distinguishing features of Arch L
   - [Configuration](#configuration)
     - [Description](#description-1)
     - [References](#references-1)
+    - [Initialise and Verify Keyring](#initialise-and-verify-keyring)
     - [Update Mirror List](#update-mirror-list)
     - [Enable Parallel Downloads](#enable-parallel-downloads)
   - [Install Software](#install-software)
@@ -52,6 +53,29 @@ This details some configuration options for improving the package manager.
 
 - [REFLECTOR(1) - EXAMPLES](https://man.archlinux.org/man/reflector.1#EXAMPLES)
 - [Enabling parallel downloads](https://wiki.archlinux.org/title/Pacman#Enabling_parallel_downloads)
+- [pacman/Package signing](https://wiki.archlinux.org/title/Pacman/Package_signing)
+
+### Initialise and Verify Keyring
+
+For first-time use, the package manager requires the following, one-time initial setup:
+
+1. Run the following command to initialise the Pacman keyring:
+
+    ```sh
+    sudo pacman-key --init
+    ```
+
+2. Verify the master signing keys:
+
+    ```sh
+    sudo pacman-key --populate
+    ```
+
+3. Manually sync the package database and install or upgrade the system keyring package:
+
+    ```sh
+    sudo pacman -Sy --needed archlinux-keyring
+    ```
 
 ### Update Mirror List
 
