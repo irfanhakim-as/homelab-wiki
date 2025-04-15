@@ -627,7 +627,7 @@ This details how to add a device to an existing LXC Container:
 
 ### GPU Passthrough to LXC Container
 
-This details two methods, **Easy** and **Advanced**, on how to passthrough and share a video device (i.e. GPU or iGPU) from a Proxmox node to one or more LXC Container(s):
+This details two methods, **Easy** **(Recommended)** and **Advanced**, on how to passthrough and share a video device (i.e. GPU or iGPU) from a Proxmox node to one or more LXC Container(s):
 
 1. On the Proxmox node host, identify the video device that you wish to passthrough and share to the LXC Container(s):
 
