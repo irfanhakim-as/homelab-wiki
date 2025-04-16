@@ -118,16 +118,6 @@ This details how to configure Docker to allow a non-root user to run it.
     sudo groupadd docker
     ```
 
-2. Add the user that is to be given root-level privileges for running Docker to the `docker` group:
-
-    ```sh
-    sudo usermod -aG docker <user>
-    ```
-
-    Replace `<user>` with the actual username of the (non-root) user (i.e. `foo`), for example:
-
-    ```sh
-    sudo usermod -aG docker foo
-    ```
+2. [Add the service (non-root) user to the `docker` group](linux.md#add-user-to-group) to give the user root-level privileges for running Docker.
 
 3. Reboot the server to apply the changes.
