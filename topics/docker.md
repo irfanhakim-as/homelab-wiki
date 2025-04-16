@@ -112,11 +112,7 @@ This details how to install Docker on a Linux system.
 
 This details how to configure Docker to allow a non-root user to run it.
 
-1. Create the `docker` group on the system:
-
-    ```sh
-    sudo groupadd docker
-    ```
+1. [Create the `docker` group](linux.md#create-group) on the system.
 
 2. [Add the service (non-root) user to the `docker` group](linux.md#add-user-to-group) to give the user root-level privileges for running Docker.
 

@@ -952,11 +952,7 @@ This details two methods, **Easy** **(Recommended)** and **Advanced**, on how to
       lxc.idmap: g 108 100108 65428
       ```
 
-3. On the Proxmox node host, add the `root` user to the `render` and `video` groups:
-
-   ```sh
-   usermod -aG render,video root
-   ```
+3. On the Proxmox node host, [add the `root` user to groups](linux.md#add-user-to-group); `render` and `video`.
 
 ### Mount SMB share on LXC Container
 
@@ -1031,21 +1027,9 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
 2. Grant access to the SMB/CIFS share for your user in the LXC Container:
 
-   - On the LXC Container, create a group that will grant the permission to mount the SMB share:
+   - On the LXC Container, [create a group](linux.md#create-group) (i.e. `lxc-shares`) with GID of `10000` that will grant the permission to mount the SMB share.
 
-      ```sh
-      sudo groupadd -g 10000 <group-name>
-      ```
-
-      Replace `<group-name>` with a suitable name accordingly (i.e. `lxc-shares`).
-
-   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, add them to the group:
-
-      ```sh
-      sudo usermod -aG <group-name> <user>
-      ```
-
-      Replace `<group-name>` with the name of the group you have created (i.e. `lxc-shares`), and `<user>` with the name of each user you wish to allow access to the share (i.e. `foo`).
+   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, [add them to the group](linux.md#add-user-to-group) you created (i.e. `lxc-shares`).
 
 3. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
