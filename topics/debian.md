@@ -284,7 +284,7 @@ This details the process of setting a static IP address and updating the DNS ser
     + iface <network-interface> inet static
     + address <ip-address>
     + netmask <subnet-mask>
-    + 
+    +
     + gateway <gateway>
     + dns-nameservers <dns1> <dns2>
     ```
