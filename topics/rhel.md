@@ -28,6 +28,7 @@ Red Hat Enterprise Linux is a commercial open-source Linux distribution develope
   - [User Management](#user-management)
     - [Description](#description-4)
     - [Create User](#create-user)
+    - [Create Group](#create-group)
     - [Add User to Group](#add-user-to-group)
   - [Sudo](#sudo)
     - [Description](#description-5)
@@ -442,6 +443,44 @@ This details how to create a service user on the system:
     ```sh
     passwd foo
     ```
+
+### Create Group
+
+This details how to create a group on the system:
+
+1. With root privileges, run the following command to create a group:
+
+    ```sh
+    groupadd <group>
+    ```
+
+    For example, if the group name is `bar`:
+
+    ```sh
+    groupadd bar
+    ```
+
+2. Verify that the group has been created:
+
+   - Replace `<group>` with the name of the group:
+
+      ```sh
+      cat /etc/group | grep <group>
+      ```
+
+      For example, if the group name is `bar`:
+
+      ```sh
+      cat /etc/group | grep bar
+      ```
+
+   - Sample output:
+
+      ```
+        bar:x:1001:
+      ```
+
+      Based on the sample output, this tells that the group (i.e. `bar`) has been created.
 
 ### Add User to Group
 
