@@ -110,7 +110,7 @@ This details some recommended configuration options for Arch Linux as a server.
 
 ### Base VM
 
-1. [Configure `pacman`](package-manager.md#configuration) by updating the system's mirror list and enabling parallel downloads.
+1. [Configure `pacman`](package-manager.md#configuration) to initialise the system keyring, update the mirror list, and enable parallel downloads.
 
 2. Perform a [full system upgrade](package-manager.md#update-software) on the system using `pacman`.
 
