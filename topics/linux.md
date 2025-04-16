@@ -23,6 +23,11 @@ Linux is both an open-source Unix-like kernel and a generic name for a family of
   - [Storage](#storage)
     - [Description](#description-4)
     - [Resize Storage](#resize-storage)
+  - [User Management](#user-management)
+    - [Description](#description-5)
+    - [Create User](#create-user)
+    - [Add User to Group](#add-user-to-group)
+    - [Sudo](#sudo)
 
 ## References
 
@@ -98,3 +103,38 @@ This details the process of updating certain storage related configurations for 
 After the _physical_ storage of the system itself has been expanded, the following steps should be performed for the new storage capacity to be reflected on the system:
 
 - [Debian](debian.md#resize-storage)
+
+---
+
+## User Management
+
+### Description
+
+This details topics pertaining to user and group management for the following Linux distributions.
+
+### Create User
+
+This details how to create a service user on the system:
+
+- [Arch Linux](arch.md#create-user)
+- [Debian](debian.md#create-user)
+- [RHEL](rhel.md#create-user)
+- [Ubuntu](ubuntu.md#create-user)
+
+### Add User to Group
+
+This details how to add a user to a specific group:
+
+- [Arch Linux](arch.md#add-user-to-group)
+- [Debian](debian.md#add-user-to-group)
+- [RHEL](rhel.md#add-user-to-group)
+- [Ubuntu](ubuntu.md#add-user-to-group)
+
+### Sudo
+
+This details the process of granting temporary superuser (sudo) privileges to a user:
+
+- [Arch Linux](arch.md#sudo)
+- [Debian](debian.md#sudo)
+- [RHEL](rhel.md#sudo)
+- [Ubuntu](ubuntu.md#sudo)
