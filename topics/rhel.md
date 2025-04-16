@@ -25,6 +25,13 @@ Red Hat Enterprise Linux is a commercial open-source Linux distribution develope
     - [References](#references-3)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
+  - [User Management](#user-management)
+    - [Description](#description-4)
+    - [Create User](#create-user)
+    - [Add User to Group](#add-user-to-group)
+  - [Sudo](#sudo)
+    - [Description](#description-5)
+    - [Steps](#steps-1)
 
 ## References
 
@@ -397,3 +404,108 @@ This details the simple process of updating system's hostname:
     ```sh
     sudo reboot now
     ```
+
+---
+
+## User Management
+
+### Description
+
+This details topics pertaining to user and group management on the system.
+
+### Create User
+
+This details how to create a service user on the system:
+
+1. As the `root` user, run the following command to create a user:
+
+    ```sh
+    adduser <username>
+    ```
+
+    For example, if the username of the service user is `foo`:
+
+    ```sh
+    adduser foo
+    ```
+
+2. After the user has been created, provide a secure password for the user:
+
+    ```sh
+    passwd <username>
+    ```
+
+    For example, if the username of the service user is `foo`:
+
+    ```sh
+    passwd foo
+    ```
+
+### Add User to Group
+
+This details how to add a user to a specific group:
+
+1. As the `root` user, run the following command to add a user to a group:
+
+    ```sh
+    usermod -aG <group> <username>
+    ```
+
+    For example, if the username of the service user is `foo` and the group is `bar`:
+
+    ```sh
+    usermod -aG bar foo
+    ```
+
+2. Verify that the user has been added to the group:
+
+   - Replace `<username>` with the username of the service user:
+
+        ```sh
+        id <username>
+        ```
+
+        For example, if the username of the service user is `foo`:
+
+        ```sh
+        id foo
+        ```
+
+   - Sample output:
+
+        ```
+            uid=1000(<username>) gid=1000(<username>) groups=1000(<username>),999(<group>)
+        ```
+
+        Based on the output, ensure that the user (i.e. `foo`) has the group (i.e. `bar`) added to their `groups` list.
+
+---
+
+## Sudo
+
+### Description
+
+This details the process of granting temporary superuser (sudo) privileges to a user.
+
+### Steps
+
+1. Switch to the `root` user if you are not logged in as root:
+
+    ```sh
+    su -
+    ```
+
+    Proceed with the rest of the following steps as root.
+
+2. [Install](package-manager.md#install-software) the `sudo` package using `dnf` if it is not already installed.
+
+3. [Create a service user](#create-user) that is to be granted sudo privileges if you have not already.
+
+4. [Add the service user to the `wheel` group](#add-user-to-group) to give them sudo privileges.
+
+5. Log out and log back in to apply and test the changes:
+
+   - Press <kbd>Ctrl + D</kbd> to log out of the root user.
+   - Press <kbd>Ctrl + D</kbd> again if you are logged in as the service user.
+   - Log back in as the service user.
+   - As the service user, execute a command that requires root privileges using `sudo`.
