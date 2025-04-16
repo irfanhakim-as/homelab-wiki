@@ -492,15 +492,25 @@ This details how to create a group on the system:
 
 1. With root privileges, run the following command to create a group:
 
-    ```sh
-    groupadd <group>
-    ```
+   - Replace `<group>` with the name of the group:
 
-    For example, if the group name is `bar`:
+      ```sh
+      groupadd <group>
+      ```
 
-    ```sh
-    groupadd bar
-    ```
+      For example, if the group name is `bar`:
+
+      ```sh
+      groupadd bar
+      ```
+
+   - If the group needs a specific group ID (GID), add the `-g` flag to the same command:
+
+      ```sh
+      groupadd <group> -g <gid>
+      ```
+
+      Replace `<gid>` with the intended GID value for the group (i.e. `1001`).
 
 2. Verify that the group has been created:
 
