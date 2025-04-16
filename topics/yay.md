@@ -74,7 +74,7 @@ This details the process of installing and setting up `yay`.
     cd ~/.yay-bin
     ```
 
-4. Build and install the package:
+4. As a service (non-root) user, build and install the package:
 
     ```sh
     makepkg -si
