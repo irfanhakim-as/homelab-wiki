@@ -26,6 +26,7 @@ Linux is both an open-source Unix-like kernel and a generic name for a family of
   - [User Management](#user-management)
     - [Description](#description-5)
     - [Create User](#create-user)
+    - [Create Group](#create-group)
     - [Add User to Group](#add-user-to-group)
     - [Sudo](#sudo)
 
@@ -120,6 +121,15 @@ This details how to create a service user on the system:
 - [Debian](debian.md#create-user)
 - [RHEL](rhel.md#create-user)
 - [Ubuntu](ubuntu.md#create-user)
+
+### Create Group
+
+This details how to create a group on the system:
+
+- [Arch Linux](arch.md#create-group)
+- [Debian](debian.md#create-group)
+- [RHEL](rhel.md#create-group)
+- [Ubuntu](ubuntu.md#create-group)
 
 ### Add User to Group
 
