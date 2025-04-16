@@ -88,7 +88,9 @@ This details some recommended configuration options for Ubuntu as a server.
 
 1. Perform a [full system upgrade](package-manager.md#update-software) on the system using `apt`.
 
-2. [Install](package-manager.md#install-software) the following packages using `apt`:
+2. [Create a service user](#create-user) on the system if there isn't one already and [grant it sudo privileges](#sudo).
+
+3. [Install](package-manager.md#install-software) the following packages using `apt`:
 
    - `curl`
    - `git`
@@ -102,7 +104,7 @@ This details some recommended configuration options for Ubuntu as a server.
    - `rsync`
    - `wget`
 
-3. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
+4. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `apt`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
@@ -110,15 +112,15 @@ This details some recommended configuration options for Ubuntu as a server.
         > [!TIP]  
         > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
-4. [Clean up](package-manager.md#clean-up) the system using `apt` to recover some storage space.
+5. [Clean up](package-manager.md#clean-up) the system using `apt` to recover some storage space.
 
-5. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
+6. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
-6. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
+7. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
 
-7. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
+8. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
 
-8. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
+9. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
 
    - Changing the default SSH port to a new port (i.e. `2222`).
 
@@ -129,7 +131,7 @@ This details some recommended configuration options for Ubuntu as a server.
         > [!WARNING]  
         > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-9. Set up the VM firewall (UFW):
+10. Set up the VM firewall (UFW):
 
    - [Enable the firewall](firewall.md#enablement).
 
@@ -137,7 +139,7 @@ This details some recommended configuration options for Ubuntu as a server.
 
    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
-10. For systems running `cloud-init` (i.e. on a Raspberry Pi), password prompts may not be required when using `sudo` by default.
+11. For systems running `cloud-init` (i.e. on a Raspberry Pi), password prompts may not be required when using `sudo` by default.
 
     - To fix this, check the content of the `/etc/sudoers` file:
 
@@ -219,7 +221,7 @@ This details some recommended configuration options for Ubuntu as a server.
       + #sudo: ALL=(ALL) NOPASSWD:ALL
       ```
 
-11. Clear the VM's Bash history:
+12. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -229,7 +231,7 @@ This details some recommended configuration options for Ubuntu as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-12. Reboot the VM to apply all changes:
+13. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now

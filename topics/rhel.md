@@ -106,11 +106,13 @@ This details some recommended configuration options for Rocky Linux as a server.
 
 1. Perform a [full system upgrade](package-manager.md#update-software) on the system using `dnf`.
 
-2. Enable the EPEL repository by [installing](package-manager.md#install-software) `https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm` using `dnf`.
+2. [Create a service user](#create-user) on the system if there isn't one already and [grant it sudo privileges](#sudo).
 
-3. [Group install](package-manager.md#install-software) the `'Development Tools'` group using `dnf`.
+3. Enable the EPEL repository by [installing](package-manager.md#install-software) `https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm` using `dnf`.
 
-4. [Install](package-manager.md#install-software) the following packages using `dnf`:
+4. [Group install](package-manager.md#install-software) the `'Development Tools'` group using `dnf`.
+
+5. [Install](package-manager.md#install-software) the following packages using `dnf`:
 
    - `curl`
    - `git`
@@ -128,7 +130,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > The `policycoreutils-python-utils` package is required for the `semanage` command, which is used to manage SELinux policy.
 
-5. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `dnf`:
+6. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `dnf`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
@@ -136,15 +138,15 @@ This details some recommended configuration options for Rocky Linux as a server.
         > [!TIP]  
         > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
-6. [Clean up](package-manager.md#clean-up) the system using `dnf` to recover some storage space.
+7. [Clean up](package-manager.md#clean-up) the system using `dnf` to recover some storage space.
 
-7. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
+8. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
-8. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
+9. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
 
-9. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
+10. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
 
-10. If SELinux is enabled on the system, configure it to allow access to the new SSH port:
+11. If SELinux is enabled on the system, configure it to allow access to the new SSH port:
 
     - Add the new SSH port to the `ssh_port_t` SELinux policy:
 
@@ -170,7 +172,7 @@ This details some recommended configuration options for Rocky Linux as a server.
         ssh_port_t                     tcp      2222, 22
         ```
 
-11. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
+12. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
 
     - Changing the default SSH port to a new port (i.e. `2222`).
 
@@ -181,7 +183,7 @@ This details some recommended configuration options for Rocky Linux as a server.
         > [!WARNING]  
         > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-12. Set up the VM firewall (Firewalld):
+13. Set up the VM firewall (Firewalld):
 
     - [Install](package-manager.md#install-software) the `firewalld` package using `dnf`.
 
@@ -193,7 +195,7 @@ This details some recommended configuration options for Rocky Linux as a server.
 
     - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
 
-13. Clear the VM's Bash history:
+14. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -203,7 +205,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-14. Reboot the VM to apply all changes:
+15. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now

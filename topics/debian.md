@@ -123,9 +123,9 @@ This details some recommended configuration options for Debian as a server.
 
 ### Base VM
 
-1. Setup [`sudo`](#sudo) for the system's service user as root.
+1. Perform a [full system upgrade](package-manager.md#update-software) on the system using `apt`.
 
-2. Perform a [full system upgrade](package-manager.md#update-software) on the system using `apt`.
+2. [Create a service user](#create-user) on the system if there isn't one already and [grant it sudo privileges](#sudo).
 
 3. [Install](package-manager.md#install-software) the following packages using `apt`:
 

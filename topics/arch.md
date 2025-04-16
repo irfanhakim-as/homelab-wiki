@@ -122,7 +122,9 @@ This details some recommended configuration options for Arch Linux as a server.
 
 2. Perform a [full system upgrade](package-manager.md#update-software) on the system using `pacman`.
 
-3. [Install](package-manager.md#install-software) the following packages using `pacman`:
+3. [Create a service user](#create-user) on the system if there isn't one already and [grant it sudo privileges](#sudo).
+
+4. [Install](package-manager.md#install-software) the following packages using `pacman`:
 
    - `base-devel`
    - `curl`
@@ -139,7 +141,7 @@ This details some recommended configuration options for Arch Linux as a server.
    - `vim`
    - `wget`
 
-4. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `pacman`:
+5. **(VM Only)** [Install](package-manager.md#install-software) packages required by your [hypervisor](../courses/hypervisor.md) using `pacman`:
 
    - ESXi: `open-vm-tools`
    - Proxmox: `qemu-guest-agent`
@@ -147,26 +149,26 @@ This details some recommended configuration options for Arch Linux as a server.
         > [!TIP]  
         > On Proxmox, you may also need to [enable](systemd.md#enable-service) the `qemu-guest-agent` service yourself.
 
-5. [Clean up](package-manager.md#clean-up) the system using `pacman` to recover some storage space.
+6. [Clean up](package-manager.md#clean-up) the system using `pacman` to recover some storage space.
 
-6. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
+7. [Enable the SSH service](ssh.md#enable-remote-access) (if it is not already enabled).
 
-7. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
+8. [Copy over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system.
 
-8. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
+9. Decide on a new SSH port (i.e. `2222`) to replace the default port, `22`.
 
-9. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
+10. Update the VM's [SSH configuration](ssh.md#configuration), which includes:
 
-   - Changing the default SSH port to a new port (i.e. `2222`).
+    - Changing the default SSH port to a new port (i.e. `2222`).
 
-   - Disabling root login via SSH.
+    - Disabling root login via SSH.
 
-   - Disabling password authentication via SSH.
+    - Disabling password authentication via SSH.
 
-        > [!WARNING]  
-        > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
+      > [!WARNING]  
+      > Make sure you have [copied over your public SSH key(s)](ssh.md#copy-ssh-keys) to the system before applying this change!
 
-10. Set up the VM firewall (Firewalld):
+11. Set up the VM firewall (Firewalld):
 
     - [Install](package-manager.md#install-software) the `firewalld` package using `pacman`.
 
@@ -178,9 +180,9 @@ This details some recommended configuration options for Arch Linux as a server.
 
     - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
 
-11. **(Optional)** [Install and set up `yay`](package-manager.md#setup) as an alternative package manager to `pacman` to get easy access to the packages in the [AUR](https://aur.archlinux.org).
+12. **(Optional)** [Install and set up `yay`](package-manager.md#setup) as an alternative package manager to `pacman` to get easy access to the packages in the [AUR](https://aur.archlinux.org).
 
-12. Clear the VM's Bash history:
+13. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -190,7 +192,7 @@ This details some recommended configuration options for Arch Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-13. Reboot the VM to apply all changes:
+14. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
