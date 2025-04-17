@@ -1808,6 +1808,9 @@ In order for VM HA to work, either a shared storage or a storage replication is 
 
 ### Adding QDevice
 
+> [!IMPORTANT]  
+> Proceed with this part of the guide only if you have an even number of Proxmox nodes in your cluster (i.e. `2`).
+
 1. Prepare an external device (i.e. Raspberry Pi) that will serve as the QDevice. The following are some recommendations and considerations for the QDevice:
 
    - Any Linux distribution will do, but [Debian 12](debian.md) or [Ubuntu 20.04 LTS](ubuntu.md) is recommended. [Install](linux.md#installation) and [configure](linux.md#configuration) the device accordingly.
