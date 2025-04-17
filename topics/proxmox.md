@@ -1678,6 +1678,8 @@ This details the process of clustering multiple Proxmox nodes together, includin
 - [QDevice-Net Setup](https://pve.proxmox.com/wiki/Cluster_Manager#_qdevice_net_setup)
 - [Default firewall rules](https://pve.proxmox.com/wiki/Firewall#pve_firewall_default_rules)
 - [Can a QDevice be outside the local network](https://www.reddit.com/r/Proxmox/comments/1aolhng/can_a_qdevice_be_outside_the_local_network)
+- [Bandwith limit - Sebastian Mangelsdorf](https://metalhead.club/@cardes/113679360656838086)
+- [Cluster Manager](https://pve.proxmox.com/wiki/Cluster_Manager)
 
 ### Creating Cluster
 
