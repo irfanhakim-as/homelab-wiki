@@ -1695,7 +1695,7 @@ This details some recommended configurations for the Proxmox cluster depending o
 
 If the cluster is using the same NIC for your VMs and the cluster link. it is recommended to set a migration bandwidth limit to prevent the cluster from being overloaded during migrations.
 
-1. On two Proxmox nodes in your cluster, [install](package-manager.md#install-software) the `iperf3` package using `apt` - refuse to start the daemon by default if prompted during the installation.
+1. On two Proxmox nodes in your cluster, [install](package-manager.md#install-software) the `iperf3` package using the system's package manager (i.e. `apt`) - refuse to start the daemon by default if prompted during the installation.
 
 2. Perform a test to check the bandwidth between the two Proxmox nodes:
 
