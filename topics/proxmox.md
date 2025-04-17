@@ -1711,7 +1711,30 @@ This details the process of clustering multiple Proxmox nodes together, includin
 
 ### Joining Node
 
-TODO
+> [!NOTE]  
+> This section of the guide assumes that you have [created a cluster](#creating-cluster) on a single Proxmox node. Proceed with the following steps with the rest of the Proxmox node(s).
+
+1. On the Proxmox node, launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the **Datacenter** menu item.
+
+3. In the Datacenter view, select the **Cluster** menu option.
+
+4. In the **Cluster Information** section, click the **Join Cluster** button.
+
+5. In the **Cluster Join** form, configure the following:
+
+   - Information: Paste the `Join Information` value you had copied from the _Primary_ Proxmox node
+   - Peer Address: Leave as default (i.e. the IP address of the _Primary_ Proxmox node)
+   - Password: Fill in the root password of the _Primary_ Proxmox node
+
+   Click the **Join** button to add the node to the cluster.
+
+6. In the **Task viewer** dialog, wait for the process to complete. Once it has, close it by clicking its corresponding **X** (**Close dialog**) button.
+
+7. Repeat these steps for each Proxmox node you wish to add to the cluster.
+
+8. If the total number of Proxmox nodes in the cluster are even and not odd, proceed to [add a QDevice](#adding-qdevice) to the cluster for quorum purposes in a high availability environment.
 
 ### Recommended Configuration
 
