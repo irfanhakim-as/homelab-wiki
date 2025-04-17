@@ -1683,7 +1683,31 @@ This details the process of clustering multiple Proxmox nodes together, includin
 
 ### Creating Cluster
 
-TODO
+> [!NOTE]  
+> Ensure all nodes that are to be clustered have [Proxmox installed and set up](#setup). Their hostname and IP configuration are final and can no longer be changed once they have been clustered.
+
+1. On one Proxmox node, launch the Proxmox Virtual Environment web interface on a web browser.
+
+2. On the left-hand side of the web interface, select the **Datacenter** menu item.
+
+3. In the Datacenter view, select the **Cluster** menu option.
+
+4. In the **Cluster Information** section, click the **Create Cluster** button.
+
+5. In the **Create Cluster** form, configure the following:
+
+   - Cluster Name: Add an appropriate, unique name as the identifier for the cluster (i.e. `mycluster`)
+   - Cluster Link: Leave as default unless you have specific requirements
+
+   Click the **Create** button to create the cluster.
+
+6. In the **Task viewer** dialog, wait for the process to complete. Once it has, close it by clicking its corresponding **X** (**Close dialog**) button.
+
+7. Navigate back to the **Cluster Information** section and click the **Join Information** button.
+
+8. In the immutable **Cluster Join Information** form, click the **Copy Information** button to copy the `Join Information` value.
+
+9. Proceed with [adding the rest of the other Proxmox node(s) to the cluster](#joining-node) you have created.
 
 ### Joining Node
 
