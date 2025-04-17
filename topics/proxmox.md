@@ -71,6 +71,7 @@ Proxmox Virtual Environment is a complete open-source platform for enterprise vi
     - [Creating Cluster](#creating-cluster)
     - [Joining Node](#joining-node)
     - [Recommended Configuration](#recommended-configuration)
+      - [Migration Bandwidth Limit](#migration-bandwidth-limit)
     - [High Availability (HA)](#high-availability-ha)
     - [Adding QDevice](#adding-qdevice)
   - [Monitoring](#monitoring)
@@ -1690,11 +1691,61 @@ TODO
 
 This details some recommended configurations for the Proxmox cluster depending on your setup.
 
-1. If the cluster is using the same NIC for your VMs and the cluster link, [update the datacenter configuration](#datacenter-configuration) with the following property and value:
+#### Migration Bandwidth Limit
+
+If the cluster is using the same NIC for your VMs and the cluster link. it is recommended to set a migration bandwidth limit to prevent the cluster from being overloaded during migrations.
+
+1. On two Proxmox nodes in your cluster, [install](package-manager.md#install-software) the `iperf3` package using `apt` - refuse to start the daemon by default if prompted during the installation.
+
+2. Perform a test to check the bandwidth between the two Proxmox nodes:
+
+   - On one of the two Proxmox nodes, run the following command to be on the receiving end of the test:
+
+      ```sh
+      iperf3 -s
+      ```
+
+   - On the other Proxmox node, run the following command to initiate the bandwidth test:
+
+      ```sh
+      iperf3 -c <proxmox-node>
+      ```
+
+      Replace `<proxmox-node>` with the IP address of the other Proxmox node on the receiving end of the test (i.e. `192.168.0.106`).
+
+   - Sample output after the test finishes:
+
+      ```
+         Connecting to host 192.168.0.106, port 5201
+         [  5] local 192.168.0.107 port 60150 connected to 192.168.0.106 port 5201
+         [ ID] Interval           Transfer     Bitrate         Retr  Cwnd
+         [  5]   0.00-1.00   sec   113 MBytes   949 Mbits/sec    0    443 KBytes
+         [  5]   1.00-2.00   sec   109 MBytes   913 Mbits/sec    0    443 KBytes
+         [  5]   2.00-3.00   sec   112 MBytes   937 Mbits/sec    0    443 KBytes
+         [  5]   3.00-4.00   sec   110 MBytes   926 Mbits/sec    0    612 KBytes
+         [  5]   4.00-5.00   sec   111 MBytes   931 Mbits/sec    0    612 KBytes
+         [  5]   5.00-6.00   sec   111 MBytes   932 Mbits/sec    0    612 KBytes
+         [  5]   6.00-7.00   sec   111 MBytes   934 Mbits/sec    0    612 KBytes
+         [  5]   7.00-8.00   sec   111 MBytes   933 Mbits/sec    0    612 KBytes
+         [  5]   8.00-9.00   sec   110 MBytes   926 Mbits/sec    0    697 KBytes
+         [  5]   9.00-10.00  sec   110 MBytes   923 Mbits/sec    0    734 KBytes
+         - - - - - - - - - - - - - - - - - - - - - - - - -
+         [ ID] Interval           Transfer     Bitrate         Retr
+         [  5]   0.00-10.00  sec  1.08 GBytes   930 Mbits/sec    0             sender
+         [  5]   0.00-10.00  sec  1.08 GBytes   928 Mbits/sec                  receiver
+
+         iperf Done.
+      ```
+
+      Based on the sample test results, the bandwidth between the two Proxmox nodes is roughly `930 Mbps`.
+
+3. Limit the bandwidth for migration to a little less than the maximum bandwidth between the two Proxmox nodes by [updating the datacenter configuration](#datacenter-configuration) with the following property and value:
 
    ```
-   bwlimit: migration=768000
+   bwlimit: migration=<bandwidth-limit>
    ```
+
+   Replace `<bandwidth-limit>` with the limit you have determined in Kbps (i.e. `768000` for a limit of 768 Mbps).
 
 ### High Availability (HA)
 
