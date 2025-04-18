@@ -1686,6 +1686,8 @@ This details the process of clustering multiple Proxmox nodes together, includin
 > [!NOTE]  
 > Ensure all nodes that are to be clustered have [Proxmox installed and set up](#setup). Their hostname and IP configuration are final and can no longer be changed once they have been clustered.
 
+This details the process of provisioning a cluster of Proxmox nodes.
+
 1. On one Proxmox node, launch the Proxmox Virtual Environment web interface on a web browser.
 
 2. On the left-hand side of the web interface, select the **Datacenter** menu item.
@@ -1714,6 +1716,8 @@ This details the process of clustering multiple Proxmox nodes together, includin
 > [!NOTE]  
 > This section of the guide assumes that you have [created a cluster](#creating-cluster) on a single Proxmox node. Proceed with the following steps with the rest of the Proxmox node(s).
 
+This details the steps to add a Proxmox node to an existing cluster.
+
 1. On the Proxmox node, launch the Proxmox Virtual Environment web interface on a web browser.
 
 2. On the left-hand side of the web interface, select the **Datacenter** menu item.
@@ -1740,6 +1744,8 @@ This details the process of clustering multiple Proxmox nodes together, includin
 
 > [!IMPORTANT]  
 > Proceed with this part of the guide only if you have an even number of Proxmox nodes in your cluster (i.e. `2`).
+
+This details the process of adding a QDevice to achieve and sustain a high availability environment in an even-numbered cluster.
 
 1. Prepare an external device (i.e. Raspberry Pi) that will serve as the QDevice. The following are some recommendations and considerations for the QDevice:
 
