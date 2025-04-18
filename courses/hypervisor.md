@@ -24,9 +24,13 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
   - [Migration](#migration)
     - [References](#references-3)
   - [Clustering](#clustering)
-    - [References](#references-4)
+    - [Creating Cluster](#creating-cluster)
+    - [Joining Node](#joining-node)
+    - [Adding QDevice](#adding-qdevice)
+    - [Recommended Configuration](#recommended-configuration)
+    - [High Availability (HA)](#high-availability-ha)
   - [Monitoring](#monitoring)
-    - [References](#references-5)
+    - [References](#references-4)
 
 ## References
 
@@ -110,9 +114,35 @@ This details the process of migrating a virtual machine from an existing hypervi
 
 This details the process of clustering multiple hypervisor nodes together.
 
-### References
+### Creating Cluster
 
-- [Proxmox: Clustering](../topics/proxmox.md#clustering)
+This details the process of provisioning a cluster of nodes on a hypervisor.
+
+- [Proxmox: Creating Cluster](../topics/proxmox.md#creating-cluster)
+
+### Joining Node
+
+This details the steps to add additional node(s) to an existing cluster.
+
+- [Proxmox: Joining Node](../topics/proxmox.md#joining-node)
+
+### Adding QDevice
+
+This details the process of adding a QDevice to achieve and sustain a high availability environment in an even-numbered cluster.
+
+- [Proxmox: Adding QDevice](../topics/proxmox.md#adding-qdevice)
+
+### Recommended Configuration
+
+This details some recommended configurations for the cluster depending on your setup.
+
+- [Proxmox: Recommended Configuration](../topics/proxmox.md#recommended-configuration)
+
+### High Availability (HA)
+
+This details the steps to set up a high availability environment.
+
+- [Proxmox: High Availability (HA)](../topics/proxmox.md#high-availability-ha)
 
 ---
 
