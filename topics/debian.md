@@ -178,7 +178,64 @@ This details some recommended configuration options for Debian as a server.
 
     - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
-11. Clear the VM's Bash history:
+11. For systems running on a Raspberry Pi (i.e. Raspberry Pi OS), password prompts may not be required when using `sudo` by default.
+
+    - To fix this, check the content of the `/etc/sudoers` file:
+
+        ```sh
+        sudo cat /etc/sudoers
+        ```
+
+    - Identify whether the following line is found in the file and not commented:
+
+        ```
+        %sudo   ALL=(ALL:ALL) ALL
+        ```
+
+        If it is not found, add the line to the end of the file accordingly. Likewise, uncomment the line if it is commented.
+
+    - Now, check for a configuration file in the `/etc/sudoers.d/` directory that is responsible for the current behaviour:
+
+        ```sh
+        sudo ls -l /etc/sudoers.d/
+        ```
+
+        Sample output:
+
+        ```
+        total 8
+        -r--r----- 1 root root   36 May 13 08:14 010_pi-nopasswd
+        -r--r----- 1 root root 1096 Jun 27  2023 README
+        ```
+
+        In this example, the configuration file is `010_pi-nopasswd`.
+
+    - Update the configuration file (i.e. `010_pi-nopasswd`) to change this behaviour:
+
+        ```sh
+        sudo nano /etc/sudoers.d/010_pi-nopasswd
+        ```
+
+        Sample configuration:
+
+        ```
+        <user> ALL=(ALL) NOPASSWD:ALL
+        ```
+
+        Comment the line with the `NOPASSWD:ALL` option to prevent it from allowing the `<user>` user from using `sudo` without a password:
+
+        ```diff
+        - <user> ALL=(ALL) NOPASSWD:ALL
+        + #<user> ALL=(ALL) NOPASSWD:ALL
+        ```
+
+        **Alternatively**, if you think it is safe, you may also delete the configuration file entirely:
+
+        ```sh
+        sudo rm -f /etc/sudoers.d/010_pi-nopasswd
+        ```
+
+12. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -188,7 +245,7 @@ This details some recommended configuration options for Debian as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-12. Reboot the VM to apply all changes:
+13. Reboot the VM to apply all changes:
 
     ```sh
     sudo reboot now
