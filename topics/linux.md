@@ -81,6 +81,7 @@ This details the process of setting a static IP address and updating the DNS ser
 - [Debian](debian.md#set-static-ip-and-update-dns)
 - [RHEL](rhel.md#set-static-ip-and-update-dns)
 - [Ubuntu](ubuntu.md#set-static-ip-and-update-dns)
+- [NetworkManager](networkmanager.md#set-static-ip-and-update-dns)
 
 ### Update Hostname
 
