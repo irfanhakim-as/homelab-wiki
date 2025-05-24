@@ -217,6 +217,9 @@ This details the process of updating certain networking configurations on the sy
 
 ### Set Static IP and Update DNS
 
+> [!IMPORTANT]  
+> On systems that use NetworkManager to manage their networking (i.e. Raspberry Pi OS), follow [this guide](networkmanager.md#set-static-ip-and-update-dns) instead.
+
 This details the process of setting a static IP address and updating the DNS server on a system.
 
 1. Backup the existing network configuration file:
