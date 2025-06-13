@@ -17,6 +17,10 @@ This details the hardware used in my homelab and any related configuration steps
   - [Hardware Configuration](#hardware-configuration)
     - [Description](#description-2)
     - [Motherboard BIOS](#motherboard-bios)
+  - [Secondary NAS](#secondary-nas)
+    - [Description](#description-3)
+    - [Main Server](#main-server-1)
+    - [Storage](#storage-1)
 
 ---
 
@@ -108,3 +112,37 @@ This details some recommended configuration options for the motherboard BIOS:
 3. **(Recommended)** Save the BIOS settings to a profile on the motherboard or a USB drive.
 
 4. Save changes made and exit the BIOS.
+
+---
+
+## Secondary NAS
+
+### Description
+
+This details the hardware used in my secondary NAS.
+
+### Main Server
+
+- Server: [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b) 4GB RAM
+
+- PSU: [Official Power Adapter for Raspberry Pi 4 15W Black (DC 5V, 3A) UK Plug](https://shopee.com.my/autobotic/8383451404)
+
+- Storage:
+
+  - OS: [SanDisk High Endurance V30 U3 Class 10 microSD](https://shopee.com.my/all_it.os/2495770926) 64GB
+  - Data (Backup): [Kingston Pendrive DataTraveler Exodia Onyx DTXON USB 3.2 Gen1 Flash Drive](https://shopee.com.my/all_it.os/7948053622) 64GB
+
+- Chassis: [Black ABS Casing with Fan for Raspberry Pi 4 with GPIO Slot](https://shopee.com.my/autobotic/5036358937)
+
+- Cooler: [Raspberry Pi 4 Heatsink](https://shopee.com.my/autobotic/2734588353)
+
+### Storage
+
+- USB 3.0 Powered Hub:
+
+  - Hub: [USB HUB Super High Speed Multi usb Hub](https://shopee.com.my/widetalent/7939944334) (USB 3.0, 4 Ports)
+  - PSU: [AC 100V-240V adapter DC 5V 4A 15V 2A 24V 1A Switching power supply DC plug 3.5mm x 1.35mm UK](https://shopee.com.my/wuzhihui2019.my/13537804309) (5V 4A)
+
+- Storage Disk: 3x [PNY CS900 2.5" SATA SSD](https://shopee.com.my/brightstarcomputer/20244351359) 1TB
+
+- SATA Cable: 3x [SATA TO USB Cable for 2.5 Inch Adapter](https://shopee.com.my/lumpsumstore/5767654064) (USB 3.0)
