@@ -178,7 +178,7 @@ This details some recommended configuration options for Debian as a server.
 
     - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
-11. For systems running on a Raspberry Pi (i.e. Raspberry Pi OS), password prompts may not be required when using `sudo` by default.
+11. For systems running on a [Raspberry Pi](raspberry-pi.md) (i.e. Raspberry Pi OS), password prompts may not be required when using `sudo` by default.
 
     - To fix this, check the content of the `/etc/sudoers` file:
 

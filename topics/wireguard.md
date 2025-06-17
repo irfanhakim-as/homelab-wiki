@@ -38,7 +38,7 @@ This details the process of setting up a WireGuard server.
 
 ### Installation
 
-1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the WireGuard server. This system can be a bare metal device (i.e. Raspberry Pi) or a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template).
+1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the WireGuard server. This system can be a bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)) or a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template).
 
 2. [Set up a domain](dns.md#register-a-subdomain) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`).
 

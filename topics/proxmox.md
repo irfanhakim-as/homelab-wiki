@@ -1747,7 +1747,7 @@ This details the steps to add a Proxmox node to an existing cluster.
 
 This details the process of adding a QDevice to achieve and sustain a high availability environment in an even-numbered cluster.
 
-1. Prepare an external device (i.e. Raspberry Pi) that will serve as the QDevice. The following are some recommendations and considerations for the QDevice:
+1. Prepare an external device (i.e. [Raspberry Pi](raspberry-pi.md)) that will serve as the QDevice. The following are some recommendations and considerations for the QDevice:
 
    - Any Linux distribution will do, but [Debian 12](debian.md) or [Ubuntu 20.04 LTS](ubuntu.md) is recommended. [Install](linux.md#installation) and [configure](linux.md#configuration) the device accordingly.
    - The QDevice requires a static IPv4 address. This should already be the case if you have configured the QDevice correctly.

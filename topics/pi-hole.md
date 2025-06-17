@@ -47,7 +47,7 @@ This details the process of setting up Pi-hole as the local DNS server for use w
 
 ### Installation
 
-1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the Pi-hole server. This system can be a bare metal device (i.e. Raspberry Pi) or a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template).
+1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the Pi-hole server. This system can be a bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)) or a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template).
 
 2. [Allow](firewall.md#adding-allow-rule) the following ports and their corresponding protocols to be open on the Pi-hole server using the system's firewall (i.e. `ufw`):
 

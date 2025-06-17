@@ -70,7 +70,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
 7. Services: Selection of VM or container based services that can be hosted in the homelab
    1. NAS (VM):
       1. TrueNAS
-      2. OpenMediaVault (Raspberry Pi)
+      2. OpenMediaVault ([Raspberry Pi](topics/raspberry-pi.md))
    2. [Database](topics/database.md) (Container):
       1. [MariaDB](topics/mariadb.md)
       2. [PostgreSQL](topics/postgresql.md)
