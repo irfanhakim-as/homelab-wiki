@@ -76,7 +76,7 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 > [!NOTE]  
 > This part of the guide focuses on the installation of OMV on SBCs like the [Raspberry Pi](raspberry-pi.md).
 
-1. Prepare a system (i.e. Virtual Machine or dedicated machine) with a basic setup of [Debian](debian.md) Linux (64-bit):
+1. Prepare a system (i.e. virtual machine or bare metal) with a basic setup of [Debian](debian.md) Linux (64-bit):
 
    - If deploying OMV on a Raspberry Pi, [flashing Raspberry Pi OS Lite (64-bit)](raspberry-pi.md#flash-os-image) is highly recommended.
 
