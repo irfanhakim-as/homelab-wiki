@@ -16,39 +16,39 @@ OpenMediaVault is the next generation network attached storage (NAS) solution ba
     - [Install OMV](#install-omv)
     - [Install OMV-Extras](#install-omv-extras)
     - [Install FlashMemory Plugin](#install-flashmemory-plugin)
-  - [Usage](#usage)
-    - [Description](#description-2)
-    - [References](#references-2)
-    - [Web Interface](#web-interface)
-    - [Installing Plugin](#installing-plugin)
-    - [Create or Edit Scheduled Task](#create-or-edit-scheduled-task)
-    - [Create Shared Folder](#create-shared-folder)
   - [User Management](#user-management)
-    - [Description](#description-3)
+    - [Description](#description-2)
     - [User Home Directory](#user-home-directory)
     - [Create User](#create-user)
   - [Configuration](#configuration)
-    - [Description](#description-4)
-    - [References](#references-3)
+    - [Description](#description-3)
+    - [References](#references-2)
     - [General Configuration](#general-configuration)
     - [Storage Configuration](#storage-configuration)
   - [Storage Setup](#storage-setup)
-    - [Description](#description-5)
-    - [References](#references-4)
+    - [Description](#description-4)
+    - [References](#references-3)
     - [Set Up Storage Disks](#set-up-storage-disks)
     - [SnapRAID](#snapraid)
     - [MergerFS](#mergerfs)
     - [SMB Share](#smb-share)
   - [Docker](#docker)
-    - [Description](#description-6)
-    - [References](#references-5)
+    - [Description](#description-5)
+    - [References](#references-4)
     - [Installing Docker](#installing-docker)
     - [Deploying Docker Container](#deploying-docker-container)
   - [Troubleshooting](#troubleshooting)
-    - [Description](#description-7)
-    - [References](#references-6)
+    - [Description](#description-6)
+    - [References](#references-5)
     - [Storage Disk Not Showing on OMV](#storage-disk-not-showing-on-omv)
     - [Unable to Get SMART Data from Storage Disk](#unable-to-get-smart-data-from-storage-disk)
+  - [Usage](#usage)
+    - [Description](#description-7)
+    - [References](#references-6)
+    - [Web Interface](#web-interface)
+    - [Installing Plugin](#installing-plugin)
+    - [Create or Edit Scheduled Task](#create-or-edit-scheduled-task)
+    - [Create Shared Folder](#create-shared-folder)
 
 ## References
 
@@ -126,98 +126,6 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 1. From the web interface, [install the FlashMemory plugin](#installing-plugin), `openmediavault-flashmemory` graphically.
 
 2. **Alternatively**, [install](package-manager.md#install-software) the `openmediavault-flashmemory` package using the package manager (i.e. `apt`).
-
----
-
-## Usage
-
-### Description
-
-This details some common usage steps for an OpenMediaVault (OMV) server.
-
-### References
-
-- [Web console login](https://wiki.omv-extras.org/doku.php?id=omv7:new_user_guide#web_console_login)
-- [Setting up a Shared Folder](https://wiki.omv-extras.org/doku.php?id=omv7:new_user_guide#setting_up_a_shared_folder)
-
-### Web Interface
-
-Most of the configuration steps laid out in following section(s) must be done through the OMV server web interface.
-
-1. To get to the OMV web interface, navigate to the following URL on a web browser:
-
-    ```
-      http://<omv-server-ip>
-    ```
-
-    Replace `<omv-server-ip>` with the IP address of the OMV server (i.e. `192.168.0.106`).
-
-2. Once taken to the OMV web interface, access with the default login credentials if it is your first time logging in:
-
-   - User name: `admin`
-   - Password: `openmediavault`
-
-    It is highly recommended that you change the default password to a more secure one.
-
-3. After a successful login, you should be taken to the default OMV **Dashboard** page.
-
-### Installing Plugin
-
-> [!NOTE]  
-> This part of the guide assumes that you have [OMV-Extras installed](#install-omv-extras) on the server.
-
-This details how to install additional plugins to extend OMV's functionality:
-
-1. From the web interface dashboard, click the **System** group on the left-hand side to expand it, and click the **Plugins** menu option.
-
-2. In the **Plugins** list, browse through the available plugins or use the search bar to find a specific plugin.
-
-3. Select to highlight the plugin you wish to install, and click the **Install** button.
-
-4. When prompted with the confirmation dialog, select the **Confirm** checkbox, and click the **Yes** button.
-
-5. Wait for the process to complete, and click the console dialog's corresponding **Close** button.
-
-### Create or Edit Scheduled Task
-
-This details how to create or edit an existing scheduled task on the OMV server:
-
-1. From the web interface dashboard, click the **System** group on the left-hand side to expand it, and click the **Scheduled Tasks** menu option.
-
-2. In the **Scheduled Tasks** page:
-
-   - To create a new scheduled task: Click the **Create** button.
-   - To update an existing scheduled task: Select to highlight the task you wish to edit, and click the **Edit** button.
-
-3. In the Scheduled Tasks **Create** or **Edit** form, configure the following:
-
-   - Enabled: Check the box to enable the scheduled task or otherwise disable it
-   - User: Set the user account to run the scheduled task as (i.e. `root`)
-   - Command: Set the command to run as per the task
-   - Send command output via email: Check the box to send command output via email upon task completion
-
-    Configure the schedule for running the task accordingly. Submit the form by clicking the **Save** button.
-
-4. If prompted to confirm and apply configuration changes made, click the **Apply** button.
-
-### Create Shared Folder
-
-This details how to create a shared folder on the OMV server:
-
-1. From the web interface dashboard, click the **Storage** group on the left-hand side to expand it, and click the **Shared Folders** menu option.
-
-2. In the Storage **Shared Folders** page, click the **Create** button.
-
-3. In the Shared Folders **Create** form, configure the following:
-
-   - Name: Set a unique, descriptive name for the shared folder (i.e. `share1`)
-   - File system: Expand the dropdown and select the file system to create the shared folder on (i.e. `/dev/sda1 [EXT4, X GiB]`)
-   - Relative path: Leave as default or set an appropriate path relative to the root of the file system (i.e. `share1/`)
-   - Permissions: Expand the dropdown and select the intended permissions (i.e. `Admin: r/w, Users: r/w, Others: no access`)
-
-    Submit the form by clicking the **Save** button.
-
-4. If prompted to confirm and apply configuration changes made, click the **Apply** button.
 
 ---
 
@@ -1099,3 +1007,95 @@ This details a potential fix for OMV's inability to get SMART data from your sto
       ```
 
       If all works correctly, this should now return the expected SMART data output - including in the OMV interface.
+
+---
+
+## Usage
+
+### Description
+
+This details some common usage steps for an OpenMediaVault (OMV) server.
+
+### References
+
+- [Web console login](https://wiki.omv-extras.org/doku.php?id=omv7:new_user_guide#web_console_login)
+- [Setting up a Shared Folder](https://wiki.omv-extras.org/doku.php?id=omv7:new_user_guide#setting_up_a_shared_folder)
+
+### Web Interface
+
+Most of the configuration steps laid out in following section(s) must be done through the OMV server web interface.
+
+1. To get to the OMV web interface, navigate to the following URL on a web browser:
+
+    ```
+      http://<omv-server-ip>
+    ```
+
+    Replace `<omv-server-ip>` with the IP address of the OMV server (i.e. `192.168.0.106`).
+
+2. Once taken to the OMV web interface, access with the default login credentials if it is your first time logging in:
+
+   - User name: `admin`
+   - Password: `openmediavault`
+
+    It is highly recommended that you change the default password to a more secure one.
+
+3. After a successful login, you should be taken to the default OMV **Dashboard** page.
+
+### Installing Plugin
+
+> [!NOTE]  
+> This part of the guide assumes that you have [OMV-Extras installed](#install-omv-extras) on the server.
+
+This details how to install additional plugins to extend OMV's functionality:
+
+1. From the web interface dashboard, click the **System** group on the left-hand side to expand it, and click the **Plugins** menu option.
+
+2. In the **Plugins** list, browse through the available plugins or use the search bar to find a specific plugin.
+
+3. Select to highlight the plugin you wish to install, and click the **Install** button.
+
+4. When prompted with the confirmation dialog, select the **Confirm** checkbox, and click the **Yes** button.
+
+5. Wait for the process to complete, and click the console dialog's corresponding **Close** button.
+
+### Create or Edit Scheduled Task
+
+This details how to create or edit an existing scheduled task on the OMV server:
+
+1. From the web interface dashboard, click the **System** group on the left-hand side to expand it, and click the **Scheduled Tasks** menu option.
+
+2. In the **Scheduled Tasks** page:
+
+   - To create a new scheduled task: Click the **Create** button.
+   - To update an existing scheduled task: Select to highlight the task you wish to edit, and click the **Edit** button.
+
+3. In the Scheduled Tasks **Create** or **Edit** form, configure the following:
+
+   - Enabled: Check the box to enable the scheduled task or otherwise disable it
+   - User: Set the user account to run the scheduled task as (i.e. `root`)
+   - Command: Set the command to run as per the task
+   - Send command output via email: Check the box to send command output via email upon task completion
+
+    Configure the schedule for running the task accordingly. Submit the form by clicking the **Save** button.
+
+4. If prompted to confirm and apply configuration changes made, click the **Apply** button.
+
+### Create Shared Folder
+
+This details how to create a shared folder on the OMV server:
+
+1. From the web interface dashboard, click the **Storage** group on the left-hand side to expand it, and click the **Shared Folders** menu option.
+
+2. In the Storage **Shared Folders** page, click the **Create** button.
+
+3. In the Shared Folders **Create** form, configure the following:
+
+   - Name: Set a unique, descriptive name for the shared folder (i.e. `share1`)
+   - File system: Expand the dropdown and select the file system to create the shared folder on (i.e. `/dev/sda1 [EXT4, X GiB]`)
+   - Relative path: Leave as default or set an appropriate path relative to the root of the file system (i.e. `share1/`)
+   - Permissions: Expand the dropdown and select the intended permissions (i.e. `Admin: r/w, Users: r/w, Others: no access`)
+
+    Submit the form by clicking the **Save** button.
+
+4. If prompted to confirm and apply configuration changes made, click the **Apply** button.
