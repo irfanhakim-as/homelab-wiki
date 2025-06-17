@@ -303,6 +303,9 @@ This details recommended configuration options for OMV in general:
 > [!NOTE]  
 > This part of the guide assumes that you have enabled email notifications on the OMV server for S.M.A.R.T. events.
 
+> [!NOTE]  
+> Ensure all storage disks have been attached to the OMV server before proceeding.
+
 This details recommended configuration options for OMV in terms of storage:
 
 1. Enable SMART monitoring on the server:
