@@ -16,6 +16,7 @@ OpenMediaVault is the next generation network attached storage (NAS) solution ba
     - [Install OMV](#install-omv)
     - [Install OMV-Extras](#install-omv-extras)
     - [Install FlashMemory Plugin](#install-flashmemory-plugin)
+    - [Post-Install Setup](#post-install-setup)
   - [Configuration](#configuration)
     - [Description](#description-2)
     - [References](#references-2)
@@ -126,6 +127,20 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 1. From the web interface, [install the FlashMemory plugin](#installing-plugin), `openmediavault-flashmemory` graphically.
 
 2. **Alternatively**, [install](package-manager.md#install-software) the `openmediavault-flashmemory` package using the package manager (i.e. `apt`).
+
+### Post-Install Setup
+
+This acts as a general guide on a complete setup process of an OMV server post-installation:
+
+1. Go through the [general configuration]() steps for the initial setup of the OMV server.
+
+2. [Set up the storage devices]() and [configure]() them accordingly.
+
+3. [Install and set up Docker]() as a means to host containerised services on the server.
+
+4. Ensure that a static IP address has been configured for the OMV server.
+
+5. **(Optional)** [Set up a domain](dns.md#register-a-subdomain) to be used as a public endpoint to your OMV server (i.e. `omv.example.com`).
 
 ---
 
