@@ -639,7 +639,6 @@ This details how to install and use Docker on the OMV server.
 - [Plugin Settings](https://wiki.omv-extras.org/doku.php?id=omv7:docker_in_omv#plugin_settings)
 - [CONFIGURATION](https://wiki.omv-extras.org/doku.php?id=omv7:docker_in_omv#configuration)
 - [OpenMediaVault 7: Step-by-Step Docker Deployment with Docker Compose Plugin - Episode 2](https://youtu.be/D_d0DNUQcwM)
-- [#](#)
 
 ### Installing Docker
 
