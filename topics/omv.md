@@ -16,27 +16,27 @@ OpenMediaVault is the next generation network attached storage (NAS) solution ba
     - [Install OMV](#install-omv)
     - [Install OMV-Extras](#install-omv-extras)
     - [Install FlashMemory Plugin](#install-flashmemory-plugin)
-  - [User Management](#user-management)
-    - [Description](#description-2)
-    - [User Home Directory](#user-home-directory)
-    - [Create User](#create-user)
   - [Configuration](#configuration)
-    - [Description](#description-3)
+    - [Description](#description-2)
     - [References](#references-2)
     - [General Configuration](#general-configuration)
     - [Storage Configuration](#storage-configuration)
   - [Storage Setup](#storage-setup)
-    - [Description](#description-4)
+    - [Description](#description-3)
     - [References](#references-3)
     - [Set Up Storage Disks](#set-up-storage-disks)
     - [SnapRAID](#snapraid)
     - [MergerFS](#mergerfs)
     - [SMB Share](#smb-share)
   - [Docker](#docker)
-    - [Description](#description-5)
+    - [Description](#description-4)
     - [References](#references-4)
     - [Installing Docker](#installing-docker)
     - [Deploying Docker Container](#deploying-docker-container)
+  - [User Management](#user-management)
+    - [Description](#description-5)
+    - [User Home Directory](#user-home-directory)
+    - [Create User](#create-user)
   - [Troubleshooting](#troubleshooting)
     - [Description](#description-6)
     - [References](#references-5)
@@ -126,62 +126,6 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 1. From the web interface, [install the FlashMemory plugin](#installing-plugin), `openmediavault-flashmemory` graphically.
 
 2. **Alternatively**, [install](package-manager.md#install-software) the `openmediavault-flashmemory` package using the package manager (i.e. `apt`).
-
----
-
-## User Management
-
-### Description
-
-This details topics pertaining user management on an OpenMediaVault (OMV) server.
-
-### User Home Directory
-
-> [!NOTE]  
-> This part of the guide assumes that you have finished configuring your [storage setup](#storage-setup).
-
-This details how to enable users created and managed by OMV to have their own home directories:
-
-1. [Create a shared folder](#create-shared-folder) for the user home directory:
-
-   - Name: Set a unique, descriptive name for the shared folder (i.e. `home`)
-   - File system: Expand the dropdown and select the intended file system (i.e. `Merger1 [X GiB]`)
-   - Relative path: Leave as default (i.e. `home/`)
-   - Permissions: `Administrator: read/write, Users: read/write, Others: no access`
-
-2. From the web interface dashboard, click the **Users** group on the left-hand side to expand it, and click the **Settings** menu option.
-
-3. In the User Management **Settings** form, configure the following:
-
-   - Enabled: Check the box to enable user home directories on the OMV server
-   - Location: Expand the dropdown and select the shared folder for the user home directory (i.e. `home [on Merger1, home/]`)
-
-    Submit the form by clicking the **Save** button.
-
-4. If prompted to confirm and apply configuration changes made, click the **Apply** button.
-
-### Create User
-
-This details how to create a user account on the OMV server:
-
-1. **(Optional)** Ensure you have enabled and configured [user home directories](#user-home-directory) on the OMV server.
-
-2. From the web interface dashboard, click the **Users** group on the left-hand side to expand it, and click the **Users** menu option.
-
-3. In the User Management **Users** page, click the **Create | Import** button, and select the **Create** option.
-
-4. In the Users **Create** form, configure the following:
-
-   - Name: Set a unique, descriptive name for the user (i.e. `user1`)
-   - Password: Set a distinct, secure password for the user
-   - Confirm password: Repeat the user password for confirmation
-   - Shell: Leave as default or expand the dropdown and select a different default shell (i.e. `/usr/bin/bash`)
-   - Groups: Expand the dropdown and select the intended group(s) for the user (i.e. `users` and `_ssh`)
-   - SSH public keys: For every SSH public key you wish to add, click the **Add** button, and add it to the form accordingly
-
-    Submit the form by clicking the **Save** button.
-
-5. If prompted to confirm and apply configuration changes made, click the **Apply** button.
 
 ---
 
@@ -773,6 +717,62 @@ This details how to install and setup Docker using the Compose plugin on OMV:
 ### Deploying Docker Container
 
 TODO
+
+---
+
+## User Management
+
+### Description
+
+This details topics pertaining user management on an OpenMediaVault (OMV) server.
+
+### User Home Directory
+
+> [!NOTE]  
+> This part of the guide assumes that you have finished configuring your [storage setup](#storage-setup).
+
+This details how to enable users created and managed by OMV to have their own home directories:
+
+1. [Create a shared folder](#create-shared-folder) for the user home directory:
+
+   - Name: Set a unique, descriptive name for the shared folder (i.e. `home`)
+   - File system: Expand the dropdown and select the intended file system (i.e. `Merger1 [X GiB]`)
+   - Relative path: Leave as default (i.e. `home/`)
+   - Permissions: `Administrator: read/write, Users: read/write, Others: no access`
+
+2. From the web interface dashboard, click the **Users** group on the left-hand side to expand it, and click the **Settings** menu option.
+
+3. In the User Management **Settings** form, configure the following:
+
+   - Enabled: Check the box to enable user home directories on the OMV server
+   - Location: Expand the dropdown and select the shared folder for the user home directory (i.e. `home [on Merger1, home/]`)
+
+    Submit the form by clicking the **Save** button.
+
+4. If prompted to confirm and apply configuration changes made, click the **Apply** button.
+
+### Create User
+
+This details how to create a user account on the OMV server:
+
+1. **(Optional)** Ensure you have enabled and configured [user home directories](#user-home-directory) on the OMV server.
+
+2. From the web interface dashboard, click the **Users** group on the left-hand side to expand it, and click the **Users** menu option.
+
+3. In the User Management **Users** page, click the **Create | Import** button, and select the **Create** option.
+
+4. In the Users **Create** form, configure the following:
+
+   - Name: Set a unique, descriptive name for the user (i.e. `user1`)
+   - Password: Set a distinct, secure password for the user
+   - Confirm password: Repeat the user password for confirmation
+   - Shell: Leave as default or expand the dropdown and select a different default shell (i.e. `/usr/bin/bash`)
+   - Groups: Expand the dropdown and select the intended group(s) for the user (i.e. `users` and `_ssh`)
+   - SSH public keys: For every SSH public key you wish to add, click the **Add** button, and add it to the form accordingly
+
+    Submit the form by clicking the **Save** button.
+
+5. If prompted to confirm and apply configuration changes made, click the **Apply** button.
 
 ---
 
