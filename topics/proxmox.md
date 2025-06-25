@@ -2209,49 +2209,9 @@ This details the steps to stream data from a Child node to the Parent node:
 
 This details the steps to set up email alerts on the Parent node:
 
-1. On the Parent node, [install](package-manager.md#install-software) the `ssmtp` package using the system's package manager (i.e. `apt`).
+1. On the Parent node, [set up an email sender](email.md#email-sender-setup) (i.e. `sSMTP`) that will be used for email alerts.
 
-2. Backup the existing SSMTP configuration file:
-
-   ```sh
-   sudo cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.bak
-   ```
-
-3. Update the network configuration file:
-
-   ```sh
-   sudo nano /etc/ssmtp/ssmtp.conf
-   ```
-
-   Add the following configuration to the end of the file:
-
-   ```sh
-   root=<email-address>
-
-   mailhub=smtp.gmail.com:465
-
-   rewriteDomain=gmail.com
-
-   TLS_CA_FILE=/etc/ssl/certs/ca-certificates.crt
-   UseTLS=Yes
-   UseSTARTTLS=No
-
-   AuthUser=<email-address>
-   AuthPass=<email-password>
-   AuthMethod=LOGIN
-   ```
-
-   Replace `<email-address>` and `<email-password>` with your own email address (i.e. `netdata@example.com`) and [app password](https://support.google.com/mail/answer/185833) respectively. You may need to configure these a little differently according to your own email provider.
-
-4. Test to see whether the SSMTP configuration works by sending a test email:
-
-   ```sh
-   echo -e "Subject: Test Email\n\nThis is a test email" | sudo sendmail <receiver-email>
-   ```
-
-   Replace `<receiver-email>` with the email address you wish to send the test email to (i.e. `admin@example.com`).
-
-5. If the test email was sent successfully, add the following [configurations](#configuring-netdata) to the end of the `health_alarm_notify.conf` config file:
+2. Once the email sender has been configured and verified as working, add the following [configurations](#configuring-netdata) to the end of the `health_alarm_notify.conf` config file:
 
    ```sh
    EMAIL_SENDER="<sender-email>"
@@ -2273,7 +2233,7 @@ This details the steps to set up email alerts on the Parent node:
    DEFAULT_RECIPIENT_EMAIL="admin@example.com user@example.com"
    ```
 
-6. Verify that the Netdata email alerts are working by sending test alerts as user `netdata`:
+3. Verify that the Netdata email alerts are working by sending test alerts as user `netdata`:
 
    ```sh
    sudo -u netdata /usr/libexec/netdata/plugins.d/alarm-notify.sh test
