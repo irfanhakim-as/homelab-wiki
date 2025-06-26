@@ -560,7 +560,7 @@ After the _physical_ storage of the system itself has been expanded, the followi
         3
         ```
 
-        When asked for the partition type, we are supposed to enter the **alias** for our partition type (i.e. `Linux LVM`). To find the alias for our partition type, run the following command:
+        When asked for the partition type, we are supposed to enter the intended partition type's (i.e. `Linux LVM`) corresponding alias or `Id` (i.e. `43`). To find the alias for our partition type, run the following command:
 
         ```sh
         L
