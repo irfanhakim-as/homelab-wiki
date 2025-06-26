@@ -26,6 +26,8 @@ Debian, also known as Debian GNU/Linux, is a free and open source Linux distribu
   - [Storage](#storage)
     - [Description](#description-4)
     - [References](#references-2)
+    - [Partition Storage](#partition-storage)
+    - [Mount Storage](#mount-storage)
     - [Resize Storage](#resize-storage)
   - [User Management](#user-management)
     - [Description](#description-5)
@@ -442,6 +444,437 @@ This details the process of updating certain storage related configurations on t
 ### References
 
 - [How to List All Block Devices in Linux | lsblk Command](https://www.geeksforgeeks.org/lsblk-command-in-linux-with-examples)
+- [Fstab Usage](https://wiki.archlinux.org/title/Fstab#Usage)
+
+### Partition Storage
+
+After attaching a new storage device to the system, this details how to partition the new storage device before mounting it:
+
+1. First and foremost, identify the exact storage device that you wish to partition:
+
+    ```sh
+    sudo fdisk -l
+    ```
+
+    Sample output of the storage device we wish to partition:
+
+    ```
+      Disk /dev/sdX: 57.73 GiB, 61991813120 bytes, 121077760 sectors
+      Disk model: DataTraveler 3.0
+      Units: sectors of 1 * 512 = 512 bytes
+      Sector size (logical/physical): 512 bytes / 512 bytes
+      I/O size (minimum/optimal): 512 bytes / 512 bytes
+      Disklabel type: dos
+      Disk identifier: 0x5ac83f1b
+
+      Device     Boot Start       End   Sectors   Size Id Type
+      /dev/sdX1  *       63 121077759 121077697  57.7G  b W95 FAT32
+    ```
+
+    Take note of the storage device name (i.e. `/dev/sdX`).
+
+2. Delete any existing partition(s) on the storage device (i.e. `/dev/sdX`):
+
+    ```sh
+    sudo wipefs -a <storage-device>
+    ```
+
+    For example:
+
+    ```sh
+    sudo wipefs -a /dev/sdX
+    ```
+
+    Sample successful output:
+
+    ```
+      /dev/sdX: 2 bytes were erased at offset 0x000001fe (dos): 55 aa
+      /dev/sdX: calling ioctl to re-read partition table: Success
+    ```
+
+3. Create a new partition on the storage device (i.e. `/dev/sdX`):
+
+   - Start `fdisk` for the storage device (i.e. `/dev/sdX`):
+
+        ```sh
+        sudo fdisk <storage-device>
+        ```
+
+        For example:
+
+        ```sh
+        sudo fdisk /dev/sdX
+        ```
+
+   - In the interactive `fdisk` session, enter the following to print the partition table:
+
+        ```sh
+        p
+        ```
+
+        Sample output:
+
+        ```
+          Disk /dev/sdX: 57.73 GiB, 61991813120 bytes, 121077760 sectors
+          Disk model: DataTraveler 3.0
+          Units: sectors of 1 * 512 = 512 bytes
+          Sector size (logical/physical): 512 bytes / 512 bytes
+          I/O size (minimum/optimal): 512 bytes / 512 bytes
+          Disklabel type: dos
+          Disk identifier: 0x5ac83f1b
+        ```
+
+        The output should show that there are no partitions on the storage device (i.e. `/dev/sdX`).
+
+   - Enter the following to create a new partition:
+
+        ```sh
+        n
+        ```
+
+        When prompted for the partition type, for example:
+
+        ```
+          Partition type
+              p   primary (0 primary, 0 extended, 4 free)
+              e   extended (container for logical partitions)
+        ```
+
+        Enter the intended partition type or press <kbd>Enter</kbd> to leave as default (i.e. `p`):
+
+        ```sh
+        p
+        ```
+
+        When prompted for the partition number, enter the appropriate partition number, or press <kbd>Enter</kbd> to leave as default (i.e. `1`):
+
+        ```sh
+        1
+        ```
+
+        When prompted for the start of the `First sector`, enter the intended value, or press <kbd>Enter</kbd> to leave as default (i.e. `2048`):
+
+        ```sh
+        2048
+        ```
+
+        When prompted for the end of the `Last sector`, enter the intended value, or press <kbd>Enter</kbd> to leave as default to use the full available space (i.e. `121077759`):
+
+        ```sh
+        121077759
+        ```
+
+        Sample successful output:
+
+        ```
+          Created a new partition 1 of type 'Linux' and of size 57.7 GiB.
+        ```
+
+   - Print the partition table to verify our new partition:
+
+        ```sh
+        p
+        ```
+
+        Sample output:
+
+        ```
+          Disk /dev/sdX: 57.73 GiB, 61991813120 bytes, 121077760 sectors
+          Disk model: DataTraveler 3.0
+          Units: sectors of 1 * 512 = 512 bytes
+          Sector size (logical/physical): 512 bytes / 512 bytes
+          I/O size (minimum/optimal): 512 bytes / 512 bytes
+          Disklabel type: dos
+          Disk identifier: 0x5689dd05
+
+          Device     Boot Start       End   Sectors  Size Id Type
+          /dev/sdX1        2048 121077759 121075712 57.7G 83 Linux
+        ```
+
+        Ensure that the new partition has been created with the correct `Size` and `Type` (i.e. `Linux`).
+
+   - **(Optional)** If the partition should be of a different type, enter the following to configure it:
+
+        ```sh
+        t
+        ```
+
+        When prompted for the partition number, enter the number of the partition we had just created (i.e. `1`):
+
+        ```sh
+        1
+        ```
+
+        When asked for the partition type, we are supposed to enter the intended partition type's (i.e. `Linux LVM`) corresponding alias or `Id` (i.e. `8e`). To find the alias for our partition type, run the following command:
+
+        ```sh
+        L
+        ```
+
+        Sample output:
+
+        ```
+          00 Empty            27 Hidden NTFS Win  82 Linux swap / So  c1 DRDOS/sec (FAT-
+          01 FAT12            39 Plan 9           83 Linux            c4 DRDOS/sec (FAT-
+          02 XENIX root       3c PartitionMagic   84 OS/2 hidden or   c6 DRDOS/sec (FAT-
+          03 XENIX usr        40 Venix 80286      85 Linux extended   c7 Syrinx
+          04 FAT16 <32M       41 PPC PReP Boot    86 NTFS volume set  da Non-FS data
+          05 Extended         42 SFS              87 NTFS volume set  db CP/M / CTOS / .
+          06 FAT16            4d QNX4.x           88 Linux plaintext  de Dell Utility
+          07 HPFS/NTFS/exFAT  4e QNX4.x 2nd part  8e Linux LVM        df BootIt
+          08 AIX              4f QNX4.x 3rd part  93 Amoeba           e1 DOS access
+          09 AIX bootable     50 OnTrack DM       94 Amoeba BBT       e3 DOS R/O
+          0a OS/2 Boot Manag  51 OnTrack DM6 Aux  9f BSD/OS           e4 SpeedStor
+          0b W95 FAT32        52 CP/M             a0 IBM Thinkpad hi  ea Linux extended
+          0c W95 FAT32 (LBA)  53 OnTrack DM6 Aux  a5 FreeBSD          eb BeOS fs
+          0e W95 FAT16 (LBA)  54 OnTrackDM6       a6 OpenBSD          ee GPT
+          0f W95 Ext'd (LBA)  55 EZ-Drive         a7 NeXTSTEP         ef EFI (FAT-12/16/
+          10 OPUS             56 Golden Bow       a8 Darwin UFS       f0 Linux/PA-RISC b
+          11 Hidden FAT12     5c Priam Edisk      a9 NetBSD           f1 SpeedStor
+          12 Compaq diagnost  61 SpeedStor        ab Darwin boot      f4 SpeedStor
+          14 Hidden FAT16 <3  63 GNU HURD or Sys  af HFS / HFS+       f2 DOS secondary
+          16 Hidden FAT16     64 Novell Netware   b7 BSDI fs          f8 EBBR protective
+          17 Hidden HPFS/NTF  65 Novell Netware   b8 BSDI swap        fb VMware VMFS
+          18 AST SmartSleep   70 DiskSecure Mult  bb Boot Wizard hid  fc VMware VMKCORE
+          1b Hidden W95 FAT3  75 PC/IX            bc Acronis FAT32 L  fd Linux raid auto
+          1c Hidden W95 FAT3  80 Old Minix        be Solaris boot     fe LANstep
+          1e Hidden W95 FAT1  81 Minix / old Lin  bf Solaris          ff BBT
+          24 NEC DOS
+        ```
+
+        Then, as an example, to configure the partition as a `Linux LVM` partition, enter the corresponding alias (i.e. `8e`) accordingly:
+
+        ```sh
+        8e
+        ```
+
+   - Enter the following to write our changes to the disk:
+
+        ```sh
+        w
+        ```
+
+        Sample output:
+
+        ```
+          The partition table has been altered.
+          Calling ioctl() to re-read partition table.
+          Syncing disks.
+        ```
+
+4. Create a filesystem (i.e. `ext4`) on the new partition (i.e. `/dev/sdX1`):
+
+    ```sh
+    sudo mkfs.<filesystem> <storage-partition>
+    ```
+
+    For example:
+
+    ```sh
+    sudo mkfs.ext4 /dev/sdX1
+    ```
+
+    Sample output:
+
+    ```
+      mke2fs 1.47.0 (5-Feb-2023)
+      Creating filesystem with 15134464 4k blocks and 3784704 inodes
+      Filesystem UUID: 6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1
+      Superblock backups stored on blocks:
+              32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
+              4096000, 7962624, 11239424
+
+      Allocating group tables: done
+      Writing inode tables: done
+      Creating journal (65536 blocks): done
+      Writing superblocks and filesystem accounting information: done
+    ```
+
+5. Verify that our partition (i.e. `/dev/sdX1`) has been created with the right filesystem (i.e. `ext4`):
+
+    ```sh
+    sudo blkid <storage-partition> | grep -i <filesystem>
+    ```
+
+    For example:
+
+    ```sh
+    sudo blkid /dev/sdX1 | grep -i ext4
+    ```
+
+    Sample output:
+
+    ```
+      /dev/sdX1: LABEL="data" UUID="6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="a4d2c519-01"
+    ```
+
+    Take note of the storage partition UUID (i.e. `6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1`) which will be needed for mounting.
+
+6. [Mount the newly created storage partition](#mount-storage) on the system.
+
+### Mount Storage
+
+This details how to mount a storage device on the system:
+
+1. Create a mountpoint directory (i.e. `/mnt/data`) for the storage partition:
+
+    ```sh
+    sudo mkdir -p <mountpoint>
+    ```
+
+    For example:
+
+    ```sh
+    sudo mkdir -p /mnt/data
+    ```
+
+2. Test mounting the storage partition (i.e. `/dev/sdX1`) to the mountpoint (i.e. `/mnt/data`):
+
+    ```sh
+    sudo mount <storage-partition> <mountpoint>
+    ```
+
+    For example:
+
+    ```sh
+    sudo mount /dev/sdX1 /mnt/data
+    ```
+
+3. If the storage partition was mounted successfully, change ownership of the mountpoint (i.e. `/mnt/data`) to the current user:
+
+    ```sh
+    sudo chown $USER: <mountpoint>
+    ```
+
+    For example:
+
+    ```sh
+    sudo chown $USER: /mnt/data
+    ```
+
+    This ensures that the current user has the correct permissions to write to the mounted storage.
+
+4. Test writing to the mountpoint (i.e. `/mnt/data`) to ensure the current user has the correct permissions to write to the storage device:
+
+    ```sh
+    touch <mountpoint>/testfile
+    ```
+
+    For example:
+
+    ```sh
+    touch /mnt/data/testfile
+    ```
+
+5.  After verifying that the mounted storage partition is writable, unmount it from its mountpoint (i.e. `/mnt/data`):
+
+    ```sh
+    sudo umount <mountpoint>
+    ```
+
+    For example:
+
+    ```sh
+    sudo umount /mnt/data
+    ```
+
+6. After verifying that the mounted storage partition is writable, add a mounting entry to the `fstab` file so that it mounts automatically on boot:
+
+   - Update the system's `fstab` file:
+
+        ```sh
+        sudo nano /etc/fstab
+        ```
+
+   - Add this generic line to the end of the file:
+
+        ```
+        <source>   <mountpoint>   <filesystem>   <options>   <dump>   <fsck>
+        ```
+
+   - Update the `<source>` with the unique identifier of the storage disk or partition we wish to mount.
+
+        For example, to identify the storage source by `UUID`, replace `<source>` with the following:
+
+        ```
+        UUID=<partition-uuid>
+        ```
+
+        In such example, replace `<partition-uuid>` with the UUID of the storage partition (i.e. `6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1`):
+
+        ```
+        UUID=6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1
+        ```
+
+   - Update the `<mountpoint>` with the path to the directory the storage device should be mounted to.
+
+        For example, replace `<mountpoint>` with the intended mountpoint (i.e. `/mnt/data`):
+
+        ```
+        /mnt/data
+        ```
+
+   - Update the `<filesystem>` with the type of filesystem (or mount driver) used to access the source.
+
+        For example, replace `<filesystem>` with the filesystem of the storage partition (i.e. `ext4`):
+
+        ```
+        ext4
+        ```
+
+   - Update the `<options>` with comma-separated settings that control how the storage is mounted or behaves.
+
+        For example, replace `<options>` with the following common mount options:
+
+        ```
+        defaults,noatime
+        ```
+
+        In such example, `defaults` sets the default mount options for the filesystem and `noatime` prevents the filesystem from updating the access time of files. Use your own combination of mount options as necessary.
+
+   - Update the `<dump>` with your preference on whether the filesystem should be dumped (i.e. `1`) or not (i.e. `0`).
+
+        For example, replace `<dump>` with the following value to skip dumps:
+
+        ```
+        0
+        ```
+
+        Filesystem dumps are no longer commonly used and should be skipped in almost all cases.
+
+   - Update the `fsck` with your preference on the order for filesystem checks on boot.
+
+        For example, to perform the filesystem check on a secondary storage device, replace `<fsck>` with the following value:
+
+        ```
+        2
+        ```
+
+        In most cases, the following values are recommended:
+
+        - Root storage device: `1`
+        - Other storage partitions: `2`
+        - Storage that does not support or require checking (i.e. remote `cifs` storage): `0`
+
+   - Sample storage mount line after all of the required updates:
+
+        ```
+        UUID=6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1   /mnt/data   ext4   defaults,noatime   0   2
+        ```
+
+   - Save the `fstab` file and [reload the systemd manager configuration](systemd.md#reload-systemd-manager-configuration) to apply the changes made.
+
+7. Remount the storage partition to its corresponding mountpoint (i.e. `/mnt/data`) to verify our `fstab` entry is configured correctly:
+
+    ```sh
+    sudo mount <mountpoint>
+    ```
+
+    For example:
+
+    ```sh
+    sudo mount /mnt/data
+    ```
 
 ### Resize Storage
 
