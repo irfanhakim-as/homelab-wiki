@@ -2209,7 +2209,7 @@ This details the steps to stream data from a Child node to the Parent node:
 
 This details the steps to set up email alerts on the Parent node:
 
-1. On the Parent node, [set up an email sender](email.md#email-sender-setup) (i.e. `sSMTP`) that will be used for email alerts.
+1. On the Parent node, [set up an email sender](email.md#email-sender-setup) (i.e. sSMTP) that will be used for email alerts.
 
 2. Once the email sender has been configured and verified as working, add the following [configurations](#configuring-netdata) to the end of the `health_alarm_notify.conf` config file:
 
