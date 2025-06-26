@@ -15,9 +15,14 @@ Raspberry Pi is a series of small single-board computers (SBCs) developed in the
     - [References](#references-1)
     - [Installation](#installation)
     - [Flash OS Image](#flash-os-image)
-  - [Adding Kernel Parameters](#adding-kernel-parameters)
+  - [RaspiBackup](#raspibackup)
     - [Description](#description-2)
     - [References](#references-2)
+    - [Installing RaspiBackup](#installing-raspibackup)
+    - [Configuring RaspiBackup](#configuring-raspibackup)
+  - [Adding Kernel Parameters](#adding-kernel-parameters)
+    - [Description](#description-3)
+    - [References](#references-3)
     - [Steps](#steps)
 
 ## References
@@ -103,6 +108,109 @@ This details how to flash an OS image to a storage medium for Raspberry Pi:
 11. Wait for the flashing process to complete, and click the **CONTINUE** button in the **Write Successful** window once it's done.
 
 12. Remove the flashed storage device from your computer and attach it to your Raspberry Pi device accordingly.
+
+---
+
+## RaspiBackup
+
+### Description
+
+This details how to set up a backup solution using RaspiBackup for the Raspberry Pi.
+
+### References
+
+- [raspiBackup](https://github.com/framps/raspiBackup)
+- [raspiBackup - Installation and configuration in 5 minutes](https://www.linux-tips-and-tricks.de/en/installation)
+- [Backup types](https://www.linux-tips-and-tricks.de/en/backup#butypes)
+- [Restorescenario for Linuxusers](https://www.linux-tips-and-tricks.de/en/restore#linxrestore)
+
+### Installing RaspiBackup
+
+> [!NOTE]  
+> A separate storage device, local or remote, is required to store the backup data.
+
+1. Ensure that you have [prepared a secondary storage](linux.md#partition-storage) on the Raspberry Pi device to be used as the backup storage.
+
+2. Create and designate a directory (i.e. `/mnt/data/raspi-backup`) on the intended backup storage device to store the RaspiBackup backup data:
+
+    ```sh
+    mkdir -p <backup-directory>
+    ```
+
+    For example:
+
+    ```sh
+    mkdir -p /mnt/data/raspi-backup
+    ```
+
+3. [Set up an email sender](email.md#email-sender-setup) system (i.e. sSMTP) if there is not an existing one on the Raspberry Pi device.
+
+4. Download and start the RaspiBackup installation script using the following command:
+
+    ```sh
+    curl -o install -L https://raw.githubusercontent.com/framps/raspiBackup/master/installation/install.sh; sudo bash ./install
+    ```
+
+5. Go through the installation procedure:
+
+   - In the **Navigation** section, select the **Ok** option to get to the _landing page_.
+   - From the _landing page_ of the **raspiBackup Installation and Configuration Tool**, select the **Install components** menu option.
+   - In the **Install components** section:
+     - Select the **Install raspiBackup using a default configuration** option.
+     - Select the **Back** option to return to the _landing page_ once the process has completed.
+
+6. Go through the [configuration process](#configuring-raspibackup) as part of the installation.
+
+7. If presented with the **First steps** section informing you that RaspiBackup has been installed successfully, select the **Ok** option.
+
+8. If presented with the **Help** section offering some helpful links, select the **Ok** option to exit the script.
+
+### Configuring RaspiBackup
+
+1. If you are configuring RaspiBackup for the first time as part of the installation process, proceed to the next step accordingly. If you are configuring RaspiBackup after the fact, run the following command first to start the configuration process:
+
+    ```sh
+    sudo raspiBackupInstallUI
+    ```
+
+2. From the _landing page_ of the **raspiBackup Installation and Configuration Tool**, select the **Configure major options** menu option to start the configuration process.
+
+3. In the **Configure major options** section, select and configure the following options:
+
+   - Backup path:
+     - Backup path: Set the path to the backup data directory you have created (i.e. `/mnt/data/raspi-backup`)
+   - Backup versions:
+     - Select the `Keep a maximum number of backups` option
+     - Number of backups to keep: Set the intended number of backups to keep (i.e. `3`)
+   - Backup type:
+     - Select the intended backup method (i.e. `Backup with tar`)
+   - Backup mode:
+     - Select the intended backup mode (i.e. `Backup the two standard partitions`)
+   - **(Optional)** Services to stop and start:
+     - If there are any services you need or wish to stop during the backup process and restart once it's finished (i.e. `docker`), select them accordingly
+   - Message verbosity:
+     - Select the intended verbosity of log messages (i.e. `Display all messages`)
+   - eMail notification:
+     - eMail address to send notifications to: Set the intended receiver email address (i.e. `admin@example.com`)
+     - Mail program: Select the configured email sender on the system (i.e. `ssmtp`) or leave as default (`mail`)
+   - Regular backup:
+     - Select the `Enable regular backup` option to perform periodical backups
+     - Weekday of regular backup: Select the intended day of the week to perform backups (i.e. `Daily`)
+     - Time of regular backup: Select the intended time of day to perform backups (i.e. `01:00`)
+   - Compression:
+     - Select the `Compress tar backup` option to reduce the size of `tar` backups
+
+4. Once you have finished configuring all of the intended settings, go **Back** to exit the **Configure major options** section and submit the configuration options.
+
+5. When prompted to save the updated configuration, select the **Yes** option.
+
+6. If prompted to save the updated `systemd` settings, select the **Yes** option.
+
+7. Once you have been redirected to the **raspiBackup Installation and Configuration Tool** _landing page_, select the **Finish** option.
+
+8. You may be presented with a warning of _inconsistent backups_ if you have opted not to stop any services before initiating backups. If so, select the **Yes** option to ignore the warning.
+
+9. If presented with the **Help** section offering some helpful links, select the **Ok** option to exit the script.
 
 ---
 
