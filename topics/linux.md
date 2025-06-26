@@ -22,6 +22,8 @@ Linux is both an open-source Unix-like kernel and a generic name for a family of
     - [Update Hostname](#update-hostname)
   - [Storage](#storage)
     - [Description](#description-4)
+    - [Partition Storage](#partition-storage)
+    - [Mount Storage](#mount-storage)
     - [Resize Storage](#resize-storage)
   - [User Management](#user-management)
     - [Description](#description-5)
@@ -99,6 +101,18 @@ This details the simple process of updating the system's hostname:
 ### Description
 
 This details the process of updating certain storage related configurations for the following Linux distributions.
+
+### Partition Storage
+
+After attaching a new storage device to the system, this details how to partition the new storage device before mounting it:
+
+- [Debian](debian.md#partition-storage)
+
+### Mount Storage
+
+This details how to mount a storage device on the system:
+
+- [Debian](debian.md#mount-storage)
 
 ### Resize Storage
 
