@@ -311,7 +311,7 @@ This details recommended configuration options for OMV in general:
 
       Submit the form by clicking the **Save** button.
 
-9. **(Optional)** TODO: Set up Timeshift for OMV server snapshots
+9. **(Optional)** [Set up Timeshift](timeshift.md#setup) for OMV server snapshots.
 
 ### Storage Configuration
 
