@@ -20,9 +20,14 @@ Raspberry Pi is a series of small single-board computers (SBCs) developed in the
     - [References](#references-2)
     - [Installing RaspiBackup](#installing-raspibackup)
     - [Configuring RaspiBackup](#configuring-raspibackup)
-  - [Adding Kernel Parameters](#adding-kernel-parameters)
+  - [Log2Ram](#log2ram)
     - [Description](#description-3)
     - [References](#references-3)
+    - [Installing Log2Ram](#installing-log2ram)
+    - [Configuring Log2Ram](#configuring-log2ram)
+  - [Adding Kernel Parameters](#adding-kernel-parameters)
+    - [Description](#description-4)
+    - [References](#references-4)
     - [Steps](#steps)
 
 ## References
@@ -211,6 +216,120 @@ This details how to set up a backup solution using RaspiBackup for the Raspberry
 8. You may be presented with a warning of _inconsistent backups_ if you have opted not to stop any services before initiating backups. If so, select the **Yes** option to ignore the warning.
 
 9. If presented with the **Help** section offering some helpful links, select the **Ok** option to exit the script.
+
+---
+
+## Log2Ram
+
+### Description
+
+This details the setup process of Log2Ram to delegate some writing operations to RAM instead of the storage medium (i.e. microSD card).
+
+### References
+
+- [Log2Ram](https://github.com/azlux/log2ram)
+- [Using Log2RAM on the Raspberry Pi](https://pimylifeup.com/raspberry-pi-log2ram)
+
+### Installing Log2Ram
+
+This details how to install and set up Log2Ram on the system:
+
+1. Add the appropriate software repository to the system:
+
+    ```sh
+    echo "deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ bookworm main" | sudo tee /etc/apt/sources.list.d/azlux.list
+    sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg  https://azlux.fr/repo.gpg
+    ```
+
+2. [Update all software repositories](package-manager.md#update-software) installed on the system using `apt`.
+
+3. [Install](package-manager.md#install-software) the `log2ram` package using `apt`.
+
+4. [Configure Log2Ram](#configuring-log2ram) to finish the setup.
+
+5. After a reboot, verify that Log2Ram has been set up correctly:
+
+    ```sh
+    df -hT | grep log2ram | awk '{print " Name: " $1 "\nMount: " $7 "\n Type: " $2 "\nUsage: " $6 "\n Size: " $3 "\n Used: " $4 "\n Free: " $5}'
+    ```
+
+    Sample output:
+
+    ```
+       Name: log2ram
+      Mount: /var/log
+       Type: tmpfs
+      Usage: 1%
+       Size: 256M
+       Used: 52K
+       Free: 256M
+       Name: log2ram
+      Mount: /var/tmp
+       Type: tmpfs
+      Usage: 0%
+       Size: 256M
+       Used: 0
+       Free: 256M
+       Name: log2ram
+      Mount: /var/spool
+       Type: tmpfs
+      Usage: 0%
+       Size: 256M
+       Used: 0
+       Free: 256M
+    ```
+
+### Configuring Log2Ram
+
+This details the recommended configuration options for Log2Ram:
+
+1. Create a backup of the default Log2Ram configuration file:
+
+    ```sh
+    sudo cp /etc/log2ram.conf /etc/log2ram.conf.bak
+    ```
+
+2. Update the Log2Ram configuration:
+
+   - Update the configuration file:
+
+      ```sh
+      sudo nano /etc/log2ram.conf
+      ```
+
+   - Increase the amount of RAM reserved for Log2Ram (i.e. `256M`):
+
+      ```diff
+      - SIZE=128M
+      + #SIZE=128M
+      + SIZE=256M
+      ```
+
+      You may check the amount of (RAM) storage needed for all the directories you wish to store in RAM, separated by a single whitespace (i.e. `/var/log`, `/var/tmp`, and `/var/spool`):
+
+      ```sh
+      sudo du -sh /var/log /var/tmp /var/spool
+      ```
+
+      Sample output:
+
+      ```
+        72K     /var/log
+        36K     /var/tmp
+        12K     /var/spool
+      ```
+
+   - Append to the list of directories to store in RAM, separated by a semicolon (i.e. `/var/log`, `/var/tmp`, and `/var/spool`):
+
+      ```diff
+      - PATH_DISK="/var/log"
+      + #PATH_DISK="/var/log"
+      + PATH_DISK="/var/log;/var/tmp;/var/spool"
+      ```
+
+   - Save changes made to the configuration file.
+
+3. You may need to reboot the system for the changes to take effect.
 
 ---
 
