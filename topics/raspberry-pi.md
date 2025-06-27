@@ -229,6 +229,7 @@ This details the setup process of Log2Ram to delegate some writing operations to
 
 - [Log2Ram](https://github.com/azlux/log2ram)
 - [Using Log2RAM on the Raspberry Pi](https://pimylifeup.com/raspberry-pi-log2ram)
+- [Track down additional folders that are seeing many writes](https://forum.openmediavault.org/index.php?thread/6438-tutorial-experimental-third-party-plugin-available-reducing-omv-s-disk-writes-al)
 
 ### Installing Log2Ram
 
