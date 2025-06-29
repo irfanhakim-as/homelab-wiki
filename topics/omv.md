@@ -81,7 +81,12 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 
    - If deploying OMV on a Raspberry Pi, [flashing Raspberry Pi OS Lite (64-bit)](raspberry-pi.md#flash-os-image) is highly recommended.
 
-   - Unlike our usual, pretty extensive [Linux configuration](linux.md#configuration) recommendations, a very minimal configuration should suffice in this case as anything more may be conflicting with OMV's own configuration.
+   - Unlike our usual, pretty extensive [Linux configuration](linux.md#configuration) recommendations, a very minimal configuration should suffice in this case as anything more may be conflicting with OMV's own configuration. For example:
+
+     - Avoid installing any packages that are potentially conflicting before installing OMV.
+     - Leave SSH configuration as default until OMV is installed.
+     - Avoid setting up a firewall at least until OMV is installed.
+     - Leave networking configuration as default until OMV is installed.
 
    - Your system is required to be connected to the internet via a wired connection before proceeding with the installation.
 
