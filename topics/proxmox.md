@@ -1774,7 +1774,13 @@ This details the process of adding a QDevice to achieve and sustain a high avail
    pvecm qdevice setup <qdevice-ip>
    ```
 
-   Replace `<qdevice-ip>` with the static IPv4 address of the QDevice (i.e. `192.168.0.108`).
+   Replace `<qdevice-ip>` with the static IPv4 address of the QDevice (i.e. `192.168.0.108`). For example:
+
+   ```sh
+   pvecm qdevice setup 192.168.0.108
+   ```
+
+   Enter the root login credentials of the QDevice server when prompted.
 
 5. If the command was successful, check the status of the cluster by running the following on the same Proxmox node:
 
