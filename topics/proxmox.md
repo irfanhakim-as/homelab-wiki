@@ -1821,6 +1821,25 @@ This details the process of adding a QDevice to achieve and sustain a high avail
 
 6. If all is done correctly, as long as not more than one node (including the QDevice) is down, the cluster should remain quorate.
 
+7. **(Optional)** If for whatever reason you need to remove the QDevice from the cluster, on only one of the Proxmox nodes, run the following command:
+
+   ```sh
+   pvecm qdevice remove
+   ```
+
+   Sample output:
+
+   ```
+     Synchronizing state of corosync-qdevice.service with SysV service script with /lib/systemd/systemd-sysv-install.
+     Executing: /lib/systemd/systemd-sysv-install disable corosync-qdevice
+     Removed "/etc/systemd/system/multi-user.target.wants/corosync-qdevice.service".
+     Synchronizing state of corosync-qdevice.service with SysV service script with /lib/systemd/systemd-sysv-install.
+     Executing: /lib/systemd/systemd-sysv-install disable corosync-qdevice
+     Removed "/etc/systemd/system/multi-user.target.wants/corosync-qdevice.service".
+     Reloading corosync.conf...
+     Done
+   ```
+
 ### Recommended Configuration
 
 This details some recommended configurations for the Proxmox cluster depending on your setup.
