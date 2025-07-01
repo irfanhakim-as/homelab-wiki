@@ -424,7 +424,7 @@ This details how to update boot configuration options (_a la_ BIOS) on a Raspber
     sudo cp /boot/firmware/config.txt /boot/firmware/config.txt.bak
     ```
 
-2. Add the desired kernel parameters to the `config.txt` file:
+2. Add the desired boot configuration options to the `config.txt` file:
 
    - Update the `config.txt` file:
 
