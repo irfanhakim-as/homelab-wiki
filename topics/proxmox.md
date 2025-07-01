@@ -1785,36 +1785,36 @@ This details the process of adding a QDevice to achieve and sustain a high avail
    Sample output:
 
    ```
-   Cluster information
-   -------------------
-   Name:             my-proxmox-cluster
-   Config Version:   7
-   Transport:        knet
-   Secure auth:      on
+     Cluster information
+     -------------------
+     Name:             my-proxmox-cluster
+     Config Version:   7
+     Transport:        knet
+     Secure auth:      on
 
-   Quorum information
-   ------------------
-   Date:             Wed Dec 25 16:13:02 2024
-   Quorum provider:  corosync_votequorum
-   Nodes:            2
-   Node ID:          0x00000001
-   Ring ID:          1.1b
-   Quorate:          Yes
+     Quorum information
+     ------------------
+     Date:             Wed Dec 25 16:13:02 2024
+     Quorum provider:  corosync_votequorum
+     Nodes:            2
+     Node ID:          0x00000001
+     Ring ID:          1.1b
+     Quorate:          Yes
 
-   Votequorum information
-   ----------------------
-   Expected votes:   3
-   Highest expected: 3
-   Total votes:      3
-   Quorum:           2
-   Flags:            Quorate Qdevice
+     Votequorum information
+     ----------------------
+     Expected votes:   3
+     Highest expected: 3
+     Total votes:      3
+     Quorum:           2
+     Flags:            Quorate Qdevice
 
-   Membership information
-   ----------------------
-      Nodeid      Votes    Qdevice Name
-   0x00000001          1    A,V,NMW 192.168.0.106 (local)
-   0x00000002          1    A,V,NMW 192.168.0.107
-   0x00000000          1            Qdevice
+     Membership information
+     ----------------------
+        Nodeid      Votes    Qdevice Name
+     0x00000001          1    A,V,NMW 192.168.0.106 (local)
+     0x00000002          1    A,V,NMW 192.168.0.107
+     0x00000000          1            Qdevice
    ```
 
    Ensure that the `Qdevice` is part of the cluster's `Membership information` section and that it has exactly `1` vote.
