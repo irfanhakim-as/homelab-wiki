@@ -29,6 +29,10 @@ Raspberry Pi is a series of small single-board computers (SBCs) developed in the
     - [Description](#description-4)
     - [References](#references-4)
     - [Steps](#steps)
+  - [Update Boot Configuration](#update-boot-configuration)
+    - [Description](#description-5)
+    - [References](#references-5)
+    - [Steps](#steps-1)
 
 ## References
 
@@ -398,4 +402,55 @@ This details how to add command line parameters to the Linux kernel on a Raspber
 
     ```
       console=serial0,115200 console=tty1 root=PARTUUID=00dde0b8-05 rootfstype=ext4 fsck.repair=yes rootwait <new-kernel-parameters>
+    ```
+
+---
+
+## Update Boot Configuration
+
+### Description
+
+This details how to update boot configuration options (_a la_ BIOS) on a Raspberry Pi.
+
+### References
+
+- [config.txt](https://www.raspberrypi.com/documentation/computers/config_txt.html)
+
+### Steps
+
+1. Create a backup of the default `config.txt` file:
+
+    ```sh
+    sudo cp /boot/firmware/config.txt /boot/firmware/config.txt.bak
+    ```
+
+2. Add the desired kernel parameters to the `config.txt` file:
+
+   - Update the `config.txt` file:
+
+      ```sh
+      sudo nano /boot/firmware/config.txt
+      ```
+
+   - At the end of the file, there is likely a line with the `[all]` conditional filter:
+
+      ```
+        [all]
+      ```
+
+      In most cases, it is recommended to add your configurations to the `[all]` section. For example:
+
+      ```diff
+        [all]
+      + <config-property>=<config-value>
+      ```
+
+      Each property and value pair should be separated from each other by newline(s).
+
+   - Save the changes made to the `config.txt` file.
+
+3. Reboot the system to apply all of the configuration options on the next boot:
+
+    ```sh
+    sudo reboot now
     ```
