@@ -29,6 +29,7 @@ OpenMediaVault is the next generation network attached storage (NAS) solution ba
     - [SnapRAID](#snapraid)
     - [MergerFS](#mergerfs)
     - [SMB Share](#smb-share)
+    - [NFS Share](#nfs-share)
   - [Docker](#docker)
     - [Description](#description-4)
     - [References](#references-4)
@@ -410,6 +411,7 @@ This details how to setup the storage solution on the OMV server.
 - [Data Drive Set Up](https://wiki.omv-extras.org/doku.php?id=omv7:new_user_guide#data_drive_set_up)
 - [SnapRAID Initialization](https://wiki.omv-extras.org/doku.php?id=omv7:omv7_plugins:snapraid#snapraid_initialization)
 - [Creating a SMB/CIF “Samba” Network Share](https://wiki.omv-extras.org/doku.php?id=omv7:new_user_guide#creating_a_smb_cif_samba_network_share)
+- [exports - NFS server export table](https://manpages.debian.org/bookworm/nfs-kernel-server/exports.5.en.html)
 
 ### Set Up Storage Disks
 
@@ -642,6 +644,47 @@ This details how to enable SMB (CIFS) and set up an SMB share on the OMV server:
 
    - Name: Set a unique, descriptive name for the user (i.e. `smbuser`)
    - Groups: Expand the dropdown and select the `users` group in addition to any others you may wish to add (i.e. `_ssh`)
+
+### NFS Share
+
+> [!NOTE]  
+> This part of the guide assumes that you have prepared a [shared folder](#create-shared-folder) to be used for the NFS share.
+
+This details how to enable NFS and set up an NFS share on the OMV server:
+
+1. Enable and configure the NFS service on the server:
+
+   - From the web interface dashboard, click the **Services** group on the left-hand side to expand it, and click the **NFS** menu option.
+
+   - In the **NFS** page, click the **Settings** menu option.
+
+   - In the NFS **Settings** form, configure the following:
+
+     - Enabled: Check the box to enable the NFS service
+     - **(Optional)** Versions: Expand the dropdown and explicitly select the NFS versions you wish to enable
+
+      Submit the form by clicking the **Save** button.
+
+   - If prompted to confirm and apply configuration changes made, click the **Apply** button.
+
+2. Create an NFS share:
+
+   - From the web interface dashboard, click the **Services** group on the left-hand side to expand it, and click the **NFS** menu option.
+
+   - In the **NFS** page, click the **Shares** menu option.
+
+   - In the NFS **Shares** page, click the **Create** button to create a new NFS share.
+
+   - In the Shares **Create** form, configure the following:
+
+     - Shared folder: Expand the dropdown and select the shared folder you wish to share (i.e. `merger1.share`)
+     - Client: Set a single client that is allowed to mount the NFS share (i.e. `192.168.0.106/24`)
+     - Permission: Expand the dropdown and select the intended read-write permissions (i.e. `Read/Write`)
+     - Extra options: Add additional export options for the NFS share (i.e. `no_root_squash`) or leave as default (i.e. `subtree_check,insecure`)
+
+      Submit the form by clicking the **Save** button.
+
+   - If prompted to confirm and apply configuration changes made, click the **Apply** button.
 
 ---
 
