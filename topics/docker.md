@@ -165,23 +165,61 @@ This details how to manage a containerised application deployment using Docker C
       nano ~/.local/share/myapp/docker-compose.yml
       ```
 
-   - Define the containerised application's services in the compose file. For example:
+   - Define the containerised application's services in the compose file:
 
-      ```yaml
-      services:
-        myapp:
-          container_name: myapp
-          image: docker.io/myuser/myapp:0.1.0
-          ports:
-            - 8000:8000
-          volumes:
-            - ~/.local/share/myapp/config:/config
-          restart: unless-stopped
-          security_opt:
-            - no-new-privileges:true
-      ```
+     - Sample compose file:
 
-      Save the compose file accordingly.
+        ```yaml
+        services:
+          myapp:
+            container_name: myapp
+            image: docker.io/myuser/myapp:0.1.0
+            ports:
+              - 8000:8000
+            environment:
+              - TZ=Etc/UTC
+            volumes:
+              - ~/.local/share/myapp/config:/config
+            restart: unless-stopped
+            security_opt:
+              - no-new-privileges:true
+        ```
+
+     - **(Optional)** You could also declare some of the values in the compose file as variables. For example:
+
+        ```yaml
+        services:
+          myapp:
+            container_name: myapp
+            image: docker.io/myuser/myapp:${APP_VERSION}
+            ports:
+              - ${HOST_PORT}:${APP_PORT}
+            environment:
+              - TZ=${APP_TIMEZONE}
+            volumes:
+              - ${APP_DIR}/config:/config
+            restart: unless-stopped
+            security_opt:
+              - no-new-privileges:true
+        ```
+
+        ... and create an env file in the same directory as the compose file (i.e. `~/.local/share/myapp/.env`):
+
+        ```sh
+        nano ~/.local/share/myapp/.env
+        ```
+
+        ... and set the defined variables in the env file. For example:
+
+        ```env
+        APP_VERSION=0.1.0
+        HOST_PORT=8000
+        APP_PORT=8000
+        APP_TIMEZONE=Etc/UTC
+        APP_DIR=~/.local/share/myapp
+        ```
+
+     - Save the compose file (and env file) accordingly.
 
    - Deploy the application stack using the full path to the application's corresponding compose file (i.e. `~/.local/share/myapp/docker-compose.yml`):
 
@@ -193,6 +231,12 @@ This details how to manage a containerised application deployment using Docker C
 
       ```sh
       docker compose -f ~/.local/share/myapp/docker-compose.yml up -d --force-recreate
+      ```
+
+      **Alternatively**, if you have supplied an env file, be sure to add the option to include the full path to the env file (i.e. `~/.local/share/myapp/.env`):
+
+      ```sh
+      docker compose -f <compose-file-path> --env-file <env-file-path> up -d --force-recreate
       ```
 
 2. To verify that all container(s) in the application stack are running:
