@@ -15,6 +15,10 @@ Docker is a set of platform as a service (PaaS) products that use OS-level virtu
     - [References](#references-1)
     - [Installation](#installation)
     - [Configuration](#configuration)
+  - [Usage](#usage)
+    - [Description](#description-2)
+    - [References](#references-2)
+    - [Docker Compose](#docker-compose)
 
 ## References
 
@@ -117,3 +121,132 @@ This details how to configure Docker to allow a non-root user to run it.
 2. [Add the service (non-root) user to the `docker` group](linux.md#add-user-to-group) to give the user root-level privileges for running Docker.
 
 3. Reboot the server to apply the changes.
+
+---
+
+## Usage
+
+### Description
+
+This details some common usage steps for a container runtime solution such as Docker.
+
+### References
+
+- [Docker Compose](https://docs.docker.com/compose)
+- [Compose file reference](https://docs.docker.com/compose/compose-file)
+
+### Docker Compose
+
+This details how to manage a containerised application deployment using Docker Compose:
+
+1. To deploy a containerised application using Docker Compose:
+
+   - Create a dedicated project directory (i.e. `~/.local/share/myapp`) for the containerised application:
+
+      ```sh
+      mkdir -p <project-directory>
+      ```
+
+      For example:
+
+      ```sh
+      mkdir -p ~/.local/share/myapp
+      ```
+
+   - Create a Docker compose file (i.e. `docker-compose.yml`) in the project directory (i.e. `~/.local/share/myapp`):
+
+      ```sh
+      nano <project-directory>/<compose-file>
+      ```
+
+      For example:
+
+      ```sh
+      nano ~/.local/share/myapp/docker-compose.yml
+      ```
+
+   - Define the containerised application's services in the compose file. For example:
+
+      ```yaml
+      services:
+        myapp:
+          container_name: myapp
+          image: docker.io/myuser/myapp:0.1.0
+          ports:
+            - 8000:8000
+          volumes:
+            - ~/.local/share/myapp/config:/config
+          restart: unless-stopped
+          security_opt:
+            - no-new-privileges:true
+      ```
+
+      Save the compose file accordingly.
+
+   - Deploy the application stack using the full path to the application's corresponding compose file (i.e. `~/.local/share/myapp/docker-compose.yml`):
+
+      ```sh
+      docker compose -f <compose-file-path> up -d --force-recreate
+      ```
+
+      For example:
+
+      ```sh
+      docker compose -f ~/.local/share/myapp/docker-compose.yml up -d --force-recreate
+      ```
+
+2. To verify that all container(s) in the application stack are running:
+
+    ```sh
+    docker compose -f <compose-file-path> ps -a
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml ps -a
+    ```
+
+3. To view and follow the logs of container(s) in the application stack:
+
+    ```sh
+    docker compose -f <compose-file-path> logs --follow
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml logs --follow
+    ```
+
+4. To stop the running application stack without removing the containers:
+
+    ```sh
+    docker compose -f <compose-file-path> stop
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml stop
+    ```
+
+5. To remove the application stack:
+
+    ```sh
+    docker compose -f <compose-file-path> down
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml down
+    ```
+
+    **Alternatively**, to remove the application stack and its volumes:
+
+    ```sh
+    docker compose -f <compose-file-path> down --volumes
+    ```
+
+    Be aware though that this option will remove all of the application's persistent data permanently.
