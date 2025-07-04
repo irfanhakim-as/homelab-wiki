@@ -13,7 +13,8 @@ In software engineering, containerisation is operating-system–level virtualisa
   - [Linux Containers (LXC)](#linux-containers-lxc)
     - [References](#references-1)
   - [Docker](#docker)
-    - [References](#references-2)
+    - [Setting Up Docker](#setting-up-docker)
+    - [Docker Usage](#docker-usage)
 
 ## References
 
@@ -36,10 +37,18 @@ This details topics pertaining to Linux Containers (LXC) on Proxmox.
 
 ## Docker
 
-This details the installation and configuration process of Docker on a Linux system.
+This section details all topics pertaining to the container runtime, Docker.
 
-### References
+### Setting Up Docker
 
-- [Setup](../topics/docker.md#setup)
-- [Docker on OpenMediaVault](../topics/omv.md#docker)
-- [Usage](../topics/docker.md#usage)
+This details the installation and configuration process of Docker on a Linux system:
+
+- [Docker Setup](../topics/docker.md#setup)
+- [Installing Docker on OMV](../topics/omv.md#installing-docker)
+
+### Docker Usage
+
+This details some common usage steps for a container runtime solution such as Docker:
+
+- [Docker Usage](../topics/docker.md#usage)
+- [Deploying Docker Container on OMV](../topics/omv.md#deploying-docker-container)
