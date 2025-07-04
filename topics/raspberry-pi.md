@@ -302,6 +302,20 @@ This details the recommended configuration options for Log2Ram:
       sudo nano /etc/log2ram.conf
       ```
 
+   - Append to the list of directories to store in RAM, separated by a semicolon (i.e. `/var/log`, `/var/tmp`, and `/var/spool`):
+
+      ```diff
+      - PATH_DISK="/var/log"
+      + #PATH_DISK="/var/log"
+      + PATH_DISK="/var/log;/var/tmp;/var/spool"
+      ```
+
+      If you are unsure what directories you wish to store in RAM, run the following command to find files or directories changed in the last 5 minutes on your system:
+
+      ```sh
+      sudo find /bin /dev /etc /home /lib /media /mnt /opt /root /sbin /srv /tmp /usr /var -cmin -5
+      ```
+
    - Increase the amount of RAM reserved for Log2Ram (i.e. `256M`):
 
       ```diff
@@ -322,14 +336,6 @@ This details the recommended configuration options for Log2Ram:
         72K     /var/log
         36K     /var/tmp
         12K     /var/spool
-      ```
-
-   - Append to the list of directories to store in RAM, separated by a semicolon (i.e. `/var/log`, `/var/tmp`, and `/var/spool`):
-
-      ```diff
-      - PATH_DISK="/var/log"
-      + #PATH_DISK="/var/log"
-      + PATH_DISK="/var/log;/var/tmp;/var/spool"
       ```
 
    - Save changes made to the configuration file.
