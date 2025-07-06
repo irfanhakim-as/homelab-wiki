@@ -146,7 +146,7 @@ This acts as a general guide on a complete setup process of an OMV server post-i
 
 4. Ensure that a static IP address has been configured for the OMV server.
 
-5. **(Optional)** [Set up a domain](dns.md#register-a-subdomain) to be used as a public endpoint to your OMV server (i.e. `omv.example.com`).
+5. **(Optional)** [Set up a domain](../courses/network.md#registering-subdomains) to be used as a public endpoint to your OMV server (i.e. `omv.example.com`).
 
 ---
 
