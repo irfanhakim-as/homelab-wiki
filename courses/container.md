@@ -50,5 +50,5 @@ This details the installation and configuration process of Docker on a Linux sys
 
 This details some common usage steps for a container runtime solution such as Docker:
 
-- [Docker Usage](../topics/docker.md#usage)
+- [Docker Compose](../topics/docker.md#docker-compose)
 - [Deploying Docker Container on OMV](../topics/omv.md#deploying-docker-container)
