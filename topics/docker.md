@@ -287,6 +287,30 @@ This details how to manage a containerised application deployment using Docker C
     docker compose -f ~/.local/share/myapp/docker-compose.yml stop
     ```
 
+6. To restart the container services in the application stack:
+
+    ```sh
+    docker compose -f <compose-file-path> restart
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml restart
+    ```
+
+    **Alternatively**, to restart a specific container service in the application stack:
+
+    ```sh
+    docker compose -f <compose-file-path> restart <service-name>
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml restart myapp
+    ```
+
 6. To remove the application stack:
 
     ```sh
