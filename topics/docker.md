@@ -251,7 +251,19 @@ This details how to manage a containerised application deployment using Docker C
     docker compose -f ~/.local/share/myapp/docker-compose.yml ps -a
     ```
 
-3. To view and follow the logs of container(s) in the application stack:
+3. To enter a running container in the application stack:
+
+    ```sh
+    docker compose -f <compose-file-path> exec <service-name> <shell>
+    ```
+
+    For example:
+
+    ```sh
+    docker compose -f ~/.local/share/myapp/docker-compose.yml exec myapp sh
+    ```
+
+4. To view and follow the logs of container(s) in the application stack:
 
     ```sh
     docker compose -f <compose-file-path> logs --follow
@@ -263,7 +275,7 @@ This details how to manage a containerised application deployment using Docker C
     docker compose -f ~/.local/share/myapp/docker-compose.yml logs --follow
     ```
 
-4. To stop the running application stack without removing the containers:
+5. To stop the running application stack without removing the containers:
 
     ```sh
     docker compose -f <compose-file-path> stop
@@ -275,7 +287,7 @@ This details how to manage a containerised application deployment using Docker C
     docker compose -f ~/.local/share/myapp/docker-compose.yml stop
     ```
 
-5. To remove the application stack:
+6. To remove the application stack:
 
     ```sh
     docker compose -f <compose-file-path> down
