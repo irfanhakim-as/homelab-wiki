@@ -75,5 +75,5 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       1. [MariaDB](topics/mariadb.md)
       2. [PostgreSQL](topics/postgresql.md)
       3. [MySQL](topics/mysql.md)
-   3. Home:
-      1. Home Assistant
+   3. Home (Container):
+      1. [Home Assistant](topics/home-assistant.md)
