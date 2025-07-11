@@ -84,7 +84,7 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 
    - Unlike our usual, pretty extensive [Linux configuration](linux.md#configuration) recommendations, a very minimal configuration should suffice in this case as anything more may be conflicting with OMV's own configuration. For example:
 
-     - Avoid installing any packages that are potentially conflicting before installing OMV.
+     - Avoid installing any packages that are potentially conflicting before installing OMV - install them **after** OMV is installed so you could avoid conflicts.
      - Leave SSH configuration as default until OMV is installed.
      - Avoid setting up a firewall at least until OMV is installed.
      - Leave networking configuration as default until OMV is installed.
