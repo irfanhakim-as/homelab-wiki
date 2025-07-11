@@ -451,7 +451,7 @@ This details the post-installation steps of the Z2M stack for a complete setup:
 
 2. Complete the Z2M server onboarding process and hook the Mosquitto server to it as a broker:
 
-   - Launch the Z2M server web interface (i.e. `http://<z2m-server-host>:8080`) on a web browser.
+   - Launch the Z2M server web interface at `http://<z2m-server-host>:8080` (i.e. `http://192.168.0.106:8080`) on a web browser.
 
    - In the **Zigbee2MQTT Onboarding** form, configure the following settings according to your setup:
 
