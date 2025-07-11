@@ -138,11 +138,11 @@ This details the installation process of HA using the Container installation met
 
    - Either before deploying, of which you will need to pre-create the directory (i.e. `/mnt/smb/docker/home-assistant/config`), or after deployment - update the Home Assistant configuration based on the [recommended configuration options](#configuration).
 
-3. **(Optional)** [Deploy and set up a VS Code Server (Code-server) stack](#install-code-server-as-a-docker-container) so it could be used to configure the HA configuration files from within the HA server.
+3. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a VS Code Server (Code-server) stack](#install-code-server-as-a-docker-container) so it could be used to configure the HA configuration files from within the HA server.
 
 4. **(Optional)** [Install and set up the HACS integration](#install-hacs-on-home-assistant-container) on the HA server as a means to install custom elements and integrations on the server, graphically.
 
-5. **(Optional)** [Deploy and set up a Zigbee2MQTT (Z2M) stack](#install-z2m-as-a-docker-container) to manage and use Zigbee devices on the HA server.
+5. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a Zigbee2MQTT (Z2M) stack](#install-z2m-as-a-docker-container) to manage and use Zigbee devices on the HA server.
 
 ### Configuration
 
