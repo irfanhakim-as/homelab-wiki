@@ -14,6 +14,7 @@ In software engineering, containerisation is operating-system–level virtualisa
     - [References](#references-1)
   - [Docker](#docker)
     - [Setting Up Docker](#setting-up-docker)
+    - [Setting Up Portainer](#setting-up-portainer)
     - [Docker Usage](#docker-usage)
 
 ## References
@@ -46,9 +47,16 @@ This details the installation and configuration process of Docker on a Linux sys
 - [Docker Setup](../topics/docker.md#setup)
 - [Installing Docker on OMV](../topics/omv.md#installing-docker)
 
+### Setting Up Portainer
+
+This details how to install and set up a Portainer server in a containerised environment.
+
+- [Setup](../topics/portainer.md#setup)
+
 ### Docker Usage
 
 This details some common usage steps for a container runtime solution such as Docker:
 
 - [Docker Compose](../topics/docker.md#docker-compose)
+- [Portainer](../topics/portainer.md#usage)
 - [Deploying Docker Container on OMV](../topics/omv.md#deploying-docker-container)
