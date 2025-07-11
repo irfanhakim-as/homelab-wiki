@@ -211,7 +211,7 @@ This details how to manage a containerised application deployment using Docker C
 
         ... and set the defined variables in the env file. For example:
 
-        ```env
+        ```sh
         APP_VERSION=0.1.0
         HOST_PORT=8000
         APP_PORT=8000
