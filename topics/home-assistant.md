@@ -68,7 +68,7 @@ This details the installation process of HA using the Container installation met
 
 2. [Deploy the HA stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/home-assistant`): This will be used for at least the database volume directory.
+   - A local app directory, on local storage (i.e. `~/.local/share/docker/home-assistant`): This will be used for at least the database volume directory which specifically requires local storage.
 
    - **(Optional)** A remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/home-assistant`): This can be used for anything else that supports remote storage such as the Home Assistant configuration volume directory.
 
