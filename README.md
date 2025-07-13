@@ -80,4 +80,4 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       1. [Home Assistant](topics/home-assistant.md) (Container)
       2. Jellyfin (Container)
       3. ErsatzTV (Container)
-      4. Immich (Container)
+      4. [Immich](topics/immich.md) (Container)
