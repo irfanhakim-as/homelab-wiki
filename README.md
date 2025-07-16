@@ -70,7 +70,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
       1. [WireGuard](topics/wireguard.md)
 7. Services: Selection of VM or container based services that can be hosted in the homelab
    1. NAS (VM):
-      1. TrueNAS
+      1. [TrueNAS](topics/truenas.md) (WIP)
       2. [OpenMediaVault](topics/omv.md) ([Raspberry Pi](topics/raspberry-pi.md))
    2. [Database](topics/database.md) (Container):
       1. [MariaDB](topics/mariadb.md)
