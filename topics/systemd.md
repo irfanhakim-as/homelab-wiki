@@ -99,9 +99,9 @@ This details how to use the `systemctl` command to manage services on a Linux sy
 
 ### Reload Systemd Manager Configuration
 
-Some operations may require reloading the systemd manager configuration.
+Some operations may require reloading the `systemd` manager configuration.
 
-1. To reload the systemd manager configuration:
+1. To reload the `systemd` manager configuration:
 
     ```sh
     sudo systemctl daemon-reload

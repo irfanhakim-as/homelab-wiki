@@ -862,7 +862,7 @@ This details how to mount a storage device on the system:
         UUID=6b2a4cd7-5e43-4f0b-9c02-9d531d2c4ea1   /mnt/data   ext4   defaults,noatime   0   2
         ```
 
-   - Save the `fstab` file and [reload the systemd manager configuration](systemd.md#reload-systemd-manager-configuration) to apply the changes made.
+   - Save the `fstab` file and [reload the `systemd` manager configuration](systemd.md#reload-systemd-manager-configuration) to apply the changes made.
 
 7. Remount the storage partition to its corresponding mountpoint (i.e. `/mnt/data`) to verify our `fstab` entry is configured correctly:
 

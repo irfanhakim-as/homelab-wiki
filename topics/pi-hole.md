@@ -456,7 +456,7 @@ This part of the guide details the process of enabling DNS-Over-HTTPS on the Pi-
     sudo chown cloudflared: /usr/local/bin/cloudflared /etc/default/cloudflared
     ```
 
-9. Create a [systemd](systemd.md) service file for `cloudflared`:
+9. Create a [`systemd`](systemd.md) service file for `cloudflared`:
 
     ```sh
     sudo nano /etc/systemd/system/cloudflared.service
