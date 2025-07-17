@@ -393,7 +393,7 @@ This details the installation process of Z2M and Mosquitto containers as compani
         persistence true
         #password_file /mosquitto/config/pwfile
         persistence_file mosquitto.db
-        persistence_location /mosquitto/data/
+        persistence_location /mosquitto/data
         ```
 
 5. Follow the [post-installation steps](#z2m-post-install-setup) to complete the Z2M stack setup.
@@ -438,7 +438,7 @@ This details the post-installation steps of the Z2M stack for a complete setup:
       - #password_file /mosquitto/config/pwfile
       + password_file /mosquitto/config/pwfile
         persistence_file mosquitto.db
-        persistence_location /mosquitto/data/
+        persistence_location /mosquitto/data
       ```
 
       Sample configuration:
@@ -451,7 +451,7 @@ This details the post-installation steps of the Z2M stack for a complete setup:
       persistence true
       password_file /mosquitto/config/pwfile
       persistence_file mosquitto.db
-      persistence_location /mosquitto/data/
+      persistence_location /mosquitto/data
       ```
 
    - Exit the Mosquitto container, and [restart](../courses/container.md#docker-usage) the `mosquitto` container service to apply the changes.
