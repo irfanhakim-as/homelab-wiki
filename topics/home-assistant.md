@@ -84,7 +84,7 @@ This details the installation process of HA using the Container installation met
             - 8123:8123
           environment:
             - TZ=${APP_TIMEZONE}
-            - DB_URL=postgresql://${DB_USER}:${DB_PASSWORD}@home-assistant-db/home-assistant-db
+            - DB_URL=postgresql://${DB_USER}:${DB_PASSWORD}@${HA_DB_CONTAINER}/${DB_NAME}
           volumes:
             - ${REMOTE_APP_DIR}/config:/config
             - /etc/localtime:/etc/localtime:ro
