@@ -110,7 +110,7 @@ This details the installation process of HA using the Container installation met
           volumes:
             - ${LOCAL_APP_DIR}/pgdata:/var/lib/postgresql/data
           networks:
-            frontend:
+            - frontend
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
@@ -306,7 +306,7 @@ This details the installation process of Z2M and Mosquitto containers as compani
             - ${APP_DIR}/mosquitto/data:/mosquitto/data
             - ${APP_DIR}/mosquitto/log:/mosquitto/log
           networks:
-            ${HA_NETWORK}:
+            - ha-network
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true

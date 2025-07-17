@@ -87,7 +87,7 @@ This details the installation steps for Immich as a Docker container:
           healthcheck:
             disable: false
           networks:
-            default:
+            - default
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
@@ -107,7 +107,7 @@ This details the installation steps for Immich as a Docker container:
           healthcheck:
             disable: false
           networks:
-            default:
+            - default
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
@@ -118,7 +118,7 @@ This details the installation steps for Immich as a Docker container:
           healthcheck:
             test: redis-cli ping || exit 1
           networks:
-            default:
+            - default
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
@@ -137,7 +137,7 @@ This details the installation steps for Immich as a Docker container:
             # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
             - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
           networks:
-            default:
+            - default
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
@@ -545,7 +545,7 @@ This details how to set up a remote ML server for Immich if its host deployment 
           volumes:
             - ${ML_CACHE_LOCATION}:/cache
           networks:
-            default:
+            - default
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
