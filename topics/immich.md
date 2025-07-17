@@ -96,12 +96,12 @@ This details the installation steps for Immich as a Docker container:
           container_name: ${IMMICH_ML_CONTAINER}
           # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
           # Example tag: ${IMMICH_VERSION:-release}-cuda
-          image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+"-${HWACCEL_ML_SVC}"}
+          image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+-${HWACCEL_ML_SVC}}
           env_file:
             - stack.env
           #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
           #  file: hwaccel.ml.yml
-          #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+"-${HWACCEL_ML_WSL}"}
+          #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
           volumes:
             - ${ML_CACHE_LOCATION}:/cache
           healthcheck:
@@ -169,10 +169,10 @@ This details the installation steps for Immich as a Docker container:
           ...
       -   #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
       -   #  file: hwaccel.ml.yml
-      -   #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+"-${HWACCEL_ML_WSL}"}
+      -   #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
       +   extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
       +     file: hwaccel.ml.yml
-      +     service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+"-${HWACCEL_ML_WSL}"}
+      +     service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
           ...
       ```
 
@@ -536,12 +536,12 @@ This details how to set up a remote ML server for Immich if its host deployment 
           container_name: ${IMMICH_ML_CONTAINER}
           # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
           # Example tag: ${IMMICH_VERSION:-release}-cuda
-          image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+"-${HWACCEL_ML_SVC}"}
+          image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+-${HWACCEL_ML_SVC}}
           ports:
             - 3003:3003
           #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
           #  file: hwaccel.ml.yml
-          #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+"-${HWACCEL_ML_WSL}"}
+          #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
           volumes:
             - ${ML_CACHE_LOCATION}:/cache
           networks:
@@ -562,10 +562,10 @@ This details how to set up a remote ML server for Immich if its host deployment 
           ...
       -   #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
       -   #  file: hwaccel.ml.yml
-      -   #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+"-${HWACCEL_ML_WSL}"}
+      -   #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
       +   extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
       +     file: hwaccel.ml.yml
-      +     service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+"-${HWACCEL_ML_WSL}"}
+      +     service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
           ...
       ```
 
