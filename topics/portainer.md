@@ -52,7 +52,7 @@ This details how to install Portainer as a Docker container:
 
 2. [Deploy the Portainer stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/portainer`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/portainer`): This will be used for the Portainer stack's volume(s).
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/portainer`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/portainer`): This will be used for the Portainer stack's volume(s).
 
    - A Docker compose file for the Portainer stack on the app directory (i.e. `/mnt/smb/docker/portainer/docker-compose.yml`):
 

@@ -68,7 +68,7 @@ This details the installation process of HA using the Container installation met
 
 2. [Deploy the HA stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/home-assistant`): This will be used for at least the database volume directory which specifically requires local storage.
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/home-assistant`): This will be used for at least the database volume directory which specifically requires local storage.
 
    - **(Optional)** A remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/home-assistant`): This can be used for anything else that supports remote storage such as the Home Assistant configuration volume directory.
 
@@ -134,7 +134,7 @@ This details the installation process of HA using the Container installation met
       DB_USER=postgres
       DB_PASSWORD=secret
       DB_NAME=home-assistant-db
-      LOCAL_APP_DIR=~/.local/share/docker/home-assistant
+      LOCAL_APP_DIR=/home/myuser/.local/share/docker/home-assistant
       ```
 
       Omit any variable(s) you may not need (i.e. `REMOTE_APP_DIR`) and replace the rest of the values with your own accordingly.
@@ -284,7 +284,7 @@ This details the installation process of Z2M and Mosquitto containers as compani
 
 4. [Deploy the Z2M stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/z2m`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/z2m`): This will be used for the Z2M stack's volumes.
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/z2m`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/z2m`): This will be used for the Z2M stack's volumes.
 
    - A Docker compose file for the Z2M stack on the app directory (i.e. `/mnt/smb/docker/z2m/docker-compose.yml`):
 
@@ -592,7 +592,7 @@ This details the installation process of a Code-server container as companion to
 
 3. [Deploy the Code-server stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/code-server`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/code-server`): Since the Code-server stack does not have its own volume, this will only be used for its Docker compose and env file.
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/code-server`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/code-server`): Since the Code-server stack does not have its own volume, this will only be used for its Docker compose and env file.
 
    - A Docker compose file for the Code-server stack on the app directory (i.e. `/mnt/smb/docker/code-server/docker-compose.yml`):
 

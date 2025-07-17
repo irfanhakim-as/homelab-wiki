@@ -57,7 +57,7 @@ This details the installation steps for Immich as a Docker container:
 
 2. [Deploy the Immich stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/immich`): This will be used for at least the database volume directory which specifically requires local storage.
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/immich`): This will be used for at least the database volume directory which specifically requires local storage.
 
    - **(Optional)** A remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/immich`): This can be used for anything else that supports remote storage such as the Immich stack's deployment files and volume(s).
 
@@ -525,7 +525,7 @@ This details how to set up a remote ML server for Immich if its host deployment 
 
 2. [Deploy the Immich machine learning stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `~/.local/share/docker/immich-remote-ml`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/immich-remote-ml`): This will be used for the Immich ML stack's deployment files and volume(s).
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/immich-remote-ml`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/immich-remote-ml`): This will be used for the Immich ML stack's deployment files and volume(s).
 
    - A Docker compose file for the Immich ML stack on the app directory (i.e. `/mnt/smb/docker/immich-remote-ml/docker-compose.yml`):
 
