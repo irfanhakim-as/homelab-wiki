@@ -50,7 +50,7 @@ Check out the [topics](./topics/) directory for individual guides and tips.
     1. [LXC](courses/container.md#linux-containers-lxc)
     2. [Docker](topics/docker.md)
     3. Podman
-    4. [Portainer](topics/portainer.md)
+    4. [Portainer](topics/portainer.md) (Container)
 5. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
    1. [RKE2](topics/rke2.md)
    2. Rancher
