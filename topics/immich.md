@@ -74,7 +74,7 @@ This details the installation steps for Immich as a Docker container:
           ports:
             - 2283:2283
           env_file:
-            - stack.env
+            - .env
           #extends:
           #  file: hwaccel.transcoding.yml
           #  service: ${HWACCEL_TRANS_SVC}
@@ -98,7 +98,7 @@ This details the installation steps for Immich as a Docker container:
           # Example tag: ${IMMICH_VERSION:-release}-cuda
           image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+-${HWACCEL_ML_SVC}}
           env_file:
-            - stack.env
+            - .env
           #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
           #  file: hwaccel.ml.yml
           #  service: ${HWACCEL_ML_SVC}${HWACCEL_ML_WSL:+-${HWACCEL_ML_WSL}}
