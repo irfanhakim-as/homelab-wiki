@@ -66,10 +66,10 @@ This details the installation steps for Immich as a Docker container:
    - A Docker compose file for the Immich stack on the app directory (i.e. `/mnt/smb/docker/immich/docker-compose.yml`):
 
       ```yaml
-      name: immich
+      name: ${SERVICE_NAME}
       services:
         immich-server:
-          container_name: immich_server
+          container_name: ${IMMICH_CONTAINER}
           image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
           ports:
             - 2283:2283
@@ -93,7 +93,7 @@ This details the installation steps for Immich as a Docker container:
             - no-new-privileges:true
 
         immich-machine-learning:
-          container_name: immich_machine_learning
+          container_name: ${IMMICH_ML_CONTAINER}
           # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
           # Example tag: ${IMMICH_VERSION:-release}-cuda
           image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+"-${HWACCEL_ML_SVC}"}
@@ -113,7 +113,7 @@ This details the installation steps for Immich as a Docker container:
             - no-new-privileges:true
 
         redis:
-          container_name: immich_redis
+          container_name: ${REDIS_CONTAINER}
           image: docker.io/valkey/valkey:${REDIS_VERSION}
           healthcheck:
             test: redis-cli ping || exit 1
@@ -124,7 +124,7 @@ This details the installation steps for Immich as a Docker container:
             - no-new-privileges:true
 
         database:
-          container_name: immich_postgres
+          container_name: ${POSTGRES_CONTAINER}
           image: ghcr.io/immich-app/postgres:${POSTGRES_VERSION}
           environment:
             POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -150,7 +150,7 @@ This details the installation steps for Immich as a Docker container:
 
       ```diff
         immich-server:
-          container_name: immich_server
+          container_name: ${IMMICH_CONTAINER}
           ...
       -   #extends:
       -   #  file: hwaccel.transcoding.yml
@@ -165,7 +165,7 @@ This details the installation steps for Immich as a Docker container:
 
       ```diff
         immich-machine-learning:
-          container_name: immich_machine_learning
+          container_name: ${IMMICH_ML_CONTAINER}
           ...
       -   #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
       -   #  file: hwaccel.ml.yml
@@ -180,7 +180,7 @@ This details the installation steps for Immich as a Docker container:
 
       ```diff
         database:
-          container_name: immich_postgres
+          container_name: ${POSTGRES_CONTAINER}
           ...
           environment:
             ...
@@ -195,6 +195,11 @@ This details the installation steps for Immich as a Docker container:
       ```sh
       # The env variables below this line are specific to the homelab-wiki guide deployment
       ###################################################################################
+      SERVICE_NAME=immich
+      IMMICH_CONTAINER=immich_server
+      IMMICH_ML_CONTAINER=immich_machine_learning
+      REDIS_CONTAINER=immich_redis
+      POSTGRES_CONTAINER=immich_postgres
       ML_CACHE_LOCATION=/mnt/smb/docker/immich/model-cache
       REDIS_VERSION=8-bookworm@sha256:fec42f399876eb6faf9e008570597741c87ff7662a54185593e74b09ce83d177
       POSTGRES_VERSION=14-vectorchord0.4.3-pgvectors0.2.0
@@ -525,10 +530,10 @@ This details how to set up a remote ML server for Immich if its host deployment 
    - A Docker compose file for the Immich ML stack on the app directory (i.e. `/mnt/smb/docker/immich-remote-ml/docker-compose.yml`):
 
       ```yaml
-      name: immich_remote_ml
+      name: ${SERVICE_NAME}
       services:
         immich-machine-learning:
-          container_name: immich_machine_learning
+          container_name: ${IMMICH_ML_CONTAINER}
           # For hardware acceleration, add one of -[armnn, cuda, rocm, openvino, rknn] to the image tag.
           # Example tag: ${IMMICH_VERSION:-release}-cuda
           image: ghcr.io/immich-app/immich-machine-learning:${IMMICH_VERSION:-release}${HWACCEL_ML_SVC:+"-${HWACCEL_ML_SVC}"}
@@ -553,7 +558,7 @@ This details how to set up a remote ML server for Immich if its host deployment 
 
       ```diff
         immich-machine-learning:
-          container_name: immich_machine_learning
+          container_name: ${IMMICH_ML_CONTAINER}
           ...
       -   #extends: # uncomment this section for hardware acceleration - see https://immich.app/docs/features/ml-hardware-acceleration
       -   #  file: hwaccel.ml.yml
@@ -569,6 +574,8 @@ This details how to set up a remote ML server for Immich if its host deployment 
       ```sh
       # The env variables below this line are specific to the homelab-wiki guide deployment
       ###################################################################################
+      SERVICE_NAME=immich_remote_ml
+      IMMICH_ML_CONTAINER=immich_machine_learning
       ML_CACHE_LOCATION=/mnt/smb/docker/immich-remote-ml/model-cache
       IMMICH_VERSION=v1.135.3
       # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference

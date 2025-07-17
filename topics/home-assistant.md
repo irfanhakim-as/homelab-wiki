@@ -75,10 +75,10 @@ This details the installation process of HA using the Container installation met
    - A Docker compose file for the Home Assistant stack on either app directory (i.e. `/mnt/smb/docker/home-assistant/docker-compose.yml`):
 
       ```yaml
-      name: home-assistant
+      name: ${SERVICE_NAME}
       services:
         home-assistant:
-          container_name: home-assistant
+          container_name: ${HA_CONTAINER}
           image: ghcr.io/home-assistant/home-assistant:${HA_VERSION}
           ports:
             - 8123:8123
@@ -92,13 +92,13 @@ This details the installation process of HA using the Container installation met
           depends_on:
             - home-assistant-db
           networks:
-            frontend:
+            - frontend
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
 
         home-assistant-db:
-          container_name: home-assistant-db
+          container_name: ${HA_DB_CONTAINER}
           image: docker.io/postgres:${POSTGRES_VERSION}
           environment:
             - POSTGRES_USER=${DB_USER}
@@ -124,6 +124,9 @@ This details the installation process of HA using the Container installation met
    - An env file for the Home Assistant stack on either of the app directory (i.e. `/mnt/smb/docker/home-assistant/.env`):
 
       ```sh
+      SERVICE_NAME=home-assistant
+      HA_CONTAINER=home-assistant
+      HA_DB_CONTAINER=home-assistant-db
       HA_VERSION=2025.6.3
       APP_TIMEZONE=Asia/Kuala_Lumpur
       REMOTE_APP_DIR=/mnt/smb/docker/home-assistant
@@ -286,10 +289,10 @@ This details the installation process of Z2M and Mosquitto containers as compani
    - A Docker compose file for the Z2M stack on the app directory (i.e. `/mnt/smb/docker/z2m/docker-compose.yml`):
 
       ```yaml
-      name: z2m
+      name: ${SERVICE_NAME}
       services:
         mosquitto:
-          container_name: mosquitto
+          container_name: ${MQTT_CONTAINER}
           image: docker.io/eclipse-mosquitto:${MQTT_VERSION}
           ports:
             - 1883:1883
@@ -309,7 +312,7 @@ This details the installation process of Z2M and Mosquitto containers as compani
             - no-new-privileges:true
 
         zigbee2mqtt:
-          container_name: zigbee2mqtt
+          container_name: ${ZIGBEE2MQTT_CONTAINER}
           image: ghcr.io/koenkk/zigbee2mqtt:${ZIGBEE2MQTT_VERSION}
           ports:
             - 8080:8080 # frontend port
@@ -326,19 +329,23 @@ This details the installation process of Z2M and Mosquitto containers as compani
             # Make sure this matches your adapter location
             - ${DEVICE_BY_ID_PATH}:${DEVICE_TTY_PATH}
           networks:
-            ${HA_NETWORK}:
+            - ha-network
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
 
       networks:
-        ${HA_NETWORK}:
+        ha-network:
+          name: ${HA_NETWORK}
           external: true
       ```
 
    - An env file for the Z2M stack on the app directory (i.e. `/mnt/smb/docker/z2m/.env`):
 
       ```sh
+      SERVICE_NAME=z2m
+      MQTT_CONTAINER=mosquitto
+      ZIGBEE2MQTT_CONTAINER=zigbee2mqtt
       MQTT_VERSION=2.0.21-openssl
       APP_DIR=/mnt/smb/docker/z2m
       HA_NETWORK=home-assistant_frontend
@@ -590,10 +597,10 @@ This details the installation process of a Code-server container as companion to
    - A Docker compose file for the Code-server stack on the app directory (i.e. `/mnt/smb/docker/code-server/docker-compose.yml`):
 
       ```yaml
-      name: code-server
+      name: ${SERVICE_NAME}
       services:
         code-server:
-          container_name: code-server
+          container_name: ${VSCODE_CONTAINER}
           image: ghcr.io/linuxserver/code-server:${VSCODE_VERSION}
           ports:
             - 8443:8443
@@ -605,19 +612,22 @@ This details the installation process of a Code-server container as companion to
           volumes:
             - ${HA_HOST_CONFIG_DIR}:${HA_CONTAINER_CONFIG_DIR}
           networks:
-            ${HA_NETWORK}:
+            - ha-network
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
 
       networks:
-        ${HA_NETWORK}:
+        ha-network:
+          name: ${HA_NETWORK}
           external: true
       ```
 
    - An env file for the Code-server stack on the app directory (i.e. `/mnt/smb/docker/code-server/.env`):
 
       ```sh
+      SERVICE_NAME=code-server
+      VSCODE_CONTAINER=code-server
       VSCODE_VERSION=4.101.2-ls283
       APP_TIMEZONE=Asia/Kuala_Lumpur
       HA_CONTAINER_CONFIG_DIR=/config
