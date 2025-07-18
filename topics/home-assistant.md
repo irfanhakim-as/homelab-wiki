@@ -217,7 +217,7 @@ This details setting up Zigbee2MQTT (Z2M) with Home Assistant (HA).
 
 This details the installation process of Z2M and Mosquitto containers as companion to the HA server:
 
-1. First and foremost, ensure that the host machine has read-write access to the Z2M-capable device either through physical attachment (i.e. bare metal host machine) or hardware passthrough (i.e. containerised or virtualised host machine).
+1. First and foremost, ensure that the host machine has read-write access to the Z2M-capable device either through physical attachment (i.e. bare metal host machine) or [hardware passthrough](../courses/hypervisor.md#hardware-passthrough) (i.e. containerised or virtualised host machine).
 
 2. Identify the name of the Docker network (i.e. `frontend`) of your HA installation:
 
