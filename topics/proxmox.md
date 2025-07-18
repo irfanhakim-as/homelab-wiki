@@ -1073,6 +1073,34 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
    - Reboot the LXC Container for the changes to take effect.
 
+4. Ensure you have read access (and write, if applicable) to the SMB share inside the LXC Container:
+
+   - On the LXC Container, test read access to the SMB share from its mountpoint (i.e. `/mnt/data`):
+
+      ```sh
+      ls -la <mountpoint>
+      cat <mountpoint>/path/to/some/file
+      ```
+
+      For example:
+
+      ```sh
+      ls -la /mnt/data
+      cat /mnt/data/somefile.txt
+      ```
+
+   - **(Optional)** If applicable, on the LXC Container, test write access to the SMB share from its mountpoint (i.e. `/mnt/data`):
+
+      ```sh
+      echo 'test' > <mountpoint>/testfile
+      ```
+
+      For example:
+
+      ```sh
+      echo 'test' > /mnt/data/testfile
+      ```
+
 ### Update LXC Container Configuration
 
 This details how to update the configuration of an LXC Container:
