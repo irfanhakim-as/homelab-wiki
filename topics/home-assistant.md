@@ -62,7 +62,7 @@ This details the installation and setup process of a Home Assistant (HA) server.
 
 This details the installation process of HA using the Container installation method:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#linux-containers-lxc); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). For simplicity, the following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). For simplicity, the following considerations should be noted:
 
    - Ports that will be used and requires allowing on the host machine vary depending on the (intended) smart home setup, hence, it is recommended not to enable or set up a [firewall](firewall.md) on the system.
 
