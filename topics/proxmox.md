@@ -1041,11 +1041,11 @@ Choose for yourself one of the aforementioned methods and follow the instruction
         rootfs: local-lvm:vm-101-disk-0,size=8G
         swap: 512
         unprivileged: 1
-      + mp0: <host-mount-path>,mp=<container-mount-path>,ro=1,shared=1
+      + mp0: <host-mountpoint>,mp=<container-mountpoint>,ro=1,shared=1
       ```
 
-      - Replace `<host-mount-path>` with the path to the directory where you have mounted the share on the Proxmox node host (i.e. `/mnt/smb/`).
-      - Replace `<container-mount-path>` with the path to where the share should be mounted inside the LXC Container (i.e. `/mnt/data`).
+      - Replace `<host-mountpoint>` with the path to the directory where you have mounted the share on the Proxmox node host (i.e. `/mnt/smb/`).
+      - Replace `<container-mountpoint>` with the path to where the share should be mounted inside the LXC Container (i.e. `/mnt/data`).
       - **(Optional)** Include the `ro=1` flag to make the share read-only inside the LXC Container.
       - **(Optional)** Adding the `shared=1` flag may be needed to allow migrating the LXC Container between Proxmox nodes.
 
