@@ -2158,7 +2158,7 @@ This details the steps to edit a Netdata configuration file on a system with Net
    +  update every = 30
    ```
 
-      This configuration sets the data granularity of tier 0 to `30s` like you may have configured on the Parent node.
+   This configuration sets the data granularity of tier 0 to `30s` like you may have configured on the Parent node.
 
 ### Streaming Data
 
