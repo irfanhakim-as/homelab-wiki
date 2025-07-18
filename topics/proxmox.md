@@ -1026,9 +1026,9 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
    - **(Optional)** In either of these methods, if you have trouble with allowing read access for a user in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker Container), you may need to update the `dir_mode` and `file_mode` mount options to `0775` accordingly.
 
-2. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
+2. After the SMB share has been added to the Proxmox node host, proceed to mount it on the LXC Container:
 
-   - Add the following line to the end of the file:
+   - On the Proxmox node host, add the following line to the end of the [LXC Container's configuration file](#update-lxc-container-configuration):
 
       ```diff
         arch: amd64
