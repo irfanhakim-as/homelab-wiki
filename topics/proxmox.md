@@ -1047,7 +1047,7 @@ Choose for yourself one of the aforementioned methods and follow the instruction
         rootfs: local-lvm:vm-101-disk-0,size=8G
         swap: 512
         unprivileged: 1
-      + mp0: <host-mount-path>,mp=<container-mount-path>,ro=1
+      + mp0: <host-mount-path>,mp=<container-mount-path>,ro=1,shared=1
       ```
 
       - Replace `<host-mount-path>` with the path to the directory where you have mounted the share on the Proxmox node host (i.e. `/mnt/smb/`).
@@ -1068,7 +1068,7 @@ Choose for yourself one of the aforementioned methods and follow the instruction
         rootfs: local-lvm:vm-101-disk-0,size=8G
         swap: 512
         unprivileged: 1
-        mp0: /mnt/smb/,mp=/mnt/data,ro=1
+        mp0: /mnt/smb/,mp=/mnt/data,ro=1,shared=1
       ```
 
 ### Update LXC Container Configuration
