@@ -1024,8 +1024,6 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
       You may refer to the [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki/blob/master/topics/samba.md#mounting-remote-directory) guide for more details on how to do this.
 
-   - **(Optional)** In either of these methods, if you have trouble with allowing read access for a user in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker Container), you may need to update the `dir_mode` and `file_mode` mount options to `0775` accordingly.
-
 2. After the SMB share has been added to the Proxmox node host, proceed to mount it on the LXC Container:
 
    - On the Proxmox node host, add the following line to the end of the [LXC Container's configuration file](#update-lxc-container-configuration):
@@ -1100,6 +1098,45 @@ Choose for yourself one of the aforementioned methods and follow the instruction
       ```sh
       echo 'test' > /mnt/data/testfile
       ```
+
+5. **(Optional)** If you intend to read or write to the SMB share in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker Container), you may need to perform some additional step(s):
+
+   - If the `dir_mode` and `file_mode` mount options were set to `0770` on the Proxmox node host, lower the _security barrier_ of the SMB share on the Proxmox node host so that it can be accessed, regardless of user or group ownership:
+
+     - Shut down all LXC Container(s) that have the SMB share mounted on them.
+     - If you have [added the SMB share as storage cluster-wide](#adding-smbcifs-storage) in the previous steps, uncheck the **Enable** option to disable the SMB share.
+     - On each Proxmox node host where the SMB share is mounted, unmount them from their mountpoint (i.e. `/mnt/pve/smb`):
+
+         ```sh
+         umount <mountpoint>
+         ```
+
+         For example:
+
+         ```sh
+         umount /mnt/pve/smb
+         ```
+
+     - After the SMB share has been unmounted from their mountpoint (i.e. `/mnt/pve/smb`), verify that they are no longer mounted on each Proxmox node host:
+
+         ```sh
+         mount | grep <mountpoint>
+         ```
+
+         For example:
+
+         ```sh
+         mount | grep /mnt/pve/smb
+         ```
+
+     - The same way you have configured the mount options of the SMB share in the first place, on the Proxmox node host, set the `dir_mode` and `file_mode` mount options to either one of the following values:
+
+       - `0775`: Allow read and execute access for all users and groups that are otherwise not allowed to access the SMB share.
+       - `0777`: Allow read, write, and execute access for all users and groups that are otherwise not allowed to access the SMB share.
+
+     - Remount the SMB share the same way you had done it initially on each Proxmox node host - directly, or by re-enabling the SMB share if you had added it as storage to Proxmox cluster-wide.
+
+   - **Alternatively**, if the additional layer of virtualisation/containerisation (i.e. Docker Container) allows setting the UID and GID of the user running processes inside it (i.e. via `PUID` and `PGID` environment variables respectively), set its GID to the GID of the group (i.e. `lxc-shares`) we had created earlier (`10000`).
 
 ### Update LXC Container Configuration
 
