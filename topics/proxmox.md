@@ -1026,13 +1026,7 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
    - **(Optional)** In either of these methods, if you have trouble with allowing read access for a user in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker Container), you may need to update the `dir_mode` and `file_mode` mount options to `0775` accordingly.
 
-2. Grant access to the SMB/CIFS share for your user in the LXC Container:
-
-   - On the LXC Container, [create a group](linux.md#create-group) (i.e. `lxc-shares`) with GID of `10000` that will grant the permission to mount the SMB share.
-
-   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, [add them to the group](linux.md#add-user-to-group) you created (i.e. `lxc-shares`).
-
-3. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
+2. On the Proxmox node host, [update the LXC Container's configuration file](#update-lxc-container-configuration):
 
    - Add the following line to the end of the file:
 
@@ -1070,6 +1064,12 @@ Choose for yourself one of the aforementioned methods and follow the instruction
         unprivileged: 1
         mp0: /mnt/smb/,mp=/mnt/data,ro=1,shared=1
       ```
+
+3. Grant access to the SMB/CIFS share for your user in the LXC Container:
+
+   - On the LXC Container, [create a group](linux.md#create-group) (i.e. `lxc-shares`) with GID of `10000` that will grant the permission to mount the SMB share.
+
+   - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, [add them to the group](linux.md#add-user-to-group) you created (i.e. `lxc-shares`).
 
 ### Update LXC Container Configuration
 
