@@ -1071,6 +1071,8 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
    - If you have any user(s) other than `root` that needs access to the share inside the LXC Container, [add them to the group](linux.md#add-user-to-group) you created (i.e. `lxc-shares`).
 
+   - Reboot the LXC Container for the changes to take effect.
+
 ### Update LXC Container Configuration
 
 This details how to update the configuration of an LXC Container:
