@@ -36,6 +36,7 @@ Home Assistant is free and open-source software used for home automation. It ser
     - [Configuring Home Assistant](#configuring-home-assistant)
     - [Adding an Integration to Home Assistant](#adding-an-integration-to-home-assistant)
     - [Adding a Dashboard to Home Assistant](#adding-a-dashboard-to-home-assistant)
+    - [Adding a User to Home Assistant](#adding-a-user-to-home-assistant)
 
 ## References
 
@@ -873,3 +874,33 @@ This details how to add a dashboard to the HA server:
 5. In the newly opened **Add dashboard** dialog, select the entry corresponding to the type of dashboard you wish to add (i.e. `Webpage`).
 
 6. You may be presented with more options to pick and configure when adding the dashboard - go through them accordingly.
+
+### Adding a User to Home Assistant
+
+This details how to create 'People' or users that should have access to the HA server:
+
+1. Launch the HA server web interface at `http://<ha-server-host>:8123` (i.e. `http://192.168.0.106:8123`) on a web browser.
+
+2. Click on the **Settings** button found on the left sidebar of the web interface.
+
+3. In the **Settings** page, click the **People** menu option.
+
+4. Click the **ADD PERSON** button found at the bottom of the **People** page.
+
+5. In the newly opened **New person** dialog, update the details of the intended user:
+
+   - Name: Set the name of the user (i.e. `John Doe`)
+   - **(Optional)** Picture: Click the **ADD PICTURE** button and select an image file to upload and use as the user's icon
+   - Allow login: Select the corresponding checkbox to enable the option, and configure the following:
+
+     - Username: Set a unique, descriptive username for the user (i.e. `john`)
+     - Password: Set a secure password for the user
+     - Confirm password: Confirm the password you have set for the user
+     - **(Optional)** Local access only: Select the corresponding checkbox if you wish to limit the user to only be able to access the HA server locally
+     - **(Optional)** Administrator: Select the corresponding checkbox if you wish to give the user administrator access to the HA server
+
+      Click the **CREATE** button to proceed with configuring the user.
+
+   - Select the devices that belong to this person: For every device with location access that belongs or identifies the user, expand the **Select an entity** dropdown, and select the device accordingly
+
+    Click the **CREATE** button to submit the form and finish creating the user account.
