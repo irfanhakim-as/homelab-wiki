@@ -62,7 +62,18 @@ This details the installation steps for Jellyfin as a Docker container:
      - Another thing you are likely going to do in your deployment is to pass through a remote or network storage directories to the Jellyfin container for serving media files - this could be an SMB share that you mount on a Proxmox node host, then passed through to the LXC Container (before again passing through media directories from it to the Jellyfin container).
      - In both aforementioned cases, it is **important** to ensure that the user the Jellyfin container will run as has the required permissions to access the graphics device and directories that you are passing through - you might think using `group_add` in the Docker compose file to solve any permission issue (i.e. by adding the Jellyfin container user to the same group GIDs as the graphics device and media directories) would be the logical solution, but based on our testing however, it might not be (at least not with an "LXC + Docker Container" combo). To address this issue:
 
-       - When [passing through the graphics device](../courses/hypervisor.md#hardware-passthrough) to the host deployment environment (i.e. LXC Container on Proxmox), ensure that it is passed through to the UID of the intended Jellyfin container user (i.e. `1000`).
+       - When [passing through the graphics device](../courses/hypervisor.md#hardware-passthrough) to the host deployment environment (i.e. LXC Container on Proxmox), ensure that it is passed through to the UID of the intended Jellyfin container user (i.e. `1000`). Verify that said UID has the rights to the graphics device on the host deployment environment:
+
+          ```sh
+          stat -c '%u' /dev/dri/*
+          ```
+
+          Sample UID output (i.e. `1000`):
+
+          ```
+            1000
+            1000
+          ```
 
        - When [passing through a remote or network storage (i.e. SMB share) to the host deployment environment (i.e. LXC Container, from the Proxmox node host)](../courses/container.md#mount-smb-share-on-lxc-container) - which will later be passed through to the Jellyfin container, take note of the GID that has the rights to the mounted storage on the host deployment environment (i.e. `/mnt/smb`):
 
