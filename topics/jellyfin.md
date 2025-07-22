@@ -209,7 +209,7 @@ This details the installation steps for Jellyfin as a Docker container:
 
 This details the post-installation steps of the Jellyfin server for a complete setup:
 
-1. Launch the Jellyfin server web interface at `http://<jellyfin-server-host>:2283` (i.e. `http://192.168.0.106:8096`) on a web browser.
+1. Launch the Jellyfin server web interface at `http://<jellyfin-server-host>:8096` (i.e. `http://192.168.0.106:8096`) on a web browser.
 
 2. When prompted for your **Preferred display language**, expand the dropdown and select the intended language for your client (i.e. `English`).
 
@@ -284,7 +284,7 @@ This details how to configure a Jellyfin server as well as some recommended conf
 
 This details how to configure a Jellyfin server through the web interface:
 
-1. Launch the Jellyfin server web interface at `http://<jellyfin-server-host>:2283` (i.e. `http://192.168.0.106:8096`) on a web browser.
+1. Launch the Jellyfin server web interface at `http://<jellyfin-server-host>:8096` (i.e. `http://192.168.0.106:8096`) on a web browser.
 
 2. In the **Login** page, either click on the profile icon corresponding to the Jellyfin admin user or click the **Manual Login** button.
 
