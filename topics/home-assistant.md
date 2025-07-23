@@ -879,7 +879,9 @@ This details some common usage steps for a Home Assistant (HA) server.
 
 ### References
 
-- [TODO](#)
+- [Adding integrations](https://www.home-assistant.io/getting-started/integration)
+- [Creating a new dashboard and edit cards](https://www.home-assistant.io/getting-started/onboarding_dashboard/#creating-a-new-dashboard-and-edit-cards)
+- [Adding a person to Home Assistant](https://www.home-assistant.io/integrations/person/#adding-a-person-to-home-assistant)
 
 ### Adding an Integration to Home Assistant
 
