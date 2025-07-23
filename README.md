@@ -79,5 +79,5 @@ Check out the [topics](./topics/) directory for individual guides and tips.
    3. Others:
       1. [Home Assistant](topics/home-assistant.md) (Container)
       2. [Jellyfin](topics/jellyfin.md) (Container)
-      3. ErsatzTV (Container)
+      3. [ErsatzTV](topics/ersatztv.md) (Container)
       4. [Immich](topics/immich.md) (Container)
