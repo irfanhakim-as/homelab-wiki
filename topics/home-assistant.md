@@ -14,6 +14,7 @@ Home Assistant is free and open-source software used for home automation. It ser
     - [Description](#description-1)
     - [References](#references-1)
     - [Install HA as a Docker Container](#install-ha-as-a-docker-container)
+    - [Post-Install Setup](#post-install-setup)
   - [Configuration](#configuration)
     - [Description](#description-2)
     - [References](#references-2)
@@ -58,6 +59,7 @@ This details the installation and setup process of a Home Assistant (HA) server.
 
 - [JimsGarage/Home-Assistant](https://github.com/JamesTurland/JimsGarage/tree/main/Home-Assistant)
 - [Let's Build A Smart Home with Home Assistant](https://youtu.be/6z-ilfbzDlY)
+- [Onboarding Home Assistant](https://www.home-assistant.io/getting-started/onboarding)
 
 ### Install HA as a Docker Container
 
@@ -142,11 +144,36 @@ This details the installation process of HA using the Container installation met
 
    - Either before deploying, of which you will need to pre-create the directory (i.e. `/mnt/smb/docker/home-assistant/config`), or after deployment - update the Home Assistant configuration based on the [recommended configuration options](#recommended-configurations).
 
-3. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a VS Code Server (Code-server) stack](#install-code-server-as-a-docker-container) so it could be used to configure the HA configuration files from within the HA server.
+3. Go through the [post-installation setup steps](#post-install-setup) to complete the HA server setup.
 
-4. **(Optional)** [Install and set up the HACS integration](#install-hacs-on-home-assistant-container) on the HA server as a means to install custom elements and integrations on the server, graphically.
+### Post-Install Setup
 
-5. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a Zigbee2MQTT (Z2M) stack](#install-z2m-as-a-docker-container) to manage and use Zigbee devices on the HA server.
+This details the post-installation steps of the HA server for a complete setup:
+
+1. Launch the HA server web interface at `http://<ha-server-host>:8123` (i.e. `http://192.168.0.106:8123`) on a web browser.
+
+2. In the initial onboarding **Welcome!** view, click the **CREATE MY SMART HOME** button.
+
+3. Set up an administrator account for managing the HA server by configuring the following in the provided **Create user** form:
+
+   - Name: Set the name of the HA admin user (i.e. `Admin`)
+   - Username: Set a unique, descriptive username for the HA admin user (i.e. `admin`)
+   - Password: Set a secure password for the HA admin user
+   - Confirm password: Confirm the password you have set for the HA admin user
+
+    Submit the form by clicking the **CREATE ACCOUNT** button.
+
+4. In the **Home location** view, locate your home address location using the provided **Search address** field, and click the **NEXT** button.
+
+5. In the **Help us help you** view, select any telemetry data you wish to share with the HA project, otherwise leave them all disabled, and click the **NEXT** button.
+
+6. At the end of the onboarding process, click the **FINISH** button to complete the initial setup.
+
+7. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a VS Code Server (Code-server) stack](#install-code-server-as-a-docker-container) so it could be used to configure the HA configuration files from within the HA server.
+
+8. **(Optional)** [Install and set up the HACS integration](#install-hacs-on-home-assistant-container) on the HA server as a means to install custom elements and integrations on the server, graphically.
+
+9. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a Zigbee2MQTT (Z2M) stack](#install-z2m-as-a-docker-container) to manage and use Zigbee devices on the HA server.
 
 ---
 
