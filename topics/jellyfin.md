@@ -26,6 +26,8 @@ Jellyfin is a Free Software Media System that puts you in control of managing an
     - [Description](#description-3)
     - [References](#references-3)
     - [Adding a User to Jellyfin](#adding-a-user-to-jellyfin)
+    - [Generate Jellyfin API Key](#generate-jellyfin-api-key)
+    - [Add Live TV Channel to Jellyfin](#add-live-tv-channel-to-jellyfin)
 
 ## References
 
@@ -513,3 +515,48 @@ This details how to add a user to the Jellyfin server:
    - Libraries: **Alternatively**, select the checkboxes corresponding to the media libraries you wish to give the user access to
 
     Click the **Save** button to submit the form and create the user account.
+
+### Generate Jellyfin API Key
+
+This details how to generate an API key for any external applications that may require access to the Jellyfin server:
+
+1. [Configure](#configuring-jellyfin) the **Dashboard** menu option under the **Administration** section as an admin user.
+
+2. Click on the **API Keys** menu option found on the left sidebar.
+
+3. In the **API Keys** view, click the **Add** button found on the top left corner, next to the view title.
+
+4. In the **New API Key** form, configure the following:
+
+   - App name: Set a unique, descriptive name for the application using the API key (i.e. `ersatztv`)
+
+    Click the **Ok** button to submit the form and create the API key.
+
+5. From the list of API key(s), copy the newly created **API Key** value that corresponds to the application that needs it.
+
+### Add Live TV Channel to Jellyfin
+
+This details how to add Live TV channel(s) to the Jellyfin server:
+
+1. [Configure](#configuring-jellyfin) the **Dashboard** menu option under the **Administration** section as an admin user.
+
+2. Click on the **Live TV** menu option found on the left sidebar.
+3. Add the tuner device of the Live TV channel:
+
+   - In the **Live TV** view, under the **Tuner Devices** section, click the corresponding **Add** button.
+   - In the provided **Live TV Tuner Setup** form, configure the following:
+
+     - Tuner type: Expand the dropdown and select the intended Live TV channel's tuner type (i.e. `M3U Tuner`)
+     - File or URL: Add the full URL path to the Live TV channel's tuner configuration file (i.e. `https://live-tv.example.com/channels.m3u`)
+     - **(Optional)** Allow fMP4 transcoding container: Select the corresponding checkbox to enable broadcasting HEVC and HDR contents
+
+      Click the **Save** button to submit the form.
+
+4. Add the TV guide data provider for the Live TV channel:
+
+   - In the **Live TV** view, under the **TV Guide Data Providers** section, click the corresponding **Add** button, then click the intended format (i.e. `XMLTV`).
+   - In the provided form (i.e. **Xml TV**), configure the following:
+
+     - File or URL: Add the full URL path to the Live TV channel's TV guide data file (i.e. `https://live-tv.example.com/xmltv.xml`)
+
+      Click the **Save** button to submit the form.
