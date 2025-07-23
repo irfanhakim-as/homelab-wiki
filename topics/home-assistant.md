@@ -140,7 +140,7 @@ This details the installation process of HA using the Container installation met
 
       Omit any variable(s) you may not need (i.e. `REMOTE_APP_DIR`) and replace the rest of the values with your own accordingly.
 
-   - Either before deploying, of which you will need to pre-create the directory (i.e. `/mnt/smb/docker/home-assistant/config`), or after deployment - update the Home Assistant configuration based on the [recommended configuration options](#configuration).
+   - Either before deploying, of which you will need to pre-create the directory (i.e. `/mnt/smb/docker/home-assistant/config`), or after deployment - update the Home Assistant configuration based on the [recommended configuration options](#recommended-configurations).
 
 3. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a VS Code Server (Code-server) stack](#install-code-server-as-a-docker-container) so it could be used to configure the HA configuration files from within the HA server.
 
