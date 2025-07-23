@@ -14,26 +14,29 @@ Home Assistant is free and open-source software used for home automation. It ser
     - [Description](#description-1)
     - [References](#references-1)
     - [Install HA as a Docker Container](#install-ha-as-a-docker-container)
-    - [Configuration](#configuration)
-  - [Zigbee2MQTT](#zigbee2mqtt)
+  - [Configuration](#configuration)
     - [Description](#description-2)
     - [References](#references-2)
+    - [Configuring Home Assistant](#configuring-home-assistant)
+    - [Recommended Configurations](#recommended-configurations)
+  - [Zigbee2MQTT](#zigbee2mqtt)
+    - [Description](#description-3)
+    - [References](#references-3)
     - [Install Z2M as a Docker Container](#install-z2m-as-a-docker-container)
     - [Z2M Post-Install Setup](#z2m-post-install-setup)
     - [Integrating Z2M with Home Assistant](#integrating-z2m-with-home-assistant)
   - [VS Code Server](#vs-code-server)
-    - [Description](#description-3)
-    - [References](#references-3)
+    - [Description](#description-4)
+    - [References](#references-4)
     - [Install Code-server as a Docker Container](#install-code-server-as-a-docker-container)
     - [Integrating Code-server with Home Assistant](#integrating-code-server-with-home-assistant)
   - [HACS](#hacs)
-    - [Description](#description-4)
-    - [References](#references-4)
-    - [Install HACS on Home Assistant Container](#install-hacs-on-home-assistant-container)
-  - [Usage](#usage)
     - [Description](#description-5)
     - [References](#references-5)
-    - [Configuring Home Assistant](#configuring-home-assistant)
+    - [Install HACS on Home Assistant Container](#install-hacs-on-home-assistant-container)
+  - [Usage](#usage)
+    - [Description](#description-6)
+    - [References](#references-6)
     - [Adding an Integration to Home Assistant](#adding-an-integration-to-home-assistant)
     - [Adding a Dashboard to Home Assistant](#adding-a-dashboard-to-home-assistant)
     - [Adding a User to Home Assistant](#adding-a-user-to-home-assistant)
@@ -54,9 +57,6 @@ This details the installation and setup process of a Home Assistant (HA) server.
 ### References
 
 - [JimsGarage/Home-Assistant](https://github.com/JamesTurland/JimsGarage/tree/main/Home-Assistant)
-- [Reverse proxy using NGINX](https://community.home-assistant.io/t/reverse-proxy-using-nginx/196954)
-- [HTTP](https://www.home-assistant.io/integrations/http)
-- [Switch Home Assistant to Use PostgreSQL Instead of SQLite](https://unixorn.github.io/post/hass-using-postgresql-instead-of-sqlite)
 - [Let's Build A Smart Home with Home Assistant](https://youtu.be/6z-ilfbzDlY)
 
 ### Install HA as a Docker Container
@@ -148,7 +148,138 @@ This details the installation process of HA using the Container installation met
 
 5. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a Zigbee2MQTT (Z2M) stack](#install-z2m-as-a-docker-container) to manage and use Zigbee devices on the HA server.
 
-### Configuration
+---
+
+## Configuration
+
+### Description
+
+This details how to configure a Home Assistant (HA) server as well as some recommended configuration options.
+
+### References
+
+- [Environment variables in yaml files](https://community.home-assistant.io/t/environment-variables-in-yaml-files/117157/4)
+- [Configuration.yaml](https://www.home-assistant.io/docs/configuration)
+- [Storing secrets](https://www.home-assistant.io/docs/configuration/secrets)
+- [Environment variables](https://www.home-assistant.io/docs/configuration/yaml/#environment-variables)
+- [Reverse proxy using NGINX](https://community.home-assistant.io/t/reverse-proxy-using-nginx/196954)
+- [HTTP](https://www.home-assistant.io/integrations/http)
+- [Switch Home Assistant to Use PostgreSQL Instead of SQLite](https://unixorn.github.io/post/hass-using-postgresql-instead-of-sqlite)
+
+### Configuring Home Assistant
+
+This details how to configure HA through its configuration file (`configuration.yaml`) and secrets file (`secrets.yaml`):
+
+1. Update the HA configuration file (`configuration.yaml`) from the host machine, or the HA server itself:
+
+   - To update the config file from the host machine:
+
+      ```sh
+      nano <path-to-config>/configuration.yaml
+      ```
+
+   - **Alternatively**, to update the config file from the HA server (i.e. container):
+
+      ```sh
+      nano /config/configuration.yaml
+      ```
+
+2. Define your configuration options, bearing in mind its `yaml` syntax and configuration specifications, to the configuration file (`configuration.yaml`):
+
+   - Typically, adding a configuration option to the config file would look something like so:
+
+      ```diff
+        some_existing_config:
+          some_option: some_value
+      +
+      + my_config:
+      +   my_option: my_value
+      ```
+
+      For example:
+
+      ```yaml
+        some_existing_config:
+          some_option: some_value
+
+        my_config:
+          my_option: my_value
+      ```
+
+   - Note however that values set in the configuration file (i.e. `my_value`) needs to be set in plain text, which means that this method may not be secure for sensitive data such as passwords and tokens. To address that:
+
+     - Set your secret value as an environment variable (i.e. `MY_SECRET_VAR`). For example, in the Docker compose file of your HA server:
+
+        ```yaml
+            environment:
+              - MY_SECRET_VAR=some-secret-value
+        ```
+
+     - Update the HA secrets file (`secrets.yaml`) from the host machine, or the HA server itself:
+
+        To update the secrets file from the host machine:
+
+        ```sh
+        nano <path-to-config>/secrets.yaml
+        ```
+
+        **Alternatively**, to update the secrets file from the HA server (i.e. container):
+
+        ```sh
+        nano /config/secrets.yaml
+        ```
+
+     - Add a variable (i.e. `my_secret_var`) to the secrets file and set the value to its corresponding environment variable (i.e. `MY_SECRET_VAR`):
+
+        ```diff
+          some_password: welcome
+        + my_secret_var: !env_var MY_SECRET_VAR
+        ```
+
+        For example:
+
+        ```yaml
+          some_password: welcome
+          my_secret_var: !env_var MY_SECRET_VAR
+        ```
+
+     - Finally, add the intended configuration option to the config file as you normally would, except, set the value to its corresponding variable from the secrets file (i.e. `my_secret_var`):
+
+        ```diff
+          some_existing_config:
+            some_option: some_value
+        +
+        + my_config:
+        +   my_option: !secret my_secret_var
+        ```
+
+        For example:
+
+        ```yaml
+          some_existing_config:
+            some_option: some_value
+
+          my_config:
+            my_option: !secret my_secret_var
+        ```
+
+3. **(Optional)** If you are updating the configuration of a running HA server, verify that your updated configuration is valid before applying the configuration changes:
+
+   - Visit `http://<ha-server-host>:8123/developer-tools/yaml` (i.e. `http://192.168.0.106:8123/developer-tools/yaml`) on a web browser.
+
+   - Under the **Check and restart** section, click the **CHECK CONFIGURATION** button.
+
+   - If the result returns a message such as the following:
+
+      ```
+        Configuration will not prevent Home Assistant from starting!
+      ```
+
+      Your pending configuration changes should be safe to apply.
+
+4. Apply your pending configuration changes by deploying the HA server or restarting the server if it is already running.
+
+### Recommended Configurations
 
 This details some recommended configuration options for a HA setup:
 
@@ -721,123 +852,7 @@ This details some common usage steps for a Home Assistant (HA) server.
 
 ### References
 
-- [Environment variables in yaml files](https://community.home-assistant.io/t/environment-variables-in-yaml-files/117157/4)
-- [Configuration.yaml](https://www.home-assistant.io/docs/configuration)
-- [Storing secrets](https://www.home-assistant.io/docs/configuration/secrets)
-- [Environment variables](https://www.home-assistant.io/docs/configuration/yaml/#environment-variables)
-
-### Configuring Home Assistant
-
-This details how to configure HA through its configuration file (`configuration.yaml`) and secrets file (`secrets.yaml`):
-
-1. Update the HA configuration file (`configuration.yaml`) from the host machine, or the HA server itself:
-
-   - To update the config file from the host machine:
-
-      ```sh
-      nano <path-to-config>/configuration.yaml
-      ```
-
-   - **Alternatively**, to update the config file from the HA server (i.e. container):
-
-      ```sh
-      nano /config/configuration.yaml
-      ```
-
-2. Define your configuration options, bearing in mind its `yaml` syntax and configuration specifications, to the configuration file (`configuration.yaml`):
-
-   - Typically, adding a configuration option to the config file would look something like so:
-
-      ```diff
-        some_existing_config:
-          some_option: some_value
-      +
-      + my_config:
-      +   my_option: my_value
-      ```
-
-      For example:
-
-      ```yaml
-        some_existing_config:
-          some_option: some_value
-
-        my_config:
-          my_option: my_value
-      ```
-
-   - Note however that values set in the configuration file (i.e. `my_value`) needs to be set in plain text, which means that this method may not be secure for sensitive data such as passwords and tokens. To address that:
-
-     - Set your secret value as an environment variable (i.e. `MY_SECRET_VAR`). For example, in the Docker compose file of your HA server:
-
-        ```yaml
-            environment:
-              - MY_SECRET_VAR=some-secret-value
-        ```
-
-     - Update the HA secrets file (`secrets.yaml`) from the host machine, or the HA server itself:
-
-        To update the secrets file from the host machine:
-
-        ```sh
-        nano <path-to-config>/secrets.yaml
-        ```
-
-        **Alternatively**, to update the secrets file from the HA server (i.e. container):
-
-        ```sh
-        nano /config/secrets.yaml
-        ```
-
-     - Add a variable (i.e. `my_secret_var`) to the secrets file and set the value to its corresponding environment variable (i.e. `MY_SECRET_VAR`):
-
-        ```diff
-          some_password: welcome
-        + my_secret_var: !env_var MY_SECRET_VAR
-        ```
-
-        For example:
-
-        ```yaml
-          some_password: welcome
-          my_secret_var: !env_var MY_SECRET_VAR
-        ```
-
-     - Finally, add the intended configuration option to the config file as you normally would, except, set the value to its corresponding variable from the secrets file (i.e. `my_secret_var`):
-
-        ```diff
-          some_existing_config:
-            some_option: some_value
-        +
-        + my_config:
-        +   my_option: !secret my_secret_var
-        ```
-
-        For example:
-
-        ```yaml
-          some_existing_config:
-            some_option: some_value
-
-          my_config:
-            my_option: !secret my_secret_var
-        ```
-
-3. **(Optional)** If you are updating the configuration of a running HA server, verify that your updated configuration is valid before applying the configuration changes:
-
-   - Visit `http://<ha-server-host>:8123/developer-tools/yaml` (i.e. `http://192.168.0.106:8123/developer-tools/yaml`) on a web browser.
-
-   - Under the **Check and restart** section, click the **CHECK CONFIGURATION** button.
-
-   - If the result returns a message such as the following:
-
-      ```
-        Configuration will not prevent Home Assistant from starting!
-      ```
-
-      Your pending configuration changes should be safe to apply.
-
-4. Apply your pending configuration changes by deploying the HA server or restarting the server if it is already running.
+- [TODO](#)
 
 ### Adding an Integration to Home Assistant
 
