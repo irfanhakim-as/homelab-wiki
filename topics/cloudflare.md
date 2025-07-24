@@ -71,7 +71,7 @@ This details how to purchase a domain name on Cloudflare.
 ## Cloudflare as Nameserver
 
 > [!IMPORTANT]  
-> This section is not required if your domain was [purchased on Cloudflare](#buying-a-domain).
+> This part of the guide is not required if your domain was [purchased on Cloudflare](#buying-a-domain).
 
 ### Description
 
