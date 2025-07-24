@@ -23,7 +23,7 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Description](#description-3)
     - [References](#references-3)
     - [Manual](#manual)
-    - [Cloudflare DDNS](#cloudflare-ddns)
+    - [Dynamic (Cloudflare DDNS)](#dynamic-cloudflare-ddns)
   - [Dynamic DNS](#dynamic-dns)
     - [Description](#description-4)
     - [References](#references-4)
@@ -160,7 +160,7 @@ This method of registering a subdomain relies on you to manually update the DNS 
 
     Click the **Save** button.
 
-### Cloudflare DDNS
+### Dynamic (Cloudflare DDNS)
 
 This ensures all of the subdomains that were registered to your domain using this method will have its public IP endpoint automatically updated:
 
@@ -279,7 +279,7 @@ This details how to keep DNS records up-to-date dynamically on Cloudflare.
 ### Cloudflare DDNS (Helm)
 
 > [!NOTE]  
-> This guide only deploys the Cloudflare DDNS tool without specifying any DNS records for it to update. To register and update subdomain(s) on the release's specified zone (domain), [update its list of subdomains](#cloudflare-ddns).
+> This guide only deploys the Cloudflare DDNS tool without specifying any DNS records for it to update. To register and update subdomain(s) on the release's specified zone (domain), [update its list of subdomains](#dynamic-cloudflare-ddns).
 
 1. Ensure Helm is [installed](helm.md#installation) on your system.
 
