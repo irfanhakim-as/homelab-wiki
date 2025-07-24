@@ -20,13 +20,11 @@ The Domain Name System (DNS) is a hierarchical and distributed name service that
     - [Description](#description-3)
   - [Register a Subdomain](#register-a-subdomain)
     - [Description](#description-4)
-    - [References](#references-3)
-  - [Dynamic DNS](#dynamic-dns)
-    - [Description](#description-5)
-    - [References](#references-4)
+    - [Manual Subdomain Registration](#manual-subdomain-registration)
+    - [Dynamic DNS](#dynamic-dns)
   - [Local DNS](#local-dns)
-    - [Description](#description-6)
-    - [References](#references-5)
+    - [Description](#description-5)
+    - [References](#references-3)
 
 ## References
 
@@ -82,25 +80,21 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
 ### Description
 
-This details how to register a subdomain on a DNS server.
+This details how to register a subdomain on a DNS server manually or dynamically.
 
-### References
+### Manual Subdomain Registration
 
-- [Cloudflare: Register a Subdomain](cloudflare.md#register-a-subdomain)
-- [FreeDNS: Register a Subdomain](freedns.md#register-a-subdomain)
+This details how to register a subdomain manually on a DNS server:
 
----
+- [Cloudflare](cloudflare.md#manual-subdomain-registration)
+- [FreeDNS](freedns.md#register-a-subdomain)
 
-## Dynamic DNS
+### Dynamic DNS
 
-### Description
+This details how to keep DNS records up-to-date dynamically on a DNS server:
 
-This details how to keep DNS records up-to-date dynamically on a DNS server.
-
-### References
-
-- [Cloudflare: Dynamic DNS](cloudflare.md#dynamic-dns)
-- [FreeDNS: Dynamic DNS](freedns.md#dynamic-dns)
+- [Cloudflare](cloudflare.md#dynamic-cloudflare-ddns)
+- [FreeDNS](freedns.md#dynamic-dns)
 
 ---
 
