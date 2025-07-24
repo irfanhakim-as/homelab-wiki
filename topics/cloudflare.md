@@ -130,7 +130,7 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
 ### Description
 
-This details how to register a subdomain on Cloudflare.
+This details how to register a subdomain on Cloudflare for a Cloudflare-managed domain.
 
 ### References
 
