@@ -164,7 +164,7 @@ This method of registering a subdomain relies on you to manually update the DNS 
 
 This ensures all of the subdomains that were registered to your domain using this method will have its public IP endpoint automatically updated:
 
-1. Deploy [Cloudflare DDNS](#cloudflare-ddns-helm) using Helm for each zone (domain) if you have not already.
+1. Deploy [Cloudflare DDNS](#cloudflare-ddns-helm) on your [Kubernetes cluster](../courses/kubernetes.md#kubernetes-cluster) using Helm for each zone (domain) if you have not already.
 
 2. [Update the values file](helm.md#update-helm-values) (i.e. `values.yaml`) of the existing Helm release (i.e. `example-com`) you have deployed:
 
