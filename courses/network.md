@@ -15,8 +15,8 @@ A computer network is a set of computers sharing resources located on or provide
   - [DNS](#dns)
     - [Setting Up a Domain](#setting-up-a-domain)
     - [Registering Subdomains](#registering-subdomains)
-    - [Local DNS](#local-dns)
     - [Disable Email Address Obfuscation](#disable-email-address-obfuscation)
+    - [Local DNS](#local-dns)
   - [VPN](#vpn)
     - [References](#references-2)
 
@@ -53,12 +53,6 @@ This details how to register and manage subdomains for your services:
 
 - [Register a Subdomain](../topics/dns.md#register-a-subdomain)
 
-### Local DNS
-
-This details the process of setting up a local DNS server for use with your local servers or devices:
-
-- [Local DNS](../topics/dns.md#local-dns)
-
 ### Disable Email Address Obfuscation
 
 > [!NOTE]  
@@ -67,6 +61,12 @@ This details the process of setting up a local DNS server for use with your loca
 This details how to disable the Cloudflare Email Address Obfuscation security feature:
 
 - [Cloudflare](../topics/cloudflare.md#disable-email-address-obfuscation)
+
+### Local DNS
+
+This details the process of setting up a local DNS server for use with your local servers or devices:
+
+- [Local DNS](../topics/dns.md#local-dns)
 
 ---
 
