@@ -52,7 +52,6 @@ This details how to acquire and set up a(n apex) domain name for your homelab:
 This details how to register and manage subdomains for your services:
 
 - [Register a Subdomain](../topics/dns.md#register-a-subdomain)
-- [Dynamic DNS](../topics/dns.md#dynamic-dns)
 
 ### Local DNS
 
