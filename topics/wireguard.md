@@ -42,7 +42,7 @@ This details the process of setting up a WireGuard server.
 
 2. [Set up a domain](../courses/network.md#registering-subdomains) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`).
 
-3. While the domain has been set up to point towards your home network, ensure that your home network is able to carry forward and route the traffic to your VPN server. This can be achieved through [port forwarding](router.md#port-forwarding):
+3. While the domain has been set up to point towards your home network, ensure that your home network is able to carry forward and route the traffic to your VPN server. This can be achieved through [port forwarding](../courses/network.md#port-forwarding):
 
    - Service Name: Set any suitable name that best describes the service or rule (i.e. `vpn`)
    - Device IP Address: Enter the private IP address of the WireGuard server (i.e. `192.168.0.106`)

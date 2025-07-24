@@ -76,7 +76,7 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 ## Register a Subdomain
 
 > [!NOTE]  
-> A registered subdomain only points to the public IP endpoint of your home network. Your home network will still need to route traffic to the appropriate internal service, typically using [port forwarding](router.md#port-forwarding).
+> A registered subdomain only points to the public IP endpoint of your home network. Your home network will still need to route traffic to the appropriate internal service, typically through [port forwarding](../courses/network.md#port-forwarding).
 
 ### Description
 
