@@ -62,7 +62,7 @@ This details the process of setting up a local DNS server for use with your loca
 ### Disable Email Address Obfuscation
 
 > [!NOTE]  
-> This section of the guide is **Optional** - it is included in this course as a reference should you need it at some point.
+> This section of the guide is **Optional** - it is included in this course as a reference should you need it at some point, if you use [Cloudflare as your nameserver](../topics/dns.md#cloudflare-as-nameserver).
 
 This details how to disable the Cloudflare Email Address Obfuscation security feature:
 
