@@ -11,14 +11,14 @@ A computer network is a set of computers sharing resources located on or provide
   - [Directory](#directory)
   - [References](#references)
   - [Router](#router)
-    - [References](#references-1)
+    - [Port Forwarding](#port-forwarding)
   - [DNS](#dns)
     - [Setting Up a Domain](#setting-up-a-domain)
     - [Registering Subdomains](#registering-subdomains)
     - [Disable Email Address Obfuscation](#disable-email-address-obfuscation)
     - [Local DNS](#local-dns)
   - [VPN](#vpn)
-    - [References](#references-2)
+    - [References](#references-1)
 
 ## References
 
@@ -30,7 +30,9 @@ A computer network is a set of computers sharing resources located on or provide
 
 This section details all topics pertaining to router configuration to ensure proper network management.
 
-### References
+### Port Forwarding
+
+This details how to set up port forwarding to route external traffic to a local service within the network:
 
 - [Port Forwarding](../topics/router.md#port-forwarding)
 
