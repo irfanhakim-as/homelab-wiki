@@ -22,7 +22,7 @@ Cloudflare, Inc. is an American company that provides content delivery network s
   - [Register a Subdomain](#register-a-subdomain)
     - [Description](#description-3)
     - [References](#references-3)
-    - [Manual](#manual)
+    - [Manual Subdomain Registration](#manual-subdomain-registration)
     - [Dynamic (Cloudflare DDNS)](#dynamic-cloudflare-ddns)
   - [Dynamic DNS](#dynamic-dns)
     - [Description](#description-4)
@@ -136,7 +136,7 @@ This details how to register a subdomain on Cloudflare.
 
 - [Create DNS records](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/#create-dns-records)
 
-### Manual
+### Manual Subdomain Registration
 
 This method of registering a subdomain relies on you to manually update the DNS entries with your home network's public IP endpoint:
 
