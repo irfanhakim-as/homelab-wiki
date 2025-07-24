@@ -34,7 +34,7 @@ This details the process of creating and setting up a Kubernetes cluster based o
 
 ### Steps
 
-1. [Provision](../courses/vm.md#creating-a-virtual-machine-from-a-template) the required number of nodes as the Master node, Worker node, and **optionally**, the Login node.
+1. [Provision the required number of nodes](../courses/vm.md#creating-a-virtual-machine-from-a-template) as the Master node, Worker node, and **optionally**, the Login node.
 
     Please refer to Orked's [prerequisites](https://github.com/irfanhakim-as/orked/blob/master/README.md#prerequisites) and [hardware requirements](https://github.com/irfanhakim-as/orked/blob/master/README.md#hardware-requirements) for the exact details.
 
