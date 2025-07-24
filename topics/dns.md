@@ -40,11 +40,11 @@ This details how to acquire a domain name from a domain name registrar.
 
 ### References
 
-- [Cloudflare: Buying a Domain](cloudflare.md#buying-a-domain)
-- [FreeDNS: Acquiring a Domain](freedns.md#acquiring-a-domain)
-- [Porkbun: Buying a Domain](porkbun.md#buying-a-domain)
-- [Squarespace: Buying a Domain](squarespace.md#buying-a-domain)
-- [Name.com: Buying a Domain](name.com.md#buying-a-domain)
+- [Cloudflare](cloudflare.md#buying-a-domain)
+- [FreeDNS](freedns.md#acquiring-a-domain)
+- [Porkbun](porkbun.md#buying-a-domain)
+- [Squarespace](squarespace.md#buying-a-domain)
+- [Name.com](name.com.md#buying-a-domain)
 
 ---
 
@@ -56,9 +56,9 @@ This details how to update the authoritative nameserver for a domain.
 
 ### References
 
-- [Porkbun: Update Authoritative Nameserver](porkbun.md#update-authoritative-nameserver)
-- [Squarespace: Update Authoritative Nameserver](squarespace.md#update-authoritative-nameserver)
-- [Name.com: Update Authoritative Nameserver](name.com.md#update-authoritative-nameserver)
+- [Porkbun](porkbun.md#update-authoritative-nameserver)
+- [Squarespace](squarespace.md#update-authoritative-nameserver)
+- [Name.com](name.com.md#update-authoritative-nameserver)
 
 ---
 
@@ -106,4 +106,4 @@ This details the process of setting up a local DNS server for use with your loca
 
 ### References
 
-- [Pi-hole: Setup](pi-hole.md#setup)
+- [Pi-hole](pi-hole.md#setup)
