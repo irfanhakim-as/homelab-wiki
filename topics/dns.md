@@ -16,14 +16,13 @@ The Domain Name System (DNS) is a hierarchical and distributed name service that
   - [Update Authoritative Nameserver](#update-authoritative-nameserver)
     - [Description](#description-2)
     - [References](#references-2)
-  - [Cloudflare as Nameserver](#cloudflare-as-nameserver)
-    - [Description](#description-3)
+    - [Cloudflare as Nameserver](#cloudflare-as-nameserver)
   - [Register a Subdomain](#register-a-subdomain)
-    - [Description](#description-4)
+    - [Description](#description-3)
     - [Manual Subdomain Registration](#manual-subdomain-registration)
     - [Dynamic DNS](#dynamic-dns)
   - [Local DNS](#local-dns)
-    - [Description](#description-5)
+    - [Description](#description-4)
     - [References](#references-3)
 
 ## References
@@ -60,16 +59,14 @@ This details how to update the authoritative nameserver for a domain.
 - [Squarespace](squarespace.md#update-authoritative-nameserver)
 - [Name.com](name.com.md#update-authoritative-nameserver)
 
----
-
-## [Cloudflare as Nameserver](cloudflare.md#cloudflare-as-nameserver)
+### Cloudflare as Nameserver
 
 > [!IMPORTANT]  
-> This section is not required if your domain was [purchased on Cloudflare](#acquiring-a-domain) or if you have no intention to use Cloudflare as your nameserver.
+> This part of the guide is not required if your domain was either [purchased on Cloudflare](#acquiring-a-domain) or if you have no intention to use Cloudflare as your nameserver.
 
-### Description
+This details how to set Cloudflare as the authoritative DNS nameserver for a domain:
 
-This details how to set Cloudflare as the authoritative DNS nameserver for a domain.
+- [Cloudflare](cloudflare.md#cloudflare-as-nameserver)
 
 ---
 
