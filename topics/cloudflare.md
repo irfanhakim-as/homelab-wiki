@@ -128,6 +128,9 @@ This details how to set Cloudflare as the authoritative DNS nameserver for a dom
 
 ## Register a Subdomain
 
+> [!IMPORTANT]  
+> This section of the guide requires that you have [acquired and set up a domain name](../courses/network.md#setting-up-a-domain) before attempting to register a subdomain.
+
 ### Description
 
 This details how to register a subdomain on Cloudflare for a Cloudflare-managed domain.
