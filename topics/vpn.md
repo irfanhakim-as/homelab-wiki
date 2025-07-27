@@ -29,4 +29,4 @@ This details the process of setting up a VPN server.
 
 ### References
 
-- [WireGuard: Setup](wireguard.md#setup)
+- [WireGuard](wireguard.md#setup)
