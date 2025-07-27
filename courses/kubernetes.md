@@ -12,6 +12,7 @@ Kubernetes, also known as K8s, is an open source system for automating deploymen
   - [References](#references)
   - [Kubernetes Cluster](#kubernetes-cluster)
     - [Creating a Kubernetes Cluster](#creating-a-kubernetes-cluster)
+    - [Reverse Proxy](#reverse-proxy)
     - [Networking Setup](#networking-setup)
   - [Helm](#helm)
     - [References](#references-1)
@@ -31,6 +32,12 @@ This details topics pertaining the provisioning, setup, management, and use case
 This details the process of creating and setting up a Kubernetes cluster:
 
 - [RKE2](../topics/rke2.md#creating-a-kubernetes-cluster)
+
+### Reverse Proxy
+
+This details how to set up a reverse proxy on the Kubernetes cluster for serving applications and services publicly:
+
+- [RKE2](../topics/rke2.md#reverse-proxy)
 
 ### Networking Setup
 
