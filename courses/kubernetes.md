@@ -24,9 +24,11 @@ Kubernetes, also known as K8s, is an open source system for automating deploymen
 
 ## Kubernetes Cluster
 
-This details the process of creating and setting up a Kubernetes cluster.
+This details topics pertaining the provisioning, setup, management, and use case of a Kubernetes cluster in a homelab environment.
 
 ### Creating a Kubernetes Cluster
+
+This details the process of creating and setting up a Kubernetes cluster:
 
 - [RKE2](../topics/rke2.md#creating-a-kubernetes-cluster)
 
