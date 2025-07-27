@@ -17,8 +17,10 @@ A computer network is a set of computers sharing resources located on or provide
     - [Registering Subdomains](#registering-subdomains)
     - [Disable Email Address Obfuscation](#disable-email-address-obfuscation)
     - [Local DNS](#local-dns)
-  - [VPN](#vpn)
+  - [Reverse Proxy](#reverse-proxy)
     - [References](#references-1)
+  - [VPN](#vpn)
+    - [References](#references-2)
 
 ## References
 
@@ -69,6 +71,16 @@ This details how to disable the Cloudflare Email Address Obfuscation security fe
 This details the process of setting up a local DNS server for use with your local servers or devices:
 
 - [Local DNS](../topics/dns.md#local-dns)
+
+---
+
+## Reverse Proxy
+
+This details how to set up a reverse proxy for serving applications and services publicly.
+
+### References
+
+- [Kubernetes](kubernetes.md#reverse-proxy)
 
 ---
 
