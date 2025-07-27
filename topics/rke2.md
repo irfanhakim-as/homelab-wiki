@@ -53,7 +53,7 @@ This details the process of creating and setting up a Kubernetes cluster based o
 
 ### Description
 
-This details how to set up a reverse proxy on the [Kubernetes cluster](#creating-a-kubernetes-cluster) for applications and services.
+This details how to set up a reverse proxy on the Kubernetes cluster for serving applications and services publicly.
 
 ### References
 
