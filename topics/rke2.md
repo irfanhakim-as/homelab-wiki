@@ -62,7 +62,7 @@ This details how to set up a reverse proxy on the [Kubernetes cluster](#creating
 
 ### Reverse Proxy Networking Setup
 
-[Setting up a domain name](#) and [creating subdomain(s)](#) for your service(s) and application(s) only routes external traffic to your homelab environment, not to your service. To route this incoming traffic to your service(s) appropriately:
+[Setting up a domain name](../courses/network.md#setting-up-a-domain) and [creating subdomain(s)](../courses/network.md#registering-subdomains) for your service(s) and application(s) only routes external traffic to your homelab environment, not to your service. To route this incoming traffic to your service(s) appropriately:
 
 1. Assuming a reverse proxy such as [Ingress NGINX Controller](https://github.com/irfanhakim-as/orked#ingress-nginx) has been deployed and set up on your [Kubernetes cluster](#creating-a-kubernetes-cluster), identify and take note of its external (i.e. local) IP address, HTTP port, and HTTPS port:
 
