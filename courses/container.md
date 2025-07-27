@@ -33,14 +33,14 @@ This section details all topics pertaining to the container runtime, Docker.
 
 This details the installation and configuration process of Docker on a Linux system:
 
-- [Docker Setup](../topics/docker.md#setup)
-- [Installing Docker on OMV](../topics/omv.md#installing-docker)
+- [Docker](../topics/docker.md#setup)
+- [Docker on OMV](../topics/omv.md#installing-docker)
 
 ### Setting Up Portainer
 
 This details how to install and set up a Portainer server in a containerised environment.
 
-- [Setup](../topics/portainer.md#setup)
+- [Portainer](../topics/portainer.md#setup)
 
 ### Docker Usage
 
@@ -48,7 +48,7 @@ This details some common usage steps for a container runtime solution such as Do
 
 - [Docker Compose](../topics/docker.md#docker-compose)
 - [Portainer](../topics/portainer.md#usage)
-- [Deploying Docker Container on OMV](../topics/omv.md#deploying-docker-container)
+- [Docker on OMV](../topics/omv.md#deploying-docker-container)
 
 ---
 

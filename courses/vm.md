@@ -35,8 +35,8 @@ This details how to create a virtual machine to be used as a template or base fo
 
 ### References
 
-- [ESXi: Creating a Virtual Machine Template](../topics/esxi.md#creating-a-virtual-machine-template)
-- [Proxmox: Create VM Template](../topics/proxmox.md#create-vm-template)
+- [ESXi](../topics/esxi.md#creating-a-virtual-machine-template)
+- [Proxmox](../topics/proxmox.md#create-vm-template)
 
 ---
 
@@ -46,8 +46,8 @@ This details how to create a virtual machine from a template or base virtual mac
 
 ### References
 
-- [ESXi: Creating a Virtual Machine From a Template](../topics/esxi.md#creating-a-virtual-machine-from-a-template)
-- [Proxmox: Create VM From VM Template](../topics/proxmox.md#create-vm-from-vm-template)
+- [ESXi](../topics/esxi.md#creating-a-virtual-machine-from-a-template)
+- [Proxmox](../topics/proxmox.md#create-vm-from-vm-template)
 
 ---
 
@@ -57,7 +57,7 @@ This details how to restore an existing virtual machine or create a new one from
 
 ### References
 
-- [Proxmox: Restoring Backup](../topics/proxmox.md#restoring-backup)
+- [Proxmox](../topics/proxmox.md#restoring-backup)
 
 ---
 
@@ -67,7 +67,7 @@ This details how to export a backup of a virtual machine or template.
 
 ### References
 
-- [Proxmox: Exporting Backup](../topics/proxmox.md#exporting-backup)
+- [Proxmox](../topics/proxmox.md#exporting-backup)
 
 ---
 
@@ -77,8 +77,8 @@ This details how to edit an existing virtual machine.
 
 ### References
 
-- [ESXi: Editing a Virtual Machine](../topics/esxi.md#editing-a-virtual-machine)
-- [Proxmox: Editing VM Parameters](../topics/proxmox.md#editing-vm-parameters)
+- [ESXi](../topics/esxi.md#editing-a-virtual-machine)
+- [Proxmox](../topics/proxmox.md#editing-vm-parameters)
 
 ---
 
