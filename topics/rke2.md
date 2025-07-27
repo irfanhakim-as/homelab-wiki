@@ -51,6 +51,9 @@ This details the process of creating and setting up a Kubernetes cluster based o
 
 ## Reverse Proxy
 
+> [!NOTE]  
+> This part of the guide assumes that you have [provisioned and set up a Kubernetes cluster](#creating-a-kubernetes-cluster) based on our written guide.
+
 ### Description
 
 This details how to set up a reverse proxy on the Kubernetes cluster for serving applications and services publicly.
