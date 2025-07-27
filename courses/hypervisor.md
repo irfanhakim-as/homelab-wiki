@@ -60,7 +60,7 @@ This details the process of performing updates on the hypervisor.
 
 ### References
 
-- [Proxmox: Updates](../topics/proxmox.md#updates)
+- [Proxmox](../topics/proxmox.md#updates)
 
 ---
 
@@ -82,13 +82,13 @@ This details some additional configuration options and use cases for the hypervi
 
 This topic details how to add an additional storage device to the hypervisor.
 
-- [ESXi: Adding a Datastore](../topics/esxi.md#adding-a-datastore)
+- [ESXi](../topics/esxi.md#adding-a-datastore)
 
 ### Adding a Network Card
 
 This topic details how to add an additional network device to the hypervisor.
 
-- [ESXi: Adding a Network Card](../topics/esxi.md#adding-a-network-card)
+- [ESXi](../topics/esxi.md#adding-a-network-card)
 
 ### Hardware Passthrough
 
@@ -118,31 +118,31 @@ This details the process of clustering multiple hypervisor nodes together.
 
 This details the process of provisioning a cluster of nodes on a hypervisor.
 
-- [Proxmox: Creating Cluster](../topics/proxmox.md#creating-cluster)
+- [Proxmox](../topics/proxmox.md#creating-cluster)
 
 ### Joining Node
 
 This details the steps to add additional node(s) to an existing cluster.
 
-- [Proxmox: Joining Node](../topics/proxmox.md#joining-node)
+- [Proxmox](../topics/proxmox.md#joining-node)
 
 ### Adding QDevice
 
 This details the process of adding a QDevice to achieve and sustain a high availability environment in an even-numbered cluster.
 
-- [Proxmox: Adding QDevice](../topics/proxmox.md#adding-qdevice)
+- [Proxmox](../topics/proxmox.md#adding-qdevice)
 
 ### Recommended Configuration
 
 This details some recommended configurations for the cluster depending on your setup.
 
-- [Proxmox: Recommended Configuration](../topics/proxmox.md#recommended-configuration)
+- [Proxmox](../topics/proxmox.md#recommended-configuration)
 
 ### High Availability (HA)
 
 This details the steps to set up a high availability environment.
 
-- [Proxmox: High Availability (HA)](../topics/proxmox.md#high-availability-ha)
+- [Proxmox](../topics/proxmox.md#high-availability-ha)
 
 ---
 
