@@ -265,7 +265,7 @@ This details how to remove or uninstall a Helm release you have deployed:
 
 ### Description
 
-This details how to get Helm values from a Helm chart or deployment (release).
+This details how to get or update Helm values from a Helm chart or deployment (release).
 
 ### References
 
