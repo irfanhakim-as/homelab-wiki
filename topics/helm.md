@@ -51,7 +51,7 @@ This details how to install Helm on your system.
 
 ### Steps
 
-1. Helm should be available in your software repository by default. [Install](package-manager.md#install-software) the `helm` package using your package manager (i.e. `apt`).
+1. Helm should be available in your software repository by default - [install](package-manager.md#install-software) the `helm` package using your package manager (i.e. `apt`).
 
 2. **Alternatively**, you can install Helm through source:
 
@@ -67,7 +67,7 @@ This details how to install Helm on your system.
       cd ~/.helm
       ```
 
-   - Build the Helm binary:
+   - Build and install the Helm binary:
 
       ```sh
       make
