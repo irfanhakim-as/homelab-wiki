@@ -229,7 +229,7 @@ This details how to set up reverse proxy for an application or service, in order
           app: my-app
       ```
 
-   - Most [Helm charts](../courses/kubernetes.md#helm) should already provide both the Kubernetes service and Ingress resource that can be enabled and configured easily as part of the deployment of your application.
+   - Most [Helm charts](../courses/kubernetes.md#helm-charts) should already provide both the Kubernetes service and Ingress resource that can be enabled and configured easily as part of the deployment of your application.
 
 3. It is also possible to use the same setup to route external traffic to a service or application that is hosted outside of your Kubernetes cluster, in the same network, with slight changes to our configuration and some additional steps:
 
