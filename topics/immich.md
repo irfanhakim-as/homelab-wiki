@@ -477,7 +477,7 @@ This details some recommended configuration options for an Immich setup:
 
      - Transcode Policy: Expand the dropdown and select the `Don't transcode any videos, may break playback on some clients` option
 
-3. **(Optional)** If you wish to set up [reverse proxy](../courses/network.md#registering-subdomains) for the Immich server, you may need to include the following custom annotations to the Ingress resource:
+3. **(Optional)** If you wish to set up [reverse proxy](../courses/network.md#reverse-proxy) for the Immich server, you may need to include the following custom annotations to the Ingress resource:
 
     ```yaml
     customAnnotations:

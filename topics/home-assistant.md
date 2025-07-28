@@ -325,7 +325,7 @@ This details some recommended configuration options for a HA setup:
         db_url: !secret db_conn_string
       ```
 
-2. **(Optional)** [Configure HA](#configuring-home-assistant) to allow for reverse proxy if you wish to [set up a domain](../courses/network.md#registering-subdomains) for the HA instance:
+2. **(Optional)** [Configure HA](#configuring-home-assistant) to allow for [reverse proxy](../courses/network.md#reverse-proxy) if you wish to [set up a domain](../courses/network.md#registering-subdomains) for the HA instance:
 
    - Add the following configuration option to your HA instance's configuration file (`configuration.yaml`):
 
