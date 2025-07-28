@@ -47,6 +47,8 @@ This details the process of creating and setting up a Kubernetes cluster based o
 
 2. Follow the detailed steps laid out in the Orked [installation guide](https://github.com/irfanhakim-as/orked/blob/master/README.md#installation) to setup a RKE2-based Kubernetes cluster from the ground up using a collection of scripts.
 
+3. Complete Orked's [post-installation setup steps](https://github.com/irfanhakim-as/orked#post-installation) to complete the Kubernetes cluster setup.
+
 ---
 
 ## Reverse Proxy
