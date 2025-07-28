@@ -14,7 +14,10 @@ Kubernetes, also known as K8s, is an open source system for automating deploymen
     - [Creating a Kubernetes Cluster](#creating-a-kubernetes-cluster)
     - [Reverse Proxy](#reverse-proxy)
   - [Helm](#helm)
-    - [References](#references-1)
+    - [Installing Helm](#installing-helm)
+    - [Helm Chart Repository](#helm-chart-repository)
+    - [Helm Charts](#helm-charts)
+    - [Helm Values](#helm-values)
 
 ## References
 
@@ -44,9 +47,26 @@ This details how to set up a reverse proxy on the Kubernetes cluster for serving
 
 This details the installation and usage of Helm to deploy and manage Kubernetes applications in your cluster.
 
-### References
+### Installing Helm
 
-- [Installation](../topics/helm.md#installation)
-- [Helm Chart Repository](../topics/helm.md#helm-chart-repository)
-- [Helm Charts](../topics/helm.md#helm-charts)
-- [Helm Values](../topics/helm.md#helm-values)
+This details how to install Helm on your system:
+
+- [Helm](../topics/helm.md#installation)
+
+### Helm Chart Repository
+
+This details how to add, update, or remove a Helm chart repository on your system and query available Helm charts to install:
+
+- [Helm](../topics/helm.md#helm-chart-repository)
+
+### Helm Charts
+
+This details how to search or deploy a Helm chart:
+
+- [Helm](../topics/helm.md#helm-charts)
+
+### Helm Values
+
+This details how to get or update Helm values from a Helm chart or deployment (release):
+
+- [Helm](../topics/helm.md#helm-values)
