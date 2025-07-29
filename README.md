@@ -1,11 +1,11 @@
 # Homelab Wiki
 
 > [!IMPORTANT]  
-> This repository is a work in progress. For a more desktop-oriented wiki on Linux, check out my [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki).
+> This repository is (constantly) a work in progress. For a more desktop-oriented wiki on Linux, check out my [Linux Wiki](https://github.com/irfanhakim-as/linux-wiki).
 
 ## Overview
 
-This wiki is a collection of guides and tips mostly focused on Homelabs, and is primarily used for my own reference. It is also used to document my own personal infrastructure, and is not necessarily perfected to be a general guide.
+This wiki is a collection of guides and tips mostly focused on starting and maintaining a homelab setup - my hope is that it could help others to get started with their own homelabbing ~~addiction~~ journey, for personal or professional purposes. Do note that this wiki leans towards my own personal homelab infrastructure, based on my own experiences, and is not necessarily perfected to be a general guide.
 
 ## Directory
 
@@ -13,71 +13,74 @@ This wiki is a collection of guides and tips mostly focused on Homelabs, and is 
   - [Overview](#overview)
   - [Directory](#directory)
   - [Courses](#courses)
-  - [Topics](#topics)
-  - [TODO](#todo)
+    - [Hardware](#hardware)
+    - [Hypervisor](#hypervisor)
+    - [Host Deployment Environments](#host-deployment-environments)
+    - [Network](#network)
+    - [Services](#services)
+  - [Contributing](#contributing)
 
 ## Courses
 
-This is a list of course-specific guides that compiles individual topics in this repository into individual guides catered to the course:
+This is a list of course-specific guides that compiles individual topics found in this repository into individual guides catered to the course:
 
-- [Hardware](./courses/hardware.md)
-- [Hypervisor](./courses/hypervisor.md)
-- [Virtual Machines (VM)](./courses/vm.md)
-- [Containers](./courses/container.md)
-- [Kubernetes](./courses/kubernetes.md)
-- [Network](./courses/network.md)
-- [Services](./courses/#)
+### [Hardware](courses/hardware.md)
 
-## Topics
+Acquiring the right hardware for the job is the first step in setting up a homelab. This course details the hardware used in my homelab (as a guideline) and any necessary configuration steps in setting them up.
 
-Check out the [topics](./topics/) directory for individual guides and tips.
+Topics include, but (possibly) not limited to:
 
-## TODO
+- [Primary Server](courses/hardware.md#primary-server)
+- [Mini Server](courses/hardware.md#mini-server)
 
-1. [Hardware](courses/hardware.md): Hardware setup as the base of the homelab
-2. [Hypervisor](courses/hypervisor.md): The primary core of the homelab used for provisioning VMs
-   1. [Proxmox](topics/proxmox.md)
-   2. [ESXi](topics/esxi.md)
-3. [VM](courses/vm.md): The base of all services and infrastructure hosted in the homelab
-   1. Creation and management per [hypervisor](courses/hypervisor.md)
-   2. Guest OS:
-      1. [Linux](topics/linux.md):
-         1. [Arch Linux](topics/arch.md)
-         2. [Debian](topics/debian.md)
-         3. [Ubuntu](topics/ubuntu.md)
-         4. [RHEL](topics/rhel.md)
-4. [Container](courses/container.md): The alternative way of hosting services
-    1. [LXC](courses/container.md#linux-containers-lxc)
-    2. [Docker](topics/docker.md)
-    3. Podman
-    4. [Portainer](topics/portainer.md) (Container)
-5. [Kubernetes](courses/kubernetes.md): The secondary core of the homelab used for deploying containerised services
-   1. [RKE2](topics/rke2.md)
-   2. Rancher
-   3. [Helm](topics/helm.md)
-6. [Network](courses/network.md): Networking setup that powers the homelab (i.e. serves services hosted on VMs and Kubernetes cluster)
-   1. [Router](topics/router.md):
-      1. [Port forwarding](topics/router.md#port-forwarding)
-   2. [DNS](topics/dns.md):
-      1. [Squarespace](topics/squarespace.md) (Google)
-      2. [Cloudflare](topics/cloudflare.md): Cloudflare DDNS, Cloudflare Tunnel
-      3. [Pi-hole](topics/pi-hole.md)
-      4. [Porkbun](topics/porkbun.md)
-      5. [FreeDNS](topics/freedns.md)
-      6. [Name.com](topics/name.com.md)
-      7. [Pi-hole](topics/pi-hole.md)
-   3. [VPN](topics/vpn.md):
-      1. [WireGuard](topics/wireguard.md)
-7. Services: Selection of VM or container based services that can be hosted in the homelab
-   1. NAS (VM):
-      1. [TrueNAS](topics/truenas.md) (WIP)
-      2. [OpenMediaVault](topics/omv.md) ([Raspberry Pi](topics/raspberry-pi.md))
-   2. [Database](topics/database.md) (Container):
-      1. [MariaDB](topics/mariadb.md)
-      2. [PostgreSQL](topics/postgresql.md)
-      3. [MySQL](topics/mysql.md)
-   3. Others:
-      1. [Home Assistant](topics/home-assistant.md) (Container)
-      2. [Jellyfin](topics/jellyfin.md) (Container)
-      3. [ErsatzTV](topics/ersatztv.md) (Container)
-      4. [Immich](topics/immich.md) (Container)
+### [Hypervisor](courses/hypervisor.md)
+
+At the heart of most homelabs, is a _primary_ server node running a hypervisor. Hypervisors allow for the creation and management of [virtual machines](courses/vm.md), among other things, which are then used to host your applications and services. This course covers the installation, configuration, and management of your chosen hypervisor software that enables you to run multiple systems on a single physical machine.
+
+Topics include, but (possibly) not limited to:
+
+- [ESXi](topics/esxi.md)
+- [Proxmox](topics/proxmox.md)
+
+### Host Deployment Environments
+
+Once you have got your hypervisor running, you need to decide how to actually deploy and run your applications. This course covers the different environments and methods available for hosting your services.
+
+Topics include, but (possibly) not limited to:
+
+- [Virtual Machines (VM)](courses/vm.md)
+- [Containers](courses/container.md) including [Docker](topics/docker.md) and [Linux Containers (LXC)](courses/container.md#linux-containers-lxc)
+- [Kubernetes](courses/kubernetes.md) including [RKE2](topics/rke2.md)
+
+### [Network](courses/network.md)
+
+Networking is a vital component of any functional homelab. This course covers the networking services and configurations needed to ensure proper connectivity and secure access to your hosted services, locally or publicly.
+
+Topics include, but (possibly) not limited to:
+
+- [DNS](topics/dns.md) including [Cloudflare](topics/cloudflare.md), [FreeDNS](topics/freedns.md), and [Pi-hole](topics/pi-hole.md)
+- [Reverse Proxy](courses/network.md#reverse-proxy)
+- [VPN](topics/vpn.md) including [WireGuard](topics/wireguard.md)
+
+### Services
+
+Last but not least, once your homelab is all ready and set up, it is time to _reap the rewards_ by utilising your setup! This course covers the plethora of applications and services that you could host on your homelab, and how to set them up.
+
+Topics include, but (possibly) not limited to:
+
+- [Database](topics/database.md) including [MariaDB](topics/mariadb.md), [MySQL](topics/mysql.md), and [PostgreSQL](topics/postgresql.md)
+- NASes including [TrueNAS](topics/truenas.md) and [OpenMediaVault (OMV)](topics/omv.md)
+- [Home Assistant](topics/home-assistant.md)
+- [Immich](topics/immich.md)
+- [Jellyfin](topics/jellyfin.md)
+- [ErsatzTV](topics/ersatztv.md)
+
+## Contributing
+
+These guides take up a huge chunk of my time to research, setup, test, document, and the most painful of all... _organise_.
+
+If you appreciate what I do, here's how you could contribute:
+
+- [Sponsor me!](https://github.com/sponsors/irfanhakim-as) Even a single cent to a _stranger_ like me, would be far too generous.
+- [Report an issue](https://github.com/irfanhakim-as/homelab-wiki/issues), any issue, including inaccurate instructions, typos, dead or missing links, incomplete guides, etc.
+- [Create a pull request](https://github.com/irfanhakim-as/homelab-wiki/pulls) for any type of corrections, improvements to existing guides, or new guides to add.
