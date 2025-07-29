@@ -85,6 +85,7 @@ This details some additional configuration options and use cases for the hypervi
 This topic details how to add an additional storage device to the hypervisor.
 
 - [ESXi](../topics/esxi.md#adding-a-datastore)
+- [Proxmox](../topics/proxmox.md#adding-storage)
 
 ### Adding a Network Card
 
