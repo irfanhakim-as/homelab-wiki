@@ -1,5 +1,8 @@
 # TrueNAS
 
+> [!WARNING]  
+> TODO: This guide is a work in progress.
+
 ## Description
 
 TrueNAS is a family of network-attached storage (NAS) products produced by iXsystems, incorporating both FOSS, as well as commercial offerings.
