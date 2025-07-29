@@ -13,7 +13,7 @@ This details the hardware used in my homelab and any related configuration steps
     - [Description](#description-1)
     - [Hardware Specification](#hardware-specification)
     - [Hardware Configuration](#hardware-configuration)
-  - [Secondary NAS](#secondary-nas)
+  - [Mini Server](#mini-server)
     - [Description](#description-2)
     - [Hardware Specification](#hardware-specification-1)
 
@@ -101,11 +101,11 @@ This details some important configuration options for the hardware used in [my h
 
 ---
 
-## Secondary NAS
+## Mini Server
 
 ### Description
 
-This details the hardware specification and configuration of the secondary NAS server node in my homelab.
+This details the hardware specification and configuration of the mini server node in my homelab.
 
 ### Hardware Specification
 
