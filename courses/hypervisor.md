@@ -11,8 +11,8 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
   - [Directory](#directory)
   - [References](#references)
   - [Installation](#installation)
-    - [ESXi](#esxi)
-    - [Proxmox](#proxmox)
+    - [Installing ESXi](#installing-esxi)
+    - [Installing Proxmox](#installing-proxmox)
   - [Updates](#updates)
     - [References](#references-1)
   - [Backups](#backups)
@@ -42,13 +42,13 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
 
 This details the process of setting up a hypervisor including installation and configuration.
 
-### ESXi
+### Installing ESXi
 
 - [Acquire License](../topics/esxi.md#acquire-license)
 - [Custom ISO](../topics/esxi.md#custom-iso)
 - [Installation](../topics/esxi.md#installation)
 
-### Proxmox
+### Installing Proxmox
 
 - [Setup](../topics/proxmox.md#setup)
 
