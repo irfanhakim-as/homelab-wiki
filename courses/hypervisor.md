@@ -16,13 +16,13 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
   - [Updates](#updates)
     - [References](#references-1)
   - [Backups](#backups)
-    - [References](#references-2)
+    - [Periodic Config Backups](#periodic-config-backups)
   - [Configuration](#configuration)
     - [Adding Additional Storage](#adding-additional-storage)
     - [Adding a Network Card](#adding-a-network-card)
     - [Hardware Passthrough](#hardware-passthrough)
   - [Migration](#migration)
-    - [References](#references-3)
+    - [Migrating to Proxmox](#migrating-to-proxmox)
   - [Clustering](#clustering)
     - [Creating Cluster](#creating-cluster)
     - [Joining Node](#joining-node)
@@ -30,7 +30,7 @@ A hypervisor (also known as a virtual machine monitor, VMM, or virtualizer) is a
     - [Recommended Configuration](#recommended-configuration)
     - [High Availability (HA)](#high-availability-ha)
   - [Monitoring](#monitoring)
-    - [References](#references-4)
+    - [References](#references-2)
 
 ## References
 
@@ -68,9 +68,11 @@ This details the process of performing updates on the hypervisor.
 
 This details the process of backing up our hypervisor.
 
-### References
+### Periodic Config Backups
 
-- [ESXi: Periodic Config Backups](../topics/esxi.md#periodic-config-backups)
+This details how to setup periodic configuration backups on the hypervisor:
+
+- [ESXi](../topics/esxi.md#periodic-config-backups)
 
 ---
 
@@ -104,9 +106,11 @@ This details the process of passing through hardware devices to a virtual machin
 
 This details the process of migrating a virtual machine from an existing hypervisor to another.
 
-### References
+### Migrating to Proxmox
 
-- [Proxmox: Migrating to Proxmox](../topics/proxmox.md#migrating-to-proxmox)
+This details the process of migrating a virtual machine from an existing hypervisor to Proxmox:
+
+- [Proxmox](../topics/proxmox.md#migrating-to-proxmox)
 
 ---
 
