@@ -63,7 +63,7 @@ This details the hardware specification and configuration of the primary server 
 
   - Network Switch: [TL-SG105E](https://www.tp-link.com/my/business-networking/easy-smart-switch/tl-sg105e)
 
-- Storage:
+- **(Optional)** Storage (NAS):
 
   - Storage Card: [ACASIS PCIe SATA Card AC-PE001 (JMB585)](https://shopee.com.my/acasisofficialshop.os/10403688152)
 
@@ -124,7 +124,7 @@ This details the hardware specification and configuration of the mini server nod
 
   - Cooler: [Raspberry Pi 4 Heatsink](https://shopee.com.my/autobotic/2734588353)
 
-- Storage:
+- **(Optional)** Storage (NAS):
 
   - USB 3.0 Powered Hub:
 
