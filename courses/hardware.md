@@ -27,7 +27,7 @@ This details the hardware specification and configuration of the primary server 
 
 ### Hardware Specification
 
-- Main Server:
+- Main Components:
 
   - Motherboard: [ASRock B450M Pro4](https://www.asrock.com/mb/AMD/B450M%20Pro4/index.asp)
 
@@ -109,7 +109,7 @@ This details the hardware specification and configuration of the mini server nod
 
 ### Hardware Specification
 
-- Main Server:
+- Main Components:
 
   - Server: [Raspberry Pi 4](https://www.raspberrypi.com/products/raspberry-pi-4-model-b) 4GB RAM
 
