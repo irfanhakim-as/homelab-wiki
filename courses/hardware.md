@@ -36,7 +36,7 @@ This details the hardware specification and configuration of the primary server 
   - GPU: [NVIDIA GeForce GT 710 1GB](https://www.techpowerup.com/gpu-specs/geforce-gt-710.c1990) -> [Intel Arc A380](https://www.intel.com/content/www/us/en/products/sku/227959/intel-arc-a380-graphics/specifications.html)
 
     > [!NOTE]  
-    > The GPU is only used for video output due to lack of integrated graphics on the CPU.
+    > A GPU is only needed if your CPU lacks any integrated graphics, or if any of your hosted services require hardware transcoding.
 
   - RAM: 4x [ADATA Premier DDR4 2666](https://www.adata.com/en/specification/483) 16GB (64GB)
 
