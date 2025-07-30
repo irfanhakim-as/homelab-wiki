@@ -22,7 +22,7 @@ This wiki is a collection of guides and tips mostly focused on starting and main
 
 ## Courses
 
-This is a list of course-specific guides that compiles individual topics found in this repository into individual guides catered to the course:
+This is a list of course-specific guides that compiles [individual topics](topics) found in this repository into individual guides catered to the course:
 
 ### [Hardware](courses/hardware.md)
 
