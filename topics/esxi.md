@@ -104,7 +104,7 @@ This details how to acquire a free license from VMware for ESXi.
 ## Custom ISO
 
 > [!NOTE]  
-> This is only required if you require additional drivers for your hardware, which would be the case for the _recommended_ [Hardware Specification](../courses/hardware.md#hardware-specification).
+> This is only required if you require additional drivers for your hardware, which would be the case for the _recommended_ [hardware specification](../courses/hardware.md#primary-server).
 
 > [!NOTE]  
 > This part of the guide requires using a Windows machine, or a Linux machine with PowerShell installed.
@@ -248,7 +248,7 @@ Follow the steps detailed in the two videos referenced above.
 
 ### Notes
 
-- Use the custom ESXi installer ISO created in the [Custom ISO](#custom-iso) section if you are using the _recommended_ [Hardware Specification](../courses/hardware.md#hardware-specification).
+- Use the custom ESXi installer ISO created in the [Custom ISO](#custom-iso) section if you are using the _recommended_ [hardware specification](../courses/hardware.md#primary-server).
 
 ---
 
