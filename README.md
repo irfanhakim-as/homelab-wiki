@@ -69,7 +69,7 @@ Last but not least, once your homelab is all ready and set up, it is time to _re
 Topics include, but (possibly) not limited to:
 
 - [Database](topics/database.md) including [MariaDB](topics/mariadb.md), [MySQL](topics/mysql.md), and [PostgreSQL](topics/postgresql.md)
-- NASes including [TrueNAS](topics/truenas.md) and [OpenMediaVault (OMV)](topics/omv.md)
+- NASes including [TrueNAS](topics/truenas.md) (TODO) and [OpenMediaVault (OMV)](topics/omv.md)
 - [Home Assistant](topics/home-assistant.md)
 - [Immich](topics/immich.md)
 - [Jellyfin](topics/jellyfin.md)
