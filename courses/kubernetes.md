@@ -44,6 +44,9 @@ This details the setup process of a Kubernetes environment from a client perspec
 
 ### Client Setup
 
+> [!NOTE]  
+> If you have already [set up a Kubernetes cluster](#cluster-setup) based on RKE2 following the guide provided by [Orked](https://github.com/irfanhakim-as/orked), the [Login node](https://github.com/irfanhakim-as/orked#login-node-1) should already have all of these set up. Use the following guide as a reference to set up any other machines you wish to use to manage the cluster.
+
 This details the setup process of a Kubernetes environment in a client node:
 
 1. [Install](../topics/package-manager.md#install-software) the `kubectl` package using your package manager (i.e. `apt`) if it is available in your software repository, **alternatively**, install from source:
