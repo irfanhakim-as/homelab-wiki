@@ -33,7 +33,7 @@ This details the hardware specification and configuration of the primary server 
 
   - CPU: [AMD Ryzen 7 1700](https://www.amd.com/en/support/cpu/amd-ryzen-processors/amd-ryzen-7-desktop-processors/amd-ryzen-7-1700)
 
-  - GPU: [NVIDIA GeForce GT 710 1GB](https://www.techpowerup.com/gpu-specs/geforce-gt-710.c1990)
+  - GPU: [NVIDIA GeForce GT 710 1GB](https://www.techpowerup.com/gpu-specs/geforce-gt-710.c1990) -> [Intel Arc A380](https://www.intel.com/content/www/us/en/products/sku/227959/intel-arc-a380-graphics/specifications.html)
 
     > [!NOTE]  
     > The GPU is only used for video output due to lack of integrated graphics on the CPU.
@@ -50,7 +50,7 @@ This details the hardware specification and configuration of the primary server 
     - OS: [Silicon Power PCIe Gen 3x4 P34A80](https://www.silicon-power.com/web/us/product-P34A80) 512GB
     - Data (VM): [Crucial MX500 SATA SSD](https://www.crucial.com/products/ssd/crucial-mx500-ssd) 1TB
 
-  - Chassis: [Tecware Quad Cube](https://www.tecware.co/quad)
+  - Chassis: [Tecware Quad Cube](https://www.tecware.co/quad) -> [JONSBO N5](https://www.jonsbo.com/en/products/N5Black.html)
 
     > [!WARNING]  
     > The tempered glass side panels on the Tecware Quad Cube falls off from the chassis easily over time.
@@ -59,9 +59,9 @@ This details the hardware specification and configuration of the primary server 
 
   - **(Optional)** Network Card: [WINYAO E575T2 (Intel 82575EB)](https://www.winyao.com/a/product_center/network_card__wangka/RJ45/2020/0420/114.html)
 
-  - Router: [D-Link DIR-X3060Z AX3000](https://www.dlink.com.my/product/ax3000-mesh-gigabit-wireless-router)
+  - Router: [D-Link DIR-X3060Z AX3000](https://www.dlink.com.my/product/ax3000-mesh-gigabit-wireless-router) -> [TP-Link Archer AX73 AX5400](https://www.tp-link.com/my/home-networking/wifi-router/archer-ax73)
 
-  - Network Switch: [TL-SG105E](https://www.tp-link.com/my/business-networking/easy-smart-switch/tl-sg105e)
+  - Network Switch: [TL-SG105E](https://www.tp-link.com/my/business-networking/easy-smart-switch/tl-sg105e) -> [TL-SG108E](https://www.tp-link.com/my/business-networking/easy-smart-switch/tl-sg108e/)
 
 - **(Optional)** Storage (NAS):
 
