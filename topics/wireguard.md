@@ -61,7 +61,7 @@ This details the process of setting up a WireGuard server.
 
    - Installation mode: `WireGuard`
    - Default wireguard Port: Enter a custom value if you wish to allocate a different port or stick with the default value of `51820`
-   - DNS Provider: Select one of the available DNS provider (i.e. `Cloudflare`) or pick `Custom` if you wish to add a custom DNS server (i.e. your own Pi-Hole server)
+   - DNS Provider: Select one of the available DNS provider (i.e. `Cloudflare`) or pick `Custom` if you wish to add a custom DNS server (i.e. your own [local DNS](../courses/network.md#local-dns) server)
    - Public IP or DNS: Select the `DNS Entry` option to point towards your public WireGuard server endpoint via DNS
      - What is the public DNS name of this Server?: Set this to the domain you had set up and configured for the WireGuard server (i.e. `vpn.example.com`)
 
