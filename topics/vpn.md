@@ -25,7 +25,7 @@ A Virtual Private Network (VPN) is a security concept to create a secure communi
 
 ### Description
 
-This details the process of setting up a VPN server.
+This details the process of installing and setting up a VPN server.
 
 ### References
 
