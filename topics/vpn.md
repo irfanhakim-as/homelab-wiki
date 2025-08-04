@@ -13,6 +13,9 @@ A Virtual Private Network (VPN) is a security concept to create a secure communi
   - [Setup](#setup)
     - [Description](#description-1)
     - [References](#references-1)
+  - [Usage](#usage)
+    - [Description](#description-2)
+    - [References](#references-2)
 
 ## References
 
@@ -30,3 +33,15 @@ This details the process of installing and setting up a VPN server.
 ### References
 
 - [WireGuard](wireguard.md#setup)
+
+---
+
+## Usage
+
+### Description
+
+This details some common usage steps for a VPN server.
+
+### References
+
+- [WireGuard](wireguard.md#usage)
