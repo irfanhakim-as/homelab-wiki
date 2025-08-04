@@ -48,7 +48,7 @@ This details the installation steps for WireGuard using PiVPN:
 
 2. **(Optional)** [Set up a domain](../courses/network.md#registering-subdomains) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`).
 
-3. Ensure that incoming traffic to your home network is routed accordingly to your VPN server by setting up [port forwarding](../courses/network.md#port-forwarding):
+3. Ensure that incoming traffic to your home network, through public IP (i.e. `203.0.113.0`) or domain (i.e. `vpn.example.com`), is routed accordingly to your VPN server by setting up [port forwarding](../courses/network.md#port-forwarding):
 
    - Service name: Set any suitable name that best describes the service or rule (i.e. `vpn`)
    - Device IP address: Enter the private IP address of the WireGuard server (i.e. `192.168.0.106`)
