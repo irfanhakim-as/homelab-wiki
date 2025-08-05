@@ -60,7 +60,9 @@ This details the installation steps for WireGuard as a Docker container:
 
 4. [Deploy the WireGuard stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/wireguard`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/wireguard`): This will be used for the WireGuard stack's deployment file(s) and volume(s).
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/wireguard`): This will be used for at least the config volume directory which specifically requires local storage.
+
+   - **(Optional)** A remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/wireguard`): This can be used for anything else that supports remote storage such as the WireGuard stack's deployment files.
 
    - A Docker compose file for the WireGuard stack on the app directory (i.e. `/mnt/smb/docker/wireguard/docker-compose.yml`):
 
@@ -116,7 +118,7 @@ This details the installation steps for WireGuard as a Docker container:
       SERVICE_NAME=wireguard
       APP_CONTAINER=wg-easy
       APP_VERSION=15.1.0
-      APP_DIR=/mnt/smb/docker/wireguard
+      APP_DIR=/home/myuser/.local/share/docker/wireguard
       WEBUI_PORT=51821
       NO_REVERSE_PROXY=false
       DISABLE_IPV6=false
