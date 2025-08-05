@@ -47,7 +47,7 @@ This details the installation steps for WireGuard as a Docker container:
 
    - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `51820/udp`
 
-2. **(Optional)** [Set up a domain](../courses/network.md#registering-subdomains) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`) - while this is technically _optional_, it is highly recommended to set up if you do not have a static public IP, which is very likely in a homelab setting.
+2. **(Optional)** [Set up a domain](../courses/network.md#registering-subdomains) (non-proxied) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`) - while this is technically _optional_, it is highly recommended to set up if you do not have a static public IP, which is very likely in a homelab setting.
 
 3. Ensure that incoming traffic to your home network, through public IP (i.e. `203.0.113.0`) or domain (i.e. `vpn.example.com`), is routed accordingly to your VPN server by setting up [port forwarding](../courses/network.md#port-forwarding):
 
