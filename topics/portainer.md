@@ -160,7 +160,7 @@ This details how to deploy or update container(s) in an application stack:
     HOST_PORT=8000
     APP_PORT=8000
     APP_TIMEZONE=Etc/UTC
-    APP_DIR=~/.local/share/myapp
+    APP_DIR=/home/myuser/.local/share/myapp
     ```
 
 6. **(Optional)** In the **Access control** section, enable the switch corresponding to the **Enable access control** option to control access to the application stack. **Alternatively**, if you are updating an existing stack, click the **Change ownership** link in the same section.

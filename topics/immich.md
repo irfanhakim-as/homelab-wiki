@@ -217,7 +217,7 @@ This details the installation steps for Immich as a Docker container:
       UPLOAD_LOCATION=/mnt/smb/media/photos/immich
 
       # The location where your database files are stored. Network shares are not supported for the database
-      DB_DATA_LOCATION=${HOME}/.local/share/docker/immich/pgdata
+      DB_DATA_LOCATION=/home/myuser/.local/share/docker/immich/pgdata
 
       # To set a timezone, uncomment the next line and change Etc/UTC to a TZ identifier from this list: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
       # TZ=Etc/UTC

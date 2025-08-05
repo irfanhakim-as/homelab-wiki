@@ -179,7 +179,7 @@ This details how to manage a containerised application deployment using Docker C
             environment:
               - TZ=Etc/UTC
             volumes:
-              - ~/.local/share/myapp/config:/config
+              - /home/myuser/.local/share/myapp/config:/config
             restart: unless-stopped
             security_opt:
               - no-new-privileges:true
@@ -216,7 +216,7 @@ This details how to manage a containerised application deployment using Docker C
         HOST_PORT=8000
         APP_PORT=8000
         APP_TIMEZONE=Etc/UTC
-        APP_DIR=~/.local/share/myapp
+        APP_DIR=/home/myuser/.local/share/myapp
         ```
 
      - Save the compose file (and env file) accordingly.
