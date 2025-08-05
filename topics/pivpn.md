@@ -44,7 +44,7 @@ This details the installation steps for WireGuard using PiVPN:
 
 1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the WireGuard server. This system can be running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container). The following considerations should be noted:
 
-   - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `51820/udp`
+   - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `<wireguard-port>/udp` (i.e. `51820/udp`)
 
 2. **(Optional)** [Set up a domain](../courses/network.md#registering-subdomains) (non-proxied) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`) - while this is technically _optional_, it is highly recommended to set up if you do not have a static public IP, which is very likely in a homelab setting.
 

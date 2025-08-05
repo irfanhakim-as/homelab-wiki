@@ -45,7 +45,7 @@ This details the installation steps for WireGuard as a Docker container:
 
 1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). The following considerations should be noted:
 
-   - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `51820/udp`
+   - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `<wireguard-port>/udp` (i.e. `51820/udp`)
 
 2. **(Optional)** [Set up a domain](../courses/network.md#registering-subdomains) (non-proxied) to be used as the endpoint to your VPN server (i.e. `vpn.example.com`) - while this is technically _optional_, it is highly recommended to set up if you do not have a static public IP, which is very likely in a homelab setting.
 
@@ -73,7 +73,7 @@ This details the installation steps for WireGuard as a Docker container:
           container_name: ${APP_CONTAINER}
           image: ghcr.io/wg-easy/wg-easy:${APP_VERSION}
           ports:
-            - 51820:51820/udp
+            - ${WIREGUARD_PORT}:${WIREGUARD_PORT}/udp
             - ${WEBUI_PORT}:${WEBUI_PORT}/tcp
           environment:
             - PORT=${WEBUI_PORT}
@@ -119,6 +119,7 @@ This details the installation steps for WireGuard as a Docker container:
       APP_CONTAINER=wg-easy
       APP_VERSION=15.1.0
       APP_DIR=/home/myuser/.local/share/docker/wireguard
+      WIREGUARD_PORT=51820
       WEBUI_PORT=51821
       NO_REVERSE_PROXY=false
       DISABLE_IPV6=false
