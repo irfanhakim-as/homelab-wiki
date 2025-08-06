@@ -79,7 +79,7 @@ This details the installation steps for Immich as a Docker container:
           #  file: hwaccel.transcoding.yml
           #  service: ${HWACCEL_TRANS_SVC}
           volumes:
-            - ${UPLOAD_LOCATION}:/usr/src/app/upload
+            - ${UPLOAD_LOCATION}:/data
             - /etc/localtime:/etc/localtime:ro
           depends_on:
             - redis
@@ -223,7 +223,7 @@ This details the installation steps for Immich as a Docker container:
       # TZ=Etc/UTC
 
       # The Immich version to use. You can pin this to a specific version like "v1.71.0"
-      IMMICH_VERSION=v1.135.3
+      IMMICH_VERSION=v1.137.3
 
       # Connection secret for postgres. You should change it to a random password
       # Please use only the characters `A-Za-z0-9`, without special characters or spaces
@@ -577,7 +577,7 @@ This details how to set up a remote ML server for Immich if its host deployment 
       SERVICE_NAME=immich_remote_ml
       IMMICH_ML_CONTAINER=immich_machine_learning
       ML_CACHE_LOCATION=/mnt/smb/docker/immich-remote-ml/model-cache
-      IMMICH_VERSION=v1.135.3
+      IMMICH_VERSION=v1.137.3
       # set to one of [armnn, cuda, rocm, openvino, openvino-wsl, rknn] for accelerated inference
       #HWACCEL_ML_SVC=openvino
       # set to 'wsl' if deploying on WSL2
