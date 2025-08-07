@@ -14,13 +14,22 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
     - [Description](#description-1)
     - [References](#references-1)
     - [Installation](#installation)
-    - [Recursive DNS Server](#recursive-dns-server)
-    - [DNS-Over-TLS (DoT)](#dns-over-tls-dot)
-    - [DNS-Over-HTTPS (DoH)](#dns-over-https-doh)
-    - [Usage](#usage)
-  - [Upstream DNS Server](#upstream-dns-server)
+    - [Post-Install Setup](#post-install-setup)
+  - [Recursive DNS Server](#recursive-dns-server)
     - [Description](#description-2)
-    - [Steps](#steps)
+    - [References](#references-2)
+    - [Unbound Setup](#unbound-setup)
+  - [DNS-Over-TLS (DoT)](#dns-over-tls-dot)
+    - [Description](#description-3)
+    - [References](#references-3)
+    - [DoT Setup](#dot-setup)
+  - [DNS-Over-HTTPS (DoH)](#dns-over-https-doh)
+    - [Description](#description-4)
+    - [References](#references-4)
+    - [DoH Setup](#doh-setup)
+  - [Usage](#usage)
+    - [Description](#description-5)
+    - [Upstream DNS Server](#upstream-dns-server)
 
 ## References
 
@@ -40,9 +49,6 @@ This details the process of setting up Pi-hole as the local DNS server for use w
 
 - [Prerequisites](https://docs.pi-hole.net/main/prerequisites)
 - [Installation](https://docs.pi-hole.net/main/basic-install)
-- [Unbound](https://docs.pi-hole.net/guides/dns/unbound)
-- [cloudflared (DoH)](https://docs.pi-hole.net/guides/dns/cloudflared)
-- [Pi-hole + Unbound + DNS Over TLS (Ubiquiti/UniFi/DoT/DoH)](https://youtu.be/8ENLZmzm5vc)
 - [Cloudflared, Unbound, or Both?](https://discourse.pi-hole.net/t/cloudflared-unbound-or-both/59245)
 
 ### Installation
@@ -103,14 +109,37 @@ This details the process of setting up Pi-hole as the local DNS server for use w
 
     Enter the new web interface password you wish to set when prompted.
 
-6. Using a web browser, log into the Pi-hole web interface with the specified address and password.
+6. Go through the [post-installation setup steps](#post-install-setup) for a complete Pi-hole server setup.
 
-### Recursive DNS Server
+### Post-Install Setup
+
+This details the post-installation steps of the Pi-hole server for a complete setup:
+
+1. **(Optional)** Enable either [DNS-Over-TLS](#dns-over-tls-dot) or [DNS-Over-HTTPS](#dns-over-https-doh) on the Pi-hole server to prevent DNS requests from being looked or tampered.
+
+2. **(Optional)** Set up the Pi-hole server as a [recursive DNS server](#recursive-dns-server) - skip this step if you are using [DNS-Over-HTTPS](#dns-over-https-doh).
+
+3. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
+
+---
+
+## Recursive DNS Server
 
 > [!IMPORTANT]  
-> This part of the setup is optional. If you choose to proceed with this setup, please skip the conflicting [DNS-Over-HTTPS](#dns-over-https-doh) section.
+> If you choose to proceed with this setup, please skip the conflicting [DNS-Over-HTTPS](#dns-over-https-doh) section.
 
-This part of the guide details the process of setting up the Pi-hole server as a recursive DNS server solution:
+### Description
+
+This details the process of setting up the Pi-hole server as a recursive DNS server solution.
+
+### References
+
+- [Unbound](https://docs.pi-hole.net/guides/dns/unbound)
+
+
+### Unbound Setup
+
+This details the process of setting up Unbound on the Pi-hole server to set it up as a recursive DNS server:
 
 1. [Install](package-manager.md#install-software) the `unbound` package using your package manager (i.e. `apt`).
 
@@ -240,14 +269,26 @@ This part of the guide details the process of setting up the Pi-hole server as a
 
 7. [Configure the Upstream DNS Provider](#upstream-dns-server) for the Pi-hole server by checking the **Custom 1 (IPv4)** box and entering the following IP address: `127.0.0.1#5335`.
 
-### DNS-Over-TLS (DoT)
+---
+
+## DNS-Over-TLS (DoT)
 
 > [!IMPORTANT]  
-> This part of the setup is optional. If you choose to proceed with this setup, please skip the conflicting [DNS-Over-HTTPS](#dns-over-https-doh) section.
+> If you choose to proceed with this setup, please skip the conflicting [DNS-Over-HTTPS](#dns-over-https-doh) section.
 
-This part of the guide details the process of enabling DNS-Over-TLS on the Pi-hole server which prevents requests from being looked or tampered:
+### Description
 
-1. As this DoT solution relies on [Unbound](#recursive-dns-server), ensure you have set it up before proceeding.
+This details the process of enabling DNS-Over-TLS on the Pi-hole server which prevents requests from being looked or tampered.
+
+### References
+
+- [Pi-hole + Unbound + DNS Over TLS (Ubiquiti/UniFi/DoT/DoH)](https://youtu.be/8ENLZmzm5vc)
+
+### DoT Setup
+
+This details the process of enabling DNS-Over-TLS on the Pi-hole server using Unbound:
+
+1. As this DoT solution relies on [Unbound](#unbound-setup), ensure you have set it up before proceeding.
 
 2. Verify that you have a certificate installed on the Pi-hole server:
 
@@ -380,12 +421,24 @@ This part of the guide details the process of enabling DNS-Over-TLS on the Pi-ho
 
 4. [Restart](systemd.md#restart-service) the `unbound.service` service.
 
-### DNS-Over-HTTPS (DoH)
+---
+
+## DNS-Over-HTTPS (DoH)
 
 > [!IMPORTANT]  
-> This part of the setup is optional. If you choose to proceed with this setup, please skip the conflicting [DNS-Over-TLS](#dns-over-tls-dot) section.
+> If you choose to proceed with this setup, please skip the conflicting [DNS-Over-TLS](#dns-over-tls-dot) section.
 
-This part of the guide details the process of enabling DNS-Over-HTTPS on the Pi-hole server which prevents requests from being looked or tampered:
+### Description
+
+This details the process of enabling DNS-Over-HTTPS on the Pi-hole server which prevents requests from being looked or tampered.
+
+### References
+
+- [cloudflared (DoH)](https://docs.pi-hole.net/guides/dns/cloudflared)
+
+### DoH Setup
+
+This details the process of enabling DNS-Over-HTTPS on the Pi-hole server using Cloudflared:
 
 1. Determine the CPU architecture of the Pi-hole server:
 
@@ -524,19 +577,17 @@ This part of the guide details the process of enabling DNS-Over-HTTPS on the Pi-
 
 13. **(Optional)** Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
 
-### Usage
-
-1. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
-
 ---
 
-## Upstream DNS Server
+## Usage
 
 ### Description
 
-This details how to set the upstream DNS provider for the Pi-hole server.
+This details some common usage steps for a Pi-hole server.
 
-### Steps
+### Upstream DNS Server
+
+This details how to set the upstream DNS provider for the Pi-hole server:
 
 1. From the Pi-hole web interface, click the **Settings** menu item.
 
