@@ -136,7 +136,6 @@ This details the process of setting up the Pi-hole server as a recursive DNS ser
 
 - [Unbound](https://docs.pi-hole.net/guides/dns/unbound)
 
-
 ### Unbound Setup
 
 This details the process of setting up Unbound on the Pi-hole server to set it up as a recursive DNS server:
