@@ -23,7 +23,8 @@ The Domain Name System (DNS) is a hierarchical and distributed name service that
     - [Dynamic DNS](#dynamic-dns)
   - [Local DNS](#local-dns)
     - [Description](#description-4)
-    - [References](#references-3)
+    - [Local DNS Server Setup](#local-dns-server-setup)
+    - [Synchronise Multiple Local DNS Servers](#synchronise-multiple-local-dns-servers)
 
 ## References
 
@@ -102,8 +103,16 @@ This details how to keep DNS records up-to-date dynamically on a DNS server:
 
 ### Description
 
-This details the process of setting up a local DNS server for use with your local servers or devices.
+This details topics pertaining to setting up and managing a local DNS server.
 
-### References
+### Local DNS Server Setup
+
+This details the process of setting up a local DNS server for use with your local servers or devices:
 
 - [Pi-hole](pi-hole.md#setup)
+
+### Synchronise Multiple Local DNS Servers
+
+This details the process of synchronising multiple replicas with a single _primary_ local DNS server for consistency:
+
+- [Pi-hole](pi-hole.md#synchronise-multiple-pi-hole-servers)
