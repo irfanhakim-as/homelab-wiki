@@ -57,38 +57,23 @@ This details the process of setting up Pi-hole as the local DNS server for use w
 
 ### Installation
 
-1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the Pi-hole server. This system can be a bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)) or a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template).
+1. Prepare and [configure](linux.md#configuration) a Debian or Ubuntu system to host the Pi-hole server. This system can be running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or even an [LXC Container](../courses/container.md#create-lxc-container). The following considerations should be noted:
 
-2. [Allow](firewall.md#adding-allow-rule) the following ports and their corresponding protocols to be open on the Pi-hole server using the system's firewall (i.e. `ufw`):
+   - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule):
 
-   - DNS: `53` (`tcp` and `udp`)
-   - FTL: `4711` (`tcp`)
-   - HTTP: `80` (`tcp`)
-   - **(Optional)** DHCP: `67` (`tcp` and `udp`)
-   - **(Optional)** DHCPv6: `546:547` (`udp`)
+     - DNS: `53` (`tcp` and `udp`)
+     - FTL: `4711` (`tcp`)
+     - HTTP: `80` (`tcp`)
+     - **(Optional)** DHCP: `67` (`tcp` and `udp`)
+     - **(Optional)** DHCPv6: `546:547` (`udp`)
 
-    As a result, your [firewall status](firewall.md#status) should contain the following rules:
-
-    ```
-        53                         ALLOW       Anywhere
-        4711/tcp                   ALLOW       Anywhere
-        80/tcp                     ALLOW       Anywhere
-        67                         ALLOW       Anywhere
-        546:547/udp                ALLOW       Anywhere
-        53 (v6)                    ALLOW       Anywhere (v6)
-        4711/tcp (v6)              ALLOW       Anywhere (v6)
-        80/tcp (v6)                ALLOW       Anywhere (v6)
-        67 (v6)                    ALLOW       Anywhere (v6)
-        546:547/udp (v6)           ALLOW       Anywhere (v6)
-    ```
-
-3. Run the installer:
+2. Run the installer:
 
     ```sh
     curl -sSL https://install.pi-hole.net | bash
     ```
 
-4. In the guided installer wizard, configure the following:
+3. In the guided installer wizard, configure the following:
 
    - Static IP Needed: Select the **Continue** option
    - Select Upstream DNS Provider: Select the main DNS provider of your choice (i.e. `Cloudflare`)
@@ -105,7 +90,7 @@ This details the process of setting up Pi-hole as the local DNS server for use w
 
     Select the **OK** option once you are done.
 
-5. **(Optional)** If you wish to change the default web interface password, run the following command:
+4. **(Optional)** If you wish to change the default web interface password, run the following command:
 
     ```sh
     pihole -a -p
@@ -113,7 +98,7 @@ This details the process of setting up Pi-hole as the local DNS server for use w
 
     Enter the new web interface password you wish to set when prompted.
 
-6. Go through the [post-installation setup steps](#post-install-setup) for a complete Pi-hole server setup.
+5. Go through the [post-installation setup steps](#post-install-setup) for a complete Pi-hole server setup.
 
 ### Post-Install Setup
 
