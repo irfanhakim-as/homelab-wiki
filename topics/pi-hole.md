@@ -27,8 +27,12 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
     - [Description](#description-4)
     - [References](#references-4)
     - [DoH Setup](#doh-setup)
-  - [Usage](#usage)
+  - [Synchronise Multiple Pi-hole Servers](#synchronise-multiple-pi-hole-servers)
     - [Description](#description-5)
+    - [References](#references-5)
+    - [Nebula Sync Setup](#nebula-sync-setup)
+  - [Usage](#usage)
+    - [Description](#description-6)
     - [Upstream DNS Server](#upstream-dns-server)
 
 ## References
@@ -119,7 +123,9 @@ This details the post-installation steps of the Pi-hole server for a complete se
 
 2. **(Optional)** Set up the Pi-hole server as a [recursive DNS server](#recursive-dns-server) - skip this step if you are using [DNS-Over-HTTPS](#dns-over-https-doh).
 
-3. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
+3. **(Optional)** Create a backup Pi-hole server for redundancy using the same [setup](#setup) process and [synchronise all of your Pi-hole servers](#synchronise-multiple-pi-hole-servers) to ensure consistency.
+
+4. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
 
 ---
 
@@ -575,6 +581,106 @@ This details the process of enabling DNS-Over-HTTPS on the Pi-hole server using 
 12. [Configure the Upstream DNS Provider](#upstream-dns-server) for the Pi-hole server by checking the **Custom 1 (IPv4)** box and entering the following IP address: `127.0.0.1#5053`.
 
 13. **(Optional)** Refer to the Pi-hole documentation on how to [update the `cloudflared` tool](https://docs.pi-hole.net/guides/dns/cloudflared/#updating-cloudflared) in the future.
+
+---
+
+## Synchronise Multiple Pi-hole Servers
+
+> [!NOTE]  
+> This assumes that you have [set up multiple Pi-hole servers](#setup) for redundancy.
+
+### Description
+
+This details the process of synchronising multiple Pi-hole server replicas with a single _primary_ Pi-hole server for consistency.
+
+### References
+
+- [nebula-sync](https://github.com/lovelaze/nebula-sync)
+- [Pi-hole Syncing… But Smarter...](https://technotim.live/posts/pihole-sync-nebula)
+
+### Nebula Sync Setup
+
+This details the process of setting up a Nebula Sync server in a containerised environment to synchronise multiple Pi-hole servers:
+
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker).
+
+2. [Deploy the Nebula Sync stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/nebula-sync`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/nebula-sync`): This will be used for the Nebula Sync stack's deployment files.
+
+   - A Docker compose file for the Nebula Sync stack on the app directory (i.e. `/mnt/smb/docker/nebula-sync/docker-compose.yml`):
+
+      ```yaml
+      name: ${SERVICE_NAME}
+      services:
+        nebula-sync:
+          container_name: ${APP_CONTAINER}
+          image: ghcr.io/lovelaze/nebula-sync:${APP_VERSION}
+          env_file:
+            - .env
+          networks:
+            - default
+          restart: unless-stopped
+          security_opt:
+            - no-new-privileges:true
+
+      networks:
+        default:
+      ```
+
+   - An env file for the Nebula Sync stack on the app directory (i.e. `/mnt/smb/docker/nebula-sync/.env`):
+
+      ```sh
+      # The env variables below this line are specific to the homelab-wiki guide deployment
+      ###################################################################################
+      SERVICE_NAME=nebula-sync
+      APP_CONTAINER=nebula-sync
+      APP_VERSION=v0.11.0
+      # The env variables below this line were provided by the nebula-sync project
+      # You can find documentation for all the supported env variables at https://github.com/lovelaze/nebula-sync#configuration
+      ###################################################################################
+      PRIMARY=http://192.168.0.106|password
+      REPLICAS=http://192.168.0.107|password,http://192.168.0.108|password
+      FULL_SYNC=false
+      RUN_GRAVITY=false
+      CRON=*/15 * * * *
+      TZ=Etc/UTC
+      CLIENT_SKIP_TLS_VERIFICATION=false
+
+      SYNC_CONFIG_DNS=true
+      SYNC_CONFIG_DHCP=false
+      SYNC_CONFIG_NTP=false
+      SYNC_CONFIG_RESOLVER=true
+      SYNC_CONFIG_DATABASE=true
+      SYNC_CONFIG_MISC=true
+      SYNC_CONFIG_DEBUG=true
+
+      SYNC_GRAVITY_DHCP_LEASES=false
+      SYNC_GRAVITY_GROUP=false
+      SYNC_GRAVITY_AD_LIST=true
+      SYNC_GRAVITY_AD_LIST_BY_GROUP=true
+      SYNC_GRAVITY_DOMAIN_LIST=true
+      SYNC_GRAVITY_DOMAIN_LIST_BY_GROUP=true
+      SYNC_GRAVITY_CLIENT=true
+      SYNC_GRAVITY_CLIENT_BY_GROUP=true
+      ```
+
+      Replace all of the values in the env file with your own accordingly, bearing in mind the following notes:
+
+      - If you intend to use `https` to specify the address of the primary Pi-hole server and its replica(s), please ensure that you are either using [valid domains you have set up through reverse proxy](../courses/network.md#reverse-proxy) (i.e. `https://pi-hole-1.example.com`), or set the value of `CLIENT_SKIP_TLS_VERIFICATION` to `true` if that is not the case (i.e. `https://192.168.0.106`).
+      - Set `FULL_SYNC` to `true` if you wish to synchronise everything between all of your Pi-hole servers, or set it to `false` and define each `SYNC_CONFIG_*` and `SYNC_GRAVITY_*` variables according to your needs.
+
+3. Once the Nebula Sync stack has been deployed, [check the logs](../courses/container.md#docker-usage) of the Nebula Sync container and verify that it is synchronising your Pi-hole servers successfully. Sample log output:
+
+    ```sh
+      2025-08-08T10:35:40Z INF Starting nebula-sync v0.11.0
+      2025-08-08T10:35:40Z INF Running sync mode=selective replicas=1
+      2025-08-08T10:35:40Z INF Authenticating clients...
+      2025-08-08T10:35:40Z INF Syncing teleporters...
+      2025-08-08T10:35:41Z INF Syncing configs...
+      2025-08-08T10:35:41Z INF Invalidating sessions...
+      2025-08-08T10:35:41Z INF Sync completed
+    ```
 
 ---
 
