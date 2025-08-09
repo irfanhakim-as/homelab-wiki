@@ -139,7 +139,7 @@ This details how to configure a Pi-hole server as well as some recommended confi
 
 This details some recommended configuration options for a Pi-hole server setup:
 
-1. Block a group of client devices from accessing the internet (i.e. for local IoT devices):
+1. Block a group of client devices from accessing the internet (i.e. for local IoT devices) through DNS:
 
    - [Create a dedicated group](#adding-a-group) (i.e. `IoT`) for the client devices.
 
