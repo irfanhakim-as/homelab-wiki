@@ -679,7 +679,7 @@ This details the process of setting up a Nebula Sync server in a containerised e
       SYNC_CONFIG_DEBUG=true
 
       SYNC_GRAVITY_DHCP_LEASES=false
-      SYNC_GRAVITY_GROUP=false
+      SYNC_GRAVITY_GROUP=true
       SYNC_GRAVITY_AD_LIST=true
       SYNC_GRAVITY_AD_LIST_BY_GROUP=true
       SYNC_GRAVITY_DOMAIN_LIST=true
