@@ -33,7 +33,12 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
     - [Nebula Sync Setup](#nebula-sync-setup)
   - [Usage](#usage)
     - [Description](#description-6)
+    - [References](#references-6)
     - [Upstream DNS Server](#upstream-dns-server)
+    - [Adding a Group](#adding-a-group)
+    - [Adding a Client to a Group](#adding-a-client-to-a-group)
+    - [Adding a Domain List](#adding-a-domain-list)
+    - [Subscribe to a Domain List](#subscribe-to-a-domain-list)
 
 ## References
 
@@ -675,6 +680,10 @@ This details the process of setting up a Nebula Sync server in a containerised e
 
 This details some common usage steps for a Pi-hole server.
 
+### References
+
+- [Pi-hole regular expressions tutorial](https://docs.pi-hole.net/regex/tutorial)
+
 ### Upstream DNS Server
 
 This details how to set the upstream DNS provider for the Pi-hole server:
@@ -692,3 +701,77 @@ This details how to set the upstream DNS provider for the Pi-hole server:
    - To use custom DNS servers: Check the custom box(es) you require (i.e. `Custom 1 (IPv4)`) and enter the IP address of the desired DNS server for each box you have checked
 
    - Click the **Save** button
+
+### Adding a Group
+
+This details how to add a group to the Pi-hole server:
+
+1. From the Pi-hole web interface, under the **GROUP MANAGEMENT** section, click the **Groups** menu item.
+
+2. In the **Group management** view, configure the **Add a new group** form like so:
+
+   - Name: Set a unique, descriptive name for the group (i.e. `Default`)
+   - **(Optional)** Comment: Describe briefly the purpose of the group (i.e. `The default group`)
+
+    Click the **Add** button to submit the form and create the group.
+
+3. Under the **List of groups** section, ensure that the newly created group's corresponding **Status** has been toggled to `Enabled`.
+
+### Adding a Client to a Group
+
+This details how to register or name a client known to the network and add it to a group on the Pi-hole server:
+
+1. From the Pi-hole web interface, under the **GROUP MANAGEMENT** section, click the **Clients** menu item.
+
+2. In the **Client group management** view, configure the **Add a new client** form like so:
+
+   - Known clients: Expand the dropdown and select the MAC address corresponding to the client device (i.e. `01:00:5E:90:10:00`)
+   - **(Optional)** Comment: Set a unique, descriptive name for the client device (i.e. `my-phone`)
+   - Group assignment: Expand the dropdown and select one or more group(s) to assign to the client device (i.e. `Default`)
+
+    Click the **Add** button to submit the form and register the client.
+
+3. To assign an existing client to a group, under the **List of configured clients** section, expand the **Group assignment** dropdown corresponding to the client device and select the group(s) to assign to it, and click the **Apply** button.
+
+### Adding a Domain List
+
+This details how to create a domain allow or block list on the Pi-hole server:
+
+1. From the Pi-hole web interface, under the **GROUP MANAGEMENT** section, click the **Domains** menu item.
+
+2. In the **Domain management** view, configure the **Add a new domain or regex filter** form like so:
+
+   - Choose between **Domain**, to compose your list using exact domain names, or **RegEx filter**, to compose your list using regular expressions
+
+   - Domain:
+
+     - Domain: Add a single or multiple domain name(s) to the list, separated by a whitespace (i.e. `example.com`)
+     - Add domain as wildcard: Check the corresponding box to enable the option if you wish to include all subdomains of the domain
+
+   - RegEx filter:
+
+     - Regular Expression: Add a [regular expression](https://docs.pi-hole.net/regex/tutorial) to the list that matches the domain(s) you wish to include in the list (i.e. `^[0-9][^a-z]+\.((com)|(edu))$`)
+
+   - **(Optional)** Comment: Describe briefly the purpose or content of the list (i.e. `Block internet access`)
+
+   - Group assignment: Expand the dropdown and select one or more group(s) to assign to the list (i.e. `Default`)
+
+    Click either the **Add to denied domains** button, to create the domain block list, or the **Add to allowed domains** button, to create the domain allow list.
+
+3. To assign an existing list to a group, under the **List of domains** section, expand the **Group assignment** dropdown corresponding to the list and select the group(s) to assign to it, and click the **Apply** button.
+
+### Subscribe to a Domain List
+
+This details how to subscribe to an external domain list on the Pi-hole server:
+
+1. From the Pi-hole web interface, under the **GROUP MANAGEMENT** section, click the **Lists** menu item.
+
+2. In the **Subscribed lists group management** view, configure the **Add a new subscribed list** form like so:
+
+   - Address: Add the publicly accessible URL to the file containing the list of domains (i.e. `https://example.com/hosts`)
+   - **(Optional)** Comment: Describe briefly the purpose or content of the list (i.e. `Adlist`)
+   - Group assignment: Expand the dropdown and select one or more group(s) to assign to the list (i.e. `Default`)
+
+    Click either the **Add blocklist** button, to subscribe to the list as a domain block list, or the **Add allowlist** button, to subscribe to the list as a domain allow list.
+
+3. To assign an existing list to a group, under the **Subscribed lists** section, expand the **Group assignment** dropdown corresponding to the list and select the group(s) to assign to it, and click the **Apply** button.
