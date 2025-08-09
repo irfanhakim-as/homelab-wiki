@@ -15,25 +15,29 @@ Pi-hole is a Linux network-level advertisement and Internet tracker blocking app
     - [References](#references-1)
     - [Installation](#installation)
     - [Post-Install Setup](#post-install-setup)
-  - [Recursive DNS Server](#recursive-dns-server)
+  - [Configuration](#configuration)
     - [Description](#description-2)
     - [References](#references-2)
-    - [Unbound Setup](#unbound-setup)
-  - [DNS-Over-TLS (DoT)](#dns-over-tls-dot)
+    - [Recommended Configurations](#recommended-configurations)
+  - [Recursive DNS Server](#recursive-dns-server)
     - [Description](#description-3)
     - [References](#references-3)
-    - [DoT Setup](#dot-setup)
-  - [DNS-Over-HTTPS (DoH)](#dns-over-https-doh)
+    - [Unbound Setup](#unbound-setup)
+  - [DNS-Over-TLS (DoT)](#dns-over-tls-dot)
     - [Description](#description-4)
     - [References](#references-4)
-    - [DoH Setup](#doh-setup)
-  - [Synchronise Multiple Pi-hole Servers](#synchronise-multiple-pi-hole-servers)
+    - [DoT Setup](#dot-setup)
+  - [DNS-Over-HTTPS (DoH)](#dns-over-https-doh)
     - [Description](#description-5)
     - [References](#references-5)
-    - [Nebula Sync Setup](#nebula-sync-setup)
-  - [Usage](#usage)
+    - [DoH Setup](#doh-setup)
+  - [Synchronise Multiple Pi-hole Servers](#synchronise-multiple-pi-hole-servers)
     - [Description](#description-6)
     - [References](#references-6)
+    - [Nebula Sync Setup](#nebula-sync-setup)
+  - [Usage](#usage)
+    - [Description](#description-7)
+    - [References](#references-7)
     - [Upstream DNS Server](#upstream-dns-server)
     - [Adding a Group](#adding-a-group)
     - [Adding a Client to a Group](#adding-a-client-to-a-group)
@@ -113,9 +117,38 @@ This details the post-installation steps of the Pi-hole server for a complete se
 
 2. **(Optional)** Set up the Pi-hole server as a [recursive DNS server](#recursive-dns-server) - skip this step if you are using [DNS-Over-HTTPS](#dns-over-https-doh).
 
-3. **(Optional)** Create a backup Pi-hole server for redundancy using the same [setup](#setup) process and [synchronise all of your Pi-hole servers](#synchronise-multiple-pi-hole-servers) to ensure consistency.
+3. **(Optional)** Proceed to configure the Pi-hole server according to the [recommended configuration options](#recommended-configurations).
 
-4. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
+4. **(Optional)** Create a backup Pi-hole server for redundancy using the same [setup](#setup) process and [synchronise all of your Pi-hole servers](#synchronise-multiple-pi-hole-servers) to ensure consistency.
+
+5. To use the Pi-hole server as the DNS provider for a specific client or network-wide, follow the steps laid out in the [Pi-hole documentation](https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245).
+
+---
+
+## Configuration
+
+### Description
+
+This details how to configure a Pi-hole server as well as some recommended configuration options.
+
+### References
+
+- [Is there a way to block internet access to a device using Pi-Hole?](https://www.reddit.com/r/pihole/comments/jqafa4/is_there_a_way_to_block_internet_access_to_a)
+
+### Recommended Configurations
+
+This details some recommended configuration options for a Pi-hole server setup:
+
+1. Block a group of client devices from accessing the internet (i.e. for local IoT devices):
+
+   - [Create a dedicated group](#adding-a-group) (i.e. `IoT`) for the client devices.
+
+   - [Create a domain block list](#adding-a-domain-list) using a RegEx filter:
+
+     - Regular Expression: `.*`
+     - Group assignment: Select the group(s) that this list should be assigned to (i.e. `IoT`)
+
+   - Finally, [add the client devices](#adding-a-client-to-a-group) to the newly created group (i.e. `IoT`).
 
 ---
 
