@@ -21,11 +21,12 @@ Debian, also known as Debian GNU/Linux, is a free and open source Linux distribu
     - [Extended VM](#extended-vm)
   - [Networking](#networking)
     - [Description](#description-3)
+    - [References](#references-2)
     - [Set Static IP and Update DNS](#set-static-ip-and-update-dns)
     - [Update Hostname](#update-hostname)
   - [Storage](#storage)
     - [Description](#description-4)
-    - [References](#references-2)
+    - [References](#references-3)
     - [Partition Storage](#partition-storage)
     - [Mount Storage](#mount-storage)
     - [Resize Storage](#resize-storage)
@@ -36,7 +37,7 @@ Debian, also known as Debian GNU/Linux, is a free and open source Linux distribu
     - [Add User to Group](#add-user-to-group)
   - [Sudo](#sudo)
     - [Description](#description-6)
-    - [References](#references-3)
+    - [References](#references-4)
     - [Steps](#steps-1)
 
 ## References
@@ -274,6 +275,10 @@ These configuration options are expected to be applied on top of the changes tha
 
 This details the process of updating certain networking configurations on the system.
 
+### References
+
+- [Setting Up IPv6 Networking on Debian 12](https://reintech.io/blog/setting-up-ipv6-networking-debian-12)
+
 ### Set Static IP and Update DNS
 
 > [!IMPORTANT]  
@@ -287,96 +292,224 @@ This details the process of setting a static IP address and updating the DNS ser
     sudo cp /etc/network/interfaces /etc/network/interfaces.bak
     ```
 
-2. Determine the name of the active network interface on the system:
+2. Get some information of the existing network configuration:
 
-    ```sh
-    route | grep '^default' | grep -o '[^ ]*$'
-    ```
+   - Get the name of the network interface in use on the system:
 
-    Sample output:
+        ```sh
+        ip -4 route | grep default | grep -oP 'dev \K\w+'
+        ```
 
-    ```
-    enp6s18
-    ```
+        Sample output:
 
-    **Alternatively**, you may also use the following command:
+        ```sh
+          enp6s18
+        ```
 
-    ```sh
-    ip link
-    ```
+   - **(Optional)** Get the system's current IPv4 address:
 
-    Sample output:
+        ```sh
+        ip -4 route get 1.1.1.1 | grep -oP 'src \K[0-9.]+'
+        ```
 
-    ```
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
-        link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
-    ```
+        Sample output:
 
-    In this example, `enp6s18` is the name of the active network interface.
+        ```sh
+          192.168.0.106
+        ```
 
-3. Update the network configuration file:
+   - Get the gateway address (IPv4) of the local network:
 
-    ```sh
-    sudo nano /etc/network/interfaces
-    ```
+        ```sh
+        ip -4 route | grep default | grep -oP 'via \K[0-9.]+'
+        ```
 
-4. Update the configuration as such:
+        Sample output:
 
-    Original configuration which uses DHCP to dynamically assign an IP address:
+        ```sh
+          192.168.0.1
+        ```
 
-    ```
-    # This file describes the network interfaces available on your system
-    # and how to activate them. For more information, see interfaces(5).
+   - Based on the system's current IPv4 address (i.e. `192.168.0.106`), get the network address and subnet range:
 
-    source /etc/network/interfaces.d/*
+        ```sh
+        ip -4 route | grep <ipv4-address> | grep -oP '[0-9.]+/[0-9]+'
+        ```
 
-    # The loopback network interface
-    auto lo
-    iface lo inet loopback
+        For example:
 
-    # The primary network interface
-    allow-hotplug <network-interface>
-    iface <network-interface> inet dhcp
-    ```
+        ```sh
+        ip -4 route | grep 192.168.0.106 | grep -oP '[0-9.]+/[0-9]+'
+        ```
 
-    Make the following changes:
+        Sample output:
 
-    ```diff
-    # The primary network interface
-    - allow-hotplug <network-interface>
-    + auto <network-interface>
-    - iface <network-interface> inet dhcp
-    + iface <network-interface> inet static
-    + address <ip-address>
-    + netmask <subnet-mask>
-    +
-    + gateway <gateway>
-    + dns-nameservers <dns1> <dns2>
-    ```
+        ```sh
+          192.168.0.0/24
+        ```
 
-    The following is an example of the updated configuration:
+        This sample value (i.e. `192.168.0.0/24`) represents the IPv4 network address and CIDR notation, indicating the range of the local network (i.e. from `192.168.0.1` to `192.168.0.254`).
 
-    ```
-    # This file describes the network interfaces available on your system
-    # and how to activate them. For more information, see interfaces(5).
+   - Based on the CIDR notation value (i.e. `/24`), get the corresponding subnet mask of the local network. In most cases, the subnet mask value (corresponding to the CIDR notation) is as follows:
 
-    source /etc/network/interfaces.d/*
+     - `/24`: `255.255.255.0`
+     - `/16`: `255.255.0.0`
+     - `/8`: `255.0.0.0`
 
-    # The loopback network interface
-    auto lo
-    iface lo inet loopback
+3. **(Optional)** Get some additional information of the existing network configuration pertaining to IPv6:
 
-    # The primary network interface
-    auto enp6s18
-    iface enp6s18 inet static
-    address 192.168.0.106
-    netmask 255.255.255.0
+   - **(Optional)** Get the system's current IPv6 address:
 
-    gateway 192.168.0.1
-    dns-nameservers 1.1.1.1 8.8.8.8
-    ```
+        ```sh
+        ip -6 route get 2606:4700:4700::1001 | grep -oP 'src \K[0-9a-f:]+'
+        ```
+
+        Sample output:
+
+        ```sh
+          2001:db8:1234:5678:a1c2:d3e4:f567:89ab
+        ```
+
+   - Get the gateway address (IPv6) of the local network:
+
+        ```sh
+        ip -6 route | grep default | grep -oP 'via \K[0-9a-f:]+'
+        ```
+
+        Sample output:
+
+        ```sh
+          fe80::a1b2:c3d4:e5f6:7890
+        ```
+
+   - Based on the network interface in use on the system (i.e. `enp6s18`), get the network address and prefix length:
+
+        ```sh
+        ip -6 route | grep <network-interface> | grep -E '^[0-9a-f:]+/[0-9]+.*proto (kernel|ra)' | grep -v fe80 | grep -oP '^[0-9a-f:]+/[0-9]+'
+        ```
+
+        For example:
+
+        ```sh
+        ip -6 route | grep enp6s18 | grep -E '^[0-9a-f:]+/[0-9]+.*proto (kernel|ra)' | grep -v fe80 | grep -oP '^[0-9a-f:]+/[0-9]+'
+        ```
+
+        Sample output:
+
+        ```sh
+          2001:db8:1234:5678::/64
+        ```
+
+        This sample value (i.e. `2001:db8:1234:5678::/64`) represents the IPv6 network prefix, indicating the network portion of the address. The `/64` means the first 64 bits identify the network, and the remaining 64 bits are for host addresses within that network.
+
+   - For IPv6, there is no separate subnet mask - the prefix length (i.e. `/64`) is used directly in the configuration. Common IPv6 prefix lengths:
+
+     - `/64`: Standard for most local networks
+     - `/56`: Sometimes used for home networks with multiple subnets
+     - `/48`: Typically assigned to organisations
+
+4. Update the networking configuration to set a static IP address and update the DNS server(s):
+
+   - Update the network configuration file:
+
+        ```sh
+        sudo nano /etc/network/interfaces
+        ```
+
+        Sample original configuration which uses DHCP to dynamically assign an IP address:
+
+        ```
+        # This file describes the network interfaces available on your system
+        # and how to activate them. For more information, see interfaces(5).
+
+        source /etc/network/interfaces.d/*
+
+        # The loopback network interface
+        auto lo
+        iface lo inet loopback
+
+        # The primary network interface
+        allow-hotplug <network-interface>
+        iface <network-interface> inet dhcp
+        ```
+
+   - Make the following changes to the configuration to set a static IPv4 address and update the DNS server(s):
+
+        ```diff
+          # The primary network interface
+        - allow-hotplug <network-interface>
+        - iface <network-interface> inet dhcp
+        + auto <network-interface>
+        + iface <network-interface> inet static
+        +   address <ipv4-address>
+        +   netmask <subnet-mask>
+        +   gateway <ipv4-gateway>
+        +   dns-nameservers <ipv4-dns1> <ipv4-dns2>
+        ```
+
+        Sample updated configuration:
+
+        ```
+        # This file describes the network interfaces available on your system
+        # and how to activate them. For more information, see interfaces(5).
+
+        source /etc/network/interfaces.d/*
+
+        # The loopback network interface
+        auto lo
+        iface lo inet loopback
+
+        # The primary network interface
+        auto enp6s18
+        iface enp6s18 inet static
+          address 192.168.0.106
+          netmask 255.255.255.0
+          gateway 192.168.0.1
+          dns-nameservers 1.1.1.1 8.8.8.8
+        ```
+
+   - **(Optional)** Make the following changes to the configuration to set a static IPv6 address and update the DNS server(s):
+
+        ```diff
+          # The primary network interface
+          auto <network-interface>
+          iface <network-interface> inet static
+            address <ipv4-address>
+            netmask <subnet-mask>
+            gateway <ipv4-gateway>
+            dns-nameservers <ipv4-dns1> <ipv4-dns2>
+        +
+        + iface <network-interface> inet6 static
+        +   address <ipv6-address>/<ipv6-prefix-length>
+        +   gateway <ipv6-gateway>
+        +   dns-nameservers <ipv6-dns1> <ipv6-dns2>
+        ```
+
+        Sample updated configuration:
+
+        ```
+        # This file describes the network interfaces available on your system
+        # and how to activate them. For more information, see interfaces(5).
+
+        source /etc/network/interfaces.d/*
+
+        # The loopback network interface
+        auto lo
+        iface lo inet loopback
+
+        # The primary network interface
+        auto enp6s18
+        iface enp6s18 inet static
+          address 192.168.0.106
+          netmask 255.255.255.0
+          gateway 192.168.0.1
+          dns-nameservers 1.1.1.1 8.8.8.8
+
+        iface enp6s18 inet6 static
+          address 2001:db8:1234:5678::106/64
+          gateway fe80::a1b2:c3d4:e5f6:7890
+          dns-nameservers 2606:4700:4700::1111 2001:4860:4860::8888
+        ```
 
 5. Save all changes made to the file and apply the new configuration by [restarting](systemd.md#restart-service) the `networking.service` service.
 
