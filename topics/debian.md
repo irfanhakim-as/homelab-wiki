@@ -289,13 +289,7 @@ This details the process of updating certain networking configurations on the sy
 
 This details the process of setting a static IP address and updating the DNS server on a system.
 
-1. Backup the existing network configuration file:
-
-    ```sh
-    sudo cp /etc/network/interfaces /etc/network/interfaces.bak
-    ```
-
-2. Get some information of the existing network configuration:
+1. Get some information of the existing network configuration:
 
    - Get the name of the network interface in use on the system:
 
@@ -359,7 +353,7 @@ This details the process of setting a static IP address and updating the DNS ser
      - `/16`: `255.255.0.0`
      - `/8`: `255.0.0.0`
 
-3. **(Optional)** Get some additional information of the existing network configuration pertaining to IPv6:
+2. **(Optional)** Get some additional information of the existing network configuration pertaining to IPv6:
 
    - **(Optional)** Get the system's current IPv6 address:
 
@@ -410,6 +404,12 @@ This details the process of setting a static IP address and updating the DNS ser
      - `/64`: Standard for most local networks
      - `/56`: Sometimes used for home networks with multiple subnets
      - `/48`: Typically assigned to organisations
+
+3. Backup the existing network configuration file:
+
+    ```sh
+    sudo cp /etc/network/interfaces /etc/network/interfaces.bak
+    ```
 
 4. Update the networking configuration to set a static IP address and update the DNS server(s):
 
