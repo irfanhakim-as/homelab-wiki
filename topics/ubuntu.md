@@ -530,31 +530,33 @@ This details the simple process of updating system's hostname:
     sudo hostnamectl set-hostname "ubuntu-1.example.com"
     ```
 
-2. **(Optional)** If you intend to update the system's hosts file, Ensure the system's hosts file is not managed by `cloud-init`:
+2. **(Optional)** If you intend to update the system's hosts file, verify that it is not managed by `cloud-init`:
 
-    ```sh
-    cat /etc/hosts
-    ```
+   - Print the content of the current hosts file:
 
-    If the start of the hosts file has the following disclaimer, then it is likely managed by `cloud-init` and needs to be disabled:
+      ```sh
+      cat /etc/hosts
+      ```
 
-    ```
-    # Your system has configured 'manage_etc_hosts' as True.
-    # As a result, if you wish for changes to this file to persist
-    # then you will need to either
-    # a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
-    # b.) change or remove the value of 'manage_etc_hosts' in
-    #     /etc/cloud/cloud.cfg or cloud-config from user-data
-    #
-    ```
+      If the start of the hosts file has the following disclaimer, then it is likely managed by `cloud-init` and needs to be disabled:
 
-3. To disable `cloud-init` completely:
+      ```
+        # Your system has configured 'manage_etc_hosts' as True.
+        # As a result, if you wish for changes to this file to persist
+        # then you will need to either
+        # a.) make changes to the master file in /etc/cloud/templates/hosts.debian.tmpl
+        # b.) change or remove the value of 'manage_etc_hosts' in
+        #     /etc/cloud/cloud.cfg or cloud-config from user-data
+        #
+      ```
 
-    ```sh
-    sudo touch /etc/cloud/cloud-init.disabled
-    ```
+   - Create the following file to disable `cloud-init` completely on the system:
 
-4. **(Optional)** Update the system's hosts file:
+      ```sh
+      sudo touch /etc/cloud/cloud-init.disabled
+      ```
+
+3. **(Optional)** Update the system's hosts file:
 
     ```sh
     sudo nano /etc/hosts
@@ -589,7 +591,7 @@ This details the simple process of updating system's hostname:
       ff02::2 ip6-allrouters
     ```
 
-5. Reboot the VM to apply the changes:
+4. Reboot the VM to apply the changes:
 
     ```sh
     sudo reboot now
