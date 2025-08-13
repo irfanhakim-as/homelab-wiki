@@ -206,7 +206,7 @@ This details some recommended configuration options for Rocky Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-15. Reboot the VM to apply all changes:
+15. Reboot the system to apply all changes:
 
     ```sh
     sudo reboot now
@@ -402,7 +402,7 @@ This details the simple process of updating system's hostname:
     ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
     ```
 
-3. Reboot the VM to apply the changes:
+3. Reboot the system to apply the changes:
 
     ```sh
     sudo reboot now
