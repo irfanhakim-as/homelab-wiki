@@ -553,14 +553,14 @@ This details the simple process of updating system's hostname:
     As an example, update the hostname from `debian-server` to `debian-1`:
 
     ```diff
-    127.0.0.1       localhost
+      127.0.0.1       localhost
     - 127.0.1.1       debian-server.example.com   debian-server
     + 127.0.1.1       debian-1.example.com   debian-1
 
-    # The following lines are desirable for IPv6 capable hosts
-    ::1     localhost ip6-localhost ip6-loopback
-    ff02::1 ip6-allnodes
-    ff02::2 ip6-allrouters
+      # The following lines are desirable for IPv6 capable hosts
+      ::1     localhost ip6-localhost ip6-loopback
+      ff02::1 ip6-allnodes
+      ff02::2 ip6-allrouters
     ```
 
 3. Reboot the VM to apply the changes:
