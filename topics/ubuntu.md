@@ -262,6 +262,9 @@ This details the process of updating certain networking configurations on the sy
 ### References
 
 - [How to Configure Static IP Address on Ubuntu 20.04](https://linuxize.com/post/how-to-configure-static-ip-address-on-ubuntu-20-04)
+- [How to configure a static IP address on an interface](https://netplan.readthedocs.io/en/stable/examples/#how-to-configure-a-static-ip-address-on-an-interface)
+- [How to configure DNS servers and search domains](https://netplan.readthedocs.io/en/stable/examples/#how-to-configure-dns-servers-and-search-domains)
+- [Configuring Static IPv6 Address Using NetPlan on Ubuntu 18.04 and Above](https://wiki.crowncloud.net/?configure_ipv6_on_ubuntu)
 
 ### Set Static IP and Update DNS
 
