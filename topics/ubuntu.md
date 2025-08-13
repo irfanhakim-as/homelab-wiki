@@ -267,107 +267,242 @@ This details the process of updating certain networking configurations on the sy
 
 This details the process of setting a static IP address and updating the DNS server on a system.
 
-1. Ensure the system's network configuration is not provisioned by `cloud-init`:
+1. First and foremost, to manage the system's network configuration manually, ensure that it is not currently provisioned by `cloud-init`:
 
-    ```sh
-    ls -l /etc/netplan/*-cloud-init.yaml
-    ```
+   - Check for a configuration file that may indicate that the network configuration on the system is provisioned by `cloud-init`:
 
-    If the output is not empty, then the system is provisioned by `cloud-init` and needs to be disabled.
+      ```sh
+      ls -l /etc/netplan/*-cloud-init.yaml
+      ```
 
-2. To disable `cloud-init` from managing the system's network configuration:
+      If the output is not empty, it is likely that the system's network configuration is provisioned by `cloud-init` and needs to be disabled.
 
-    ```sh
-    sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
-    ```
+   - Configure `cloud-init` to not manage the system's network configuration:
 
-    Add and save the following configuration to the file:
+      ```sh
+      sudo nano /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+      ```
 
-    ```
-    network: {config: disabled}
-    ```
+      Add and save the following configuration to the file:
 
-3. Backup the existing network configuration file, if available:
+      ```
+      network: {config: disabled}
+      ```
+
+2. Get some information of the existing network configuration:
+
+   - Get the name of the network interface in use on the system:
+
+      ```sh
+      ip -4 route | grep default | grep -oP 'dev \K\w+'
+      ```
+
+      Sample output:
+
+      ```sh
+        enp6s18
+      ```
+
+   - **(Optional)** Get the system's current IPv4 address:
+
+      ```sh
+      ip -4 route get 1.1.1.1 | grep -oP 'src \K[0-9.]+'
+      ```
+
+      Sample output:
+
+      ```sh
+        192.168.0.106
+      ```
+
+   - Get the gateway address (IPv4) of the local network:
+
+      ```sh
+      ip -4 route | grep default | grep -oP 'via \K[0-9.]+'
+      ```
+
+      Sample output:
+
+      ```sh
+        192.168.0.1
+      ```
+
+   - Based on the system's current IPv4 address (i.e. `192.168.0.106`), get the network address and subnet range:
+
+      ```sh
+      ip -4 route | grep <ipv4-address> | grep -oP '[0-9.]+/[0-9]+'
+      ```
+
+      For example:
+
+      ```sh
+      ip -4 route | grep 192.168.0.106 | grep -oP '[0-9.]+/[0-9]+'
+      ```
+
+      Sample output:
+
+      ```sh
+        192.168.0.0/24
+      ```
+
+      This sample value (i.e. `192.168.0.0/24`) represents the IPv4 network address and CIDR notation, indicating the range of the local network (i.e. from `192.168.0.1` to `192.168.0.254`).
+
+   - Based on the CIDR notation value (i.e. `/24`), get the corresponding subnet mask of the local network. In most cases, the subnet mask value (corresponding to the CIDR notation) is as follows:
+
+     - `/24`: `255.255.255.0`
+     - `/16`: `255.255.0.0`
+     - `/8`: `255.0.0.0`
+
+3. **(Optional)** Get some additional information of the existing network configuration pertaining to IPv6:
+
+   - **(Optional)** Get the system's current IPv6 address:
+
+        ```sh
+        ip -6 route get 2606:4700:4700::1001 | grep -oP 'src \K[0-9a-f:]+'
+        ```
+
+        Sample output:
+
+        ```sh
+          2001:db8:1234:5678:a1c2:d3e4:f567:89ab
+        ```
+
+   - Get the gateway address (IPv6) of the local network:
+
+        ```sh
+        ip -6 route | grep default | grep -oP 'via \K[0-9a-f:]+'
+        ```
+
+        Sample output:
+
+        ```sh
+          fe80::a1b2:c3d4:e5f6:7890
+        ```
+
+   - Based on the network interface in use on the system (i.e. `enp6s18`), get the network address and prefix length:
+
+        ```sh
+        ip -6 route | grep <network-interface> | grep -E '^[0-9a-f:]+/[0-9]+.*proto (kernel|ra)' | grep -v fe80 | grep -oP '^[0-9a-f:]+/[0-9]+'
+        ```
+
+        For example:
+
+        ```sh
+        ip -6 route | grep enp6s18 | grep -E '^[0-9a-f:]+/[0-9]+.*proto (kernel|ra)' | grep -v fe80 | grep -oP '^[0-9a-f:]+/[0-9]+'
+        ```
+
+        Sample output:
+
+        ```sh
+          2001:db8:1234:5678::/64
+        ```
+
+        This sample value (i.e. `2001:db8:1234:5678::/64`) represents the IPv6 network prefix, indicating the network portion of the address. The `/64` means the first 64 bits identify the network, and the remaining 64 bits are for host addresses within that network.
+
+   - For IPv6, there is no separate subnet mask - the prefix length (i.e. `/64`) is used directly in the configuration. Common IPv6 prefix lengths:
+
+     - `/64`: Standard for most local networks
+     - `/56`: Sometimes used for home networks with multiple subnets
+     - `/48`: Typically assigned to organisations
+
+4. Backup the existing network configuration file, if available:
 
     ```sh
     sudo cp /etc/netplan/00-installer-config.yaml /etc/netplan/00-installer-config.yaml.bak
     ```
 
-4. Determine the name of the active network interface on the system:
+5. Update the networking configuration to set a static IP address and update the DNS server(s):
 
-    ```sh
-    route | grep '^default' | grep -o '[^ ]*$'
-    ```
+   - Update or create the network configuration file:
 
-    Sample output:
+        ```sh
+        sudo nano /etc/netplan/00-installer-config.yaml
+        ```
 
-    ```
-    enp6s18
-    ```
+        Sample original configuration which uses DHCP to dynamically assign an IP address:
 
-    **Alternatively**, you may also use the following command:
+        ```yaml
+        network:
+          ethernets:
+            <network-interface>:
+              dhcp4: true
+          version: 2
+        ```
 
-    ```sh
-    ip link
-    ```
+   - Make the following changes to the configuration to set a static IPv4 address and update the DNS server(s):
 
-    Sample output:
+        ```diff
+          network:
+            ethernets:
+              <network-interface>:
+        +       addresses:
+        +         - <ipv4-address>/<cidr-notation>
+        -       dhcp4: true
+        +       dhcp4: false
+        +       nameservers:
+        +         addresses:
+        +           - <ipv4-dns1>
+        +           - <ipv4-dns2>
+            version: 2
+        ```
 
-    ```
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    2: enp6s18: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
-        link/ether fg:LA:Og:mQ:LQ:7Q brd ff:ff:ff:ff:ff:ff
-    ```
+        Sample updated configuration:
 
-    In this example, `enp6s18` is the name of the active network interface.
+        ```yaml
+        network:
+          ethernets:
+            enp6s18:
+              addresses:
+                - 192.168.0.106/24
+              dhcp4: false
+              nameservers:
+                addresses:
+                  - 1.1.1.1
+                  - 8.8.8.8
+          version: 2
+        ```
 
-5. Update or create the network configuration file:
+   - **(Optional)** Make the following changes to the configuration to set a static IPv6 address and update the DNS server(s):
 
-    ```sh
-    sudo nano /etc/netplan/00-installer-config.yaml
-    ```
+        ```diff
+          network:
+            ethernets:
+              <network-interface>:
+                addresses:
+                  - <ipv4-address>/<cidr-notation>
+        +         - <ipv6-address>/<ipv6-prefix-length>
+                dhcp4: false
+        +       dhcp6: false
+                nameservers:
+                  addresses:
+                    - <ipv4-dns1>
+                    - <ipv4-dns2>
+        +           - <ipv6-dns1>
+        +           - <ipv6-dns2>
+            version: 2
+        ```
 
-6. Update the configuration as such:
+        Sample updated configuration:
 
-    Original configuration which uses DHCP to dynamically assign an IP address:
+        ```yaml
+        network:
+          ethernets:
+            enp6s18:
+              addresses:
+                - 192.168.0.106/24
+                - 2001:db8:1234:5678::106/64
+              dhcp4: false
+              dhcp6: false
+              nameservers:
+                addresses:
+                  - 1.1.1.1
+                  - 8.8.8.8
+                  - 2606:4700:4700::1111
+                  - 2001:4860:4860::8888
+          version: 2
+        ```
 
-    ```yaml
-    network:
-      ethernets:
-        <network-interface>:
-          dhcp4: true
-      version: 2
-    ```
-
-    Make the following changes:
-
-    ```diff
-    network:
-      ethernets:
-        <network-interface>:
-    +     addresses: [<ip-address>/24]
-    -     dhcp4: true
-    +     dhcp4: false
-    +     nameservers:
-    +       addresses: [<dns1>,<dns2>]
-      version: 2
-    ```
-
-    The following is an example of the updated configuration:
-
-    ```yaml
-    network:
-      ethernets:
-        enp6s18:
-          addresses: [192.168.0.106/24]
-          dhcp4: false
-          nameservers:
-            addresses: [1.1.1.1,8.8.8.8]
-      version: 2
-    ```
-
-7. Save all changes made to the file and apply the new configuration:
+6. Save all changes made to the file and apply the new configuration:
 
     ```sh
     sudo netplan apply
