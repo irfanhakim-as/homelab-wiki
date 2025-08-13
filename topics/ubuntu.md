@@ -268,6 +268,9 @@ This details the process of updating certain networking configurations on the sy
 
 ### Set Static IP and Update DNS
 
+> [!WARNING]  
+> The IPv6 portion of this guide is **EXPERIMENTAL** - more testing and contributions from actual experts are required.
+
 This details the process of setting a static IP address and updating the DNS server on a system.
 
 1. First and foremost, to manage the system's network configuration manually, ensure that it is not currently provisioned by `cloud-init`:
