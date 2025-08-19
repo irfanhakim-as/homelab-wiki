@@ -57,11 +57,11 @@ This details how to install Portainer as a Docker container:
    - A Docker compose file for the Portainer stack on the app directory (i.e. `/mnt/smb/docker/portainer/docker-compose.yml`):
 
       ```yaml
-      name: portainer
+      name: ${SERVICE_NAME}
       services:
         portainer:
-          container_name: portainer
-          image: docker.io/portainer/portainer-ce:${PORTAINER_VERSION}
+          container_name: ${APP_CONTAINER}
+          image: docker.io/portainer/portainer-ce:${APP_VERSION}
           ports:
             - 8000:8000
             - 9443:9443
@@ -70,7 +70,7 @@ This details how to install Portainer as a Docker container:
             - ${APP_DIR}/data:/data
             - /var/run/docker.sock:/var/run/docker.sock
           networks:
-            default:
+            - default
           restart: unless-stopped
           security_opt:
             - no-new-privileges:true
@@ -82,7 +82,9 @@ This details how to install Portainer as a Docker container:
    - An env file for the Portainer stack on the app directory (i.e. `/mnt/smb/docker/portainer/.env`):
 
       ```sh
-      PORTAINER_VERSION=2.27.8
+      SERVICE_NAME=portainer
+      APP_CONTAINER=portainer
+      APP_VERSION=2.27.8
       APP_DIR=/mnt/smb/docker/portainer
       ```
 
