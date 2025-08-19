@@ -84,7 +84,7 @@ This details how to install Portainer as a Docker container:
       ```sh
       SERVICE_NAME=portainer
       APP_CONTAINER=portainer
-      APP_VERSION=2.27.8
+      APP_VERSION=2.27.9
       APP_DIR=/mnt/smb/docker/portainer
       ```
 
