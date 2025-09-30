@@ -90,6 +90,8 @@ This details how to install Portainer as a Docker container:
 
       Replace the values with your own accordingly.
 
+3. Go through the [post-installation setup steps](#post-install-setup) for the Portainer server.
+
 ### Post-Install Setup
 
 This details the post-installation steps of the Portainer stack for a complete setup:
