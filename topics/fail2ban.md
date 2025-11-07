@@ -68,6 +68,7 @@ This details how to configure Fail2Ban and some recommended configuration option
 - [How to Secure Your Linux Server with Fail2Ban Configuration](https://www.hostinger.com/my/tutorials/fail2ban-configuration)
 - [How to assign a friendly name to a port number in Linux?](https://unix.stackexchange.com/questions/611406/how-to-assign-a-friendly-name-to-a-port-number-in-linux)
 - [In Fail2Ban, How to Change the SSH port number?](https://serverfault.com/questions/382858/in-fail2ban-how-to-change-the-ssh-port-number)
+- [fail2ban does not start on some debian/ubuntu systems](https://github.com/fail2ban/fail2ban/issues/3292#issuecomment-1142503461)
 
 ### How to Configure Fail2Ban
 
@@ -179,6 +180,28 @@ This details some recommended configuration options for a Fail2Ban setup:
    - After the configuration has been applied, [verify](#return-jail-status) that the `sshd` jail is running on the system.
 
 3. After you have finished all of your configurations, do not forget to [restart](systemd.md#restart-service) the `fail2ban.service` service on the system to apply the changes.
+
+4. If you are having issues with Fail2Ban not being able to start, and see the following errors in the `fail2ban.service` [service log](systemd.md#service-status):
+
+    ```
+      fail2ban                [565192]: ERROR   Failed during configuration: Have not found any log file for sshd jail
+      fail2ban                [565192]: ERROR   Async configuration of server failed
+    ```
+
+    Try overriding the `sshd` jail's `backend` value to `systemd` in the `jail.local` configuration file:
+
+    ```diff
+      [sshd]
+      enabled = true
+      # To use more aggressive sshd modes set filter parameter "mode" in jail.local:
+      # normal (default), ddos, extra or aggressive (combines all).
+      # See "tests/files/logs/sshd" or "filter.d/sshd.conf" for usage example and details.
+      #mode   = normal
+      port    = 2222
+      logpath = %(sshd_log)s
+    - backend = %(sshd_backend)s
+    + backend = systemd
+    ```
 
 ---
 
