@@ -131,9 +131,7 @@ This details some recommended configuration options for a Fail2Ban setup:
 
    - Based on these sample configuration values, client "A" would be banned for 2 hours, if they fail to authenticate, 3 times, within 60 minutes.
 
-2. Enable the `sshd` jail on the system, if it has not been enabled by default:
-
-   - [Update](#how-to-configure-fail2ban) the `jail.local` configuration file.
+2. [Configure](#how-to-configure-fail2ban) and enable the `sshd` jail on the system using the `jail.local` configuration file:
 
    - Locate the following `[sshd]` section in the file and add the following line to enable it:
 
@@ -178,7 +176,7 @@ This details some recommended configuration options for a Fail2Ban setup:
       + ssh             2222/tcp                        # The Secure Shell (SSH) Protocol
       ```
 
-   - [Verify](#return-jail-status) that the `sshd` jail is running on the system.
+   - After the configuration has been applied, [verify](#return-jail-status) that the `sshd` jail is running on the system.
 
 3. After you have finished all of your configurations, do not forget to [restart](systemd.md#restart-service) the `fail2ban.service` service on the system to apply the changes.
 
