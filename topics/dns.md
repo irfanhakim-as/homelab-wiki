@@ -43,6 +43,7 @@ This details how to acquire a domain name from a domain name registrar.
 - [Cloudflare](cloudflare.md#buying-a-domain)
 - [FreeDNS](freedns.md#acquiring-a-domain)
 - [Porkbun](porkbun.md#buying-a-domain)
+- [Spaceship](spaceship.md#buying-a-domain)
 - [Squarespace](squarespace.md#buying-a-domain)
 - [Name.com](name.com.md#buying-a-domain)
 
@@ -57,6 +58,7 @@ This details how to update the authoritative nameserver for a domain.
 ### References
 
 - [Porkbun](porkbun.md#update-authoritative-nameserver)
+- [Spaceship](spaceship.md#update-authoritative-nameserver)
 - [Squarespace](squarespace.md#update-authoritative-nameserver)
 - [Name.com](name.com.md#update-authoritative-nameserver)
 
