@@ -34,6 +34,10 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Description](#description-5)
     - [References](#references-5)
     - [Steps](#steps-1)
+  - [Limit Domain Traffic to Certain Country](#limit-domain-traffic-to-certain-country)
+    - [Description](#description-6)
+    - [References](#references-6)
+    - [Steps](#steps-2)
 
 ## References
 
@@ -412,3 +416,61 @@ Forced email address obfuscation might not be what you want in some cases, this 
      - Click the **Deploy** button to apply the rule configuration.
 
 9. Back in the **Configuration Rules** page, ensure that the rule you have just created has been enabled.
+
+---
+
+## Limit Domain Traffic to Certain Country
+
+### Description
+
+This details how to limit traffic to your Cloudflare-managed domain to a specific country.
+
+### References
+
+- [How do you block connections per country on Cloudflare](https://redlib.pussthecat.org/r/jellyfin/comments/1pasdyo/comment/nrmkrza)
+
+### Steps
+
+You may want to limit traffic to your domain to a specific country, this details how to do so by implementing a security rule on Cloudflare:
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
+
+3. On the **Account Home** page, select the link on the name of the domain you wish to configure (i.e. `example.com`).
+
+4. On the left hand side of the dashboard, expand the **Security** menu group, and select the **Security rules** menu item.
+
+5. In the **Security rules** page, click the **Create rule** button, and select the **Custom rules** option.
+
+6. In the **New custom rule** form, configure the following:
+
+   - Rule name: Add a descriptive name that identifies the rule (i.e. `Geolocation filter`)
+
+   - When incoming requests match:
+
+     - Set the following values:
+
+       - Field: Expand the dropdown and select the `Country` option
+       - Operator: Expand the dropdown and select the `is not in` option
+       - Value: Expand the dropdown and select the country (or countries) you wish to allow traffic from (i.e. `Malaysia`)
+
+     - **(Optional)** If you wish to to not block Let's Encrypt/ACME certificate validation, click the corresponding **And** button and configure the following:
+
+       - Field: Expand the dropdown and select the `URI Path` option
+       - Operator: Expand the dropdown and select the `does not equal` option
+       - Value: Set the value to the ACME challenge path (i.e. `/.well-known/acme-challenge/*`)
+
+     - The **Expression Preview** should look similar to the following, if you have done all of the above:
+
+        ```
+          (not ip.src.country in {"MY"} and http.request.uri.path ne "/.well-known/acme-challenge/*")
+        ```
+
+     - Then take action:
+
+       - Choose action: Expand the dropdown and select the `Block` option
+
+     - Click the **Deploy** button to apply the rule configuration.
+
+7. Back in the **Security rules** page, ensure that the rule you have just created is flagged as **Active**.

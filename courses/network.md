@@ -16,6 +16,7 @@ A computer network is a set of computers sharing resources located on or provide
     - [Setting Up a Domain](#setting-up-a-domain)
     - [Registering Subdomains](#registering-subdomains)
     - [Disable Email Address Obfuscation](#disable-email-address-obfuscation)
+    - [Limit Domain Traffic to Certain Country](#limit-domain-traffic-to-certain-country)
     - [Local DNS](#local-dns)
   - [Reverse Proxy](#reverse-proxy)
     - [References](#references-1)
@@ -65,6 +66,15 @@ This details how to register and manage subdomains for your services:
 This details how to disable the Cloudflare Email Address Obfuscation security feature:
 
 - [Cloudflare](../topics/cloudflare.md#disable-email-address-obfuscation)
+
+### Limit Domain Traffic to Certain Country
+
+> [!NOTE]  
+> **(Optional)** This section of the guide is included in this course as a reference should you need it at some point.
+
+This details how to limit traffic to your Cloudflare-managed domain to a specific country:
+
+- [Cloudflare](../topics/cloudflare.md#limit-domain-traffic-to-certain-country)
 
 ### Local DNS
 
