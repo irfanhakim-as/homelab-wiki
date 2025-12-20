@@ -60,7 +60,7 @@ This details how to register and manage subdomains for your services:
 ### Disable Email Address Obfuscation
 
 > [!NOTE]  
-> **(Optional)** This section of the guide is included in this course as a reference should you need it at some point, if you use [Cloudflare as your nameserver](../topics/dns.md#cloudflare-as-nameserver).
+> **(Optional)** This section of the guide is included in this course as a reference should you need it at some point.
 
 This details how to disable the Cloudflare Email Address Obfuscation security feature:
 
