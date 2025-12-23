@@ -74,6 +74,7 @@ Topics include, but (possibly) not limited to:
 - [Immich](topics/immich.md)
 - [Jellyfin](topics/jellyfin.md)
 - [ErsatzTV](topics/ersatztv.md)
+- [Forgejo](topics/forgejo.md)
 
 ## Contributing
 
