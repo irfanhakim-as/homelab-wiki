@@ -134,3 +134,5 @@ This details the hardware specification and configuration of the mini server nod
   - Storage Disk: 3x [PNY CS900 2.5" SATA SSD](https://shopee.com.my/brightstarcomputer/20244351359) 1TB
 
   - SATA Cable: 3x [SATA TO USB Cable for 2.5 Inch Adapter](https://shopee.com.my/lumpsumstore/5767654064) (USB 3.0)
+
+  - **(Optional)** Enclosure: [Raspberry Pi 3/4/5 NAS 4xDISK with USB HUB](https://makerworld.com/en/models/158103-raspberry-pi-3-4-5-nas-4xdisk-with-usb-hub)
