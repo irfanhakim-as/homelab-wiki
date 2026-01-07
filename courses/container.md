@@ -10,10 +10,10 @@ In software engineering, containerisation is operating-system–level virtualisa
   - [Description](#description)
   - [Directory](#directory)
   - [References](#references)
-  - [Docker](#docker)
-    - [Setting Up Docker](#setting-up-docker)
+  - [Container Runtimes](#container-runtimes)
+    - [Setting Up a Container Runtime](#setting-up-a-container-runtime)
     - [Setting Up Portainer](#setting-up-portainer)
-    - [Docker Usage](#docker-usage)
+    - [Container Runtime Usage](#container-runtime-usage)
   - [Linux Containers (LXC)](#linux-containers-lxc)
     - [Create LXC Container](#create-lxc-container)
     - [GPU Passthrough to LXC Container](#gpu-passthrough-to-lxc-container)
@@ -25,30 +25,35 @@ In software engineering, containerisation is operating-system–level virtualisa
 
 ---
 
-## Docker
+## Container Runtimes
 
-This section details all topics pertaining to the container runtime, Docker.
+> [!TIP]  
+> In general, services that could be deployed with Docker (Compose) could also be deployed with Podman (Compose) and vice versa.
 
-### Setting Up Docker
+This section details all topics pertaining to container runtimes such as Docker and Podman.
 
-This details the installation and configuration process of Docker on a Linux system:
+### Setting Up a Container Runtime
+
+This details the installation and configuration process of container runtimes on a Linux system:
 
 - [Docker](../topics/docker.md#setup)
-- [Docker on OMV](../topics/omv.md#installing-docker)
+- [Docker on OpenMediaVault (OMV)](../topics/omv.md#installing-docker)
+- [Podman](../topics/podman.md#setup)
 
 ### Setting Up Portainer
 
-This details how to install and set up a Portainer server in a containerised environment.
+This details how to install and set up a Portainer server in a containerised environment:
 
 - [Portainer](../topics/portainer.md#setup)
 
-### Docker Usage
+### Container Runtime Usage
 
-This details some common usage steps for a container runtime solution such as Docker:
+This details common usage steps for container runtime solutions:
 
 - [Docker Compose](../topics/docker.md#docker-compose)
+- [Docker on OpenMediaVault (OMV)](../topics/omv.md#deploying-docker-container)
+- [Podman Compose](../topics/podman.md#podman-compose)
 - [Portainer](../topics/portainer.md#usage)
-- [Docker on OMV](../topics/omv.md#deploying-docker-container)
 
 ---
 
