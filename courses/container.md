@@ -12,7 +12,7 @@ In software engineering, containerisation is operating-system–level virtualisa
   - [References](#references)
   - [Container Runtimes](#container-runtimes)
     - [Setting Up a Container Runtime](#setting-up-a-container-runtime)
-    - [Setting Up Portainer](#setting-up-portainer)
+    - [Setting Up a Container Management Platform](#setting-up-a-container-management-platform)
     - [Container Runtime Usage](#container-runtime-usage)
   - [Linux Containers (LXC)](#linux-containers-lxc)
     - [Create LXC Container](#create-lxc-container)
@@ -40,9 +40,9 @@ This details the installation and configuration process of container runtimes on
 - [Docker on OpenMediaVault (OMV)](../topics/omv.md#installing-docker)
 - [Podman](../topics/podman.md#setup)
 
-### Setting Up Portainer
+### Setting Up a Container Management Platform
 
-This details how to install and set up a Portainer server in a containerised environment:
+This details how to install and set up a container management platform as a means to deploy and manage OCI containers:
 
 - [Portainer](../topics/portainer.md#setup)
 
