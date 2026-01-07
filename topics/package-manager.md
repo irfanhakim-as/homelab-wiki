@@ -46,7 +46,7 @@ This details the process of installing and setting up a package manager.
 
 ### References
 
-- [Yay: Setup](yay.md#setup)
+- [Yay](yay.md#setup)
 
 ---
 
@@ -58,7 +58,7 @@ This details some configuration options for improving the package manager.
 
 ### References
 
-- [Pacman: Configuration](pacman.md#configuration)
+- [Pacman](pacman.md#configuration)
 
 ---
 
@@ -70,10 +70,10 @@ This details the process of installing software.
 
 ### References
 
-- [Apt: Install Software](apt.md#install-software)
-- [DNF: Install Software](dnf.md#install-software)
-- [Pacman: Install Software](pacman.md#install-software)
-- [Yay: Install Software](yay.md#install-software)
+- [Apt](apt.md#install-software)
+- [DNF](dnf.md#install-software)
+- [Pacman](pacman.md#install-software)
+- [Yay](yay.md#install-software)
 
 ---
 
@@ -85,10 +85,10 @@ This details the process of updating a software or the system.
 
 ### References
 
-- [Apt: Update Software](apt.md#update-software)
-- [DNF: Update Software](dnf.md#update-software)
-- [Pacman: Update Software](pacman.md#update-software)
-- [Yay: Update Software](yay.md#update-software)
+- [Apt](apt.md#update-software)
+- [DNF](dnf.md#update-software)
+- [Pacman](pacman.md#update-software)
+- [Yay](yay.md#update-software)
 
 ---
 
@@ -100,10 +100,10 @@ This details the process of uninstalling software.
 
 ### References
 
-- [Apt: Remove Software](apt.md#remove-software)
-- [DNF: Remove Software](dnf.md#remove-software)
-- [Pacman: Remove Software](pacman.md#remove-software)
-- [Yay: Remove Software](yay.md#remove-software)
+- [Apt](apt.md#remove-software)
+- [DNF](dnf.md#remove-software)
+- [Pacman](pacman.md#remove-software)
+- [Yay](yay.md#remove-software)
 
 ---
 
@@ -115,10 +115,10 @@ This details the process of searching software.
 
 ### References
 
-- [Apt: Search Software](apt.md#search-software)
-- [DNF: Search Software](dnf.md#search-software)
-- [Pacman: Search Software](pacman.md#search-software)
-- [Yay: Search Software](yay.md#search-software)
+- [Apt](apt.md#search-software)
+- [DNF](dnf.md#search-software)
+- [Pacman](pacman.md#search-software)
+- [Yay](yay.md#search-software)
 
 ---
 
@@ -130,7 +130,7 @@ This details the process of cleaning up the system.
 
 ### References
 
-- [Apt: Clean Up](apt.md#clean-up)
-- [DNF: Clean Up](dnf.md#clean-up)
-- [Pacman: Clean Up](pacman.md#clean-up)
-- [Yay: Clean Up](yay.md#clean-up)
+- [Apt](apt.md#clean-up)
+- [DNF](dnf.md#clean-up)
+- [Pacman](pacman.md#clean-up)
+- [Yay](yay.md#clean-up)
