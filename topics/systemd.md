@@ -21,6 +21,7 @@ Systemd is a suite of basic building blocks for a Linux system. It provides a sy
     - [Restart Service](#restart-service)
     - [Service Status](#service-status)
     - [Reload Systemd Manager Configuration](#reload-systemd-manager-configuration)
+    - [List Systemd Units](#list-systemd-units)
 
 ## References
 
@@ -105,4 +106,62 @@ Some operations may require reloading the `systemd` manager configuration.
 
     ```sh
     sudo systemctl daemon-reload
+    ```
+
+### List Systemd Units
+
+This details how to list down all or specific `systemd` unit(s) on the system:
+
+1. To list down all system-wide `systemd` unit(s) on the system:
+
+    ```sh
+    systemctl list-unit-files --no-pager
+    ```
+
+    You may also use `grep` if you wish to filter the results for specific unit(s):
+
+    ```sh
+    systemctl list-unit-files --no-pager | grep -E <filter>
+    ```
+
+    For example:
+
+    ```sh
+    systemctl list-unit-files --no-pager | grep -E 'unit.service'
+    ```
+
+2. To list down all user-specific `systemd` unit(s) on the system:
+
+    ```sh
+    systemctl --user list-unit-files --no-pager
+    ```
+
+    You may also use `grep` if you wish to filter the results for specific unit(s):
+
+    ```sh
+    systemctl --user list-unit-files --no-pager | grep -E <filter>
+    ```
+
+    For example:
+
+    ```sh
+    systemctl --user list-unit-files --no-pager | grep -E 'unit.service'
+    ```
+
+3. **Alternatively**, to list down **ALL** `systemd` unit(s) on the system:
+
+    ```sh
+    { systemctl list-unit-files --no-pager; systemctl --user list-unit-files --no-pager; }
+    ```
+
+    You may also use `grep` if you wish to filter the results for specific unit(s):
+
+    ```sh
+    { systemctl list-unit-files --no-pager; systemctl --user list-unit-files --no-pager; } | grep -E <filter>
+    ```
+
+    For example:
+
+    ```sh
+    { systemctl list-unit-files --no-pager; systemctl --user list-unit-files --no-pager; } | grep -E 'unit.service'
     ```
