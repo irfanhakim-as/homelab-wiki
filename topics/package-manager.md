@@ -18,6 +18,9 @@ A package manager or package-management system is a collection of software tools
     - [References](#references-2)
   - [Usage](#usage)
     - [Description](#description-3)
+    - [List Software Repositories](#list-software-repositories)
+    - [Add Software Repository](#add-software-repository)
+    - [Update Software Repository](#update-software-repository)
     - [Install Software](#install-software)
     - [Update Software](#update-software)
     - [Remove Software](#remove-software)
@@ -60,6 +63,24 @@ This details some configuration options for improving the package manager.
 ### Description
 
 This details some common usage steps for basic package management.
+
+### List Software Repositories
+
+This details the process of listing available software repositories on the system:
+
+- [Nix](nix.md#listing-available-channels)
+
+### Add Software Repository
+
+This details the process of adding a software repository to the system:
+
+- [Nix](nix.md#adding-a-channel)
+
+### Update Software Repository
+
+This details the process of updating available software repositories on the system:
+
+- [Nix](nix.md#updating-a-channel)
 
 ### Install Software
 
