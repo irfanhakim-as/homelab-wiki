@@ -65,11 +65,11 @@ This details the installation and setup process of a Home Assistant (HA) server.
 
 This details the installation process of HA using the Container installation method:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). For simplicity, the following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
 
    - Ports that will be used and requires allowing on the host machine vary depending on the (intended) smart home setup, hence, it is recommended not to enable or set up a [firewall](firewall.md) on the system.
 
-2. [Deploy the HA stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+2. [Deploy the HA stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/home-assistant`): This will be used for at least the database volume directory which specifically requires local storage.
 
@@ -441,7 +441,7 @@ This details the installation process of Z2M and Mosquitto containers as compani
 
      - Take note of both the `DEVICE_BY_ID_PATH` (i.e. `/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_9020107cf473ef11852cdb1e313510fd-if00-port0`) and `DEVICE_TTY_PATH` (i.e. `/dev/ttyUSB0`) values which will later be used to passthrough the Z2M-capable device to the Z2M container.
 
-4. [Deploy the Z2M stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+4. [Deploy the Z2M stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/z2m`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/z2m`): This will be used for the Z2M stack's volumes.
 
@@ -563,7 +563,7 @@ This details the post-installation steps of the Z2M stack for a complete setup:
 
 1. Generate the login credentials for the Mosquitto container and lock it behind authentication:
 
-   - [Enter the Mosquitto container](../courses/container.md#docker-usage) using the compose file (i.e. `/mnt/smb/docker/z2m/docker-compose.yml`), the `mosquitto` service, and the `sh` shell.
+   - [Enter the Mosquitto container](../courses/container.md#container-runtime-usage) using the compose file (i.e. `/mnt/smb/docker/z2m/docker-compose.yml`), the `mosquitto` service, and the `sh` shell.
 
    - Inside the container, create the credentials file (i.e. `/mosquitto/config/pwfile`) for a brand new user (i.e. `mqttuser`):
 
@@ -613,7 +613,7 @@ This details the post-installation steps of the Z2M stack for a complete setup:
       persistence_location /mosquitto/data
       ```
 
-   - Exit the Mosquitto container, and [restart](../courses/container.md#docker-usage) the `mosquitto` container service to apply the changes.
+   - Exit the Mosquitto container, and [restart](../courses/container.md#container-runtime-usage) the `mosquitto` container service to apply the changes.
 
 2. Complete the Z2M server onboarding process and hook the Mosquitto server to it as a broker:
 
@@ -749,7 +749,7 @@ This details the installation process of a Code-server container as companion to
         1000
       ```
 
-3. [Deploy the Code-server stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+3. [Deploy the Code-server stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/code-server`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/code-server`): Since the Code-server stack does not have its own volume, this will only be used for its Docker compose and env file.
 
@@ -841,7 +841,7 @@ The Home Assistant Community Store (HACS) is a custom integration that provides 
 
 This details the installation steps of HACS on the HA server:
 
-1. [Enter the HA container](../courses/container.md#docker-usage) using the compose file (i.e. `/mnt/smb/docker/home-assistant/docker-compose.yml`), the `home-assistant` service, and the `bash` shell.
+1. [Enter the HA container](../courses/container.md#container-runtime-usage) using the compose file (i.e. `/mnt/smb/docker/home-assistant/docker-compose.yml`), the `home-assistant` service, and the `bash` shell.
 
 2. Inside the container, run the HACS installation script:
 
@@ -857,7 +857,7 @@ This details the installation steps of HACS on the HA server:
       INFO: Remember to restart Home Assistant before you configure it
     ```
 
-3. Exit the HA container, and [restart](../courses/container.md#docker-usage) the `home-assistant` container service for the installation to take effect.
+3. Exit the HA container, and [restart](../courses/container.md#container-runtime-usage) the `home-assistant` container service for the installation to take effect.
 
 4. [Integrate HACS to your HA server](#adding-an-integration-to-home-assistant), while noting the following options:
 

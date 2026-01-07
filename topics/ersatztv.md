@@ -39,7 +39,7 @@ This details how to install and set up an ErsatzTV server in a containerised env
 
 This details the installation steps for ErsatzTV as a Docker container:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). The following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
 
    - Hardware-accelerated transcoding is highly recommended for the best ErsatzTV experience - setting up an [LXC Container on Proxmox](../courses/container.md#create-lxc-container) and [passing through a (dedicated or integrated) GPU](../courses/hypervisor.md#hardware-passthrough) to it may be the easiest way to set up as the host deployment environment for ErsatzTV, paying careful attention to the following items in your deployment:
 
@@ -84,7 +84,7 @@ This details the installation steps for ErsatzTV as a Docker container:
 
      - `8409/tcp`
 
-2. [Deploy the ErsatzTV stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+2. [Deploy the ErsatzTV stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/ersatztv`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/ersatztv`): This will be used for the ErsatzTV stack's volume(s).
 

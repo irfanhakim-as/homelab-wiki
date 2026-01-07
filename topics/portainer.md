@@ -46,11 +46,11 @@ This details how to install and set up a Portainer server in a containerised env
 
 This details how to install Portainer as a Docker container:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). For simplicity, the following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
 
    - Ports that will be used and requires allowing vary for each container you host on the Portainer server, hence, it is recommended not to enable or set up a [firewall](firewall.md) on the system.
 
-2. [Deploy the Portainer stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+2. [Deploy the Portainer stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/portainer`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/portainer`): This will be used for the Portainer stack's volume(s).
 

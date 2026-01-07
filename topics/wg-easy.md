@@ -43,7 +43,7 @@ This details how to install and set up a WireGuard server in a containerised env
 
 This details the installation steps for WireGuard as a Docker container:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). The following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
 
    - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `<wireguard-port>/udp` (i.e. `51820/udp`)
 
@@ -58,7 +58,7 @@ This details the installation steps for WireGuard as a Docker container:
    - Protocol: `UDP`
    - Enabled: Toggle or check this box to enable the port forwarding rule
 
-4. [Deploy the WireGuard stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+4. [Deploy the WireGuard stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/wireguard`): This will be used for at least the config volume directory which specifically requires local storage.
 

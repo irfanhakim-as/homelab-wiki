@@ -48,14 +48,14 @@ This details how to install and set up an Forgejo server in a containerised envi
 
 This details the installation steps for Forgejo as a Docker container:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker). For simplicity, the following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
 
    - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule):
 
      - `3000/tcp`
      - `222/tcp`
 
-2. [Deploy the Forgejo stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+2. [Deploy the Forgejo stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/forgejo`): This will be used for at least the database volume directory which specifically requires local storage.
 

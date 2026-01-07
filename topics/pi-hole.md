@@ -625,9 +625,9 @@ This details the process of synchronising multiple Pi-hole server replicas with 
 
 This details the process of setting up a Nebula Sync server in a containerised environment to synchronise multiple Pi-hole servers:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-docker).
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime).
 
-2. [Deploy the Nebula Sync stack with Docker Compose](../courses/container.md#docker-usage) after preparing the following items:
+2. [Deploy the Nebula Sync stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/nebula-sync`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/nebula-sync`): This will be used for the Nebula Sync stack's deployment files.
 
@@ -693,7 +693,7 @@ This details the process of setting up a Nebula Sync server in a containerised e
       - If you intend to use `https` to specify the address of the primary Pi-hole server and its replica(s), please ensure that you are either using [valid domains you have set up through reverse proxy](../courses/network.md#reverse-proxy) (i.e. `https://pi-hole-1.example.com`), or set the value of `CLIENT_SKIP_TLS_VERIFICATION` to `true` if that is not the case (i.e. `https://192.168.0.106`).
       - Set `FULL_SYNC` to `true` if you wish to synchronise everything between all of your Pi-hole servers, or set it to `false` and define each `SYNC_CONFIG_*` and `SYNC_GRAVITY_*` variables according to your needs.
 
-3. Once the Nebula Sync stack has been deployed, [check the logs](../courses/container.md#docker-usage) of the Nebula Sync container and verify that it is synchronising your Pi-hole servers successfully. Sample log output:
+3. Once the Nebula Sync stack has been deployed, [check the logs](../courses/container.md#container-runtime-usage) of the Nebula Sync container and verify that it is synchronising your Pi-hole servers successfully. Sample log output:
 
     ```sh
       2025-08-08T10:35:40Z INF Starting nebula-sync v0.11.0
