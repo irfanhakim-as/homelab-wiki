@@ -16,21 +16,13 @@ A package manager or package-management system is a collection of software tools
   - [Configuration](#configuration)
     - [Description](#description-2)
     - [References](#references-2)
-  - [Install Software](#install-software)
+  - [Usage](#usage)
     - [Description](#description-3)
-    - [References](#references-3)
-  - [Update Software](#update-software)
-    - [Description](#description-4)
-    - [References](#references-4)
-  - [Remove Software](#remove-software)
-    - [Description](#description-5)
-    - [References](#references-5)
-  - [Search Software](#search-software)
-    - [Description](#description-6)
-    - [References](#references-6)
-  - [Clean Up](#clean-up)
-    - [Description](#description-7)
-    - [References](#references-7)
+    - [Install Software](#install-software)
+    - [Update Software](#update-software)
+    - [Remove Software](#remove-software)
+    - [Search Software](#search-software)
+    - [Clean Up](#clean-up)
 
 ## References
 
@@ -63,13 +55,15 @@ This details some configuration options for improving the package manager.
 
 ---
 
-## Install Software
+## Usage
 
 ### Description
 
-This details the process of installing software.
+This details some common usage steps for basic package management.
 
-### References
+### Install Software
+
+This details the process of installing software:
 
 - [Apt](apt.md#install-software)
 - [DNF](dnf.md#install-software)
@@ -77,15 +71,9 @@ This details the process of installing software.
 - [Pacman](pacman.md#install-software)
 - [Yay](yay.md#install-software)
 
----
+### Update Software
 
-## Update Software
-
-### Description
-
-This details the process of updating a software or the system.
-
-### References
+This details the process of updating a software or the system:
 
 - [Apt](apt.md#update-software)
 - [DNF](dnf.md#update-software)
@@ -93,15 +81,9 @@ This details the process of updating a software or the system.
 - [Pacman](pacman.md#update-software)
 - [Yay](yay.md#update-software)
 
----
+### Remove Software
 
-## Remove Software
-
-### Description
-
-This details the process of uninstalling software.
-
-### References
+This details the process of uninstalling software:
 
 - [Apt](apt.md#remove-software)
 - [DNF](dnf.md#remove-software)
@@ -109,15 +91,9 @@ This details the process of uninstalling software.
 - [Pacman](pacman.md#remove-software)
 - [Yay](yay.md#remove-software)
 
----
+### Search Software
 
-## Search Software
-
-### Description
-
-This details the process of searching software.
-
-### References
+This details the process of searching software:
 
 - [Apt](apt.md#search-software)
 - [DNF](dnf.md#search-software)
@@ -125,15 +101,9 @@ This details the process of searching software.
 - [Pacman](pacman.md#search-software)
 - [Yay](yay.md#search-software)
 
----
+### Clean Up
 
-## Clean Up
-
-### Description
-
-This details the process of cleaning up the system.
-
-### References
+This details the process of cleaning up the system:
 
 - [Apt](apt.md#clean-up)
 - [DNF](dnf.md#clean-up)
