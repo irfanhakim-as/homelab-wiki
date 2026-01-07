@@ -46,6 +46,7 @@ This details the process of installing and setting up a package manager.
 
 ### References
 
+- [Nix](nix.md#setup)
 - [Yay](yay.md#setup)
 
 ---
@@ -72,6 +73,7 @@ This details the process of installing software.
 
 - [Apt](apt.md#install-software)
 - [DNF](dnf.md#install-software)
+- [Nix](nix.md#install-software)
 - [Pacman](pacman.md#install-software)
 - [Yay](yay.md#install-software)
 
@@ -87,6 +89,7 @@ This details the process of updating a software or the system.
 
 - [Apt](apt.md#update-software)
 - [DNF](dnf.md#update-software)
+- [Nix](nix.md#update-software)
 - [Pacman](pacman.md#update-software)
 - [Yay](yay.md#update-software)
 
@@ -102,6 +105,7 @@ This details the process of uninstalling software.
 
 - [Apt](apt.md#remove-software)
 - [DNF](dnf.md#remove-software)
+- [Nix](nix.md#remove-software)
 - [Pacman](pacman.md#remove-software)
 - [Yay](yay.md#remove-software)
 
@@ -117,6 +121,7 @@ This details the process of searching software.
 
 - [Apt](apt.md#search-software)
 - [DNF](dnf.md#search-software)
+- [Nix](nix.md#search-software)
 - [Pacman](pacman.md#search-software)
 - [Yay](yay.md#search-software)
 
@@ -132,5 +137,6 @@ This details the process of cleaning up the system.
 
 - [Apt](apt.md#clean-up)
 - [DNF](dnf.md#clean-up)
+- [Nix](nix.md#clean-up)
 - [Pacman](pacman.md#clean-up)
 - [Yay](yay.md#clean-up)
