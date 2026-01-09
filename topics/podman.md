@@ -251,7 +251,7 @@ This details the post-installation steps for a complete Podman setup:
 
 ### Description
 
-This details some common usage steps for a container runtime solution such as Podman.
+This details some common usage steps for a Container Runtime solution such as Podman.
 
 ### References
 

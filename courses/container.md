@@ -30,11 +30,11 @@ In software engineering, containerisation is operating-system–level virtualisa
 > [!TIP]  
 > In general, services that could be deployed with Docker (Compose) could also be deployed with Podman (Compose) and vice versa.
 
-This section details all topics pertaining to [Open Container Initiative (OCI)](https://opencontainers.org/about/overview) container runtimes such as Docker and Podman.
+This section details all topics pertaining to [Open Container Initiative (OCI)](https://opencontainers.org/about/overview) Container Runtimes such as Docker and Podman.
 
 ### Setting Up a Container Runtime
 
-This details the installation and configuration process of container runtimes on a Linux system:
+This details the installation and configuration process of Container Runtimes on a Linux system:
 
 - [Docker](../topics/docker.md#setup)
 - [Docker on OpenMediaVault (OMV)](../topics/omv.md#installing-docker)
@@ -48,7 +48,7 @@ This details how to install and set up a container management platform as a mean
 
 ### Container Runtime Usage
 
-This details common usage steps for container runtime solutions:
+This details common usage steps for Container Runtime solutions:
 
 - [Docker Compose](../topics/docker.md#docker-compose)
 - [Docker on OpenMediaVault (OMV)](../topics/omv.md#deploying-docker-container)

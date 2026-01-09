@@ -128,7 +128,7 @@ This details how to configure Docker to allow a non-root user to run it.
 
 ### Description
 
-This details some common usage steps for a container runtime solution such as Docker.
+This details some common usage steps for a Container Runtime solution such as Docker.
 
 ### References
 
