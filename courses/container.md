@@ -30,7 +30,7 @@ In software engineering, containerisation is operating-system–level virtualisa
 > [!TIP]  
 > In general, services that could be deployed with Docker (Compose) could also be deployed with Podman (Compose) and vice versa.
 
-This section details all topics pertaining to [OCI](https://opencontainers.org/about/overview) container runtimes such as Docker and Podman.
+This section details all topics pertaining to [Open Container Initiative (OCI)](https://opencontainers.org/about/overview) container runtimes such as Docker and Podman.
 
 ### Setting Up a Container Runtime
 
