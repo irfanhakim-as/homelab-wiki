@@ -42,7 +42,7 @@ This details the installation and configuration process of Container Runtimes on
 
 ### Setting Up a Container Management Platform
 
-This details how to install and set up a container management platform as a means to deploy and manage OCI containers:
+This details how to install and set up a container management platform as a means to deploy and manage OCI Containers graphically:
 
 - [Portainer](../topics/portainer.md#setup)
 
