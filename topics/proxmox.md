@@ -1099,7 +1099,7 @@ Choose for yourself one of the aforementioned methods and follow the instruction
       echo 'test' > /mnt/data/testfile
       ```
 
-5. **(Optional)** If you intend to read or write to the SMB share in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker Container), you may need to perform some additional step(s):
+5. **(Optional)** If you intend to read or write to the SMB share in another layer of virtualisation/containerisation (i.e. Proxmox node host -> LXC Container -> Docker/Podman Container), you may need to perform some additional step(s):
 
    - If the `dir_mode` and `file_mode` mount options were set to `0770` on the Proxmox node host, lower the _security barrier_ of the SMB share on the Proxmox node host so that it can be accessed, regardless of user or group ownership:
 
@@ -1136,7 +1136,7 @@ Choose for yourself one of the aforementioned methods and follow the instruction
 
      - Remount the SMB share the same way you had done it initially on each Proxmox node host - directly, or by re-enabling the SMB share if you had added it as storage to Proxmox cluster-wide.
 
-   - **Alternatively**, if the additional layer of virtualisation/containerisation (i.e. Docker Container) allows setting the UID and GID of the user running processes inside it (i.e. via `PUID` and `PGID` environment variables respectively), set its GID to the GID of the group (i.e. `lxc-shares`) we had created earlier (`10000`).
+   - **Alternatively**, if the additional layer of virtualisation/containerisation (i.e. Docker/Podman Container) allows setting the UID and GID of the user running processes inside it (i.e. via `PUID` and `PGID` environment variables respectively), set its GID to the GID of the group (i.e. `lxc-shares`) we had created earlier (`10000`).
 
 ### Update LXC Container Configuration
 

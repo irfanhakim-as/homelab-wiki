@@ -49,13 +49,13 @@ This details how to install and set up an Immich server in a containerised envir
 
 ### Installation
 
-This details the installation steps for Immich as a Docker container:
+This details the installation steps for Immich as a containerised application:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [a Container Runtime is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
 
    - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `2283/tcp`
 
-2. [Deploy the Immich stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+2. [Deploy the Immich stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/immich`): This will be used for at least the database volume directory which specifically requires local storage.
 
@@ -63,7 +63,7 @@ This details the installation steps for Immich as a Docker container:
 
    - **(Optional)** A remote app directory, on remote mounted storage (i.e. `/mnt/smb/media/photos/immich`): This will be used for the large media files that will be uploaded to Immich.
 
-   - A Docker compose file for the Immich stack on the app directory (i.e. `/mnt/smb/docker/immich/docker-compose.yml`):
+   - A Compose file for the Immich stack on the app directory (i.e. `/mnt/smb/docker/immich/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -146,7 +146,7 @@ This details the installation steps for Immich as a Docker container:
         default:
       ```
 
-      **(Optional)** If your host deployment environment is capable of hardware transcoding, uncomment the following section in the Docker compose file:
+      **(Optional)** If your host deployment environment is capable of hardware transcoding, uncomment the following section in the Compose file:
 
       ```diff
         immich-server:
@@ -161,7 +161,7 @@ This details the installation steps for Immich as a Docker container:
           ...
       ```
 
-      **(Optional)** If your host deployment environment is capable of hardware-accelerated machine learning, uncomment the following section in the Docker compose file:
+      **(Optional)** If your host deployment environment is capable of hardware-accelerated machine learning, uncomment the following section in the Compose file:
 
       ```diff
         immich-machine-learning:
@@ -176,7 +176,7 @@ This details the installation steps for Immich as a Docker container:
           ...
       ```
 
-      **(Optional)** If the local storage where the local app directory is located is a hard disk drive (HDD), uncomment the following line in the Docker compose file:
+      **(Optional)** If the local storage where the local app directory is located is a hard disk drive (HDD), uncomment the following line in the Compose file:
 
       ```diff
         database:
@@ -273,7 +273,7 @@ This details the installation steps for Immich as a Docker container:
 
       Replace all of the values in the env file with your own accordingly.
 
-   - **(Optional)** A Docker compose file for hardware-accelerated transcoding on the app directory if your host deployment environment is capable of hardware transcoding (i.e. `/mnt/smb/docker/immich/hwaccel.transcoding.yml`):
+   - **(Optional)** A Compose file for hardware-accelerated transcoding on the app directory if your host deployment environment is capable of hardware transcoding (i.e. `/mnt/smb/docker/immich/hwaccel.transcoding.yml`):
 
       ```yaml
       # Configurations for hardware-accelerated transcoding
@@ -333,7 +333,7 @@ This details the installation steps for Immich as a Docker container:
             - LIBVA_DRIVER_NAME=d3d12
       ```
 
-   - **(Optional)** A Docker compose file for hardware-accelerated machine learning on the app directory if your host deployment environment is capable of hardware-accelerated machine learning (i.e. `/mnt/smb/docker/immich/hwaccel.ml.yml`):
+   - **(Optional)** A Compose file for hardware-accelerated machine learning on the app directory if your host deployment environment is capable of hardware-accelerated machine learning (i.e. `/mnt/smb/docker/immich/hwaccel.ml.yml`):
 
       ```yaml
       # Configurations for hardware-accelerated machine learning
@@ -519,15 +519,15 @@ To alleviate performance issues on low-memory systems like the Raspberry Pi, you
 
 This details how to set up a remote ML server for Immich if its host deployment environment is not capable of hardware-accelerated machine learning:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [a Container Runtime is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
 
    - Either [disable the firewall](firewall.md#disablement) on the system or [allow access to the following port(s) and corresponding protocol(s)](firewall.md#adding-allow-rule): `3003/tcp`
 
-2. [Deploy the Immich machine learning stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+2. [Deploy the Immich machine learning stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/immich-remote-ml`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/immich-remote-ml`): This will be used for the Immich ML stack's deployment files and volume(s).
 
-   - A Docker compose file for the Immich ML stack on the app directory (i.e. `/mnt/smb/docker/immich-remote-ml/docker-compose.yml`):
+   - A Compose file for the Immich ML stack on the app directory (i.e. `/mnt/smb/docker/immich-remote-ml/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -554,7 +554,7 @@ This details how to set up a remote ML server for Immich if its host deployment 
         default:
       ```
 
-      **(Optional)** If your host deployment environment is capable of hardware-accelerated machine learning, uncomment the following section in the Docker compose file:
+      **(Optional)** If your host deployment environment is capable of hardware-accelerated machine learning, uncomment the following section in the Compose file:
 
       ```diff
         immich-machine-learning:
@@ -610,7 +610,7 @@ This details how to set up a remote ML server for Immich if its host deployment 
 
       Replace all of the values in the env file with your own accordingly.
 
-   - **(Optional)** A Docker compose file for hardware-accelerated machine learning on the app directory if your host deployment environment is capable of hardware-accelerated machine learning (i.e. `/mnt/smb/docker/immich-remote-ml/hwaccel.ml.yml`):
+   - **(Optional)** A Compose file for hardware-accelerated machine learning on the app directory if your host deployment environment is capable of hardware-accelerated machine learning (i.e. `/mnt/smb/docker/immich-remote-ml/hwaccel.ml.yml`):
 
       ```yaml
       # Configurations for hardware-accelerated machine learning

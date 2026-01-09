@@ -625,13 +625,13 @@ This details the process of synchronising multiple Pi-hole server replicas with 
 
 This details the process of setting up a Nebula Sync server in a containerised environment to synchronise multiple Pi-hole servers:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime).
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [a Container Runtime is installed and set up](../courses/container.md#setting-up-a-container-runtime).
 
-2. [Deploy the Nebula Sync stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+2. [Deploy the Nebula Sync stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/nebula-sync`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/nebula-sync`): This will be used for the Nebula Sync stack's deployment files.
 
-   - A Docker compose file for the Nebula Sync stack on the app directory (i.e. `/mnt/smb/docker/nebula-sync/docker-compose.yml`):
+   - A Compose file for the Nebula Sync stack on the app directory (i.e. `/mnt/smb/docker/nebula-sync/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}

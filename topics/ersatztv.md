@@ -37,15 +37,15 @@ This details how to install and set up an ErsatzTV server in a containerised env
 
 ### Installation
 
-This details the installation steps for ErsatzTV as a Docker container:
+This details the installation steps for ErsatzTV as a containerised application:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [a Container Runtime is installed and set up](../courses/container.md#setting-up-a-container-runtime). The following considerations should be noted:
 
    - Hardware-accelerated transcoding is highly recommended for the best ErsatzTV experience - setting up an [LXC Container on Proxmox](../courses/container.md#create-lxc-container) and [passing through a (dedicated or integrated) GPU](../courses/hypervisor.md#hardware-passthrough) to it may be the easiest way to set up as the host deployment environment for ErsatzTV, paying careful attention to the following items in your deployment:
 
-     - When deploying with Docker Compose, besides passing through a (dedicated or integrated) GPU to the host deployment environment (i.e. LXC Container), the graphics device should also be passed through to the ErsatzTV container - this is covered in the subsequent deployment steps.
+     - When deploying with Compose or Portainer, besides passing through a (dedicated or integrated) GPU to the host deployment environment (i.e. LXC Container), the graphics device should also be passed through to the ErsatzTV container - this is covered in the subsequent deployment steps.
      - Another thing you are likely going to do in your deployment is to pass through a remote or network storage directories to the ErsatzTV container for serving media files - this could be an SMB share that you mount on a Proxmox node host, then passed through to the LXC Container (before again passing through media directories from it to the ErsatzTV container).
-     - In both aforementioned cases, it is **important** to ensure that the user the ErsatzTV container will run as has the required permissions to access the graphics device and directories that you are passing through - you might think using `group_add` in the Docker compose file to solve any permission issue (i.e. by adding the ErsatzTV container user to the same group GIDs as the graphics device and media directories) would be the logical solution, but based on our testing however, it might not be (at least not with an "LXC + Docker Container" combo). To verify that this is not an issue:
+     - In both aforementioned cases, it is **important** to ensure that the user the ErsatzTV container will run as has the required permissions to access the graphics device and directories that you are passing through - you might think using `group_add` in the Compose file to solve any permission issue (i.e. by adding the ErsatzTV container user to the same group GIDs as the graphics device and media directories) would be the logical solution, but based on our testing however, it might not be (at least not with an "LXC + Docker/Podman Container" combo). To verify that this is not an issue:
 
        - When [passing through the graphics device](../courses/hypervisor.md#hardware-passthrough) to the host deployment environment (i.e. LXC Container on Proxmox), ensure that it is passed through to the UID of the intended ErsatzTV container user (i.e. `0`). Verify that said UID has the rights to the graphics device on the host deployment environment:
 
@@ -84,13 +84,13 @@ This details the installation steps for ErsatzTV as a Docker container:
 
      - `8409/tcp`
 
-2. [Deploy the ErsatzTV stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+2. [Deploy the ErsatzTV stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/ersatztv`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/ersatztv`): This will be used for the ErsatzTV stack's volume(s).
 
    - **(Optional)** Remote media directories, on remote mounted storage (i.e. `/mnt/smb/media/movies`, `/mnt/smb/media/tvshows`, etc.): These directories are expected to contain the media files that are meant to be served in ErsatzTV.
 
-   - A Docker compose file for the ErsatzTV stack on the app directory (i.e. `/mnt/smb/docker/ersatztv/docker-compose.yml`):
+   - A Compose file for the ErsatzTV stack on the app directory (i.e. `/mnt/smb/docker/ersatztv/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -125,7 +125,7 @@ This details the installation steps for ErsatzTV as a Docker container:
         default:
       ```
 
-      Update the following section in the Docker compose file with the actual paths to the directories that store your media files (i.e. Movies, TV Shows, Anime, etc.) - if you are deploying ErsatzTV alongside [Jellyfin](jellyfin.md), mapping the media directories to the same paths as they were mapped in Jellyfin is recommended:
+      Update the following section in the Compose file with the actual paths to the directories that store your media files (i.e. Movies, TV Shows, Anime, etc.) - if you are deploying ErsatzTV alongside [Jellyfin](jellyfin.md), mapping the media directories to the same paths as they were mapped in Jellyfin is recommended:
 
       ```diff
         ersatztv:
@@ -144,7 +144,7 @@ This details the installation steps for ErsatzTV as a Docker container:
           ...
       ```
 
-      **(Optional)** If your host deployment environment is capable of hardware transcoding (i.e. has a dedicated or integrated GPU through physical attachment or [hardware passthrough](../courses/hypervisor.md#hardware-passthrough)), uncomment the following section in the Docker compose file to passthrough the graphics device to the ErsatzTV container:
+      **(Optional)** If your host deployment environment is capable of hardware transcoding (i.e. has a dedicated or integrated GPU through physical attachment or [hardware passthrough](../courses/hypervisor.md#hardware-passthrough)), uncomment the following section in the Compose file to passthrough the graphics device to the ErsatzTV container:
 
       ```diff
         ersatztv:

@@ -13,7 +13,7 @@ Home Assistant is free and open-source software used for home automation. It ser
   - [Setup](#setup)
     - [Description](#description-1)
     - [References](#references-1)
-    - [Install HA as a Docker Container](#install-ha-as-a-docker-container)
+    - [Installation](#installation)
     - [Post-Install Setup](#post-install-setup)
   - [Configuration](#configuration)
     - [Description](#description-2)
@@ -23,13 +23,13 @@ Home Assistant is free and open-source software used for home automation. It ser
   - [Zigbee2MQTT](#zigbee2mqtt)
     - [Description](#description-3)
     - [References](#references-3)
-    - [Install Z2M as a Docker Container](#install-z2m-as-a-docker-container)
+    - [Z2M Installation](#z2m-installation)
     - [Z2M Post-Install Setup](#z2m-post-install-setup)
     - [Integrating Z2M with Home Assistant](#integrating-z2m-with-home-assistant)
   - [VS Code Server](#vs-code-server)
     - [Description](#description-4)
     - [References](#references-4)
-    - [Install Code-server as a Docker Container](#install-code-server-as-a-docker-container)
+    - [Code-server Installation](#code-server-installation)
     - [Integrating Code-server with Home Assistant](#integrating-code-server-with-home-assistant)
   - [HACS](#hacs)
     - [Description](#description-5)
@@ -61,21 +61,21 @@ This details the installation and setup process of a Home Assistant (HA) server.
 - [Let's Build A Smart Home with Home Assistant](https://youtu.be/6z-ilfbzDlY)
 - [Onboarding Home Assistant](https://www.home-assistant.io/getting-started/onboarding)
 
-### Install HA as a Docker Container
+### Installation
 
 This details the installation process of HA using the Container installation method:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [a Container Runtime is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
 
    - Ports that will be used and requires allowing on the host machine vary depending on the (intended) smart home setup, hence, it is recommended not to enable or set up a [firewall](firewall.md) on the system.
 
-2. [Deploy the HA stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+2. [Deploy the HA stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/home-assistant`): This will be used for at least the database volume directory which specifically requires local storage.
 
    - **(Optional)** A remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/home-assistant`): This can be used for anything else that supports remote storage such as the Home Assistant configuration volume directory.
 
-   - A Docker compose file for the Home Assistant stack on either app directory (i.e. `/mnt/smb/docker/home-assistant/docker-compose.yml`):
+   - A Compose file for the Home Assistant stack on either app directory (i.e. `/mnt/smb/docker/home-assistant/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -169,11 +169,11 @@ This details the post-installation steps of the HA server for a complete setup:
 
 6. At the end of the onboarding process, click the **FINISH** button to complete the initial setup.
 
-7. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a VS Code Server (Code-server) stack](#install-code-server-as-a-docker-container) so it could be used to configure the HA configuration files from within the HA server.
+7. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a VS Code Server (Code-server) stack](#code-server-installation) so it could be used to configure the HA configuration files from within the HA server.
 
 8. **(Optional)** [Install and set up the HACS integration](#install-hacs-on-home-assistant-container) on the HA server as a means to install custom elements and integrations on the server, graphically.
 
-9. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a Zigbee2MQTT (Z2M) stack](#install-z2m-as-a-docker-container) to manage and use Zigbee devices on the HA server.
+9. **(Optional)** On the same host system where you have deployed your HA stack, [deploy and set up a Zigbee2MQTT (Z2M) stack](#z2m-installation) to manage and use Zigbee devices on the HA server.
 
 ---
 
@@ -235,7 +235,7 @@ This details how to configure HA through its configuration file (`configuration.
 
    - Note however that values set in the configuration file (i.e. `my_value`) needs to be set in plain text, which means that this method may not be secure for sensitive data such as passwords and tokens. To address that:
 
-     - Set your secret value as an environment variable (i.e. `MY_SECRET_VAR`). For example, in the Docker compose file of your HA server:
+     - Set your secret value as an environment variable (i.e. `MY_SECRET_VAR`). For example, in the Compose file of your HA server:
 
         ```yaml
             environment:
@@ -312,7 +312,7 @@ This details some recommended configuration options for a HA setup:
 
 1. [Configure HA](#configuring-home-assistant) to use PostgreSQL instead of the default SQLite database:
 
-   - Based on the `DB_URL` environment variable set in the Docker compose file, add the following variable in your HA instance's secrets file (`secrets.yaml`):
+   - Based on the `DB_URL` environment variable set in the Compose file, add the following variable in your HA instance's secrets file (`secrets.yaml`):
 
       ```yaml
       db_conn_string: !env_var DB_URL
@@ -366,31 +366,39 @@ This details setting up Zigbee2MQTT (Z2M) with Home Assistant (HA).
 - [Docker Compose](https://www.zigbee2mqtt.io/guide/installation/02_docker.html#docker-compose)
 - [JimsGarage/Zigbee2MQTT](https://github.com/JamesTurland/JimsGarage/blob/main/Zigbee2MQTT)
 
-### Install Z2M as a Docker Container
+### Z2M Installation
 
 > [!IMPORTANT]  
 > This guide assumes that you wish to incorporate Z2M into your smart home setup and that you have a hardware device capable of Z2M (i.e. [SONOFF ZBDongle-P](https://sonoff.tech/products/sonoff-zigbee-3-0-usb-dongle-plus-zbdongle-p)). If said device requires a firmware update, make sure to do so before proceeding.
 
 > [!NOTE]  
-> This guide assumes that you have [deployed and set up HA](#setup) as a Docker container.
+> This guide assumes that you have [deployed and set up HA](#setup) as a containerised application.
 
 This details the installation process of Z2M and Mosquitto containers as companion to the HA server:
 
 1. First and foremost, ensure that the host machine has read-write access to the Z2M-capable device either through physical attachment (i.e. bare metal host machine) or [hardware passthrough](../courses/hypervisor.md#hardware-passthrough) (i.e. containerised or virtualised host machine).
 
-2. Identify the name of the Docker network (i.e. `frontend`) of your HA installation:
+2. Identify the name of the Docker or Podman network (i.e. `frontend`) of your HA installation:
 
-    ```sh
-    docker network ls --format "{{.Name}}" | grep -i frontend
-    ```
+   - Replace `<container-runtime>` with the Container Runtime used for the deployment (i.e. `docker` or `podman`):
 
-    Sample output:
+      ```sh
+      <container-runtime> network ls --format '{{.Name}}' | grep -i frontend
+      ```
 
-    ```
-      home-assistant_frontend
-    ```
+      For example:
 
-    Take note of this name (i.e. `home-assistant_frontend`) as we will use it to join the network on the Z2M stack.
+      ```sh
+      docker network ls --format '{{.Name}}' | grep -i frontend
+      ```
+
+   - Sample output:
+
+      ```
+        home-assistant_frontend
+      ```
+
+      Take note of this name (i.e. `home-assistant_frontend`) as we will use it to join the network on the Z2M stack.
 
 3. Locate and identify the Z2M-capable device paths on the host system:
 
@@ -441,11 +449,11 @@ This details the installation process of Z2M and Mosquitto containers as compani
 
      - Take note of both the `DEVICE_BY_ID_PATH` (i.e. `/dev/serial/by-id/usb-Itead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_V2_9020107cf473ef11852cdb1e313510fd-if00-port0`) and `DEVICE_TTY_PATH` (i.e. `/dev/ttyUSB0`) values which will later be used to passthrough the Z2M-capable device to the Z2M container.
 
-4. [Deploy the Z2M stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+4. [Deploy the Z2M stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/z2m`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/z2m`): This will be used for the Z2M stack's volumes.
 
-   - A Docker compose file for the Z2M stack on the app directory (i.e. `/mnt/smb/docker/z2m/docker-compose.yml`):
+   - A Compose file for the Z2M stack on the app directory (i.e. `/mnt/smb/docker/z2m/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -686,26 +694,34 @@ This details setting up VS Code Server (Code-server) with Home Assistant (HA).
 - [User / Group Identifiers](https://docs.linuxserver.io/images/docker-code-server/#user-group-identifiers)
 - [Installing Home Assistant using Docker Compose](https://pimylifeup.com/home-assistant-docker-compose)
 
-### Install Code-server as a Docker Container
+### Code-server Installation
 
 > [!NOTE]  
-> This guide assumes that you have [deployed and set up HA](#setup) as a Docker container.
+> This guide assumes that you have [deployed and set up HA](#setup) as a containerised application.
 
 This details the installation process of a Code-server container as companion to the HA server:
 
-1. Identify the name of the Docker network (i.e. `frontend`) of your HA installation:
+1. Identify the name of the Docker or Podman network (i.e. `frontend`) of your HA installation:
 
-    ```sh
-    docker network ls --format "{{.Name}}" | grep -i frontend
-    ```
+   - Replace `<container-runtime>` with the Container Runtime used for the deployment (i.e. `docker` or `podman`):
 
-    Sample output:
+      ```sh
+      <container-runtime> network ls --format '{{.Name}}' | grep -i frontend
+      ```
 
-    ```
-      home-assistant_frontend
-    ```
+      For example:
 
-    Take note of this name (i.e. `home-assistant_frontend`) as we will use it to join the network on the Code-server stack.
+      ```sh
+      docker network ls --format '{{.Name}}' | grep -i frontend
+      ```
+
+   - Sample output:
+
+      ```
+        home-assistant_frontend
+      ```
+
+      Take note of this name (i.e. `home-assistant_frontend`) as we will use it to join the network on the Code-server stack.
 
 2. Pertaining to the HA server's config directory, identify the following items:
 
@@ -749,11 +765,11 @@ This details the installation process of a Code-server container as companion to
         1000
       ```
 
-3. [Deploy the Code-server stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+3. [Deploy the Code-server stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
 
-   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/code-server`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/code-server`): Since the Code-server stack does not have its own volume, this will only be used for its Docker compose and env file.
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/code-server`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/code-server`): Since the Code-server stack does not have its own volume, this will only be used for its Compose and env file.
 
-   - A Docker compose file for the Code-server stack on the app directory (i.e. `/mnt/smb/docker/code-server/docker-compose.yml`):
+   - A Compose file for the Code-server stack on the app directory (i.e. `/mnt/smb/docker/code-server/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -837,7 +853,7 @@ The Home Assistant Community Store (HACS) is a custom integration that provides 
 ### Install HACS on Home Assistant Container
 
 > [!NOTE]  
-> This guide assumes that you have [deployed and set up HA](#setup) as a Docker container.
+> This guide assumes that you have [deployed and set up HA](#setup) as a containerised application.
 
 This details the installation steps of HACS on the HA server:
 

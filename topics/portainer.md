@@ -44,17 +44,17 @@ This details how to install and set up a Portainer server in a containerised env
 
 ### Installation
 
-This details how to install Portainer as a Docker container:
+This details how to install Portainer as a containerised application:
 
-1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [Docker is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
+1. On a [preconfigured Linux machine](linux.md#configuration) running on a [virtual machine](../courses/vm.md#creating-a-virtual-machine-from-a-template), bare metal device (i.e. [Raspberry Pi](raspberry-pi.md)), or perhaps an [LXC Container](../courses/container.md#create-lxc-container); ensure that [a Container Runtime is installed and set up](../courses/container.md#setting-up-a-container-runtime). For simplicity, the following considerations should be noted:
 
    - Ports that will be used and requires allowing vary for each container you host on the Portainer server, hence, it is recommended not to enable or set up a [firewall](firewall.md) on the system.
 
-2. [Deploy the Portainer stack with Docker Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
+2. [Deploy the Portainer stack with Compose](../courses/container.md#container-runtime-usage) after preparing the following items:
 
    - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/portainer`) or a remote app directory, on remote mounted storage (i.e. `/mnt/smb/docker/portainer`): This will be used for the Portainer stack's volume(s).
 
-   - A Docker compose file for the Portainer stack on the app directory (i.e. `/mnt/smb/docker/portainer/docker-compose.yml`):
+   - A Compose file for the Portainer stack on the app directory (i.e. `/mnt/smb/docker/portainer/docker-compose.yml`):
 
       ```yaml
       name: ${SERVICE_NAME}
@@ -68,7 +68,7 @@ This details how to install Portainer as a Docker container:
             - 9000:9000 # for http
           volumes:
             - ${APP_DIR}/data:/data
-            - /var/run/docker.sock:/var/run/docker.sock
+            - ${CONTAINER_RUNTIME_SOCKET}:/var/run/docker.sock
           networks:
             - default
           restart: unless-stopped
@@ -86,7 +86,34 @@ This details how to install Portainer as a Docker container:
       APP_CONTAINER=portainer
       APP_VERSION=2.27.9
       APP_DIR=/mnt/smb/docker/portainer
+      CONTAINER_RUNTIME_SOCKET=/var/run/docker.sock
       ```
+
+      The `CONTAINER_RUNTIME_SOCKET` value is dependent on the Container Runtime you are using for the deployment:
+
+      - If you are using Docker, get the path to the Docker socket file using:
+
+        ```sh
+        docker context inspect --format '{{.Endpoints.docker.Host}}' | sed 's|.*://||'
+        ```
+
+        Sample output:
+
+        ```
+          /var/run/docker.sock
+        ```
+
+      - If you are using Podman, get the path to the Podman socket file using:
+
+        ```sh
+        podman info --format '{{.Host.RemoteSocket.Path}}'
+        ```
+
+        Sample output:
+
+        ```
+          /run/user/1000/podman/podman.sock
+        ```
 
       Replace the values with your own accordingly.
 
@@ -135,11 +162,11 @@ This details how to deploy or update container(s) in an application stack:
 3. If you are adding a new stack, in the **Create stack** form, configure the following:
 
    - Name: Set a unique, descriptive name for the application stack (i.e. `myapp`)
-   - Build method: Select the **Web editor** menu option to define the Docker compose and env file from the web interface
+   - Build method: Select the **Web editor** menu option to define the Compose and env file from the web interface
 
     **Alternatively**, if you are updating an existing stack, in the **Stack details** view, click the **Editor** section.
 
-4. In the provided **Web editor** for the application stack, define or update the content of its Docker Compose file. For example:
+4. In the provided **Web editor** for the application stack, define or update the content of its Compose file. For example:
 
     ```yaml
     services:
