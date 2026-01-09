@@ -48,8 +48,8 @@ Once you have got your hypervisor running, you need to decide how to actually de
 
 Topics include, but (possibly) not limited to:
 
-- [Virtual Machines (VM)](courses/vm.md)
-- [Containers](courses/container.md) including [Docker](topics/docker.md), [Podman](topics/podman.md), and [Linux Containers (LXC)](courses/container.md#linux-containers-lxc)
+- [Virtual Machines (VM)](courses/vm.md) and [Linux Containers (LXC)](courses/container.md#linux-containers-lxc)
+- [Containers](courses/container.md) including [Docker](topics/docker.md) and [Podman](topics/podman.md)
 - [Kubernetes](courses/kubernetes.md) including [RKE2](topics/rke2.md)
 
 ### [Network](courses/network.md)
