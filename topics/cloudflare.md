@@ -38,6 +38,10 @@ Cloudflare, Inc. is an American company that provides content delivery network s
     - [Description](#description-6)
     - [References](#references-6)
     - [Steps](#steps-2)
+  - [Disable Caching for Specific Hostname](#disable-caching-for-specific-hostname)
+    - [Description](#description-7)
+    - [References](#references-7)
+    - [Steps](#steps-3)
 
 ## References
 
@@ -474,3 +478,59 @@ You may want to limit traffic to your domain to a specific country, this details
      - Click the **Deploy** button to apply the rule configuration.
 
 7. Back in the **Security rules** page, ensure that the rule you have just created is flagged as **Active**.
+
+---
+
+## Disable Caching for Specific Hostname
+
+### Description
+
+This details how to disable caching for a specific hostname on a Cloudflare-managed domain.
+
+### References
+
+- [Create a rule in the dashboard](https://developers.cloudflare.com/cache/how-to/cache-rules/create-dashboard)
+
+### Steps
+
+If a website of yours does not need to be cached (i.e. serving static content), this details how to do so by implementing a cache rule on Cloudflare:
+
+1. Visit the [Cloudflare dashboard](https://dash.cloudflare.com) page on a web browser. Log into your Cloudflare account if you have not already.
+
+2. On the left hand side of the dashboard, select the **Account Home** menu item.
+
+3. On the **Account Home** page, select the link on the name of the domain you wish to configure (i.e. `example.com`).
+
+4. On the left hand side of the dashboard, expand the **Caching** menu group, and select the **Cache Rules** menu item.
+
+5. In the **Cache Rules** page, click the **Create rule** button.
+
+6. In the **Create new Cache Rule** form, configure the following:
+
+   - Rule name: Add a descriptive name that identifies the rule (i.e. `Disable caching`)
+
+   - If incoming requests match:
+
+     - Select to enable the `Custom filter expression` option
+
+   - When incoming requests match:
+
+     - Set the following values:
+
+       - Field: Expand the dropdown and select the `Hostname` option
+       - Operator: Expand the dropdown and select the `equals` option
+       - Value: Set the hostname you wish to disable caching for (i.e. `mysubdomain.example.com`)
+
+     - The **Expression Preview** should look similar to the following, if you have done all of the above:
+
+        ```
+          (http.host eq "mysubdomain.example.com")
+        ```
+
+     - Then, Cache eligibility:
+
+       - Select to enable the `Bypass cache` option
+
+     - Click the **Deploy** button to apply the rule configuration.
+
+7. Back in the **Cache Rules** page, ensure that the rule you have just created has been enabled.
