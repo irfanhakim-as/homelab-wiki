@@ -85,37 +85,47 @@ This details how to install Podman on a Linux system:
       bash ~/get-podman-launcher.sh
       ```
 
-3. If you encounter such an error while building or running a container using `podman` post-installation:
+3. If you encounter any of the following errors in an attempt to use `podman` post-installation:
 
-    ```
-      Error: open /etc/containers/policy.json: no such file or directory
-    ```
+   - Podman requires a policy configuration file, but one may not be provided by default:
 
-    Fix this by doing the following:
-
-    - Create the following configuration directory on the system:
-
-      ```sh
-      mkdir -p ~/.config/containers
+      ```
+        Error: open /etc/containers/policy.json: no such file or directory
       ```
 
-    - Create the following policy configuration file:
+      To fix this:
 
-      ```sh
-      nano ~/.config/containers/policy.json
+      - Create the following configuration directory on the system:
+
+        ```sh
+        mkdir -p ~/.config/containers
+        ```
+
+      - Create the following policy configuration file:
+
+        ```sh
+        nano ~/.config/containers/policy.json
+        ```
+
+        Add and save the following configuration to the file:
+
+        ```json
+        {
+          "default": [
+            {
+              "type": "insecureAcceptAnything"
+            }
+          ]
+        }
+        ```
+
+   - Podman needs `newuidmap` and `newgidmap` for rootless containers:
+
+      ```
+        Error: command required for rootless mode with multiple IDs: exec: "newuidmap": executable file not found in $PATH
       ```
 
-      Add and save the following configuration to the file:
-
-      ```json
-      {
-        "default": [
-          {
-            "type": "insecureAcceptAnything"
-          }
-        ]
-      }
-      ```
+      To fix this, find the package that provides both of these commands and [install](package-manager.md#install-software) it using your package manager (i.e. `apt`).
 
 4. To set up the necessary `systemd` unit files for Podman, create and enable the following `systemd` unit files on the system:
 
