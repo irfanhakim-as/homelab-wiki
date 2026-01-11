@@ -222,7 +222,7 @@ This details how to install Podman on a Linux system:
 5. To ensure that Podman containers that have been configured to start on boot (i.e. `restart-policy=always`) can do so successfully without needing to log into the system first, enable linger for boot startup:
 
     ```sh
-    loginctl enable-linger ${USER}
+    sudo loginctl enable-linger ${USER}
     ```
 
     Check that it has been enabled:
