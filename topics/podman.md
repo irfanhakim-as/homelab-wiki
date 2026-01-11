@@ -119,7 +119,7 @@ This details how to install Podman on a Linux system:
 
 4. To set up the necessary `systemd` unit files for Podman, create and enable the following `systemd` unit files on the system:
 
-   - First and foremost, [check if the following `systemd` units exist](systemd.md#list-systemd-units) on the system, both system/user-wide:
+   - First and foremost, [check if the following `systemd` units already exist](systemd.md#list-systemd-units) on the system, both system/user-wide:
 
      - `podman.service`
      - `podman.socket`
