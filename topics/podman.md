@@ -253,7 +253,10 @@ This details how to install Podman on a Linux system:
 
 This details the post-installation steps for a complete Podman setup:
 
-1. For a _[Docker Compose](docker.md#docker-compose)-like_ compatibility, [install](package-manager.md#install-software) the `podman-compose` package using your package manager (i.e. `nix`) if it is available in your software repository.
+1. For a _[Docker Compose](docker.md#docker-compose)-like_ compatibility, [install](package-manager.md#install-software) either one of the following packages using your package manager (i.e. `nix`) if it is available in your software repository:
+
+   - `docker-compose`
+   - `podman-compose`
 
 ---
 
@@ -271,7 +274,7 @@ This details some common usage steps for a Container Runtime solution such as Po
 ### Podman Compose
 
 > [!NOTE]  
-> [Podman Compose needs to be installed](#post-install-setup) before you are able to proceed with the following operations.
+> [Either Docker Compose or Podman Compose needs to be installed](#post-install-setup) before you are able to proceed with the following operations.
 
 This details how to manage a containerised application deployment using Podman Compose:
 
