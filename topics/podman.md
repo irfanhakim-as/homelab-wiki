@@ -154,7 +154,7 @@ This details how to install Podman on a Linux system:
         Type=exec
         KillMode=process
         Environment=LOGGING="--log-level=info"
-        ExecStart=</path/to/podman> system service $LOGGING system service
+        ExecStart=</path/to/podman> system service
 
         [Install]
         WantedBy=default.target
