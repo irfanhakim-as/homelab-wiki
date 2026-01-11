@@ -365,109 +365,109 @@ This details how to manage a containerised application deployment using Podman C
    - Deploy the application stack using the full path to the application's corresponding Compose file (i.e. `~/.local/share/myapp/docker-compose.yml`):
 
       ```sh
-      podman-compose -f <compose-file-path> up -d --force-recreate
+      podman compose -f <compose-file-path> up -d --force-recreate
       ```
 
       For example:
 
       ```sh
-      podman-compose -f ~/.local/share/myapp/docker-compose.yml up -d --force-recreate
+      podman compose -f ~/.local/share/myapp/docker-compose.yml up -d --force-recreate
       ```
 
       **Alternatively**, if you have supplied an env file, be sure to add the option to include the full path to the env file (i.e. `~/.local/share/myapp/.env`):
 
       ```sh
-      podman-compose -f <compose-file-path> --env-file <env-file-path> up -d --force-recreate
+      podman compose -f <compose-file-path> --env-file <env-file-path> up -d --force-recreate
       ```
 
 2. To verify that all container(s) in the application stack are running:
 
     ```sh
-    podman-compose -f <compose-file-path> ps -a
+    podman compose -f <compose-file-path> ps -a
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml ps -a
+    podman compose -f ~/.local/share/myapp/docker-compose.yml ps -a
     ```
 
 3. To enter a running container in the application stack:
 
     ```sh
-    podman-compose -f <compose-file-path> exec <service-name> <shell>
+    podman compose -f <compose-file-path> exec <service-name> <shell>
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml exec myapp sh
+    podman compose -f ~/.local/share/myapp/docker-compose.yml exec myapp sh
     ```
 
 4. To view and follow the logs of container(s) in the application stack:
 
     ```sh
-    podman-compose -f <compose-file-path> logs --follow
+    podman compose -f <compose-file-path> logs --follow
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml logs --follow
+    podman compose -f ~/.local/share/myapp/docker-compose.yml logs --follow
     ```
 
 5. To stop the running application stack without removing the containers:
 
     ```sh
-    podman-compose -f <compose-file-path> stop
+    podman compose -f <compose-file-path> stop
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml stop
+    podman compose -f ~/.local/share/myapp/docker-compose.yml stop
     ```
 
 6. To restart the container services in the application stack:
 
     ```sh
-    podman-compose -f <compose-file-path> restart
+    podman compose -f <compose-file-path> restart
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml restart
+    podman compose -f ~/.local/share/myapp/docker-compose.yml restart
     ```
 
     **Alternatively**, to restart a specific container service in the application stack:
 
     ```sh
-    podman-compose -f <compose-file-path> restart <service-name>
+    podman compose -f <compose-file-path> restart <service-name>
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml restart myapp
+    podman compose -f ~/.local/share/myapp/docker-compose.yml restart myapp
     ```
 
 7. To remove the application stack:
 
     ```sh
-    podman-compose -f <compose-file-path> down
+    podman compose -f <compose-file-path> down
     ```
 
     For example:
 
     ```sh
-    podman-compose -f ~/.local/share/myapp/docker-compose.yml down
+    podman compose -f ~/.local/share/myapp/docker-compose.yml down
     ```
 
     **Alternatively**, to remove the application stack and its volumes:
 
     ```sh
-    podman-compose -f <compose-file-path> down --volumes
+    podman compose -f <compose-file-path> down --volumes
     ```
 
     Be aware though that this option will remove all of the application's persistent data permanently.
