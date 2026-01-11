@@ -181,9 +181,11 @@ This details some recommended configuration options for Arch Linux as a server.
 
     - [Remove the (default) firewall rule](firewall.md#delete-rule) allowing the old SSH port using its service name, `ssh`.
 
-12. **(Optional)** [Install and set up `yay`](package-manager.md#setup) as an alternative package manager to `pacman` to get easy access to the packages in the [AUR](https://aur.archlinux.org).
+12. **(Optional)** [Install and enable Fail2Ban](fail2ban.md#setup) on the system to protect it against brute-force attacks.
 
-13. Clear the VM's Bash history:
+13. **(Optional)** [Install and set up `yay`](package-manager.md#setup) as an alternative package manager to `pacman` to get easy access to the packages in the [AUR](https://aur.archlinux.org).
+
+14. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -193,7 +195,7 @@ This details some recommended configuration options for Arch Linux as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-14. Reboot the system to apply all changes:
+15. Reboot the system to apply all changes:
 
     ```sh
     sudo reboot now

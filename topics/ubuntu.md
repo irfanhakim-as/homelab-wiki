@@ -140,7 +140,9 @@ This details some recommended configuration options for Ubuntu as a server.
 
    - [Allow the connection](firewall.md#adding-allow-rule) to the new SSH port (i.e. `2222`) using the `tcp` protocol.
 
-11. For systems running `cloud-init` (i.e. on a [Raspberry Pi](raspberry-pi.md)), password prompts may not be required when using `sudo` by default.
+11. **(Optional)** [Install and enable Fail2Ban](fail2ban.md#setup) on the system to protect it against brute-force attacks.
+
+12. For systems running `cloud-init` (i.e. on a [Raspberry Pi](raspberry-pi.md)), password prompts may not be required when using `sudo` by default.
 
     - To fix this, check the content of the `/etc/sudoers` file:
 
@@ -222,7 +224,7 @@ This details some recommended configuration options for Ubuntu as a server.
       + #sudo: ALL=(ALL) NOPASSWD:ALL
       ```
 
-12. Clear the VM's Bash history:
+13. Clear the VM's Bash history:
 
     ```sh
     history -c
@@ -232,7 +234,7 @@ This details some recommended configuration options for Ubuntu as a server.
     > [!NOTE]  
     > There should be no other active sessions on the VM while doing this.
 
-13. Reboot the system to apply all changes:
+14. Reboot the system to apply all changes:
 
     ```sh
     sudo reboot now
