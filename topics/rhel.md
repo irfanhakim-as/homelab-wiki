@@ -401,7 +401,7 @@ This details the simple process of updating system's hostname:
     ```diff
     - 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
     + 127.0.0.1   rocky-1 rocky-1.example.com localhost localhost.localdomain localhost4 localhost4.localdomain4
-    ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+      ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
     ```
 
 3. Reboot the system to apply the changes:
