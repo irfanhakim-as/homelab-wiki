@@ -44,28 +44,10 @@ This details how to install and setup SSH on a Linux system.
 
 ### Installation
 
-1. Install SSH according to the system's Linux distribution.
+1. [Install](package-manager.md#install-software) SSH from the system package manager according to the system's Linux distribution:
 
-    Arch Linux:
-
-    ```sh
-    sudo pacman -Syyu
-    sudo pacman -S openssh
-    ```
-
-    Debian/Ubuntu:
-
-    ```sh
-    sudo apt update
-    sudo apt install openssh-server
-    ```
-
-    Rocky Linux (RHEL):
-
-    ```sh
-    sudo yum update
-    sudo yum install openssh-server
-    ```
+   - Arch Linux: `openssh`
+   - Debian/Ubuntu and Rocky Linux (RHEL): `openssh-server`
 
 ### Generate SSH keys
 
