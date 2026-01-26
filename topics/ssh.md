@@ -138,8 +138,8 @@ This changes the system's SSH port from its default port `22` for better securit
 2. Based on the default `Port` line:
 
     ```diff
-    #Port 22
-    +Port <port-number>
+      #Port 22
+    + Port <port-number>
     ```
 
    - Comment the original `Port` line if it is not already commented to override it.
@@ -149,8 +149,8 @@ This changes the system's SSH port from its default port `22` for better securit
    - Example changes:
 
         ```
-        #Port 22
-        Port 2222
+          #Port 22
+          Port 2222
         ```
 
 ### Disable Root Login
@@ -162,8 +162,8 @@ This disables logging in as root via SSH.
 2. Based on the default `PermitRootLogin` line:
 
     ```diff
-    #PermitRootLogin prohibit-password
-    +PermitRootLogin no
+      #PermitRootLogin prohibit-password
+    + PermitRootLogin no
     ```
 
    - Comment the original `PermitRootLogin` line if it is not already commented to override it.
@@ -173,8 +173,8 @@ This disables logging in as root via SSH.
    - Example changes:
 
         ```
-        #PermitRootLogin prohibit-password
-        PermitRootLogin no
+          #PermitRootLogin prohibit-password
+          PermitRootLogin no
         ```
 
 ### Disable Password Authentication
@@ -186,8 +186,8 @@ This disables authenticating users with their passwords via SSH, requiring the u
 2. Based on the default `PasswordAuthentication` line:
 
     ```diff
-    #PasswordAuthentication yes
-    +PasswordAuthentication no
+      #PasswordAuthentication yes
+    + PasswordAuthentication no
     ```
 
    - Comment the original `PasswordAuthentication` line if it is not already commented to override it.
@@ -197,8 +197,8 @@ This disables authenticating users with their passwords via SSH, requiring the u
    - Example changes:
 
         ```
-        #PasswordAuthentication yes
-        PasswordAuthentication no
+          #PasswordAuthentication yes
+          PasswordAuthentication no
         ```
 
 ---
