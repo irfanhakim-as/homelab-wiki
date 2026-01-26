@@ -104,26 +104,26 @@ This details the process of updating the system's SSH configuration and includes
 
 ### Steps
 
-1. Backup the original SSH configuration file:
+1. Write a new custom SSH configuration file in the `/etc/ssh/sshd_config.d` directory:
 
     ```sh
-    sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+    sudo nano /etc/ssh/sshd_config.d/<config-name>.conf
     ```
 
-2. Update the SSH configuration file:
+    For example:
 
     ```sh
-    sudo nano /etc/ssh/sshd_config
+    sudo nano /etc/ssh/sshd_config.d/custom.conf
     ```
 
-3. Make any necessary changes and save the SSH configuration file.
+    Make any necessary configuration changes and save the custom SSH configuration file.
 
-4. Once **absolutely** confident and ready to apply the changes, [restart](systemd.md#restart-service) the SSH service (i.e. `sshd.service` or `ssh.service`).
+2. Once **absolutely** confident and ready to apply the changes, [restart](systemd.md#restart-service) the SSH service (i.e. `sshd.service` or `ssh.service`).
 
     > [!WARNING]  
     > Applying changes to the SSH configuration file without being prepared for the changes to take effect is highly discouraged.
 
-5. If any of these changes do not persist across reboot (i.e. on certain LXC Containers), you may need to run the following additional steps:
+3. If any of these changes do not persist across reboot (i.e. on certain LXC Containers), you may need to run the following additional steps:
 
    - [Disable](systemd.md#disable-service) the SSH socket (i.e. `sshd.socket` or `ssh.socket`)
 
