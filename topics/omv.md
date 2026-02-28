@@ -109,7 +109,14 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
     wget -O - https://raw.githubusercontent.com/OpenMediaVault-Plugin-Developers/installScript/master/install | sudo bash
     ```
 
-      Note that you may lose remote SSH connection to the OMV server at a certain point during the installation process. Should this happen, simply reconnect to the server's latest IP address via SSH or the web interface.
+    Note that you may lose remote SSH connection to the OMV server at a certain point during the installation process, for example:
+
+    ```
+      [2025-12-23 01:41:54+0000] [omvinstall] Applying network changes with omv-salt. Connection may drop ...
+      client_loop: ssh_packet_write_poll: Connection to 192.168.0.106 port 22: Host is down
+    ```
+
+    Should this happen, simply reconnect to the server's latest IP address via SSH or the web interface.
 
 ### Install OMV-Extras
 
