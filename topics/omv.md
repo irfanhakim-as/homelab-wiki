@@ -145,11 +145,11 @@ This details the installation steps for setting up an OpenMediaVault (OMV) serve
 
 This acts as a general guide on a complete setup process of an OMV server post-installation:
 
-1. Go through the [general configuration]() steps for the initial setup of the OMV server.
+1. Go through the [general configuration](#general-configuration) steps for the initial setup of the OMV server.
 
-2. [Set up the storage devices]() and [configure]() them accordingly.
+2. [Set up the storage devices](#storage-setup) and [configure](#storage-configuration) them accordingly.
 
-3. [Install and set up Docker]() as a means to host containerised services on the server.
+3. [Install and set up Docker](#docker) as a means to host containerised services on the server.
 
 4. Ensure that a static IP address has been configured for the OMV server.
 
