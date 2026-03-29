@@ -52,6 +52,12 @@ This details how to use the `systemctl` command to manage services on a Linux sy
     sudo systemctl start unit.service
     ```
 
+    **Alternatively**, to start a user-level service:
+
+    ```sh
+    systemctl --user start unit.service
+    ```
+
 ### Enable Service
 
 1. To enable a service to start on every boot:
@@ -60,10 +66,22 @@ This details how to use the `systemctl` command to manage services on a Linux sy
     sudo systemctl enable unit.service
     ```
 
+    **Alternatively**, to enable a user-level service to start on every login:
+
+    ```sh
+    systemctl --user enable unit.service
+    ```
+
 2. **Alternatively**, to start a service now and enable the service on boot in a single command:
 
     ```sh
     sudo systemctl enable --now unit.service
+    ```
+
+    **Alternatively**, for a user-level service:
+
+    ```sh
+    systemctl --user enable --now unit.service
     ```
 
 ### Stop Service
@@ -74,12 +92,24 @@ This details how to use the `systemctl` command to manage services on a Linux sy
     sudo systemctl stop unit.service
     ```
 
+    **Alternatively**, to stop a user-level service:
+
+    ```sh
+    systemctl --user stop unit.service
+    ```
+
 ### Disable Service
 
 1. To disable an enabled service from starting on every boot:
 
     ```sh
     sudo systemctl disable unit.service
+    ```
+
+    **Alternatively**, to disable a user-level service from starting on every login:
+
+    ```sh
+    systemctl --user disable unit.service
     ```
 
 ### Restart Service
@@ -90,12 +120,24 @@ This details how to use the `systemctl` command to manage services on a Linux sy
     sudo systemctl restart unit.service
     ```
 
+    **Alternatively**, to restart a user-level service:
+
+    ```sh
+    systemctl --user restart unit.service
+    ```
+
 ### Service Status
 
 1. To check the status of a service:
 
     ```sh
     sudo systemctl status unit.service
+    ```
+
+    **Alternatively**, to check the status of a user-level service:
+
+    ```sh
+    systemctl --user status unit.service
     ```
 
 ### Reload Systemd Manager Configuration
