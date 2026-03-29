@@ -33,6 +33,12 @@ Raspberry Pi is a series of small single-board computers (SBCs) developed in the
     - [Description](#description-5)
     - [References](#references-5)
     - [Steps](#steps-1)
+  - [Raspberry Pi Connect](#raspberry-pi-connect)
+    - [Description](#description-6)
+    - [References](#references-6)
+    - [Installing Raspberry Pi Connect](#installing-raspberry-pi-connect)
+    - [Linking Raspberry Pi Connect](#linking-raspberry-pi-connect)
+    - [Connecting via Raspberry Pi Connect](#connecting-via-raspberry-pi-connect)
 
 ## References
 
@@ -460,3 +466,85 @@ This details how to update boot configuration options (_a la_ BIOS) on a Raspber
     ```sh
     sudo reboot now
     ```
+
+---
+
+## Raspberry Pi Connect
+
+### Description
+
+This details how to set up Raspberry Pi Connect, an official remote access service by Raspberry Pi that allows you to access your Raspberry Pi's desktop or a remote shell session from any browser, without requiring port forwarding or a VPN.
+
+### References
+
+- [Raspberry Pi Connect](https://www.raspberrypi.com/documentation/services/connect.html)
+
+### Installing Raspberry Pi Connect
+
+> [!NOTE]
+> Raspberry Pi Connect requires Raspberry Pi OS Bookworm or later. For desktop access, a desktop environment must be installed. For headless (shell-only) access, Raspberry Pi OS Lite is supported.
+
+1. [Update all software repositories](package-manager.md#update-software) installed on the system using `apt`.
+
+2. [Install](package-manager.md#install-software) either the `rpi-connect` package or its _lite_ variant, `rpi-connect-lite` (remote shell only, no screen sharing) using `apt`.
+
+3. If using `rpi-connect-lite`, enable user lingering so the service continues running when you are not logged in:
+
+    ```sh
+    loginctl enable-linger
+    ```
+
+4. [Start](systemd.md#start-service) the `rpi-connect.service` user-level service.
+
+5. [Enable](systemd.md#enable-service) the `rpi-connect.service` user-level service to start automatically on login.
+
+### Linking Raspberry Pi Connect
+
+> [!NOTE]
+> This only needs to be done once per device to associate it with your Raspberry Pi ID.
+
+This details how to link the device to your Raspberry Pi ID:
+
+1. On the Raspberry Pi, sign in to Raspberry Pi Connect using your Raspberry Pi ID:
+
+    ```sh
+    rpi-connect signin
+    ```
+
+    Sample output:
+
+    ```
+      Complete sign in by visiting https://connect.raspberrypi.com/verify/XXXX-XXXX
+    ```
+
+2. Visit the URL provided in the output in a browser, and sign in with your Raspberry Pi ID (or create one if you do not have one yet).
+
+3. Once signed in, the device will be linked to your Raspberry Pi ID. Verify that the service is running:
+
+    ```sh
+    rpi-connect status
+    ```
+
+    Sample output:
+
+    ```
+      Signed in: yes
+      Subscribed to events: yes
+      Screen sharing: unavailable
+      Remote shell: allowed (0 sessions active)
+    ```
+
+### Connecting via Raspberry Pi Connect
+
+This details how to remotely connect to the Raspberry Pi using Raspberry Pi Connect from any device:
+
+1. From any device with a browser, visit [connect.raspberrypi.com](https://connect.raspberrypi.com) and sign in with your Raspberry Pi ID.
+
+2. In the **Devices** list, locate your Raspberry Pi and click its corresponding **Connect** button.
+
+3. If provided with multiple connection options, select the type of remote session you would like to start:
+
+   - `Screen sharing`: Opens a remote desktop session in the browser (requires a desktop environment to be installed and an active desktop session running on the Pi)
+   - `Remote shell`: Opens a terminal session in the browser (available on all variants including Raspberry Pi OS Lite)
+
+4. The selected session will open in a new browser window, providing you with remote access to the Raspberry Pi.
