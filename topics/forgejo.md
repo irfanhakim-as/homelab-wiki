@@ -322,6 +322,7 @@ This details setting up a Forgejo Actions runner with the Forgejo server.
 - [Forgejo runner](https://code.forgejo.org/forgejo/runner)
 - [Forgejo Actions administrator guide](https://forgejo.org/docs/latest/admin/actions)
 - [Installation with Docker](https://forgejo.org/docs/latest/admin/actions/installation/docker)
+- [Setting up Forgejo Actions](https://nickcunningh.am/blog/how-to-setup-and-configure-forgejo-with-support-for-forgejo-actions-and-more#setting-up-forgejo-actions)
 
 ### Runner Installation
 
