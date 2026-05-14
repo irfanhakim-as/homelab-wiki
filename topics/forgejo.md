@@ -20,9 +20,13 @@ Forgejo is software for hosting a forge using the Git version control system to 
     - [References](#references-2)
     - [Configuring Forgejo](#configuring-forgejo)
     - [Recommended Configurations](#recommended-configurations)
-  - [Usage](#usage)
+  - [Forgejo Runner](#forgejo-runner)
     - [Description](#description-3)
     - [References](#references-3)
+    - [Runner Installation](#runner-installation)
+  - [Usage](#usage)
+    - [Description](#description-4)
+    - [References](#references-4)
     - [Adding a User to Forgejo](#adding-a-user-to-forgejo)
     - [Cloning Existing Git Repository to Forgejo](#cloning-existing-git-repository-to-forgejo)
     - [Repository Mirroring from Forgejo to GitHub](#repository-mirroring-from-forgejo-to-github)
@@ -174,6 +178,8 @@ This details the post-installation steps of the Forgejo server for a complete se
 
 3. Configure the Forgejo server based on the [recommended configuration options](#configuration).
 
+4. **(Optional)** [Deploy and set up a Forgejo Actions runner](#runner-installation) to enable CI/CD workflows on the Forgejo server.
+
 ---
 
 ## Configuration
@@ -302,6 +308,169 @@ This details some recommended configuration options for a Forgejo setup:
    - **(Optional)** Update the following configuration option under the `security` group on your Forgejo instance's configuration file (`app.ini`) to establish a trusted network range for the reverse proxy:
 
      - `REVERSE_PROXY_TRUSTED_PROXIES`: Set this to the network range of your local network (i.e. `192.168.0.0/24`)
+
+---
+
+## Forgejo Runner
+
+### Description
+
+This details setting up a Forgejo Actions runner with the Forgejo server.
+
+### References
+
+- [Forgejo runner](https://code.forgejo.org/forgejo/runner)
+- [Forgejo Actions administrator guide](https://forgejo.org/docs/latest/admin/actions)
+- [Installation with Docker](https://forgejo.org/docs/latest/admin/actions/installation/docker)
+
+### Runner Installation
+
+> [!NOTE]  
+> This guide assumes that you have [deployed and set up a Forgejo server](#setup) as a containerised application.
+
+This details the installation process of a Forgejo Actions runner as a companion to the Forgejo server:
+
+1. First, register a new runner on the Forgejo server to obtain the connection credentials:
+
+   - Log in to the Forgejo server web interface and click the profile icon found on the top right corner to expand the **Profile and settings** menu.
+
+   - Click the **Site administration** menu option.
+
+   - In the **Admin settings** page, expand the **Actions** group, and click the **Runners** menu option.
+
+   - In the **Manage runners** page, click the **Create new Runner** button.
+
+   - In the **Create new runner** form, configure the following:
+
+     - Name: Set a unique, descriptive name for the runner (i.e. `my-runner`)
+     - Description: Set a brief description for the runner (i.e. `My Forgejo Actions runner`)
+
+      Click the **Create** button to submit the form.
+
+   - Take note of the displayed **UUID** and **Token** values, as these will be used in the runner configuration.
+
+2. [Deploy the Forgejo runner stack with Compose or Portainer](../courses/container.md#container-runtime-usage) after preparing the following items:
+
+   - A local app directory, on local storage (i.e. `/home/myuser/.local/share/docker/forgejo-runner`): This will be used for the runner's data and configuration.
+
+   - A Compose file for the Forgejo runner stack on the app directory (i.e. `/home/myuser/.local/share/docker/forgejo-runner/docker-compose.yml`):
+
+      ```yaml
+      name: ${SERVICE_NAME}
+      services:
+        dind:
+          container_name: ${DIND_CONTAINER}
+          image: ${DIND_REGISTRY}/library/docker:${DIND_VERSION}
+          command: ["dockerd", "-H", "tcp://0.0.0.0:2375", "--tls=false"]
+          privileged: true
+          networks:
+            - default
+          restart: unless-stopped
+
+        runner:
+          container_name: ${RUNNER_CONTAINER}
+          image: ${RUNNER_REGISTRY}/forgejo/runner:${RUNNER_VERSION}
+          command: forgejo-runner daemon --config /etc/forgejo-runner/config.yml
+          user: "${RUNNER_UID}:${RUNNER_GID}"
+          environment:
+            - DOCKER_HOST=tcp://dind:2375
+          volumes:
+            - ${APP_DIR}/data:/data
+            - ${APP_DIR}/config/config.yml:/etc/forgejo-runner/config.yml:ro
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+          deploy:
+            resources:
+              limits:
+                cpus: ${RUNNER_CPU_LIMIT}
+                memory: ${RUNNER_MEMORY_LIMIT}
+          depends_on:
+            - dind
+          networks:
+            - default
+          restart: unless-stopped
+          security_opt:
+            - no-new-privileges:true
+
+      networks:
+        default:
+      ```
+
+   - An env file for the Forgejo runner stack on the app directory (i.e. `/home/myuser/.local/share/docker/forgejo-runner/.env`):
+
+      ```sh
+      SERVICE_NAME=forgejo-runner
+      RUNNER_CONTAINER=forgejo-runner
+      RUNNER_REGISTRY=data.forgejo.org
+      RUNNER_VERSION=12.10.1
+      APP_DIR=/home/myuser/.local/share/docker/forgejo-runner
+      DIND_CONTAINER=forgejo-dind
+      DIND_REGISTRY=docker.io
+      DIND_VERSION=29.4.3-dind-alpine3.23
+      RUNNER_UID=1000
+      RUNNER_GID=1000
+      RUNNER_CPU_LIMIT=1
+      RUNNER_MEMORY_LIMIT=1g
+      ```
+
+      Replace the values with your own accordingly.
+
+   - Pre-configure the runner with its configuration file before deployment:
+
+     - Pre-create the runner's configuration directory inside the app directory (i.e. `/home/myuser/.local/share/docker/forgejo-runner`):
+
+        ```sh
+        mkdir -p <app-dir>/config
+        ```
+
+        For example:
+
+        ```sh
+        mkdir -p /home/myuser/.local/share/docker/forgejo-runner/config
+        ```
+
+     - Inside the runner's configuration directory (i.e. `/home/myuser/.local/share/docker/forgejo-runner/config`), create the configuration file (i.e. `config.yml`):
+
+        ```sh
+        nano <runner-config-dir>/config.yml
+        ```
+
+        For example:
+
+        ```sh
+        nano /home/myuser/.local/share/docker/forgejo-runner/config/config.yml
+        ```
+
+        Add and save the following configuration to the file, replacing `<forgejo-host>`, `<uuid>`, and `<token>` with the values obtained earlier:
+
+        ```yaml
+        log:
+          level: info
+          job_level: info
+
+        runner:
+          capacity: 1
+          timeout: 3h
+          shutdown_timeout: 3h
+
+        container:
+          network: "host"
+          docker_host: "-"
+          options: "-e DOCKER_HOST=tcp://dind:2375"
+
+        server:
+          connections:
+            forgejo:
+              url: https://<forgejo-host>/
+              uuid: <uuid>
+              token: <token>
+              labels:
+                - ubuntu-latest:docker://docker.io/catthehacker/ubuntu:act-24.04
+        ```
+
+        You may adjust the `labels` list to include additional runner images you wish to support.
+
+3. Once the stack has been deployed, the runner should appear as active in the **Runners** page of the Forgejo server web interface.
 
 ---
 
