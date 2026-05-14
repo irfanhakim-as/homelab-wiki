@@ -671,10 +671,17 @@ This details how to clone an existing Git repository to the Forgejo server:
 
 This details how to set up repository mirroring from the Forgejo server to GitHub:
 
-1. To set up repository mirroring to GitHub from a Forgejo server, you will need to choose a method to authenticate to the GitHub server; either via SSH or HTTPS. If you choose the latter, please ensure that you have created a GitHub personal access token (classic) with the following scopes:
+1. To set up repository mirroring to GitHub from a Forgejo server, you will need to choose a method to authenticate to the GitHub server; either via SSH or HTTPS. If you choose the latter, please ensure that you have created a GitHub personal access token with the required permissions:
 
-   - `public_repo`
-   - `workflow`
+   - Classic token scopes:
+
+     - `public_repo`
+     - `workflow`
+
+   - Fine-grained token repository permissions:
+
+     - Contents: `Read and write`
+     - Workflows: `Read and write`
 
 2. The source repository in this exercise will be the Forgejo server repository. The target repository on GitHub must already be created and should meet either one of the two following criterias:
 
