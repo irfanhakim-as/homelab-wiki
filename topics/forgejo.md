@@ -705,7 +705,7 @@ This details how to set up repository mirroring from the Forgejo server to GitHu
 
       Click the **Add push mirror** button to submit the form.
 
-   - **(SSH)** If you have chosen to authenticate to the target GitHub repository via SSH, please ensure that you have added the configured mirror's automatically generated public SSH key to the GitHub user account accordingly:
+   - **(SSH)** If you have chosen to authenticate to the target GitHub repository via SSH, please ensure that you have added the configured mirror's automatically generated public SSH key to either the GitHub user account or the target repository's deploy keys accordingly:
 
      - On the source repository, under the same **Mirror settings** section, click the **Copy public key** link corresponding to the configured mirror to obtain the public SSH key that you need.
 
