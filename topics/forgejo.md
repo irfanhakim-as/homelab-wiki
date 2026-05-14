@@ -470,7 +470,7 @@ This details the installation process of a Forgejo Actions runner as a companion
 
         You may adjust the `labels` list to include additional runner images you wish to support.
 
-3. Once the stack has been deployed, the runner should appear as active in the **Runners** page of the Forgejo server web interface.
+3. Once the stack has been deployed, the runner should appear in the **Manage runners** page of the Forgejo server web interface.
 
 ---
 
