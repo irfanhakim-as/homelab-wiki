@@ -489,7 +489,7 @@ This details the installation steps for the Borg client on a Kubernetes cluster 
                   subPath: "data"
         ```
 
-        PVCs are mounted read-only and must be in the same namespace as the borgmatic release. They must also support concurrent read access, so use `ReadWriteMany` (RWX) if the source application and borgmatic run on different nodes, as `ReadWriteOnce` (RWO) only allows a single node to mount the PVC at a time.
+        PVCs are mounted read-only and must be in the same namespace as the Borg client. They must also support concurrent read access, so use `ReadWriteMany` (RWX) where possible, as `ReadWriteOnce` (RWO) only allows a single node to mount the PVC at a time (if this even works).
 
      - `borgmatic.configs.<config-name>.content`: Set the raw backup configuration content for this job
 
