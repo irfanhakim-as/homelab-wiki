@@ -18,6 +18,7 @@ This wiki is a collection of guides and tips mostly focused on starting and main
     - [Host Deployment Environments](#host-deployment-environments)
     - [Network](#network)
     - [Services](#services)
+    - [Backups](#backups)
   - [Contributing](#contributing)
 
 ## Courses
@@ -75,6 +76,14 @@ Topics include, but (possibly) not limited to:
 - [Jellyfin](topics/jellyfin.md)
 - [ErsatzTV](topics/ersatztv.md)
 - [Forgejo](topics/forgejo.md)
+
+### [Backups](courses/backups.md)
+
+No homelab is complete without a reliable backup strategy. This course covers how to protect your data by setting up a backup server and client, and how to recover when things go wrong.
+
+Topics include, but (possibly) not limited to:
+
+- [Backup Server](courses/backups.md#setting-up-a-backup-server) and [Backup Client](courses/backups.md#setting-up-a-backup-client) setup including [Borg](topics/borg.md)
 
 ## Contributing
 
