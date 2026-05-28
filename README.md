@@ -65,7 +65,7 @@ Topics include, but (possibly) not limited to:
 
 ### Services
 
-Last but not least, once your homelab is all ready and set up, it is time to _reap the rewards_ by utilising your setup! This course covers the plethora of applications and services that you could host on your homelab, and how to set them up.
+Once your homelab is all ready and set up, it is time to _reap the rewards_ by utilising your setup! This course covers the plethora of applications and services that you could host on your homelab, and how to set them up.
 
 Topics include, but (possibly) not limited to:
 
