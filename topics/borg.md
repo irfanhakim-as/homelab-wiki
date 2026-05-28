@@ -627,7 +627,7 @@ This details the post-installation steps of the Borg client for a complete setup
 #### Borg Client Post-Install Setup on Helm
 
 > [!NOTE]  
-> This guide assumes that you have [installed the Borg client](#install-borg-client-on-helm) through Helm.
+> This guide assumes that you have [installed the Borg client](#install-borg-client-on-helm) on a Kubernetes cluster using Helm.
 
 This details the post-installation steps of the Borg client for a complete setup:
 
