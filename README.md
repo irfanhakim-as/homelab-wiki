@@ -71,6 +71,7 @@ Topics include, but (possibly) not limited to:
 
 - [Database](topics/database.md) including [MariaDB](topics/mariadb.md), [MySQL](topics/mysql.md), and [PostgreSQL](topics/postgresql.md)
 - NASes including [TrueNAS](topics/truenas.md) (TODO) and [OpenMediaVault (OMV)](topics/omv.md)
+- [S3](topics/s3.md) storage including [SeaweedFS](topics/seaweedfs.md)
 - [Home Assistant](topics/home-assistant.md)
 - [Immich](topics/immich.md)
 - [Jellyfin](topics/jellyfin.md)
