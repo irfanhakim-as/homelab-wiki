@@ -596,7 +596,7 @@ This details the post-installation steps of the Borg client for a complete setup
 
       Repository initialisation creates the final repository directory itself, but requires its parent directory to already exist.
 
-   - Run the repository initialisation from inside the client container:
+   - [Run the repository initialisation](../courses/container.md#container-runtime-usage) from inside the client container:
 
       ```sh
       docker exec -it <container-name> borgmatic --config /etc/borgmatic.d/<config-name>.yaml repo-create
@@ -610,7 +610,7 @@ This details the post-installation steps of the Borg client for a complete setup
 
       The passphrase is automatically sourced from the `BORG_PASSPHRASE` environment variable set in the env file. Ensure it is stored securely (i.e. in a password manager), as the repository cannot be decrypted or recovered without it.
 
-2. **(Optional)** Run a manual backup to verify that the setup is working correctly:
+2. **(Optional)** [Run a manual backup](../courses/container.md#container-runtime-usage) from inside the client container to verify that the setup is working correctly:
 
    ```sh
    docker exec -it <container-name> borgmatic --config /etc/borgmatic.d/<config-name>.yaml --verbosity 1

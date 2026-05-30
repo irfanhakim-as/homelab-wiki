@@ -223,19 +223,7 @@ This details the installation steps for Cloudflare DDNS on a Kubernetes cluster 
 
 This details the post-installation steps of Cloudflare DDNS for a complete Docker setup:
 
-1. Verify the deployment is running:
-
-    ```sh
-    docker logs <container>
-    ```
-
-    For example:
-
-    ```sh
-    docker logs cloudflare-ddns
-    ```
-
-    Sample output indicating the deployment is running:
+1. Verify the deployment is running by [monitoring the logs](../courses/container.md#container-runtime-usage) of the `cloudflare-ddns` container. Sample output indicating the deployment is running:
 
     ```
       🕰️ Updating IPv4 (A) records every 300 seconds
@@ -332,31 +320,9 @@ This details how to add subdomains for Cloudflare DDNS to manage on a Docker dep
 
       Setting an empty `name` value adds or updates a DNS record equalling to the apex or root domain of the specified zone (i.e. `example.com` as opposed to something like `mysubdomain.example.com`).
 
-2. Restart the deployment for the changes to take effect:
+2. [Restart](../courses/container.md#container-runtime-usage) the `cloudflare-ddns` container for the changes to take effect.
 
-    ```sh
-    docker restart <container>
-    ```
-
-    For example:
-
-    ```sh
-    docker restart cloudflare-ddns
-    ```
-
-3. Verify the deployment is updating the intended DNS records:
-
-    ```sh
-    docker logs <container>
-    ```
-
-    For example:
-
-    ```sh
-    docker logs cloudflare-ddns
-    ```
-
-    Sample output:
+3. Verify the deployment is updating the intended DNS records by [monitoring the logs](../courses/container.md#container-runtime-usage) of the `cloudflare-ddns` container. Sample output:
 
     ```
       🕰️ Updating IPv4 (A) records every 300 seconds
