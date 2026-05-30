@@ -313,6 +313,6 @@ This details how to set up reverse proxy for an application or service, in order
           protocol: TCP
       ```
 
-   - **Alternatively**, instead of writing and deploying these resources individually, you could utilise and [deploy](helm.md#install-or-upgrade-a-helm-chart) the [`mika/external-svc`](https://github.com/irfanhakim-as/charts/tree/master/mika/external-svc) Helm chart which can be easily configured to create the required resources for you.
+   - **Alternatively**, instead of writing and deploying these resources individually, you could utilise and [deploy](helm.md#install-or-upgrade-a-helm-chart) the [`moekai/external-svc`](https://github.com/irfanhakim-as/charts/tree/master/moekai/external-svc) Helm chart which can be easily configured to create the required resources for you.
 
 4. After completing this setup for the application, local or external to your Kubernetes cluster, you should now be able to reach the application or service using its domain name (i.e. `my-app.example.com`) that has been defined in the Ingress resource.
