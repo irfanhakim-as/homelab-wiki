@@ -84,7 +84,7 @@ No homelab is complete without a reliable backup strategy. This course covers ho
 
 Topics include, but (possibly) not limited to:
 
-- [Backup Server](courses/backups.md#setting-up-a-backup-server) and [Backup Client](courses/backups.md#setting-up-a-backup-client) setup including [Borg](topics/borg.md)
+- [Borg](courses/backups.md#borg)
 
 ## Contributing
 
