@@ -20,7 +20,7 @@ Backups are a critical part of any homelab setup. This course covers how to set 
 
 ## References
 
-- [BorgBackup](https://www.borgbackup.org)
+- [Backup](https://en.wikiversity.org/wiki/Backup)
 
 ---
 
