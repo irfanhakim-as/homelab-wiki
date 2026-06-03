@@ -22,6 +22,9 @@ SeaweedFS is a distributed object storage system with a built-in S3-compatible A
     - [References](#references-2)
     - [Add S3 Identity](#add-s3-identity)
       - [Add S3 Identity on Docker](#add-s3-identity-on-docker)
+  - [Usage](#usage)
+    - [Description](#description-3)
+    - [Provision an S3 Bucket](#provision-an-s3-bucket)
 
 ## References
 
@@ -356,3 +359,32 @@ This details how to add a new S3 identity to a SeaweedFS Docker deployment:
 
 3. [Restart](../courses/container.md#container-runtime-usage) the `seaweedfs-s3` container service for the changes to take effect.
 
+---
+
+## Usage
+
+### Description
+
+This details some common usage steps for SeaweedFS.
+
+### Provision an S3 Bucket
+
+> [!NOTE]
+> This guide assumes that you have [installed and set up SeaweedFS](#setup) as a containerised application.
+
+This details how to provision a complete S3 bucket with dedicated access credentials on SeaweedFS:
+
+1. First and foremost, ensure the following pre-requisites are met:
+
+   - [AWS CLI is installed](s3.md#install-aws-cli) on the client system.
+   - An [AWS CLI profile](s3.md#configure-aws-cli-profile) has been configured for an S3 identity with admin access (e.g. `Admin`) to the SeaweedFS S3 API, for use in creating the bucket.
+
+2. [Create the bucket](s3.md#create-a-bucket) using the admin AWS CLI profile.
+
+3. [Add an S3 identity](#add-s3-identity-on-docker) scoped to the bucket to generate the access and secret keys. The following actions are recommended for a client with full read and write access to the bucket:
+
+   - `Read:<bucket-name>/*`
+   - `Write:<bucket-name>/*`
+   - `List:<bucket-name>`
+   - `Tagging:<bucket-name>/*`
+   - **(Optional)** `Admin:<bucket-name>` (if the client requires bucket-level access such as `HeadBucket` to verify the bucket exists before operating)
