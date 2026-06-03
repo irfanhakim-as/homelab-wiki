@@ -250,15 +250,7 @@ This details the post-installation steps of SeaweedFS for a complete setup:
 
      - `Admin`
 
-   - For every bucket required, [create the named bucket](s3.md#create-a-bucket) using the admin identity.
-
-   - For every client (i.e. application or user) that needs access to the S3 gateway, [add an S3 identity](#add-s3-identity-on-docker) with credentials and actions scoped to their intended bucket. The following actions are recommended for a client with full read and write access to a specific bucket:
-
-     - `Read:<bucket-name>/*`
-     - `Write:<bucket-name>/*`
-     - `List:<bucket-name>`
-     - `Tagging:<bucket-name>/*`
-     - `Admin:<bucket-name>` (if the client requires bucket-level access such as `HeadBucket` to verify the bucket exists before operating)
+   - For every bucket required, [provision an S3 bucket](#provision-an-s3-bucket) with a dedicated client identity.
 
 4. **(Optional)** [Set up a reverse proxy](../courses/network.md#reverse-proxy) for the SeaweedFS S3 endpoint to make it accessible over HTTPS outside the local network. This is the recommended approach for external access. The following considerations should be noted:
 
