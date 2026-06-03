@@ -29,6 +29,7 @@ BorgBackup (commonly referred to as Borg) is an open-source deduplicating backup
   - [Usage](#usage)
     - [Description](#description-3)
     - [References](#references-3)
+    - [Running a Manual Backup](#running-a-manual-backup)
     - [Listing Archives](#listing-archives)
     - [Restoring from Backup](#restoring-from-backup)
 
@@ -610,19 +611,7 @@ This details the post-installation steps of the Borg client for a complete setup
 
       The passphrase is automatically sourced from the `BORG_PASSPHRASE` environment variable set in the env file. Ensure it is stored securely (i.e. in a password manager), as the repository cannot be decrypted or recovered without it.
 
-2. **(Optional)** [Run a manual backup](../courses/container.md#container-runtime-usage) from inside the client container to verify that the setup is working correctly:
-
-   ```sh
-   docker exec -it <container-name> borgmatic --config /etc/borgmatic.d/<config-name>.yaml --verbosity 1
-   ```
-
-   For example:
-
-   ```sh
-   docker exec -it borg-client borgmatic --config /etc/borgmatic.d/config.yaml --verbosity 1
-   ```
-
-   Once the backup completes successfully, the container will continue running and trigger subsequent backups automatically according to the configured `CRON_SCHEDULE`.
+2. **(Optional)** [Run a manual backup](#running-a-manual-backup) to verify that the setup is working correctly. Once the backup completes successfully, the container will continue running and trigger subsequent backups automatically according to the configured `CRON_SCHEDULE`.
 
 #### Borg Client Post-Install Setup on Helm
 
@@ -675,28 +664,7 @@ This details the post-installation steps of the Borg client for a complete setup
       kubectl delete job --namespace <namespace> borgmatic-shell
       ```
 
-2. **(Optional)** Trigger a manual backup to verify that the setup is working:
-
-   - Create a manual backup job, replacing `<namespace>`, `<release>`, and `<config-name>` accordingly:
-
-      ```sh
-      kubectl create job --namespace <namespace> <release>-borgmatic-<config-name>-manual \
-        --from=cronjob/<release>-borgmatic-<config-name>
-      ```
-
-   - Follow the job's logs:
-
-      ```sh
-      kubectl logs --namespace <namespace> \
-        -l "app.kubernetes.io/instance=<release>" \
-        --follow
-      ```
-
-   - Delete the manual job once done:
-
-      ```sh
-      kubectl delete job --namespace <namespace> <release>-borgmatic-<config-name>-manual
-      ```
+2. **(Optional)** [Trigger a manual backup](#running-a-manual-backup) to verify that the setup is working.
 
 ---
 
@@ -708,8 +676,69 @@ This details some common usage steps for Borg backups.
 
 ### References
 
+- [How to set up backups](https://torsion.org/borgmatic/how-to/set-up-backups/#backups)
 - [How to inspect your backups](https://torsion.org/borgmatic/how-to/inspect-your-backups/)
 - [How to extract a backup](https://torsion.org/borgmatic/how-to/restore-a-backup/)
+
+### Running a Manual Backup
+
+This details how to trigger a manual backup outside of the regular schedule:
+
+- To run a manual backup on a **Docker** deployment:
+
+   ```sh
+   docker exec -it <container-name> borgmatic --config /etc/borgmatic.d/<config-name>.yaml --verbosity 1
+   ```
+
+   For example:
+
+   ```sh
+   docker exec -it borg-client borgmatic --config /etc/borgmatic.d/config.yaml --verbosity 1
+   ```
+
+- To trigger a manual backup on a **Helm** deployment:
+
+   - Create a manual backup job, replacing `<namespace>`, `<release>`, and `<config-name>` accordingly:
+
+      ```sh
+      kubectl create job --namespace <namespace> <release>-borgmatic-<config-name>-manual \
+        --from=cronjob/<release>-borgmatic-<config-name>
+      ```
+
+      For example:
+
+      ```sh
+      kubectl create job --namespace borgmatic borgmatic-client-1-borgmatic-myconfig-manual \
+        --from=cronjob/borgmatic-client-1-borgmatic-myconfig
+      ```
+
+   - Follow the job's logs:
+
+      ```sh
+      kubectl logs --namespace <namespace> \
+        -l "app.kubernetes.io/instance=<release>" \
+        --follow
+      ```
+
+      For example:
+
+      ```sh
+      kubectl logs --namespace borgmatic \
+        -l "app.kubernetes.io/instance=borgmatic-client-1" \
+        --follow
+      ```
+
+   - Delete the manual job once done:
+
+      ```sh
+      kubectl delete job --namespace <namespace> <release>-borgmatic-<config-name>-manual
+      ```
+
+      For example:
+
+      ```sh
+      kubectl delete job --namespace borgmatic borgmatic-client-1-borgmatic-myconfig-manual
+      ```
 
 ### Listing Archives
 
