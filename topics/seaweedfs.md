@@ -341,18 +341,18 @@ This details how to add a new S3 identity to a SeaweedFS Docker deployment:
 
    Actions can be applied globally or scoped to a specific bucket. The scoping format depends on whether the action targets the bucket itself or objects inside it:
 
-   - **Object-level actions** are scoped with `<action>:<bucket-name>/*`, where `/*` refers to all objects within the bucket.
-   - **Bucket-level actions** are scoped with `<action>:<bucket-name>`, as they operate on the bucket as a whole rather than on individual objects.
+   - **Object-level actions** are scoped with `<action>:<bucket-name>/*`, where `/*` refers to all objects within the bucket:
 
-   | Action | Scope | Description |
-   |---|---|---|
-   | `Admin` | Bucket-level | Full access to all S3 operations globally. When scoped to a bucket, limits access to management of that specific bucket only (e.g. configuring ownership controls and ACLs), without granting object-level access. Scoped: `Admin:<bucket-name>`. |
-   | `Read` | Object-level | Download objects. Scoped: `Read:<bucket-name>/*`. |
-   | `Write` | Object-level | Upload and delete objects. Scoped: `Write:<bucket-name>/*`. |
-   | `List` | Bucket-level | List objects within a bucket. Scoped: `List:<bucket-name>`. |
-   | `Tagging` | Object-level | Read and manage object tags. Scoped: `Tagging:<bucket-name>/*`. |
-   | `Read_ACP` | Object-level | Read access control policies for objects and buckets. Scoped: `Read_ACP:<bucket-name>/*`. |
-   | `Write_ACP` | Object-level | Write access control policies for objects and buckets. Scoped: `Write_ACP:<bucket-name>/*`. |
+     - `Read:<bucket-name>/*`: Download objects.
+     - `Write:<bucket-name>/*`: Upload and delete objects.
+     - `Tagging:<bucket-name>/*`: Read and manage object tags.
+     - `Read_ACP:<bucket-name>/*`: Read access control policies for objects and buckets.
+     - `Write_ACP:<bucket-name>/*`: Write access control policies for objects and buckets.
+
+   - **Bucket-level actions** are scoped with `<action>:<bucket-name>`, as they operate on the bucket as a whole rather than on individual objects:
+
+     - `List:<bucket-name>`: List objects within a bucket.
+     - `Admin:<bucket-name>`: Full access to all S3 operations globally. When scoped to a bucket, limits access to management of that specific bucket only (e.g. configuring ownership controls and ACLs), without granting object-level access.
 
 3. [Restart](../courses/container.md#container-runtime-usage) the `seaweedfs-s3` container service for the changes to take effect.
 
