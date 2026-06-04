@@ -85,6 +85,7 @@ No homelab is complete without a reliable backup strategy. This course covers ho
 Topics include, but (possibly) not limited to:
 
 - [Borg](courses/backups.md#borg)
+- [Longhorn](courses/backups.md#longhorn)
 
 ## Contributing
 
