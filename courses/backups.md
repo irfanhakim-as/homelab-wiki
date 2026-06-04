@@ -12,10 +12,12 @@ Backups are a critical part of any homelab setup. This course covers how to set 
   - [References](#references)
   - [Backup Setup](#backup-setup)
     - [Borg](#borg)
+    - [Longhorn](#longhorn)
   - [Usage](#usage)
     - [Triggering a Backup](#triggering-a-backup)
     - [Listing Backups](#listing-backups)
     - [Restoring from Backup](#restoring-from-backup)
+    - [Disaster Recovery](#disaster-recovery)
 
 ## References
 
@@ -34,6 +36,13 @@ This details how to set up and use Borg for backing up data from any mounted sto
 - [Server](../topics/borg.md#borg-server)
 - [Client](../topics/borg.md#borg-client)
 
+### Longhorn
+
+This details how to configure Longhorn's native backup feature to back up its Kubernetes persistent volumes to an S3-compatible storage bucket:
+
+- [S3 Bucket Setup](../topics/s3.md#s3-bucket-setup)
+- [Backup Setup](../topics/longhorn.md#backup-setup)
+
 ---
 
 ## Usage
@@ -45,15 +54,24 @@ This details some common usage steps for backups.
 This details how to trigger an on-demand backup outside of the regular schedule:
 
 - [Borg](../topics/borg.md#running-a-manual-backup)
+- [Longhorn](../topics/longhorn.md#trigger-an-on-demand-backup)
 
 ### Listing Backups
 
 This details how to list the available backups in a backup repository:
 
 - [Borg](../topics/borg.md#listing-archives)
+- [Longhorn](../topics/longhorn.md#inspect-backups)
 
 ### Restoring from Backup
 
 This details how to restore data from a backup:
 
 - [Borg](../topics/borg.md#restoring-from-backup)
+- [Longhorn](../topics/longhorn.md#restore-from-backup)
+
+### Disaster Recovery
+
+This details how to recover from a complete system or cluster loss:
+
+- [Longhorn](../topics/longhorn.md#disaster-recovery)
