@@ -250,6 +250,12 @@ This details how to set up a reverse proxy on the Kubernetes cluster for serving
 
 - [RKE2](../topics/rke2.md#reverse-proxy)
 
+### Backups
+
+This details how to back up persistent volumes on the Kubernetes cluster:
+
+- [Longhorn](../courses/backups.md#longhorn)
+
 ---
 
 ## Helm
