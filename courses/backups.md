@@ -13,6 +13,7 @@ Backups are a critical part of any homelab setup. This course covers how to set 
   - [Backup Setup](#backup-setup)
     - [Borg](#borg)
   - [Usage](#usage)
+    - [Triggering a Backup](#triggering-a-backup)
     - [Listing Backups](#listing-backups)
     - [Restoring from Backup](#restoring-from-backup)
 
@@ -38,6 +39,12 @@ This details how to set up and use Borg for backing up data from any mounted sto
 ## Usage
 
 This details some common usage steps for backups.
+
+### Triggering a Backup
+
+This details how to trigger an on-demand backup outside of the regular schedule:
+
+- [Borg](../topics/borg.md#running-a-manual-backup)
 
 ### Listing Backups
 
