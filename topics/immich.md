@@ -477,28 +477,40 @@ This details some recommended configuration options for an Immich setup:
 
      - Transcode Policy: Expand the dropdown and select the `Don't transcode any videos, may break playback on some clients` option
 
-3. **(Optional)** If you wish to set up [reverse proxy](../courses/network.md#reverse-proxy) for the Immich server, you may need to include the following custom annotations to the Ingress resource:
+3. **(Optional)** If you wish to set up [reverse proxy](../courses/network.md#reverse-proxy) for the Immich server, you may need to deploy the following `BackendTrafficPolicy` resource for its `HTTPRoute`, in the same namespace as the route:
 
     ```yaml
-    customAnnotations:
-      - prefix: ""
-        name: "proxy-body-size"
-        value: "50000M"
-      - prefix: ""
-        name: "proxy-connect-timeout"
-        value: "600"
-      - prefix: ""
-        name: "proxy-read-timeout"
-        value: "1800"
-      - prefix: ""
-        name: "proxy-send-timeout"
-        value: "600"
-      - prefix: "nginx.org"
-        name: "send-timeout"
-        value: "6000"
+    apiVersion: gateway.envoyproxy.io/v1alpha1
+    kind: BackendTrafficPolicy
+    metadata:
+      name: <route-name>
+    spec:
+      targetRefs:
+      - group: gateway.networking.k8s.io
+        kind: HTTPRoute
+        name: <route-name>
+      timeout:
+        http:
+          requestTimeout: 1800s
+        tcp:
+          connectTimeout: 600s
     ```
 
-    This should help resolve some issues with uploading large files to the Immich server through its public domain.
+    This should help resolve some issues with uploading large files to the Immich server through its public domain. The Gateway does not limit the size of request bodies, so no equivalent of the `proxy-body-size` annotation is needed.
+
+    **(Deprecated)** If you still use Ingress NGINX, include the following annotations in the metadata of the Ingress resource:
+
+    ```yaml
+    metadata:
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: 50000M
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+        nginx.org/send-timeout: "6000"
+    ```
+
+    This should help resolve the same issues with uploading large files to the Immich server through its public domain.
 
 ---
 

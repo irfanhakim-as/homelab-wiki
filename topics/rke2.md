@@ -56,12 +56,17 @@ This details the process of creating and setting up a Kubernetes cluster based o
 > [!NOTE]  
 > This part of the guide assumes that you have [provisioned and set up a Kubernetes cluster](#creating-a-kubernetes-cluster) based on our written guide.
 
+> [!WARNING]  
+> [Ingress NGINX](https://github.com/irfanhakim-as/orked#ingress-nginx) has been retired upstream and is deprecated in favour of the [Gateway](https://github.com/irfanhakim-as/orked#gateway). The Ingress based setup remains documented below for those who still use it.
+
 ### Description
 
-This details how to set up a reverse proxy on the Kubernetes cluster for serving applications and services publicly.
+This details how to set up the Gateway, a reverse proxy on the Kubernetes cluster for serving applications and services publicly.
 
 ### References
 
+- [Gateway API](https://gateway-api.sigs.k8s.io)
+- [HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute)
 - [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress)
 - [Service](https://kubernetes.io/docs/concepts/services-networking/service)
 
@@ -69,59 +74,100 @@ This details how to set up a reverse proxy on the Kubernetes cluster for serving
 
 [Setting up a domain name](../courses/network.md#setting-up-a-domain) and [creating subdomain(s)](../courses/network.md#registering-subdomains) for your service(s) and application(s) only routes external traffic to your homelab environment, not to your service. To route this incoming traffic to your service(s) appropriately:
 
-1. Assuming a reverse proxy such as [Ingress NGINX Controller](https://github.com/irfanhakim-as/orked#ingress-nginx) has been deployed and set up on your [Kubernetes cluster](#creating-a-kubernetes-cluster), identify and take note of its external (i.e. local) IP address, HTTP port, and HTTPS port:
+1. Assuming the [Gateway](https://github.com/irfanhakim-as/orked#gateway) has been deployed and set up on your [Kubernetes cluster](#creating-a-kubernetes-cluster), identify and take note of its external (e.g. local) IP address, HTTP port, and HTTPS port:
 
     ```sh
-    kubectl --context <cluster> --namespace ingress-nginx get svc ingress-nginx-controller -o jsonpath='External IP: {.status.loadBalancer.ingress[0].ip}{"\n"}{range .spec.ports[*]}{.name}: {.port}{"\n"}{end}'
+    kubectl --context <cluster> --namespace envoy-gateway-system get gateway envoy-gateway -o jsonpath='IP address: {.status.addresses[0].value}{"\n"}HTTP port: {.spec.listeners[0].port}{"\n"}HTTPS port: {.spec.listeners[1].port}{"\n"}'
     ```
 
     For example:
 
     ```sh
-    kubectl --context my-cluster --namespace ingress-nginx get svc ingress-nginx-controller -o jsonpath='IP address: {.status.loadBalancer.ingress[0].ip}{"\n"}{range .spec.ports[*]}{.name}: {.port}{"\n"}{end}'
+    kubectl --context my-cluster --namespace envoy-gateway-system get gateway envoy-gateway -o jsonpath='IP address: {.status.addresses[0].value}{"\n"}HTTP port: {.spec.listeners[0].port}{"\n"}HTTPS port: {.spec.listeners[1].port}{"\n"}'
     ```
 
     Sample output:
 
     ```sh
       IP address: 192.168.0.100
-      http: 80
-      https: 443
+      HTTP port: 80
+      HTTPS port: 443
     ```
 
-2. Domain name(s) you have or will set up for your application(s) are expected to be pointed to the public IP address of your homelab environment (i.e. `203.0.113.0`) - this will route external traffic to your home network, but not to your service(s). To address this, set up the following [port forwarding](../courses/network.md#port-forwarding) rules on your router to send traffic to the reverse proxy (i.e. Ingress NGINX Controller):
+2. Domain name(s) you have or will set up for your application(s) are expected to be pointed to the public IP address of your homelab environment (e.g. `203.0.113.0`), which routes external traffic to your home network but not to your service(s). To address this, set up the following [port forwarding](../courses/network.md#port-forwarding) rules on your router to send traffic to the Gateway:
 
    - HTTP:
 
-     - Service name: Set a unique, descriptive name for the HTTP port forwarding rule (i.e. `my-cluster-http`)
-     - Device IP address: Add the external IP address of the reverse proxy service (i.e. `192.168.0.100`)
-     - External port: Add the [default port](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports) for HTTP (i.e. `80`)
-     - Internal port: Add the HTTP port of the reverse proxy service (i.e. `80`)
-     - Protocol: Set the protocol to `UDP`
+     - Service name: Set a unique, descriptive name for the HTTP port forwarding rule (e.g. `my-cluster-http`)
+     - Device IP address: Add the external IP address of the Gateway (e.g. `192.168.0.100`)
+     - External port: Add the [default port](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports) for HTTP (e.g. `80`)
+     - Internal port: Add the HTTP port of the Gateway (e.g. `80`)
+     - Protocol: Set the protocol to `TCP`
      - Enabled: Ensure the port forwarding rule is active by enabling the corresponding checkbox or switch
 
    - HTTPS:
 
-     - Service name: Set a unique, descriptive name for the HTTPS port forwarding rule (i.e. `my-cluster-https`)
-     - Device IP address: Add the external IP address of the reverse proxy service (i.e. `192.168.0.100`)
-     - External port: Add the [default port](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports) for HTTPS (i.e. `443`)
-     - Internal port: Add the HTTPS port of the reverse proxy service (i.e. `443`)
-     - Protocol: Set the protocol to `UDP`
+     - Service name: Set a unique, descriptive name for the HTTPS port forwarding rule (e.g. `my-cluster-https`)
+     - Device IP address: Add the external IP address of the Gateway (e.g. `192.168.0.100`)
+     - External port: Add the [default port](https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports) for HTTPS (e.g. `443`)
+     - Internal port: Add the HTTPS port of the Gateway (e.g. `443`)
+     - Protocol: Set the protocol to `TCP`
      - Enabled: Ensure the port forwarding rule is active by enabling the corresponding checkbox or switch
 
-    These port forwarding rules ensure that external requests can reach the reverse proxy controller inside the cluster.
+    These port forwarding rules ensure that external requests can reach the Gateway inside the cluster.
 
-3. After completing this network setup, the following [application setup](#reverse-proxy-application-setup) is required for each application(s) and service(s), so the reverse proxy could route external traffic to them accordingly.
+3. After completing this network setup, the following [application setup](#reverse-proxy-application-setup) is required for each application and service, so the Gateway can route external traffic to them accordingly.
 
 ### Reverse Proxy Application Setup
 
-This details how to set up reverse proxy for an application or service, in order for traffic reaching the reverse proxy controller could be routed to the application or service accordingly:
+This details how to set up the Gateway for an application or service, so traffic reaching the Gateway can be routed to the application or service accordingly:
 
 1. After setting up the [reverse proxy networking environment](#reverse-proxy-networking-setup) in your homelab, ensure that you have [set up a domain name](../courses/network.md#setting-up-a-domain), and [created a subdomain name](../courses/network.md#registering-subdomains) for your application, if you have not already.
 
-2. At this point, external traffic to your domain(s) will be routed to your home network (i.e. `203.0.113.0`), then to the reverse proxy controller (i.e. `192.168.0.100`) - for the traffic to reach your application or service, the reverse proxy controller needs to know how to route the traffic of a certain domain or subdomain to the correct (Kubernetes) service. This is done by deploying an Ingress resource for said service:
+2. At this point, external traffic to your domain(s) will be routed to your home network (e.g. `203.0.113.0`), then to the Gateway (e.g. `192.168.0.100`). For the traffic to reach your application or service, the Gateway needs to know how to route the traffic of a certain domain or subdomain to the correct (Kubernetes) service. This is done by deploying an HTTPRoute resource for said service:
 
-   - An [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress) helps define rules that map incoming requests to the appropriate [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service) - directing users to the service(s) you wish to serve publicly:
+   - An [HTTPRoute resource](https://gateway-api.sigs.k8s.io/api-types/httproute) defines rules that map incoming requests to the appropriate [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service), directing users to the service(s) you wish to serve publicly:
+
+      ```yaml
+      apiVersion: gateway.networking.k8s.io/v1
+      kind: HTTPRoute
+      metadata:
+        name: <route-name>
+      spec:
+        parentRefs:
+        - name: envoy-gateway
+          namespace: envoy-gateway-system
+        hostnames:
+        - <domain>
+        rules:
+        - backendRefs:
+          - name: <service-name>
+            port: <port-number>
+      ```
+
+      Example HTTPRoute manifest (e.g. `httproute.yaml`) for a particular service:
+
+      ```yaml
+      apiVersion: gateway.networking.k8s.io/v1
+      kind: HTTPRoute
+      metadata:
+        name: my-app-route
+      spec:
+        parentRefs:
+        - name: envoy-gateway
+          namespace: envoy-gateway-system
+        hostnames:
+        - my-app.example.com
+        rules:
+        - backendRefs:
+          - name: my-app-svc
+            port: 80
+      ```
+
+      The Gateway serves HTTPS using wildcard certificates issued by [Cert-Manager](https://github.com/irfanhakim-as/orked#cert-manager), so no certificate configuration is needed per application. The domain only needs to be covered by one of the `GATEWAY_DOMAINS` the [Gateway](https://github.com/irfanhakim-as/orked#gateway) was set up with.
+
+   - **(Deprecated)** Ingress resources remain supported for clusters that still use [Ingress NGINX](https://github.com/irfanhakim-as/orked#ingress-nginx). An [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress) helps define rules that map incoming requests to the appropriate [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service):
+
 
       ```yaml
       apiVersion: networking.k8s.io/v1
@@ -157,7 +203,7 @@ This details how to set up reverse proxy for an application or service, in order
           secretName: <cert-name>
       ```
 
-      Example Ingress manifest (i.e. `ingress.yaml`) for a particular service:
+      Example Ingress manifest (e.g. `ingress.yaml`) for a particular service:
 
       ```yaml
       apiVersion: networking.k8s.io/v1
@@ -195,7 +241,7 @@ This details how to set up reverse proxy for an application or service, in order
 
       The key configuration in this Ingress is the `cert-manager.io/cluster-issuer` annotation, which should be set to `letsencrypt-dns-prod` - this tells [Cert-Manager](https://github.com/irfanhakim-as/orked#cert-manager) to automatically generate SSL/TLS certificates from Let's Encrypt using DNS validation, ensuring your services are securely accessible via HTTPS.
 
-   - Ingress resource(s) relies on a [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service) specific to your application (which should be deployed beforehand) that it is mapped to:
+   - HTTPRoute resource(s) rely on a [Kubernetes service](https://kubernetes.io/docs/concepts/services-networking/service) specific to your application (which should be deployed beforehand) that it is mapped to:
 
       ```yaml
       apiVersion: v1
@@ -231,7 +277,7 @@ This details how to set up reverse proxy for an application or service, in order
           app: my-app
       ```
 
-   - Most [Helm charts](../courses/kubernetes.md#helm-charts) should already provide both the Kubernetes service and Ingress resource that can be enabled and configured easily as part of the deployment of your application.
+   - Most [Helm charts](../courses/kubernetes.md#helm-charts) should already provide both the Kubernetes service and HTTPRoute resource that can be enabled and configured easily as part of the deployment of your application.
 
 3. It is also possible to use the same setup to route external traffic to a service or application that is hosted outside of your Kubernetes cluster, in the same network, with slight changes to our configuration and some additional steps:
 
@@ -315,4 +361,4 @@ This details how to set up reverse proxy for an application or service, in order
 
    - **Alternatively**, instead of writing and deploying these resources individually, you could utilise and [deploy](helm.md#install-or-upgrade-a-helm-chart) the [`moekai/external-svc`](https://github.com/irfanhakim-as/charts/tree/master/moekai/external-svc) Helm chart which can be easily configured to create the required resources for you.
 
-4. After completing this setup for the application, local or external to your Kubernetes cluster, you should now be able to reach the application or service using its domain name (i.e. `my-app.example.com`) that has been defined in the Ingress resource.
+4. After completing this setup for the application, local or external to your Kubernetes cluster, you should now be able to reach the application or service using its domain name (e.g. `my-app.example.com`) that has been defined in the HTTPRoute resource.
