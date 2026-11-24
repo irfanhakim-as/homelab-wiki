@@ -332,12 +332,12 @@ This details some recommended configuration options for a HA setup:
       ```yaml
       # Reference: https://www.home-assistant.io/integrations/http
       http:
-        # For extra security set this to only accept connections on localhost if NGINX is on the same machine
+        # For extra security set this to only accept connections on localhost if the reverse proxy is on the same machine
         # Uncommenting this will mean that you can only reach Home Assistant using the proxy, not directly via IP from other clients.
         # server_host: 127.0.0.1
         use_x_forwarded_for: true
         # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
-        # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
+        # Set this to your reverse proxy IP, or localhost if hosted on the same machine.
         trusted_proxies:
           - <local-network>
         # Flag indicating whether additional IP filtering is enabled.
